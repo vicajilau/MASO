@@ -42,4 +42,7 @@
 
 ## Distribución
 
-Si quieres probar MASO, no dudes en acceder a la carpeta [DISTRIBUTIONS](https://github.com/vicajilau/MASO/raw/main/DISTRIBUTIONS) donde podrás bajarte el ejecutable para las distintas plataformas disponibles.
+Para instalar MASO, sigue estos pasos:
+1. Descarga el archivo ejecutable correspondiente a tu sistema operativo desde la carpeta [DISTRIBUTIONS](https://github.com/vicajilau/MASO/raw/main/DISTRIBUTIONS).
+2. Ejecuta el archivo de instalación y sigue las instrucciones en pantalla para completar la instalación.
+3. Una vez instalado, abre MASO y comienza a explorar sus características.
