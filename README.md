@@ -1,4 +1,6 @@
-![MASO banner](https://github.com/vicajilau/MASO/raw/main/MASO.png)
+<p align="center">
+  <img src="https://github.com/vicajilau/MASO/raw/main/MASO.png" width="250" height="250"/>
+</p>
 # MASO
 
 ¡Bienvenido a MASO! El simulador Multiplataforma para el Aprendizaje de Sistemas Operativos. Este es un simulador diseñado para ayudarte en el aprendizaje de la planificación de procesos en sistemas operativos. MASO te brinda una experiencia interactiva para comprender los conceptos clave de la planificación de procesos de una manera práctica y efectiva.
