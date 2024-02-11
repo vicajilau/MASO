@@ -42,4 +42,4 @@
 
 ## Distribución
 
-Si quieres probar MASO, no dudes en acceder a la carpeta DISTRIBUTIONS donde podrás bajarte el ejecutable para las distintas plataformas disponibles.
+Si quieres probar MASO, no dudes en acceder a la carpeta [DISTRIBUTIONS](https://github.com/vicajilau/MASO/raw/main/DISTRIBUTIONS) donde podrás bajarte el ejecutable para las distintas plataformas disponibles.
