@@ -19,7 +19,7 @@
 1. Clona este repositorio en tu máquina local:
 
    ```bash
-   git clone https://github.com/tu-usuario/maso.git
+   git clone https://github.com/vicajilau/maso.git
    ```
 
 2. Navega al directorio del proyecto:
