@@ -1,8 +1,9 @@
-**MASO - Simulador Multiplataforma para el Aprendizaje de Sistemas Operativos**
+![MASO banner](https://github.com/vicajilau/MASO/raw/main/MASO.png)
+# MASO
 
-¡Bienvenido a MASO! Este es un simulador multiplataforma diseñado para ayudarte en el aprendizaje de la planificación de procesos en sistemas operativos. MASO te brinda una experiencia interactiva para comprender los conceptos clave de la planificación de procesos de una manera práctica y efectiva.
+¡Bienvenido a MASO! El simulador Multiplataforma para el Aprendizaje de Sistemas Operativos. Este es un simulador diseñado para ayudarte en el aprendizaje de la planificación de procesos en sistemas operativos. MASO te brinda una experiencia interactiva para comprender los conceptos clave de la planificación de procesos de una manera práctica y efectiva.
 
-### Características principales
+## Características principales
 
 - **Interfaz intuitiva**: Diseño fácil de usar que te permite interactuar con el simulador de manera sencilla.
 - **Simulación realista**: Experimenta cómo se ejecutan los procesos en un sistema operativo a través de una simulación precisa.
@@ -10,7 +11,7 @@
 - **Visualización dinámica**: Observa cómo se desarrolla la ejecución de los procesos a través de gráficos interactivos y datos en tiempo real.
 - **Personalización**: Ajusta los parámetros de la simulación según tus necesidades para experimentar diferentes escenarios.
 
-### Instalación
+## Instalación
 
 1. Clona este repositorio en tu máquina local:
 
@@ -36,6 +37,6 @@
    flutter run
    ```
 
-### Distribución
+## Distribución
 
 Si quieres probar MASO, no dudes en acceder a la carpeta DISTRIBUTIONS donde podrás bajarte el ejecutable para las distintas plataformas disponibles.
