@@ -14,15 +14,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Create .env file
-        run: |
-          echo '${{ secrets.FLUTTER_ENV_FILE }}' > .env
-      - name: Create key.properties file
-        run: |
-          echo '${{ secrets.ANDROID_KEY_PROPERTIES_FILE }}' > android/key.properties
-      - name: Create local.properties file
-        run: |
-          echo '${{ secrets.ANDROID_LOCAL_PROPERTIES_FILE }}' > android/local.properties
       - uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
