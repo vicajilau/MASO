@@ -1,6 +1,6 @@
-<div style="text-align: center;">
-  <img src="https://github.com/vicajilau/MASO/raw/main/MASO.png" style="width: 250px; height: 250px;" alt="MASO Logo"/>
-</div>
+<p align="center">
+  <img src="https://github.com/vicajilau/MASO/raw/main/MASO.png" width="250" height="250" alt="MASO Logo"/>
+</p>
 
 # MASO
 
