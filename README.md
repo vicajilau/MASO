@@ -1,6 +1,6 @@
-<p align="center">
-  <img src="https://github.com/vicajilau/MASO/raw/main/MASO.png" width="250" height="250"/>
-</p>
+<div style="text-align: center;">
+  <img src="https://github.com/vicajilau/MASO/raw/main/MASO.png" style="width: 250px; height: 250px;" alt="MASO Logo"/>
+</div>
 
 # MASO
 
@@ -22,19 +22,13 @@
    git clone https://github.com/vicajilau/maso.git
    ```
 
-2. Navega al directorio del proyecto:
-
-   ```bash
-   cd maso
-   ```
-
-3. Instala las dependencias necesarias:
+2. Instala las dependencias necesarias:
 
    ```bash
    flutter pub get
    ```
 
-4. Ejecuta el simulador en tu dispositivo o emulador:
+3. Ejecuta el simulador en tu dispositivo o emulador:
 
    ```bash
    flutter run
