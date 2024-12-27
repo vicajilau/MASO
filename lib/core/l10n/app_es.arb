@@ -1,0 +1,66 @@
+{
+  "titleAppBar": "MASO - Simulador",
+  "@titleAppBar": {
+    "description": "Título de la aplicación mostrado en el AppBar."
+  },
+  "home": "Inicio",
+  "@home": {
+    "description": "Etiqueta para el botón de Inicio en el AppBar."
+  },
+  "settings": "Configuración",
+  "@settings": {
+    "description": "Etiqueta para el botón de Configuración en el AppBar."
+  },
+  "about": "Acerca de",
+  "@about": {
+    "description": "Etiqueta para el botón de Acerca de en el AppBar."
+  },
+  "fileLoaded": "Archivo cargado: {filePath}",
+  "@fileLoaded": {
+    "description": "Mensaje mostrado cuando un archivo se carga con éxito.",
+    "placeholders": {
+      "filePath": {
+        "type": "String",
+        "example": "/ruta/al/archivo.maso"
+      }
+    }
+  },
+  "fileError": "Error: {message}",
+  "@fileError": {
+    "description": "Mensaje mostrado cuando hay un error al cargar un archivo.",
+    "placeholders": {
+      "message": {
+        "type": "String",
+        "example": "Formato de archivo no válido"
+      }
+    }
+  },
+  "dropFileHere": "Arrastra un archivo .maso aquí",
+  "@dropFileHere": {
+    "description": "Texto mostrado dentro del área de arrastre para archivos."
+  },
+  "errorInvalidFile": "Error: archivo no válido. Debe ser un archivo .maso.",
+    "@errorInvalidFile": {
+      "description": "Mensaje mostrado cuando el archivo arrastrado no es un archivo .maso."
+    },
+    "errorLoadingFile": "Error al cargar el archivo MASO: {error}",
+    "@errorLoadingFile": {
+      "description": "Mensaje mostrado cuando hay un error al cargar un archivo MASO.",
+      "placeholders": {
+        "error": {
+          "type": "String",
+          "example": "Archivo no encontrado"
+        }
+      }
+    },
+    "errorSavingFile": "Error al guardar el archivo: {error}",
+    "@errorSavingFile": {
+      "description": "Mensaje mostrado cuando hay un error al guardar un archivo.",
+      "placeholders": {
+        "error": {
+          "type": "String",
+          "example": "Permiso denegado"
+        }
+      }
+    }
+}

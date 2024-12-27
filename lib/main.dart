@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:maso/routes/app_router.dart';
 
 import 'core/constants/theme.dart';
@@ -18,8 +19,9 @@ class MasoApp extends StatelessWidget {
       routerConfig: appRouter,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      themeMode: ThemeMode
-          .system, // Cambia automáticamente entre claro y oscuro según el sistema
+      themeMode: ThemeMode.system,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
     );
   }
 }

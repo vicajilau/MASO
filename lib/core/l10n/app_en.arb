@@ -1,0 +1,66 @@
+{
+  "titleAppBar": "MASO - Simulator",
+  "@titleAppBar": {
+    "description": "Title of the application displayed in the AppBar."
+  },
+  "home": "Home",
+  "@home": {
+    "description": "Label for the Home button in the AppBar."
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "Label for the Settings button in the AppBar."
+  },
+  "about": "About",
+  "@about": {
+    "description": "Label for the About button in the AppBar."
+  },
+  "fileLoaded": "File loaded: {filePath}",
+  "@fileLoaded": {
+    "description": "Message displayed when a file is successfully loaded.",
+    "placeholders": {
+      "filePath": {
+        "type": "String",
+        "example": "/path/to/file.maso"
+      }
+    }
+  },
+  "fileError": "Error: {message}",
+  "@fileError": {
+    "description": "Message displayed when there is an error loading a file.",
+    "placeholders": {
+      "message": {
+        "type": "String",
+        "example": "Invalid file format"
+      }
+    }
+  },
+  "dropFileHere": "Drag a .maso file here",
+  "@dropFileHere": {
+    "description": "Text displayed inside the drop area for dragging files."
+  },
+  "errorInvalidFile": "Error: Invalid file. Must be a .maso file.",
+    "@errorInvalidFile": {
+      "description": "Message displayed when the dropped file is not a .maso file."
+    },
+    "errorLoadingFile": "Error loading the MASO file: {error}",
+    "@errorLoadingFile": {
+      "description": "Message displayed when there is an error while loading a MASO file.",
+      "placeholders": {
+        "error": {
+          "type": "String",
+          "example": "File not found"
+        }
+      }
+    },
+    "errorSavingFile": "Error saving file: {error}",
+    "@errorSavingFile": {
+      "description": "Message displayed when there is an error while saving a file.",
+      "placeholders": {
+        "error": {
+          "type": "String",
+          "example": "Permission denied"
+        }
+      }
+    }
+}
