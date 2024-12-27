@@ -56,7 +56,7 @@ class FileError extends FileState {
       case FileErrorType.errorOpeningFile:
         return AppLocalizations.of(context)!.errorLoadingFile(error.toString());
       case FileErrorType.errorSavingFile:
-        return AppLocalizations.of(context)!.errorInvalidFile;
+        return AppLocalizations.of(context)!.errorSavingFile(error.toString());
     }
   }
 }
@@ -117,7 +117,11 @@ class FileBloc extends Bloc<FileEvent, FileState> {
       } on Exception catch (e) {
         emit(FileError(
             reason: FileErrorType.errorSavingFile,
-            error: e)); // Emit error if file saving fails
+            error: e)); // Emit error from Exception
+      } catch (e) {
+        emit(FileError(
+            reason: FileErrorType.errorSavingFile,
+            error: Exception(e))); // Emit error from _TypeError
       }
     });
   }
