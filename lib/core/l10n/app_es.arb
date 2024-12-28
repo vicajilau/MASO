@@ -106,5 +106,17 @@
   "saveButton": "Guardar",
   "@saveButton": {
     "description": "Botón de guardar."
+  },
+  "confirmDeleteTitle": "Confirmar eliminación",
+  "@confirmDeleteTitle": {
+    "description": "Título para el cuadro de diálogo de confirmación al eliminar un proceso."
+  },
+  "confirmDeleteMessage": "¿Estás seguro de que deseas eliminar el proceso `{processName}`?",
+  "@confirmDeleteMessage": {
+    "description": "Mensaje en el cuadro de diálogo de confirmación para eliminar."
+  },
+  "deleteButton": "Eliminar",
+  "@deleteButton": {
+    "description": "Texto del botón para confirmar la eliminación."
   }
 }

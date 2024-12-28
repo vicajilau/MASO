@@ -106,5 +106,17 @@
   "saveButton": "Save",
   "@saveButton": {
     "description": "Save button."
+  },
+  "confirmDeleteTitle": "Confirm Deletion",
+  "@confirmDeleteTitle": {
+    "description": "Title for the confirmation dialog when deleting a process."
+  },
+  "confirmDeleteMessage": "Are you sure you want to delete `{processName}` process?",
+  "@confirmDeleteMessage": {
+    "description": "Message in the confirmation dialog for deletion."
+  },
+  "deleteButton": "Delete",
+  "@deleteButton": {
+    "description": "Button text for confirming deletion."
   }
 }
