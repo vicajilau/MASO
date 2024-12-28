@@ -3,9 +3,9 @@
   "@titleAppBar": {
     "description": "Título de la aplicación mostrado en el AppBar."
   },
-  "home": "Inicio",
-  "@home": {
-    "description": "Etiqueta para el botón de Inicio en el AppBar."
+  "load": "Cargar",
+  "@load": {
+    "description": "Etiqueta para el botón de Cargar fichero MASO en el AppBar."
   },
   "settings": "Configuración",
   "@settings": {

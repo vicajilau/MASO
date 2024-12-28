@@ -3,9 +3,9 @@
   "@titleAppBar": {
     "description": "Title of the application displayed in the AppBar."
   },
-  "home": "Home",
-  "@home": {
-    "description": "Label for the Home button in the AppBar."
+  "load": "Load",
+  "@load": {
+    "description": "Label for the Load MASO file button in the AppBar."
   },
   "settings": "Settings",
   "@settings": {
