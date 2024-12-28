@@ -15,3 +15,5 @@ class FileSaveRequested extends FileEvent {
   final MasoFile masoFile; // The MasoFile object to be saved
   FileSaveRequested(this.filePath, this.masoFile);
 }
+
+class FilePickRequested extends FileEvent {}

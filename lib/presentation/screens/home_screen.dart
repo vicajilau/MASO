@@ -1,5 +1,4 @@
 import 'package:desktop_drop/desktop_drop.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -48,15 +47,8 @@ class HomeScreen extends StatelessWidget {
                 title: Text(AppLocalizations.of(context)!.titleAppBar),
                 actions: [
                   TextButton(
-                    onPressed: () async {
-                      FilePickerResult? result =
-                          await FilePicker.platform.pickFiles();
-                      if (result != null) {
-                        context
-                            .read<FileBloc>()
-                            .add(FileDropped(result.files.single.path!));
-                      }
-                    },
+                    onPressed: () =>
+                        context.read<FileBloc>().add(FilePickRequested()),
                     child: Text(AppLocalizations.of(context)!.load,
                         style: const TextStyle(color: Colors.white)),
                   ),

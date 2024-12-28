@@ -24,4 +24,8 @@ class FileRepository {
   Future<void> saveMasoFile(String filePath, MasoFile masoFile) async {
     await _fileService.writeMasoFile(filePath, masoFile);
   }
+
+  Future<String?> pickFile() async {
+    return _fileService.pickFile();
+  }
 }

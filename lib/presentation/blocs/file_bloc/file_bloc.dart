@@ -51,7 +51,27 @@ class FileBloc extends Bloc<FileEvent, FileState> {
       } catch (e) {
         emit(FileError(
             reason: FileErrorType.errorSavingFile,
-            error: Exception(e))); // Emit error from _TypeError
+            error: Exception(e)));
+      }
+    });
+
+    on<FilePickRequested>((event, emit) async {
+      emit(FileLoading()); // Emit loading state while saving the file
+      try {
+        // Save the MasoFile to the specified path
+        final path = await fileRepository.pickFile();
+        if (path != null) {
+          add(FileDropped(path));
+        }
+
+      } on Exception catch (e) {
+        emit(FileError(
+            reason: FileErrorType.errorSavingFile,
+            error: e)); // Emit error from Exception
+      } catch (e) {
+        emit(FileError(
+            reason: FileErrorType.errorSavingFile,
+            error: Exception(e)));
       }
     });
   }

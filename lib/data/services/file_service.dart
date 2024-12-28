@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:file_picker/file_picker.dart';
+
 import '../../domain/models/maso_file.dart';
 
 /// The FileService class is responsible for reading and writing MASO files.
@@ -28,5 +30,13 @@ class FileService {
 
     // Write the content to the file
     await file.writeAsString(content);
+  }
+
+  Future<String?> pickFile() async {
+    final result = await FilePicker.platform.pickFiles();
+    if (result != null) {
+      return result.files.single.path;
+    }
+    return null;
   }
 }
