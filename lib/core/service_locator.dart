@@ -2,7 +2,7 @@ import 'package:get_it/get_it.dart';
 
 import '../data/repositories/file_repository.dart';
 import '../data/services/file_service.dart';
-import '../presentation/blocs/file_bloc.dart';
+import '../presentation/blocs/file_bloc/file_bloc.dart';
 
 // Create an instance of GetIt, which is the service locator
 final getIt = GetIt.instance;

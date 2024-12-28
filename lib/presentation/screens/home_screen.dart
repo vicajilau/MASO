@@ -5,7 +5,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../core/service_locator.dart';
-import '../blocs/file_bloc.dart';
+import '../blocs/file_bloc/file_bloc.dart';
+import '../blocs/file_bloc/file_event.dart';
+import '../blocs/file_bloc/file_state.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
