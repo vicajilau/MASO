@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:maso/domain/models/maso_file.dart';
 
 import '../../domain/models/process.dart';
@@ -22,7 +23,7 @@ class _MasoFileListState extends State<MasoFileList> {
         return ListTile(
           title: Text(process.name),
           subtitle: Text(
-            'Arrival Time: ${process.arrivalTime}, Service Time: ${process.serviceTime}',
+            '${AppLocalizations.of(context)!.arrivalTimeLabel(process.arrivalTime.toString())} ${AppLocalizations.of(context)!.serviceTimeLabel(process.serviceTime.toString())}',
           ),
           trailing: IconButton(
             icon: Icon(Icons.delete),

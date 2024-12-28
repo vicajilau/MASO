@@ -62,5 +62,49 @@
           "example": "Permission denied"
         }
       }
+    },
+  "arrivalTimeLabel": "Arrival Time: {arrivalTime}",
+  "@arrivalTimeLabel": {
+    "description": "Label for displaying the arrival time of a process.",
+    "placeholders": {
+      "arrivalTime": {
+        "type": "String",
+        "example": "10"
+      }
     }
+  },
+  "serviceTimeLabel": "Service Time: {serviceTime}",
+  "@serviceTimeLabel": {
+    "description": "Label for displaying the service time of a process.",
+    "placeholders": {
+      "serviceTime": {
+        "type": "String",
+        "example": "5"
+      }
+    }
+  },
+  "editProcessTitle": "Edit Process",
+  "@editProcessTitle": {
+    "description": "Title of the screen for editing a process."
+  },
+  "processNameLabel": "Process Name",
+  "@processNameLabel": {
+    "description": "Label for the process name input field."
+  },
+  "arrivalTimeDialogLabel": "Arrival Time",
+  "@arrivalTimeDialogLabel": {
+    "description": "Label for the arrival time input field."
+  },
+  "serviceTimeDialogLabel": "Service Time",
+  "@serviceTimeDialogLabel": {
+    "description": "Label for the service time input field."
+  },
+  "cancelButton": "Cancel",
+  "@cancelButton": {
+    "description": "Cancel button."
+  },
+  "saveButton": "Save",
+  "@saveButton": {
+    "description": "Save button."
+  }
 }

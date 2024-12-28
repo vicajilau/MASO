@@ -62,5 +62,49 @@
           "example": "Permiso denegado"
         }
       }
+    },
+  "arrivalTimeLabel": "Tiempo de Llegada: {arrivalTime}",
+  "@arrivalTimeLabel": {
+    "description": "Etiqueta para mostrar el tiempo de llegada de un proceso.",
+    "placeholders": {
+      "arrivalTime": {
+        "type": "String",
+        "example": "10"
+      }
     }
+  },
+  "serviceTimeLabel": "Tiempo de Servicio: {serviceTime}",
+  "@serviceTimeLabel": {
+    "description": "Etiqueta para mostrar el tiempo de servicio de un proceso.",
+    "placeholders": {
+      "serviceTime": {
+        "type": "String",
+        "example": "5"
+      }
+    }
+  },
+  "editProcessTitle": "Editar Proceso",
+  "@editProcessTitle": {
+    "description": "Título de la pantalla para editar un proceso."
+  },
+  "processNameLabel": "Nombre del Proceso",
+  "@processNameLabel": {
+    "description": "Etiqueta para el campo de entrada del nombre del proceso."
+  },
+  "arrivalTimeDialogLabel": "Tiempo de Llegada",
+  "@arrivalTimeDialogLabel": {
+    "description": "Etiqueta para el campo de entrada del tiempo de llegada."
+  },
+  "serviceTimeDialogLabel": "Tiempo de Servicio",
+  "@serviceTimeDialogLabel": {
+    "description": "Etiqueta para el campo de entrada del tiempo de servicio."
+  },
+  "cancelButton": "Cancelar",
+  "@cancelButton": {
+    "description": "Botón de cancelar."
+  },
+  "saveButton": "Guardar",
+  "@saveButton": {
+    "description": "Botón de guardar."
+  }
 }

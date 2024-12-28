@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:maso/domain/models/process.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EditProcessScreen extends StatefulWidget {
   final Process process;
@@ -45,7 +46,7 @@ class _EditProcessScreenState extends State<EditProcessScreen> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('Edit Process'),
+      title: Text(AppLocalizations.of(context)!.editProcessTitle),
       content: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -53,7 +54,7 @@ class _EditProcessScreenState extends State<EditProcessScreen> {
             TextField(
               controller: _nameController,
               decoration: InputDecoration(
-                labelText: 'Process Name',
+                labelText: AppLocalizations.of(context)!.processNameLabel,
                 border: OutlineInputBorder(),
               ),
             ),
@@ -61,7 +62,7 @@ class _EditProcessScreenState extends State<EditProcessScreen> {
             TextField(
               controller: _arrivalTimeController,
               decoration: InputDecoration(
-                labelText: 'Arrival Time',
+                labelText: AppLocalizations.of(context)!.arrivalTimeDialogLabel,
                 border: OutlineInputBorder(),
               ),
               keyboardType: TextInputType.number,
@@ -70,7 +71,7 @@ class _EditProcessScreenState extends State<EditProcessScreen> {
             TextField(
               controller: _serviceTimeController,
               decoration: InputDecoration(
-                labelText: 'Service Time',
+                labelText: AppLocalizations.of(context)!.serviceTimeDialogLabel,
                 border: OutlineInputBorder(),
               ),
               keyboardType: TextInputType.number,
@@ -81,11 +82,11 @@ class _EditProcessScreenState extends State<EditProcessScreen> {
       actions: [
         TextButton(
           onPressed: () => Navigator.of(context).pop(),
-          child: Text('Cancel'),
+          child: Text(AppLocalizations.of(context)!.cancelButton),
         ),
         ElevatedButton(
           onPressed: _submit,
-          child: Text('Save'),
+          child: Text(AppLocalizations.of(context)!.saveButton),
         ),
       ],
     );
