@@ -6,7 +6,7 @@ import 'core/constants/theme.dart';
 import 'core/service_locator.dart';
 
 void main() {
-  setupServiceLocator();
+  ServiceLocator.instance.setup();
   runApp(const MasoApp());
 }
 
@@ -22,6 +22,7 @@ class MasoApp extends StatelessWidget {
       themeMode: ThemeMode.system,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
+      debugShowCheckedModeBanner: false,
     );
   }
 }

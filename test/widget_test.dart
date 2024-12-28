@@ -10,7 +10,7 @@ import 'package:maso/core/service_locator.dart';
 import 'package:maso/main.dart';
 
 void main() {
-  setupServiceLocator();
+  ServiceLocator.instance.setup();
 
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.

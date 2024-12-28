@@ -5,6 +5,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../core/service_locator.dart';
+import '../../routes/app_router.dart';
 import '../blocs/file_bloc/file_bloc.dart';
 import '../blocs/file_bloc/file_event.dart';
 import '../blocs/file_bloc/file_state.dart';
@@ -19,23 +20,23 @@ class HomeScreen extends StatelessWidget {
           title: Text(AppLocalizations.of(context)!.titleAppBar),
           actions: [
             TextButton(
-              onPressed: () => context.go('/home'),
+              onPressed: () => context.go(AppRoutes.home),
               child: Text(AppLocalizations.of(context)!.home,
                   style: const TextStyle(color: Colors.white)),
             ),
             TextButton(
-              onPressed: () => context.go('/settings'),
+              onPressed: () => context.go(AppRoutes.settings),
               child: Text(AppLocalizations.of(context)!.settings,
                   style: const TextStyle(color: Colors.white)),
             ),
             TextButton(
-              onPressed: () => context.go('/about'),
+              onPressed: () => context.go(AppRoutes.about),
               child: Text(AppLocalizations.of(context)!.about,
                   style: const TextStyle(color: Colors.white)),
             ),
           ]),
       body: BlocProvider(
-        create: (_) => getIt<FileBloc>(),
+        create: (_) => ServiceLocator.instance.getIt<FileBloc>(),
         child: BlocListener<FileBloc, FileState>(
           listener: (context, state) {
             if (state is FileLoaded) {
@@ -44,6 +45,7 @@ class HomeScreen extends StatelessWidget {
                     content: Text(AppLocalizations.of(context)!
                         .fileLoaded(state.filePath))),
               );
+              context.push(AppRoutes.fileLoadedScreen);
             }
             if (state is FileError) {
               ScaffoldMessenger.of(context).showSnackBar(

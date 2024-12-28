@@ -1,3 +1,5 @@
+import 'package:maso/core/service_locator.dart';
+
 import '../../domain/models/maso_file.dart';
 import '../services/file_service.dart';
 
@@ -12,7 +14,9 @@ class FileRepository {
   /// Loads a `MasoFile` from a file.
   /// This method calls the `readMasoFile` function from FileService to read the file.
   Future<MasoFile> loadMasoFile(String filePath) async {
-    return await _fileService.readMasoFile(filePath);
+    final masoFile = await _fileService.readMasoFile(filePath);
+    ServiceLocator.instance.registerMasoFile(masoFile);
+    return masoFile;
   }
 
   /// Saves a `MasoFile` to a file.
