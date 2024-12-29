@@ -19,8 +19,7 @@ class FileBloc extends Bloc<FileEvent, FileState> {
         if (event.filePath.endsWith('.maso')) {
           // If the file has the correct extension, load the file
           final masoFile = await fileRepository.loadMasoFile(event.filePath);
-          emit(FileLoaded(
-              masoFile, event.filePath)); // Emit the loaded file state
+          emit(FileLoaded(masoFile)); // Emit the loaded file state
         } else {
           // If the file is not a .maso file, emit an error state
           emit(FileError(reason: FileErrorType.invalidExtension));
@@ -41,9 +40,14 @@ class FileBloc extends Bloc<FileEvent, FileState> {
       emit(FileLoading()); // Emit loading state while saving the file
       try {
         // Save the MasoFile to the specified path
-        await fileRepository.saveMasoFile(event.filePath, event.masoFile);
-        emit(FileLoaded(event.masoFile,
-            event.filePath)); // Emit the loaded file state after save
+        final path = await fileRepository.getMasoFilePath(
+            event.masoFile, event.dialogTitle);
+        if (path != null) {
+          event.masoFile.filePath = path;
+          await fileRepository.saveMasoFile(event.masoFile);
+          emit(FileLoaded(
+              event.masoFile)); // Emit the loaded file state after save
+        }
       } on Exception catch (e) {
         emit(FileError(
             reason: FileErrorType.errorSavingFile,

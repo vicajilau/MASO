@@ -25,9 +25,19 @@
       }
     }
   },
+  "fileSaved": "File saved: {filePath}",
+  "@fileSaved": {
+    "description": "Message displayed when a file is successfully saved.",
+    "placeholders": {
+      "filePath": {
+        "type": "String",
+        "example": "/path/to/file.maso"
+      }
+    }
+  },
   "fileError": "Error: {message}",
   "@fileError": {
-    "description": "Message displayed when there is an error loading a file.",
+    "description": "Message displayed when there is an error loading or saving a file.",
     "placeholders": {
       "message": {
         "type": "String",
@@ -123,5 +133,6 @@
   "disabledLabel": "Disabled",
   "confirmExitTitle": "Confirm Exit",
   "confirmExitMessage": "Are you sure you want to leave without saving?",
-  "exitButton": "Exit"
+  "exitButton": "Exit",
+  "saveDialogTitle": "Please select an output file:"
 }

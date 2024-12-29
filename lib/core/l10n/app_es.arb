@@ -25,9 +25,19 @@
       }
     }
   },
+  "fileSaved": "Archivo guardado: {filePath}",
+  "@fileSaved": {
+    "description": "Mensaje mostrado cuando un archivo se guarda con éxito.",
+    "placeholders": {
+      "filePath": {
+        "type": "String",
+        "example": "/ruta/al/archivo.maso"
+      }
+    }
+  },
   "fileError": "Error: {message}",
   "@fileError": {
-    "description": "Mensaje mostrado cuando hay un error al cargar un archivo.",
+    "description": "Mensaje mostrado cuando hay un error al cargar o guardar un archivo.",
     "placeholders": {
       "message": {
         "type": "String",
@@ -123,5 +133,6 @@
   "disabledLabel": "Deshabilitado",
   "confirmExitTitle": "Confirmar salida",
   "confirmExitMessage": "¿Seguro que quieres salir sin guardar?",
-  "exitButton": "Salir"
+  "exitButton": "Salir",
+  "saveDialogTitle": "Por favor, seleccione un archivo de salida:"
 }

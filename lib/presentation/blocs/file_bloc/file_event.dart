@@ -11,9 +11,9 @@ class FileDropped extends FileEvent {
 
 /// Event triggered when a file save is requested, with the file path and data.
 class FileSaveRequested extends FileEvent {
-  final String filePath; // Path where the file should be saved
   final MasoFile masoFile; // The MasoFile object to be saved
-  FileSaveRequested(this.filePath, this.masoFile);
+  final String dialogTitle;
+  FileSaveRequested(this.masoFile, this.dialogTitle);
 }
 
 /// Event triggered when a file is requested to be picked.

@@ -4,7 +4,7 @@ import 'metadata.dart';
 
 /// The MasoFile class represents a MASO file, which consists of metadata and a list of processes.
 class MasoFile {
-  final String filePath;
+  String filePath;
 
   /// Metadata of the MASO file
   final Metadata metadata;

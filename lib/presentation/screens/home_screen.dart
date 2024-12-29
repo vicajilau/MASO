@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:maso/core/context_extension.dart';
 import 'package:platform_detail/platform_detail.dart';
 
 import '../../core/service_locator.dart';
@@ -29,15 +30,15 @@ class _HomeScreenState extends State<HomeScreen> {
         listener: (context, state) async {
           if (state is FileLoaded) {
             // File has been loaded, show a snack bar and navigate
-            presentSnackBar(
-                AppLocalizations.of(context)!.fileLoaded(state.filePath));
+            context.presentSnackBar(
+                AppLocalizations.of(context)!.fileLoaded(state.masoFile.filePath));
             final _ = await context.push(AppRoutes.fileLoadedScreen);
             if (context.mounted) {
               context.read<FileBloc>().add(FileReset());
             }
           }
           if (state is FileError && context.mounted) {
-            presentSnackBar(state.getDescription(context));
+            context.presentSnackBar(state.getDescription(context));
           }
           if (state is FileLoading) {
             setState(() {
@@ -114,22 +115,5 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
-  }
-
-  /// Displays a snack bar with the given text message.
-  ///
-  /// This method uses the `ScaffoldMessenger` to show a `SnackBar`
-  /// containing the provided `text`. The `context` must be a valid
-  /// `BuildContext` from the current widget tree.
-  ///
-  /// - Parameters:
-  ///   - text: The message to display in the `SnackBar`.
-  ///
-  /// Example usage:
-  /// ```dart
-  /// presentSnackBar("File uploaded successfully!");
-  /// ```
-  void presentSnackBar(String text) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(text)));
   }
 }

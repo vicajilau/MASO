@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:maso/core/context_extension.dart';
 import 'package:maso/core/service_locator.dart';
 
 import '../../domain/models/maso_file.dart';
 import '../../domain/use_cases/check_file_changes_use_case.dart';
+import '../blocs/file_bloc/file_bloc.dart';
+import '../blocs/file_bloc/file_event.dart';
+import '../blocs/file_bloc/file_state.dart';
 import '../widgets/exit_confirmation_screen.dart';
 import '../widgets/maso_file_list.dart';
 
@@ -49,43 +55,64 @@ class _FileLoadedScreenState extends State<FileLoadedScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-            "${cachedMasoFile.metadata.name} - ${cachedMasoFile.metadata.description}"),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () async {
-            final shouldExit = await _confirmExit();
-            if (shouldExit && context.mounted) {
-              context.pop();
-            }
+    return BlocProvider<FileBloc>(
+      create: (_) => ServiceLocator.instance.getIt<FileBloc>(),
+      child: BlocListener<FileBloc, FileState>(
+        listener: (context, state) async {
+          if (state is FileLoaded) {
+            context.presentSnackBar(AppLocalizations.of(context)!
+                .fileSaved(state.masoFile.filePath));
+            await _checkFileChange();
+          }
+          if (state is FileError && context.mounted) {
+            context.presentSnackBar(state.getDescription(context));
+          }
+        },
+        child: Builder(
+          builder: (context) {
+            return Scaffold(
+              appBar: AppBar(
+                title: Text(
+                    "${cachedMasoFile.metadata.name} - ${cachedMasoFile.metadata.description}"),
+                leading: IconButton(
+                  icon: const Icon(Icons.arrow_back),
+                  onPressed: () async {
+                    final shouldExit = await _confirmExit();
+                    if (shouldExit && context.mounted) {
+                      context.pop();
+                    }
+                  },
+                ),
+                actions: [
+                  // Save Action
+                  IconButton(
+                    icon: const Icon(Icons.save),
+                    tooltip: 'Save',
+                    onPressed: _hasFileChanged
+                        ? () {
+                            context.read<FileBloc>().add(FileSaveRequested(
+                                  cachedMasoFile,
+                                  AppLocalizations.of(context)!.saveDialogTitle,
+                                ));
+                          }
+                        : null, // Disable button if file hasn't changed
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.play_arrow),
+                    tooltip: 'Execute',
+                    onPressed: () {
+                      // Add logic for execution here
+                    },
+                  ),
+                ],
+              ),
+              body: MasoFileList(
+                masoFile: cachedMasoFile,
+                onFileChange: _checkFileChange,
+              ),
+            );
           },
         ),
-        actions: [
-          // Save Action
-          IconButton(
-            icon: Icon(Icons.save),
-            tooltip: 'Save',
-            onPressed: _hasFileChanged
-                ? () {
-                    // Add your save logic here
-                    // context.read<FileBloc>().add(SaveMasoFile());
-                  }
-                : null, // Disable button if file hasn't changed
-          ),
-          IconButton(
-            icon: Icon(Icons.play_arrow),
-            tooltip: 'Execute',
-            onPressed: () {
-              // context.read<FileBloc>().add(ExecuteMasoFileProcesses());
-            },
-          ),
-        ],
-      ),
-      body: MasoFileList(
-        masoFile: cachedMasoFile,
-        onFileChange: _checkFileChange,
       ),
     );
   }

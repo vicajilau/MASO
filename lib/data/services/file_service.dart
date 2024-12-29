@@ -20,10 +20,19 @@ class FileService {
     return MasoFile.fromJson(json, filePath);
   }
 
+  /// Get a path for a `MasoFile` in the file system.
+  Future<String?> getOutputPathFor(
+      MasoFile masoFile, String dialogTitle) async {
+    return await FilePicker.platform.saveFile(
+        dialogTitle: dialogTitle,
+        fileName: 'output-file.maso',
+        initialDirectory: masoFile.filePath);
+  }
+
   /// Writes a `MasoFile` object to a file at the specified path.
-  Future<void> writeMasoFile(String filePath, MasoFile masoFile) async {
+  Future<void> writeMasoFile(MasoFile masoFile) async {
     // Create a File object for the provided file path
-    final file = File(filePath);
+    final file = File(masoFile.filePath);
 
     // Convert the MasoFile object to JSON string format
     final content = jsonEncode(masoFile.toJson());

@@ -15,9 +15,8 @@ class FileLoading extends FileState {}
 /// State representing a successfully loaded file, containing the file data and path.
 class FileLoaded extends FileState {
   final MasoFile masoFile; // The loaded MasoFile object
-  final String filePath; // Path of the loaded file
 
-  FileLoaded(this.masoFile, this.filePath);
+  FileLoaded(this.masoFile);
 }
 
 /// State representing an error during file operation, with an error message.
