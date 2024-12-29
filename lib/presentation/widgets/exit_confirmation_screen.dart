@@ -3,9 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 
 class ExitConfirmationScreen extends StatelessWidget {
-  final Future<bool> Function() onExitConfirmed;
-
-  const ExitConfirmationScreen({super.key, required this.onExitConfirmed});
+  const ExitConfirmationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,18 +12,11 @@ class ExitConfirmationScreen extends StatelessWidget {
       content: Text(AppLocalizations.of(context)!.confirmExitMessage),
       actions: [
         TextButton(
-          onPressed: () {
-            context.pop(false);
-          },
+          onPressed: () => context.pop(false),
           child: Text(AppLocalizations.of(context)!.cancelButton),
         ),
         ElevatedButton(
-          onPressed: () async {
-            bool shouldExit = await onExitConfirmed();
-            if (context.mounted) {
-              context.pop(shouldExit);
-            }
-          },
+          onPressed: () => context.pop(true),
           child: Text(AppLocalizations.of(context)!.exitButton),
         ),
       ],

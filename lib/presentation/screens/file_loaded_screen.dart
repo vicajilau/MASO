@@ -19,11 +19,7 @@ class _FileLoadedScreenState extends State<FileLoadedScreen> {
   Future<bool> _confirmExit() async {
     return await showDialog<bool>(
           context: context,
-          builder: (context) => ExitConfirmationScreen(
-            onExitConfirmed: () async {
-              return true;
-            },
-          ),
+          builder: (context) => ExitConfirmationScreen(),
         ) ??
         false;
   }
