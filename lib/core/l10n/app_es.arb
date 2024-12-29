@@ -120,5 +120,8 @@
     "description": "Texto del botón para confirmar la eliminación."
   },
   "enabledLabel": "Habilitado",
-  "disabledLabel": "Deshabilitado"
+  "disabledLabel": "Deshabilitado",
+  "confirmExitTitle": "Confirmar salida",
+  "confirmExitMessage": "¿Seguro que quieres salir sin guardar?",
+  "exitButton": "Salir"
 }

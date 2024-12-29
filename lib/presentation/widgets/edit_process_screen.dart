@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 import 'package:maso/domain/models/process.dart';
 
 class EditProcessScreen extends StatefulWidget {
@@ -43,7 +44,7 @@ class _EditProcessScreenState extends State<EditProcessScreen> {
       serviceTime: int.tryParse(_serviceTimeController.text) ?? 0,
       enabled: _isEnabled,
     );
-    Navigator.of(context).pop(updatedProcess);
+    context.pop(updatedProcess);
   }
 
   @override
@@ -101,7 +102,7 @@ class _EditProcessScreenState extends State<EditProcessScreen> {
       ),
       actions: [
         TextButton(
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () => context.pop(),
           child: Text(AppLocalizations.of(context)!.cancelButton),
         ),
         ElevatedButton(

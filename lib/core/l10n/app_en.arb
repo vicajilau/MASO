@@ -120,5 +120,8 @@
     "description": "Button text for confirming deletion."
   },
   "enabledLabel": "Enabled",
-  "disabledLabel": "Disabled"
+  "disabledLabel": "Disabled",
+  "confirmExitTitle": "Confirm Exit",
+  "confirmExitMessage": "Are you sure you want to leave without saving?",
+  "exitButton": "Exit"
 }

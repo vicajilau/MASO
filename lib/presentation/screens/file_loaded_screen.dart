@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:maso/core/service_locator.dart';
 
 import '../../domain/models/maso_file.dart';
+import '../widgets/exit_confirmation_screen.dart';
 import '../widgets/maso_file_list.dart';
 
 class FileLoadedScreen extends StatefulWidget {
@@ -13,9 +15,17 @@ class FileLoadedScreen extends StatefulWidget {
 
 class _FileLoadedScreenState extends State<FileLoadedScreen> {
   final MasoFile masoFile = ServiceLocator.instance.getIt<MasoFile>();
-  @override
-  void initState() {
-    super.initState();
+
+  Future<bool> _confirmExit() async {
+    return await showDialog<bool>(
+          context: context,
+          builder: (context) => ExitConfirmationScreen(
+            onExitConfirmed: () async {
+              return true;
+            },
+          ),
+        ) ??
+        false;
   }
 
   @override
@@ -24,6 +34,16 @@ class _FileLoadedScreenState extends State<FileLoadedScreen> {
       appBar: AppBar(
         title: Text(
             "${masoFile.metadata.name} - ${masoFile.metadata.description}"),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () async {
+            final shouldExit = await _confirmExit();
+            if (shouldExit && context.mounted) {
+              print("context.canPop(): ${context.canPop()}");
+              context.pop();
+            }
+          },
+        ),
         actions: [
           // Save Action
           IconButton(

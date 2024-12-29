@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 import 'package:maso/domain/models/maso_file.dart';
 
 import '../../domain/models/process.dart';
@@ -23,11 +24,11 @@ class _MasoFileListState extends State<MasoFileList> {
                 .confirmDeleteMessage(process.name)),
             actions: [
               TextButton(
-                onPressed: () => Navigator.of(context).pop(false),
+                onPressed: () => context.pop(false),
                 child: Text(AppLocalizations.of(context)!.cancelButton),
               ),
               ElevatedButton(
-                onPressed: () => Navigator.of(context).pop(true),
+                onPressed: () => context.pop(true),
                 child: Text(AppLocalizations.of(context)!.deleteButton),
               ),
             ],
