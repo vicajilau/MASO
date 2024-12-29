@@ -77,6 +77,16 @@ class _MasoFileListState extends State<MasoFileList> {
             subtitle: Text(
               '${AppLocalizations.of(context)!.arrivalTimeLabel(process.arrivalTime.toString())} ${AppLocalizations.of(context)!.serviceTimeLabel(process.serviceTime.toString())}',
             ),
+            leading: Switch(
+              value: process.enabled,
+              onChanged: (value) {
+                setState(() {
+                  process.enabled = value;
+                });
+              },
+              activeColor: Colors.green,
+              inactiveThumbColor: Colors.red,
+            ),
             onTap: () async {
               final updatedProcess = await showDialog<Process>(
                 context: context,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:maso/domain/models/process.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:maso/domain/models/process.dart';
 
 class EditProcessScreen extends StatefulWidget {
   final Process process;
@@ -15,6 +15,7 @@ class _EditProcessScreenState extends State<EditProcessScreen> {
   late TextEditingController _nameController;
   late TextEditingController _arrivalTimeController;
   late TextEditingController _serviceTimeController;
+  late bool _isEnabled;
 
   @override
   void initState() {
@@ -24,6 +25,7 @@ class _EditProcessScreenState extends State<EditProcessScreen> {
         TextEditingController(text: widget.process.arrivalTime.toString());
     _serviceTimeController =
         TextEditingController(text: widget.process.serviceTime.toString());
+    _isEnabled = widget.process.enabled;
   }
 
   @override
@@ -39,6 +41,7 @@ class _EditProcessScreenState extends State<EditProcessScreen> {
       name: _nameController.text,
       arrivalTime: int.tryParse(_arrivalTimeController.text) ?? 0,
       serviceTime: int.tryParse(_serviceTimeController.text) ?? 0,
+      enabled: _isEnabled,
     );
     Navigator.of(context).pop(updatedProcess);
   }
@@ -75,6 +78,23 @@ class _EditProcessScreenState extends State<EditProcessScreen> {
                 border: OutlineInputBorder(),
               ),
               keyboardType: TextInputType.number,
+            ),
+            SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(_isEnabled
+                    ? AppLocalizations.of(context)!.enabledLabel
+                    : AppLocalizations.of(context)!.disabledLabel),
+                Switch(
+                  value: _isEnabled,
+                  onChanged: (value) {
+                    setState(() {
+                      _isEnabled = value;
+                    });
+                  },
+                ),
+              ],
             ),
           ],
         ),

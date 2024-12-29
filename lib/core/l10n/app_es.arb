@@ -118,5 +118,7 @@
   "deleteButton": "Eliminar",
   "@deleteButton": {
     "description": "Texto del botón para confirmar la eliminación."
-  }
+  },
+  "enabledLabel": "Habilitado",
+  "disabledLabel": "Deshabilitado"
 }
