@@ -39,7 +39,6 @@ class _FileLoadedScreenState extends State<FileLoadedScreen> {
           onPressed: () async {
             final shouldExit = await _confirmExit();
             if (shouldExit && context.mounted) {
-              print("context.canPop(): ${context.canPop()}");
               context.pop();
             }
           },
