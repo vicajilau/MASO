@@ -8,7 +8,9 @@ import 'edit_process_screen.dart';
 
 class MasoFileList extends StatefulWidget {
   final MasoFile masoFile;
-  const MasoFileList({super.key, required this.masoFile});
+  final VoidCallback onFileChange;
+  const MasoFileList(
+      {super.key, required this.masoFile, required this.onFileChange});
 
   @override
   State<MasoFileList> createState() => _MasoFileListState();
@@ -47,6 +49,7 @@ class _MasoFileListState extends State<MasoFileList> {
           }
           final process = widget.masoFile.processes.removeAt(oldIndex);
           widget.masoFile.processes.insert(newIndex, process);
+          widget.onFileChange();
         });
       },
       children: List.generate(widget.masoFile.processes.length, (index) {
@@ -58,6 +61,7 @@ class _MasoFileListState extends State<MasoFileList> {
           onDismissed: (direction) {
             setState(() {
               widget.masoFile.processes.removeAt(index);
+              widget.onFileChange();
             });
           },
           background: Container(
@@ -83,6 +87,7 @@ class _MasoFileListState extends State<MasoFileList> {
               onChanged: (value) {
                 setState(() {
                   process.enabled = value;
+                  widget.onFileChange();
                 });
               },
               activeColor: Colors.green,
@@ -96,6 +101,7 @@ class _MasoFileListState extends State<MasoFileList> {
               if (updatedProcess != null) {
                 setState(() {
                   widget.masoFile.processes[index] = updatedProcess;
+                  widget.onFileChange();
                 });
               }
             },

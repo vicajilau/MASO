@@ -50,9 +50,12 @@ class FileBloc extends Bloc<FileEvent, FileState> {
             error: e)); // Emit error from Exception
       } catch (e) {
         emit(FileError(
-            reason: FileErrorType.errorSavingFile,
-            error: Exception(e)));
+            reason: FileErrorType.errorSavingFile, error: Exception(e)));
       }
+    });
+
+    on<FileReset>((event, emit) async {
+      emit(FileInitial()); // Emit initial state after reset
     });
 
     on<FilePickRequested>((event, emit) async {
@@ -62,15 +65,14 @@ class FileBloc extends Bloc<FileEvent, FileState> {
         if (path != null) {
           add(FileDropped(path));
         }
-
+        emit(FileInitial());
       } on Exception catch (e) {
         emit(FileError(
             reason: FileErrorType.errorSavingFile,
             error: e)); // Emit error from Exception
       } catch (e) {
         emit(FileError(
-            reason: FileErrorType.errorSavingFile,
-            error: Exception(e)));
+            reason: FileErrorType.errorSavingFile, error: Exception(e)));
       }
     });
   }

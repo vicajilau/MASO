@@ -16,4 +16,10 @@ class FileSaveRequested extends FileEvent {
   FileSaveRequested(this.filePath, this.masoFile);
 }
 
+/// Event triggered when a file is requested to be picked.
+/// This event can be used to initiate the file selection process.
 class FilePickRequested extends FileEvent {}
+
+/// Event triggered to reset the file state.
+/// This event can be used to clear any file-related data or state.
+class FileReset extends FileEvent {}

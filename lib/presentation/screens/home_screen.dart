@@ -11,33 +11,43 @@ import '../blocs/file_bloc/file_bloc.dart';
 import '../blocs/file_bloc/file_event.dart';
 import '../blocs/file_bloc/file_state.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  bool _isLoading = false; // Variable to track loading state
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<FileBloc>(
       create: (_) => ServiceLocator.instance.getIt<FileBloc>(),
       child: BlocListener<FileBloc, FileState>(
-        listener: (context, state) {
+        listener: (context, state) async {
           if (state is FileLoaded) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(
-                  AppLocalizations.of(context)!.fileLoaded(state.filePath),
-                ),
-              ),
-            );
-            context.push(AppRoutes.fileLoadedScreen);
+            // File has been loaded, show a snack bar and navigate
+            presentSnackBar(
+                AppLocalizations.of(context)!.fileLoaded(state.filePath));
+            final _ = await context.push(AppRoutes.fileLoadedScreen);
+            if (context.mounted) {
+              context.read<FileBloc>().add(FileReset());
+            }
           }
-          if (state is FileError) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(
-                  state.getDescription(context),
-                ),
-              ),
-            );
+          if (state is FileError && context.mounted) {
+            presentSnackBar(state.getDescription(context));
+          }
+          if (state is FileLoading) {
+            setState(() {
+              _isLoading =
+                  true; // File is currently loading, disable the load button
+            });
+          } else {
+            setState(() {
+              _isLoading = false; // otherwise enabled it
+            });
           }
         },
         child: Builder(
@@ -46,21 +56,30 @@ class HomeScreen extends StatelessWidget {
               appBar: AppBar(
                 title: Text(AppLocalizations.of(context)!.titleAppBar),
                 actions: [
+                  // Disable the load button if a file is loading
                   TextButton(
-                    onPressed: () =>
-                        context.read<FileBloc>().add(FilePickRequested()),
-                    child: Text(AppLocalizations.of(context)!.load,
-                        style: const TextStyle(color: Colors.white)),
+                    onPressed: _isLoading
+                        ? null
+                        : () =>
+                            context.read<FileBloc>().add(FilePickRequested()),
+                    child: Text(
+                      AppLocalizations.of(context)!.load,
+                      style: const TextStyle(color: Colors.white),
+                    ),
                   ),
                   TextButton(
                     onPressed: () => context.go(AppRoutes.settings),
-                    child: Text(AppLocalizations.of(context)!.settings,
-                        style: const TextStyle(color: Colors.white)),
+                    child: Text(
+                      AppLocalizations.of(context)!.settings,
+                      style: const TextStyle(color: Colors.white),
+                    ),
                   ),
                   TextButton(
                     onPressed: () => context.go(AppRoutes.about),
-                    child: Text(AppLocalizations.of(context)!.about,
-                        style: const TextStyle(color: Colors.white)),
+                    child: Text(
+                      AppLocalizations.of(context)!.about,
+                      style: const TextStyle(color: Colors.white),
+                    ),
                   ),
                 ],
               ),
@@ -68,9 +87,11 @@ class HomeScreen extends StatelessWidget {
                   ? Center(child: Image.asset('MASO.png', fit: BoxFit.contain))
                   : DropTarget(
                       onDragDone: (details) {
-                        context
-                            .read<FileBloc>()
-                            .add(FileDropped(details.files.first.path));
+                        if (context.read<FileBloc>().state is! FileLoaded) {
+                          context
+                              .read<FileBloc>()
+                              .add(FileDropped(details.files.first.path));
+                        }
                       },
                       child: Center(
                         child: DragTarget<String>(
@@ -93,5 +114,22 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  /// Displays a snack bar with the given text message.
+  ///
+  /// This method uses the `ScaffoldMessenger` to show a `SnackBar`
+  /// containing the provided `text`. The `context` must be a valid
+  /// `BuildContext` from the current widget tree.
+  ///
+  /// - Parameters:
+  ///   - text: The message to display in the `SnackBar`.
+  ///
+  /// Example usage:
+  /// ```dart
+  /// presentSnackBar("File uploaded successfully!");
+  /// ```
+  void presentSnackBar(String text) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(text)));
   }
 }

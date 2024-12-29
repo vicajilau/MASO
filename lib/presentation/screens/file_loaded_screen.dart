@@ -16,17 +16,35 @@ class FileLoadedScreen extends StatefulWidget {
 
 class _FileLoadedScreenState extends State<FileLoadedScreen> {
   final MasoFile cachedMasoFile = ServiceLocator.instance.getIt<MasoFile>();
+  bool _hasFileChanged = false; // Variable to track file change status
+
+  // Function to check if the file has changed
+  Future<void> _checkFileChange() async {
+    final CheckFileChangesUseCase checkFileChangesUseCase =
+        ServiceLocator.instance.getIt<CheckFileChangesUseCase>();
+    bool hasChanged = await checkFileChangesUseCase.execute(cachedMasoFile);
+    setState(() {
+      _hasFileChanged = hasChanged;
+    });
+  }
 
   Future<bool> _confirmExit() async {
-    final CheckFileChangesUseCase checkFileChangesUseCase = ServiceLocator.instance.getIt<CheckFileChangesUseCase>();
+    final CheckFileChangesUseCase checkFileChangesUseCase =
+        ServiceLocator.instance.getIt<CheckFileChangesUseCase>();
     if (await checkFileChangesUseCase.execute(cachedMasoFile) && mounted) {
       return await showDialog<bool>(
-        context: context,
-        builder: (context) => ExitConfirmationScreen(),
-      ) ??
+            context: context,
+            builder: (context) => ExitConfirmationScreen(),
+          ) ??
           false;
     }
     return true;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _checkFileChange(); // Check the file change status when the screen is loaded
   }
 
   @override
@@ -49,9 +67,12 @@ class _FileLoadedScreenState extends State<FileLoadedScreen> {
           IconButton(
             icon: Icon(Icons.save),
             tooltip: 'Save',
-            onPressed: () {
-              // context.read<FileBloc>().add(SaveMasoFile());
-            },
+            onPressed: _hasFileChanged
+                ? () {
+                    // Add your save logic here
+                    // context.read<FileBloc>().add(SaveMasoFile());
+                  }
+                : null, // Disable button if file hasn't changed
           ),
           IconButton(
             icon: Icon(Icons.play_arrow),
@@ -64,6 +85,7 @@ class _FileLoadedScreenState extends State<FileLoadedScreen> {
       ),
       body: MasoFileList(
         masoFile: cachedMasoFile,
+        onFileChange: _checkFileChange,
       ),
     );
   }
