@@ -80,7 +80,8 @@ class MasoFile {
 
   /// Override the hashCode to be consistent with the equality operator.
   @override
-  int get hashCode => metadata.hashCode ^ processes.hashCode;
+  int get hashCode =>
+      filePath.hashCode ^ metadata.hashCode ^ _processesHashCode(processes);
 
   /// Compares the 'processes' list deeply by checking each process object.
   bool _processesEqual(List<Process> otherProcesses) {
@@ -89,6 +90,15 @@ class MasoFile {
       if (processes[i] != otherProcesses[i]) return false;
     }
     return true;
+  }
+
+  /// Generates a hash code for the 'processes' list based on each process object.
+  int _processesHashCode(List<Process> processes) {
+    int result = 0;
+    for (var process in processes) {
+      result ^= process.hashCode;
+    }
+    return result;
   }
 }
 
