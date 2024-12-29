@@ -56,10 +56,9 @@ class FileBloc extends Bloc<FileEvent, FileState> {
     });
 
     on<FilePickRequested>((event, emit) async {
-      emit(FileLoading()); // Emit loading state while saving the file
+      emit(FileLoading()); // Emit loading state while pick the file
       try {
-        // Save the MasoFile to the specified path
-        final path = await fileRepository.pickFile();
+        final path = await fileRepository.pickFileManually();
         if (path != null) {
           add(FileDropped(path));
         }

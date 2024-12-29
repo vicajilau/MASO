@@ -4,6 +4,8 @@ import 'metadata.dart';
 
 /// The MasoFile class represents a MASO file, which consists of metadata and a list of processes.
 class MasoFile {
+  final String filePath;
+
   /// Metadata of the MASO file
   final Metadata metadata;
 
@@ -11,22 +13,22 @@ class MasoFile {
   final List<Process> processes;
 
   /// Constructor for creating a MasoFile instance with metadata and processes.
-  MasoFile({
-    required this.metadata,
-    required this.processes,
-  });
+  MasoFile(
+      {required this.metadata,
+      required this.processes,
+      required this.filePath});
 
   /// Factory constructor to create a MasoFile instance from a JSON map.
-  factory MasoFile.fromJson(Map<String, dynamic> json) {
+  factory MasoFile.fromJson(Map<String, dynamic> json, String filePath) {
     checkIfJsonIsCorrect(json);
     return MasoFile(
-      // Parse the 'metadata' field and create a Metadata instance
-      metadata: Metadata.fromJson(json['metadata'] as Map<String, dynamic>),
-      // Parse the 'processes' field and create a list of Process instances
-      processes: (json['processes'] as List<dynamic>)
-          .map((e) => Process.fromJson(e as Map<String, dynamic>))
-          .toList(),
-    );
+        // Parse the 'metadata' field and create a Metadata instance
+        metadata: Metadata.fromJson(json['metadata'] as Map<String, dynamic>),
+        // Parse the 'processes' field and create a list of Process instances
+        processes: (json['processes'] as List<dynamic>)
+            .map((e) => Process.fromJson(e as Map<String, dynamic>))
+            .toList(),
+        filePath: filePath);
   }
 
   /// Converts the MasoFile instance to a JSON map.
@@ -65,6 +67,28 @@ class MasoFile {
       /// throw an exception with a specific message regarding the incorrect 'processes' content.
       throw Exception(MasoFileBadContent.processesBadContent);
     }
+  }
+
+  /// Override the equality operator to compare MasoFile instances based on their values.
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is MasoFile &&
+        other.metadata == metadata &&
+        _processesEqual(other.processes);
+  }
+
+  /// Override the hashCode to be consistent with the equality operator.
+  @override
+  int get hashCode => metadata.hashCode ^ processes.hashCode;
+
+  /// Compares the 'processes' list deeply by checking each process object.
+  bool _processesEqual(List<Process> otherProcesses) {
+    if (processes.length != otherProcesses.length) return false;
+    for (int i = 0; i < processes.length; i++) {
+      if (processes[i] != otherProcesses[i]) return false;
+    }
+    return true;
   }
 }
 

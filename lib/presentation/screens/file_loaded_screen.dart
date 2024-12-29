@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:maso/core/service_locator.dart';
 
 import '../../domain/models/maso_file.dart';
+import '../../domain/use_cases/check_file_changes_use_case.dart';
 import '../widgets/exit_confirmation_screen.dart';
 import '../widgets/maso_file_list.dart';
 
@@ -14,14 +15,18 @@ class FileLoadedScreen extends StatefulWidget {
 }
 
 class _FileLoadedScreenState extends State<FileLoadedScreen> {
-  final MasoFile masoFile = ServiceLocator.instance.getIt<MasoFile>();
+  final MasoFile cachedMasoFile = ServiceLocator.instance.getIt<MasoFile>();
 
   Future<bool> _confirmExit() async {
-    return await showDialog<bool>(
-          context: context,
-          builder: (context) => ExitConfirmationScreen(),
-        ) ??
-        false;
+    final CheckFileChangesUseCase checkFileChangesUseCase = ServiceLocator.instance.getIt<CheckFileChangesUseCase>();
+    if (await checkFileChangesUseCase.execute(cachedMasoFile) && mounted) {
+      return await showDialog<bool>(
+        context: context,
+        builder: (context) => ExitConfirmationScreen(),
+      ) ??
+          false;
+    }
+    return true;
   }
 
   @override
@@ -29,7 +34,7 @@ class _FileLoadedScreenState extends State<FileLoadedScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-            "${masoFile.metadata.name} - ${masoFile.metadata.description}"),
+            "${cachedMasoFile.metadata.name} - ${cachedMasoFile.metadata.description}"),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () async {
@@ -58,7 +63,7 @@ class _FileLoadedScreenState extends State<FileLoadedScreen> {
         ],
       ),
       body: MasoFileList(
-        masoFile: masoFile,
+        masoFile: cachedMasoFile,
       ),
     );
   }

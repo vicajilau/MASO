@@ -34,9 +34,9 @@ class FileError extends FileState {
       case FileErrorType.invalidExtension:
         return AppLocalizations.of(context)!.errorInvalidFile;
       case FileErrorType.errorOpeningFile:
-        return AppLocalizations.of(context)!.errorLoadingFile(error.toString());
       case FileErrorType.errorSavingFile:
-        return AppLocalizations.of(context)!.errorSavingFile(error.toString());
+      case FileErrorType.errorPickingFileManually:
+        return AppLocalizations.of(context)!.errorLoadingFile(error.toString());
     }
   }
 }
@@ -50,5 +50,8 @@ enum FileErrorType {
   errorOpeningFile,
 
   /// There was an error while trying to save the file.
-  errorSavingFile;
+  errorSavingFile,
+
+  /// There was an error while trying to pick the file.
+  errorPickingFileManually;
 }

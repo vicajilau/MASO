@@ -17,7 +17,7 @@ class FileService {
 
     // Decode the string content into a Map and convert it to a MasoFile object
     final json = jsonDecode(content) as Map<String, dynamic>;
-    return MasoFile.fromJson(json);
+    return MasoFile.fromJson(json, filePath);
   }
 
   /// Writes a `MasoFile` object to a file at the specified path.

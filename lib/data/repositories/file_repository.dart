@@ -25,7 +25,33 @@ class FileRepository {
     await _fileService.writeMasoFile(filePath, masoFile);
   }
 
-  Future<String?> pickFile() async {
+  /// Picks a file manually using the file service.
+  ///
+  /// This method delegates the task of file selection to the `_fileService`'s
+  /// `pickFile` method. It returns a [String] representing the file path of
+  /// the selected file, or [null] if no file is selected.
+  ///
+  /// Returns:
+  ///   A [Future<String?>] containing the path of the selected file, or [null].
+  Future<String?> pickFileManually() async {
     return _fileService.pickFile();
+  }
+
+  /// Checks if the file has changed by comparing the current file content
+  /// with the cached version of the file.
+  ///
+  /// This method reads the original content of the file specified by the
+  /// [filePath] and compares it with the [cachedMasoFile]. If the content
+  /// is different, it returns [true]; otherwise, it returns [false].
+  ///
+  /// Parameters:
+  ///   - [filePath]: The path to the file to be checked.
+  ///   - [cachedMasoFile]: The cached version of the file content to compare.
+  ///
+  /// Returns:
+  ///   A [Future<bool>] indicating whether the file content has changed.
+  Future<bool> hasMasoFileChanged(String filePath, MasoFile cachedMasoFile) async {
+    final originalMasoFile = await _fileService.readMasoFile(filePath);
+    return originalMasoFile != cachedMasoFile;
   }
 }

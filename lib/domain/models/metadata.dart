@@ -34,4 +34,18 @@ class Metadata {
       'description': description, // Convert the 'description' field to JSON
     };
   }
+
+  /// Override the equality operator to compare Metadata instances based on their values.
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is Metadata &&
+        other.name == name &&
+        other.version == version &&
+        other.description == description;
+  }
+
+  /// Override the hashCode to be consistent with the equality operator.
+  @override
+  int get hashCode => name.hashCode ^ version.hashCode ^ description.hashCode;
 }
