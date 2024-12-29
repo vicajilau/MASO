@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:maso/domain/models/maso_file.dart';
 
 import '../../domain/models/process.dart';
-import 'edit_process_screen.dart';
+import 'process_screen.dart';
 
 class MasoFileList extends StatefulWidget {
   final MasoFile masoFile;
@@ -96,7 +96,7 @@ class _MasoFileListState extends State<MasoFileList> {
             onTap: () async {
               final updatedProcess = await showDialog<Process>(
                 context: context,
-                builder: (context) => EditProcessScreen(process: process),
+                builder: (context) => ProcessScreen(process: process),
               );
               if (updatedProcess != null) {
                 setState(() {

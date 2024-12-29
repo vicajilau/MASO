@@ -20,6 +20,16 @@ class FileSaveRequested extends FileEvent {
 /// This event can be used to initiate the file selection process.
 class FilePickRequested extends FileEvent {}
 
+/// Event triggered when a file is requested to be picked.
+/// This event can be used to initiate the file selection process.
+class CreateMasoMetadata extends FileEvent {
+  final String name;
+  final String version;
+  final String description;
+  CreateMasoMetadata(
+      {required this.name, required this.version, required this.description});
+}
+
 /// Event triggered to reset the file state.
 /// This event can be used to clear any file-related data or state.
 class FileReset extends FileEvent {}

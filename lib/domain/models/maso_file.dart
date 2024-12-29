@@ -4,7 +4,7 @@ import 'metadata.dart';
 
 /// The MasoFile class represents a MASO file, which consists of metadata and a list of processes.
 class MasoFile {
-  String filePath;
+  String? filePath;
 
   /// Metadata of the MASO file
   final Metadata metadata;
@@ -13,10 +13,7 @@ class MasoFile {
   final List<Process> processes;
 
   /// Constructor for creating a MasoFile instance with metadata and processes.
-  MasoFile(
-      {required this.metadata,
-      required this.processes,
-      required this.filePath});
+  MasoFile({required this.metadata, required this.processes, this.filePath});
 
   /// Factory constructor to create a MasoFile instance from a JSON map.
   factory MasoFile.fromJson(Map<String, dynamic> json, String filePath) {

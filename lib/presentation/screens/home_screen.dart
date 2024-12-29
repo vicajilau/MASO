@@ -6,11 +6,13 @@ import 'package:go_router/go_router.dart';
 import 'package:maso/core/context_extension.dart';
 import 'package:platform_detail/platform_detail.dart';
 
+import '../../core/constants/maso_metadata.dart';
 import '../../core/service_locator.dart';
 import '../../routes/app_router.dart';
 import '../blocs/file_bloc/file_bloc.dart';
 import '../blocs/file_bloc/file_event.dart';
 import '../blocs/file_bloc/file_state.dart';
+import '../widgets/create_maso_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -22,6 +24,24 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   bool _isLoading = false; // Variable to track loading state
 
+  Future<void> _showCreateMasoFileDialog(BuildContext context) async {
+    final result = await showDialog<Map<String, String>>(
+      context: context,
+      builder: (_) => const CreateMasoFileDialog(),
+    );
+
+    if (result != null &&
+        result['name'] != null &&
+        result['description'] != null &&
+        context.mounted) {
+      context.read<FileBloc>().add(CreateMasoMetadata(
+            name: result['name']!,
+            version: MasoMetadata.version,
+            description: result['description']!,
+          ));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider<FileBloc>(
@@ -29,9 +49,9 @@ class _HomeScreenState extends State<HomeScreen> {
       child: BlocListener<FileBloc, FileState>(
         listener: (context, state) async {
           if (state is FileLoaded) {
-            // File has been loaded, show a snack bar and navigate
-            context.presentSnackBar(
-                AppLocalizations.of(context)!.fileLoaded(state.masoFile.filePath));
+            context.presentSnackBar(AppLocalizations.of(context)!.fileLoaded(
+                state.masoFile.filePath ??
+                    "${state.masoFile.metadata.name}.maso"));
             final _ = await context.push(AppRoutes.fileLoadedScreen);
             if (context.mounted) {
               context.read<FileBloc>().add(FileReset());
@@ -42,12 +62,11 @@ class _HomeScreenState extends State<HomeScreen> {
           }
           if (state is FileLoading) {
             setState(() {
-              _isLoading =
-                  true; // File is currently loading, disable the load button
+              _isLoading = true;
             });
           } else {
             setState(() {
-              _isLoading = false; // otherwise enabled it
+              _isLoading = false;
             });
           }
         },
@@ -57,7 +76,16 @@ class _HomeScreenState extends State<HomeScreen> {
               appBar: AppBar(
                 title: Text(AppLocalizations.of(context)!.titleAppBar),
                 actions: [
-                  // Disable the load button if a file is loading
+                  // Disable the create and load button if a file is loading
+                  TextButton(
+                    onPressed: _isLoading
+                        ? null
+                        : () => _showCreateMasoFileDialog(context),
+                    child: Text(
+                      AppLocalizations.of(context)!.create,
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                  ),
                   TextButton(
                     onPressed: _isLoading
                         ? null

@@ -3,16 +3,16 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:maso/domain/models/process.dart';
 
-class EditProcessScreen extends StatefulWidget {
-  final Process process;
+class ProcessScreen extends StatefulWidget {
+  final Process? process;
 
-  const EditProcessScreen({super.key, required this.process});
+  const ProcessScreen({super.key, this.process});
 
   @override
-  State<EditProcessScreen> createState() => _EditProcessScreenState();
+  State<ProcessScreen> createState() => _ProcessDialogState();
 }
 
-class _EditProcessScreenState extends State<EditProcessScreen> {
+class _ProcessDialogState extends State<ProcessScreen> {
   late TextEditingController _nameController;
   late TextEditingController _arrivalTimeController;
   late TextEditingController _serviceTimeController;
@@ -21,12 +21,13 @@ class _EditProcessScreenState extends State<EditProcessScreen> {
   @override
   void initState() {
     super.initState();
-    _nameController = TextEditingController(text: widget.process.name);
+    _nameController =
+        TextEditingController(text: widget.process?.name ?? '');
     _arrivalTimeController =
-        TextEditingController(text: widget.process.arrivalTime.toString());
+        TextEditingController(text: widget.process?.arrivalTime.toString() ?? '');
     _serviceTimeController =
-        TextEditingController(text: widget.process.serviceTime.toString());
-    _isEnabled = widget.process.enabled;
+        TextEditingController(text: widget.process?.serviceTime.toString() ?? '');
+    _isEnabled = widget.process?.enabled ?? true; // Default to enabled for creation
   }
 
   @override
@@ -38,19 +39,25 @@ class _EditProcessScreenState extends State<EditProcessScreen> {
   }
 
   void _submit() {
-    final updatedProcess = Process(
+    final newOrUpdatedProcess = Process(
       name: _nameController.text,
       arrivalTime: int.tryParse(_arrivalTimeController.text) ?? 0,
       serviceTime: int.tryParse(_serviceTimeController.text) ?? 0,
       enabled: _isEnabled,
     );
-    context.pop(updatedProcess);
+    context.pop(newOrUpdatedProcess);
   }
 
   @override
   Widget build(BuildContext context) {
+    final isEditing = widget.process != null;
+
     return AlertDialog(
-      title: Text(AppLocalizations.of(context)!.editProcessTitle),
+      title: Text(
+        isEditing
+            ? AppLocalizations.of(context)!.editProcessTitle
+            : AppLocalizations.of(context)!.createProcessTitle,
+      ),
       content: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -59,34 +66,36 @@ class _EditProcessScreenState extends State<EditProcessScreen> {
               controller: _nameController,
               decoration: InputDecoration(
                 labelText: AppLocalizations.of(context)!.processNameLabel,
-                border: OutlineInputBorder(),
+                border: const OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             TextField(
               controller: _arrivalTimeController,
               decoration: InputDecoration(
                 labelText: AppLocalizations.of(context)!.arrivalTimeDialogLabel,
-                border: OutlineInputBorder(),
+                border: const OutlineInputBorder(),
               ),
               keyboardType: TextInputType.number,
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             TextField(
               controller: _serviceTimeController,
               decoration: InputDecoration(
                 labelText: AppLocalizations.of(context)!.serviceTimeDialogLabel,
-                border: OutlineInputBorder(),
+                border: const OutlineInputBorder(),
               ),
               keyboardType: TextInputType.number,
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(_isEnabled
-                    ? AppLocalizations.of(context)!.enabledLabel
-                    : AppLocalizations.of(context)!.disabledLabel),
+                Text(
+                  _isEnabled
+                      ? AppLocalizations.of(context)!.enabledLabel
+                      : AppLocalizations.of(context)!.disabledLabel,
+                ),
                 Switch(
                   value: _isEnabled,
                   onChanged: (value) {

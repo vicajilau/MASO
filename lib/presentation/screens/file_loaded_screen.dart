@@ -6,12 +6,14 @@ import 'package:maso/core/context_extension.dart';
 import 'package:maso/core/service_locator.dart';
 
 import '../../domain/models/maso_file.dart';
+import '../../domain/models/process.dart';
 import '../../domain/use_cases/check_file_changes_use_case.dart';
 import '../blocs/file_bloc/file_bloc.dart';
 import '../blocs/file_bloc/file_event.dart';
 import '../blocs/file_bloc/file_state.dart';
 import '../widgets/exit_confirmation_screen.dart';
 import '../widgets/maso_file_list.dart';
+import '../widgets/process_screen.dart';
 
 class FileLoadedScreen extends StatefulWidget {
   const FileLoadedScreen({super.key});
@@ -61,7 +63,7 @@ class _FileLoadedScreenState extends State<FileLoadedScreen> {
         listener: (context, state) async {
           if (state is FileLoaded) {
             context.presentSnackBar(AppLocalizations.of(context)!
-                .fileSaved(state.masoFile.filePath));
+                .fileSaved(state.masoFile.filePath!));
             await _checkFileChange();
           }
           if (state is FileError && context.mounted) {
@@ -84,6 +86,18 @@ class _FileLoadedScreenState extends State<FileLoadedScreen> {
                   },
                 ),
                 actions: [
+                  IconButton(onPressed: () async {
+                    final createdProcess = await showDialog<Process>(
+                      context: context,
+                      builder: (context) => ProcessScreen(),
+                    );
+                    if (createdProcess != null) {
+                      setState(() {
+                        cachedMasoFile.processes.add(createdProcess);
+                        _checkFileChange();
+                      });
+                    }
+                  }, icon: const Icon(Icons.add)),
                   // Save Action
                   IconButton(
                     icon: const Icon(Icons.save),

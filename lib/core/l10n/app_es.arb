@@ -3,6 +3,10 @@
   "@titleAppBar": {
     "description": "Título de la aplicación mostrado en el AppBar."
   },
+  "create": "Crear",
+  "@create": {
+    "description": "Etiqueta para el botón de Crear fichero MASO en el AppBar."
+  },
   "load": "Cargar",
   "@load": {
     "description": "Etiqueta para el botón de Cargar fichero MASO en el AppBar."
@@ -97,6 +101,10 @@
   "@editProcessTitle": {
     "description": "Título de la pantalla para editar un proceso."
   },
+  "createProcessTitle": "Crear Proceso",
+  "@createProcessTitle": {
+    "description": "Título de la pantalla para crear un proceso."
+  },
   "processNameLabel": "Nombre del Proceso",
   "@processNameLabel": {
     "description": "Etiqueta para el campo de entrada del nombre del proceso."
@@ -134,5 +142,10 @@
   "confirmExitTitle": "Confirmar salida",
   "confirmExitMessage": "¿Seguro que quieres salir sin guardar?",
   "exitButton": "Salir",
-  "saveDialogTitle": "Por favor, seleccione un archivo de salida:"
+  "saveDialogTitle": "Por favor, seleccione un archivo de salida:",
+  "fillAllFieldsError": "Por favor, completa todos los campos.",
+  "createMasoFileTitle": "Crear Archivo MASO",
+  "fileNameLabel": "Nombre del Archivo",
+  "fileDescriptionLabel": "Descripción del Archivo",
+  "createButton": "Crear"
 }

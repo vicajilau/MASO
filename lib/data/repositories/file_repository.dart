@@ -1,6 +1,7 @@
 import 'package:maso/core/service_locator.dart';
 
 import '../../domain/models/maso_file.dart';
+import '../../domain/models/metadata.dart';
 import '../services/file_service.dart';
 
 /// FileRepository class manages file-related operations by delegating tasks to FileService
@@ -15,6 +16,20 @@ class FileRepository {
   /// This method calls the `readMasoFile` function from FileService to read the file.
   Future<MasoFile> loadMasoFile(String filePath) async {
     final masoFile = await _fileService.readMasoFile(filePath);
+    ServiceLocator.instance.registerMasoFile(masoFile);
+    return masoFile;
+  }
+
+  /// Loads a `MasoFile` from a file.
+  /// This method calls the `readMasoFile` function from FileService to read the file.
+  Future<MasoFile> createMasoFile(
+      {required String name,
+      required String version,
+      required String description}) async {
+    final masoFile = MasoFile(
+        metadata:
+            Metadata(name: name, version: version, description: description),
+        processes: []);
     ServiceLocator.instance.registerMasoFile(masoFile);
     return masoFile;
   }
@@ -56,7 +71,9 @@ class FileRepository {
   ///
   /// Returns:
   ///   A [Future<bool>] indicating whether the file content has changed.
-  Future<bool> hasMasoFileChanged(String filePath, MasoFile cachedMasoFile) async {
+  Future<bool> hasMasoFileChanged(
+      String? filePath, MasoFile cachedMasoFile) async {
+    if (filePath == null) return true;
     final originalMasoFile = await _fileService.readMasoFile(filePath);
     return originalMasoFile != cachedMasoFile;
   }

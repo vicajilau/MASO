@@ -32,7 +32,7 @@ class FileService {
   /// Writes a `MasoFile` object to a file at the specified path.
   Future<void> writeMasoFile(MasoFile masoFile) async {
     // Create a File object for the provided file path
-    final file = File(masoFile.filePath);
+    final file = File(masoFile.filePath!);
 
     // Convert the MasoFile object to JSON string format
     final content = jsonEncode(masoFile.toJson());

@@ -3,6 +3,10 @@
   "@titleAppBar": {
     "description": "Title of the application displayed in the AppBar."
   },
+  "create": "Create",
+  "@create": {
+    "description": "Label for the Create MASO file button in the AppBar."
+  },
   "load": "Load",
   "@load": {
     "description": "Label for the Load MASO file button in the AppBar."
@@ -97,6 +101,10 @@
   "@editProcessTitle": {
     "description": "Title of the screen for editing a process."
   },
+  "createProcessTitle": "Create Process",
+  "@createProcessTitle": {
+    "description": "Title of the screen for creating a process."
+  },
   "processNameLabel": "Process Name",
   "@processNameLabel": {
     "description": "Label for the process name input field."
@@ -134,5 +142,10 @@
   "confirmExitTitle": "Confirm Exit",
   "confirmExitMessage": "Are you sure you want to leave without saving?",
   "exitButton": "Exit",
-  "saveDialogTitle": "Please select an output file:"
+  "saveDialogTitle": "Please select an output file:",
+  "fillAllFieldsError": "Please fill in all the fields.",
+  "createMasoFileTitle": "Create MASO File",
+  "fileNameLabel": "File Name",
+  "fileDescriptionLabel": "File Description",
+  "createButton": "Create"
 }

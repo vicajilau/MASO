@@ -35,6 +35,26 @@ class FileBloc extends Bloc<FileEvent, FileState> {
       }
     });
 
+    on<CreateMasoMetadata>((event, emit) async {
+      emit(
+          FileLoading()); // Emit loading state while the file is being processed
+      try {
+        final masoFile = await fileRepository.createMasoFile(
+            name: event.name,
+            version: event.version,
+            description: event.description);
+        emit(FileLoaded(masoFile)); // Emit the loaded file state
+      } on Exception catch (e) {
+        emit(FileError(
+            reason: FileErrorType.errorOpeningFile,
+            error: e)); // Emit error if file saving fails
+      } catch (e) {
+        emit(FileError(
+            reason: FileErrorType.errorOpeningFile,
+            error: Exception(e))); // Emit error if file loading fails
+      }
+    });
+
     // Handling the FileSaveRequested event
     on<FileSaveRequested>((event, emit) async {
       emit(FileLoading()); // Emit loading state while saving the file
