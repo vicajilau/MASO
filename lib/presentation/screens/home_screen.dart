@@ -96,20 +96,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       style: const TextStyle(color: Colors.white),
                     ),
                   ),
-                  TextButton(
-                    onPressed: () => context.go(AppRoutes.settings),
-                    child: Text(
-                      AppLocalizations.of(context)!.settings,
-                      style: const TextStyle(color: Colors.white),
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () => context.go(AppRoutes.about),
-                    child: Text(
-                      AppLocalizations.of(context)!.about,
-                      style: const TextStyle(color: Colors.white),
-                    ),
-                  ),
                 ],
               ),
               body: PlatformDetail.isMobile

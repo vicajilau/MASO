@@ -6,8 +6,6 @@ import '../presentation/screens/home_screen.dart';
 class AppRoutes {
   static const String home = '/';
   static const String fileLoadedScreen = '/file_loaded_screen';
-  static const String settings = '/settings';
-  static const String about = '/about';
 }
 
 final GoRouter appRouter = GoRouter(

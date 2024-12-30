@@ -11,14 +11,6 @@
   "@load": {
     "description": "Etiqueta para el botón de Cargar fichero MASO en el AppBar."
   },
-  "settings": "Configuración",
-  "@settings": {
-    "description": "Etiqueta para el botón de Configuración en el AppBar."
-  },
-  "about": "Acerca de",
-  "@about": {
-    "description": "Etiqueta para el botón de Acerca de en el AppBar."
-  },
   "fileLoaded": "Archivo cargado: {filePath}",
   "@fileLoaded": {
     "description": "Mensaje mostrado cuando un archivo se carga con éxito.",

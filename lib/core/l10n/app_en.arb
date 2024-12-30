@@ -11,14 +11,6 @@
   "@load": {
     "description": "Label for the Load MASO file button in the AppBar."
   },
-  "settings": "Settings",
-  "@settings": {
-    "description": "Label for the Settings button in the AppBar."
-  },
-  "about": "About",
-  "@about": {
-    "description": "Label for the About button in the AppBar."
-  },
   "fileLoaded": "File loaded: {filePath}",
   "@fileLoaded": {
     "description": "Message displayed when a file is successfully loaded.",
