@@ -36,14 +36,8 @@ class FileRepository {
 
   /// Saves a `MasoFile` to a file.
   /// This method calls the `writeMasoFile` function from FileService to write the file.
-  Future<void> saveMasoFile(MasoFile masoFile) async {
-    await _fileService.writeMasoFile(masoFile);
-  }
-
-  /// Saves a `MasoFile` to a file.
-  /// This method calls the `writeMasoFile` function from FileService to write the file.
-  Future<String?> getMasoFilePath(MasoFile masoFile, String dialogTitle) async {
-    return await _fileService.getOutputPathFor(masoFile, dialogTitle);
+  Future<MasoFile> saveMasoFile(MasoFile masoFile, String dialogTitle) async {
+    return await _fileService.saveMasoFile(masoFile, dialogTitle);
   }
 
   /// Picks a file manually using the file service.

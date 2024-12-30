@@ -59,15 +59,11 @@ class FileBloc extends Bloc<FileEvent, FileState> {
     on<FileSaveRequested>((event, emit) async {
       emit(FileLoading()); // Emit loading state while saving the file
       try {
-        // Save the MasoFile to the specified path
-        final path = await fileRepository.getMasoFilePath(
+        // Save the MasoFile saved
+        event.masoFile = await fileRepository.saveMasoFile(
             event.masoFile, event.dialogTitle);
-        if (path != null) {
-          event.masoFile.filePath = path;
-          await fileRepository.saveMasoFile(event.masoFile);
-          emit(FileLoaded(
-              event.masoFile)); // Emit the loaded file state after save
-        }
+        emit(FileLoaded(
+            event.masoFile)); // Emit the loaded file state after save
       } on Exception catch (e) {
         emit(FileError(
             reason: FileErrorType.errorSavingFile,

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
+import 'package:platform_detail/platform_detail.dart';
 
 import '../../domain/models/maso_file.dart';
 
@@ -20,17 +21,25 @@ class FileService {
     return MasoFile.fromJson(json, filePath);
   }
 
-  /// Get a path for a `MasoFile` in the file system.
-  Future<String?> getOutputPathFor(
-      MasoFile masoFile, String dialogTitle) async {
-    return await FilePicker.platform.saveFile(
+  /// Save a maso file for a `MasoFile` in the file system.
+  Future<MasoFile> saveMasoFile(MasoFile masoFile, String dialogTitle) async {
+    String jsonString = jsonEncode(masoFile.toJson());
+    final bytes = utf8.encode(jsonString);
+    final path = await FilePicker.platform.saveFile(
         dialogTitle: dialogTitle,
         fileName: 'output-file.maso',
-        initialDirectory: masoFile.filePath);
+        initialDirectory: masoFile.filePath,
+        bytes: bytes);
+
+    if (path != null && !PlatformDetail.isMobile) {
+      masoFile.filePath = path;
+      await _writeMasoFile(masoFile);
+    }
+    return masoFile;
   }
 
-  /// Writes a `MasoFile` object to a file at the specified path.
-  Future<void> writeMasoFile(MasoFile masoFile) async {
+  /// Writes a `MasoFile` object to a file at the specified path on Desktop.
+  Future<void> _writeMasoFile(MasoFile masoFile) async {
     // Create a File object for the provided file path
     final file = File(masoFile.filePath!);
 
