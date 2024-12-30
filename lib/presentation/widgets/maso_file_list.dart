@@ -96,7 +96,11 @@ class _MasoFileListState extends State<MasoFileList> {
             onTap: () async {
               final updatedProcess = await showDialog<Process>(
                 context: context,
-                builder: (context) => ProcessScreen(process: process),
+                builder: (context) => ProcessScreen(
+                  process: process,
+                  existingProcesses: widget.masoFile.processes,
+                  processPosition: index,
+                ),
               );
               if (updatedProcess != null) {
                 setState(() {

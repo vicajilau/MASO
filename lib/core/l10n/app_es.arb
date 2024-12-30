@@ -147,5 +147,11 @@
   "createMasoFileTitle": "Crear Archivo MASO",
   "fileNameLabel": "Nombre del Archivo",
   "fileDescriptionLabel": "Descripción del Archivo",
-  "createButton": "Crear"
+  "createButton": "Crear",
+  "emptyNameError": "El nombre no puede estar vacío.",
+  "duplicateNameError": "Ya existe un proceso con este nombre.",
+  "invalidArrivalTimeError": "El tiempo de llegada debe ser un número entero positivo.",
+  "invalidServiceTimeError": "El tiempo de servicio debe ser un número entero positivo.",
+  "invalidTimeDifferenceError": "El tiempo de servicio debe ser mayor que el tiempo de llegada.",
+  "timeDifferenceTooSmallError": "El tiempo de servicio debe ser al menos 1 unidad mayor que el tiempo de llegada."
 }

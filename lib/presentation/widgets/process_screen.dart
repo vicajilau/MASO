@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:maso/domain/models/list_processes_extension.dart';
 import 'package:maso/domain/models/process.dart';
 
 class ProcessScreen extends StatefulWidget {
   final Process? process;
+  final List<Process> existingProcesses;
+  final int? processPosition;
 
-  const ProcessScreen({super.key, this.process});
+  const ProcessScreen(
+      {super.key,
+      this.process,
+      required this.existingProcesses,
+      this.processPosition});
 
   @override
   State<ProcessScreen> createState() => _ProcessDialogState();
@@ -17,17 +24,18 @@ class _ProcessDialogState extends State<ProcessScreen> {
   late TextEditingController _arrivalTimeController;
   late TextEditingController _serviceTimeController;
   late bool _isEnabled;
+  String? _errorMessage;
 
   @override
   void initState() {
     super.initState();
-    _nameController =
-        TextEditingController(text: widget.process?.name ?? '');
-    _arrivalTimeController =
-        TextEditingController(text: widget.process?.arrivalTime.toString() ?? '');
-    _serviceTimeController =
-        TextEditingController(text: widget.process?.serviceTime.toString() ?? '');
-    _isEnabled = widget.process?.enabled ?? true; // Default to enabled for creation
+    _nameController = TextEditingController(text: widget.process?.name ?? '');
+    _arrivalTimeController = TextEditingController(
+        text: widget.process?.arrivalTime.toString() ?? '');
+    _serviceTimeController = TextEditingController(
+        text: widget.process?.serviceTime.toString() ?? '');
+    _isEnabled =
+        widget.process?.enabled ?? true; // Default to enabled for creation
   }
 
   @override
@@ -38,14 +46,65 @@ class _ProcessDialogState extends State<ProcessScreen> {
     super.dispose();
   }
 
+  bool _validateInput() {
+    final name = _nameController.text.trim();
+    final arrivalTime = int.tryParse(_arrivalTimeController.text);
+    final serviceTime = int.tryParse(_serviceTimeController.text);
+
+    if (name.isEmpty) {
+      setState(() {
+        _errorMessage = AppLocalizations.of(context)!.emptyNameError;
+      });
+      return false;
+    }
+
+    if (widget.existingProcesses
+        .containProcessWithName(name, position: widget.processPosition)) {
+      setState(() {
+        _errorMessage = AppLocalizations.of(context)!.duplicateNameError;
+      });
+      return false;
+    }
+
+    if (arrivalTime == null || arrivalTime < 0) {
+      setState(() {
+        _errorMessage = AppLocalizations.of(context)!.invalidArrivalTimeError;
+      });
+      return false;
+    }
+
+    if (serviceTime == null || serviceTime <= arrivalTime) {
+      setState(() {
+        _errorMessage =
+            AppLocalizations.of(context)!.invalidTimeDifferenceError;
+      });
+      return false;
+    }
+
+    if ((serviceTime - arrivalTime) < 1) {
+      setState(() {
+        _errorMessage =
+            AppLocalizations.of(context)!.timeDifferenceTooSmallError;
+      });
+      return false;
+    }
+
+    setState(() {
+      _errorMessage = null;
+    });
+    return true;
+  }
+
   void _submit() {
-    final newOrUpdatedProcess = Process(
-      name: _nameController.text,
-      arrivalTime: int.tryParse(_arrivalTimeController.text) ?? 0,
-      serviceTime: int.tryParse(_serviceTimeController.text) ?? 0,
-      enabled: _isEnabled,
-    );
-    context.pop(newOrUpdatedProcess);
+    if (_validateInput()) {
+      final newOrUpdatedProcess = Process(
+        name: _nameController.text.trim(),
+        arrivalTime: int.parse(_arrivalTimeController.text),
+        serviceTime: int.parse(_serviceTimeController.text),
+        enabled: _isEnabled,
+      );
+      context.pop(newOrUpdatedProcess);
+    }
   }
 
   @override
@@ -88,6 +147,14 @@ class _ProcessDialogState extends State<ProcessScreen> {
               keyboardType: TextInputType.number,
             ),
             const SizedBox(height: 10),
+            if (_errorMessage != null)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: Text(
+                  _errorMessage!,
+                  style: TextStyle(color: Theme.of(context).colorScheme.error),
+                ),
+              ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

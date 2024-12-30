@@ -90,7 +90,9 @@ class _FileLoadedScreenState extends State<FileLoadedScreen> {
                       onPressed: () async {
                         final createdProcess = await showDialog<Process>(
                           context: context,
-                          builder: (context) => ProcessScreen(),
+                          builder: (context) => ProcessScreen(
+                            existingProcesses: cachedMasoFile.processes,
+                          ),
                         );
                         if (createdProcess != null) {
                           setState(() {

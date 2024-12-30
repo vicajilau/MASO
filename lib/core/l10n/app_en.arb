@@ -147,5 +147,11 @@
   "createMasoFileTitle": "Create MASO File",
   "fileNameLabel": "File Name",
   "fileDescriptionLabel": "File Description",
-  "createButton": "Create"
+  "createButton": "Create",
+  "emptyNameError": "The name cannot be empty.",
+  "duplicateNameError": "A process with this name already exists.",
+  "invalidArrivalTimeError": "Arrival time must be a positive integer.",
+  "invalidServiceTimeError": "Service time must be a positive integer.",
+  "invalidTimeDifferenceError": "Service time must be greater than arrival time.",
+  "timeDifferenceTooSmallError": "Service time must be at least 1 unit greater than arrival time."
 }
