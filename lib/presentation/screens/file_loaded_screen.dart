@@ -86,18 +86,20 @@ class _FileLoadedScreenState extends State<FileLoadedScreen> {
                   },
                 ),
                 actions: [
-                  IconButton(onPressed: () async {
-                    final createdProcess = await showDialog<Process>(
-                      context: context,
-                      builder: (context) => ProcessScreen(),
-                    );
-                    if (createdProcess != null) {
-                      setState(() {
-                        cachedMasoFile.processes.add(createdProcess);
-                        _checkFileChange();
-                      });
-                    }
-                  }, icon: const Icon(Icons.add)),
+                  IconButton(
+                      onPressed: () async {
+                        final createdProcess = await showDialog<Process>(
+                          context: context,
+                          builder: (context) => ProcessScreen(),
+                        );
+                        if (createdProcess != null) {
+                          setState(() {
+                            cachedMasoFile.processes.add(createdProcess);
+                            _checkFileChange();
+                          });
+                        }
+                      },
+                      icon: const Icon(Icons.add)),
                   // Save Action
                   IconButton(
                     icon: const Icon(Icons.save),
@@ -114,9 +116,14 @@ class _FileLoadedScreenState extends State<FileLoadedScreen> {
                   IconButton(
                     icon: const Icon(Icons.play_arrow),
                     tooltip: 'Execute',
-                    onPressed: () {
-                      // Add logic for execution here
-                    },
+                    onPressed: cachedMasoFile.processes.isNotEmpty
+                        ? () {
+                            context.read<FileBloc>().add(FileSaveRequested(
+                                  cachedMasoFile,
+                                  AppLocalizations.of(context)!.saveDialogTitle,
+                                ));
+                          }
+                        : null, // Disable button if file hasn't changed
                   ),
                 ],
               ),
