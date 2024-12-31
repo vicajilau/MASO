@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../data/repositories/file_repository.dart';
+import '../../../domain/models/custom_exceptions/file_invalid_exception.dart';
 import 'file_event.dart';
 import 'file_state.dart';
 
@@ -16,14 +17,10 @@ class FileBloc extends Bloc<FileEvent, FileState> {
       emit(
           FileLoading()); // Emit loading state while the file is being processed
       try {
-        if (event.filePath.endsWith('.maso')) {
-          // If the file has the correct extension, load the file
-          final masoFile = await fileRepository.loadMasoFile(event.filePath);
-          emit(FileLoaded(masoFile)); // Emit the loaded file state
-        } else {
-          // If the file is not a .maso file, emit an error state
-          emit(FileError(reason: FileErrorType.invalidExtension));
-        }
+        final masoFile = await fileRepository.loadMasoFile(event.filePath);
+        emit(FileLoaded(masoFile)); // Emit the loaded file state
+      } on FileInvalidException {
+        emit(FileError(reason: FileErrorType.invalidExtension));
       } on Exception catch (e) {
         emit(FileError(
             reason: FileErrorType.errorOpeningFile,
@@ -84,15 +81,16 @@ class FileBloc extends Bloc<FileEvent, FileState> {
         final path = await fileRepository.pickFileManually();
         if (path != null) {
           add(FileDropped(path));
+        } else {
+          emit(FileInitial());
         }
-        emit(FileInitial());
       } on Exception catch (e) {
         emit(FileError(
-            reason: FileErrorType.errorSavingFile,
+            reason: FileErrorType.errorOpeningFile,
             error: e)); // Emit error from Exception
       } catch (e) {
         emit(FileError(
-            reason: FileErrorType.errorSavingFile, error: Exception(e)));
+            reason: FileErrorType.errorOpeningFile, error: Exception(e)));
       }
     });
   }

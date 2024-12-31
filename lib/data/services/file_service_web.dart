@@ -1,9 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:html' as html;
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:file_picker/file_picker.dart';
-import 'package:maso/domain/models/custom_exceptions/file_invalid_exception.dart';
 import 'package:platform_detail/platform_detail.dart';
 
 import '../../domain/models/maso_file.dart';
@@ -12,13 +13,8 @@ import '../../domain/models/maso_file.dart';
 class FileService {
   /// Reads a MASO file from the provided file path and returns a `MasoFile` object.
   Future<MasoFile> readMasoFile(String filePath) async {
-    if (!filePath.endsWith('.maso')) {
-      throw FileInvalidException("File does not a .maso file.");
-    }
-    // Create a File object for the provided file path
-    final file = File(filePath);
-    // Read the file content as a string
-    final content = await file.readAsString();
+    final response = await readBlobFile(filePath);
+    final content = utf8.decode(response);
 
     // Decode the string content into a Map and convert it to a MasoFile object
     final json = jsonDecode(content) as Map<String, dynamic>;
@@ -60,5 +56,34 @@ class FileService {
       return result.files.single.path;
     }
     return null;
+  }
+
+  Future<Uint8List> readBlobFile(String blobUrl) async {
+    try {
+      // Obtener el Blob desde el URL
+      final response = await html.window.fetch(blobUrl);
+      final blob = await response.blob();
+
+      // Crear un FileReader para leer el contenido del Blob
+      final reader = html.FileReader();
+      final completer = Completer<Uint8List>();
+
+      // Configurar un listener para cuando la lectura esté completa
+      reader.onLoad.listen((event) {
+        completer.complete(reader.result as Uint8List);
+      });
+
+      reader.onError.listen((event) {
+        completer.completeError('Error al leer el blob');
+      });
+
+      // Leer el Blob como ArrayBuffer
+      reader.readAsArrayBuffer(blob);
+
+      // Retornar el resultado como Future<Uint8List>
+      return await completer.future;
+    } catch (e) {
+      throw Exception('Error leyendo el archivo: $e');
+    }
   }
 }

@@ -2,7 +2,7 @@ import 'package:maso/core/service_locator.dart';
 
 import '../../domain/models/maso_file.dart';
 import '../../domain/models/metadata.dart';
-import '../services/file_service.dart';
+import '../services/file_service.dart' if (dart.library.html) '../services/file_service_web.dart';
 
 /// FileRepository class manages file-related operations by delegating tasks to FileService
 class FileRepository {
