@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 
+/// A dialog widget for requesting a file name from the user.
 class RequestFileNameDialog extends StatefulWidget {
   const RequestFileNameDialog({super.key});
 
@@ -10,77 +11,93 @@ class RequestFileNameDialog extends StatefulWidget {
 }
 
 class _RequestFileNameDialogState extends State<RequestFileNameDialog> {
-  late TextEditingController _controller;
-  String? _errorMessage;
+  late TextEditingController
+      _controller; // Controller for the file name input field.
+  String? _errorMessage; // Error message to display if validation fails.
 
   @override
   void initState() {
     super.initState();
-    _controller = TextEditingController();
+    _controller = TextEditingController(); // Initialize the text controller.
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    _controller.dispose(); // Dispose of the text controller to free resources.
     super.dispose();
   }
 
+  /// Validate the input and set error messages as necessary.
   bool _validateInput() {
-    final filename = _controller.text.trim();
+    final filename = _controller.text.trim(); // Get the trimmed input value.
 
+    // Check if the filename is empty.
     if (filename.isEmpty) {
       setState(() {
-        _errorMessage = AppLocalizations.of(context)!.emptyFileNameMessage;
+        _errorMessage = AppLocalizations.of(context)!
+            .emptyFileNameMessage; // Set error message for empty filename.
       });
       return false;
     }
 
-    // Verificar si el nombre del archivo termina en '.maso'
+    // Check if the filename ends with '.maso'; if not, append it.
     if (!filename.endsWith('.maso')) {
-      _controller.text = "$filename.maso"; // Actualiza el texto sin el error
+      _controller.text =
+          "$filename.maso"; // Update the text with the correct extension.
     }
 
     setState(() {
-      _errorMessage = null; // Limpiar el mensaje de error
+      _errorMessage = null; // Clear any previous error messages.
     });
-    return true;
+    return true; // Input is valid.
   }
 
+  /// Handle submission of the dialog.
   void _submit() {
     if (_validateInput()) {
-      context.pop(_controller.text.trim());
+      context.pop(_controller.text
+          .trim()); // Return the valid filename to the previous context.
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text(AppLocalizations.of(context)!.requestFileNameTitle),
+      title: Text(AppLocalizations.of(context)!
+          .requestFileNameTitle), // Title of the dialog.
       content: SingleChildScrollView(
         child: Column(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisSize:
+              MainAxisSize.min, // Minimize column size to fit content.
           children: [
-            TextField(
+            // TextFormField for file name input.
+            TextFormField(
               controller: _controller,
+              decoration: InputDecoration(
+                hintText: AppLocalizations.of(context)!
+                    .fileNameHint, // Hint text for the input field.
+                errorText:
+                    _errorMessage, // Display error message if validation fails.
+                border: const OutlineInputBorder(), // Define border style.
+              ),
               onChanged: (value) {
                 setState(() {
-                  _errorMessage = null;
+                  _errorMessage =
+                      null; // Clear error message when input changes.
                 });
               },
-              decoration: InputDecoration(
-                hintText: AppLocalizations.of(context)!.fileNameHint,
-                errorText: _errorMessage,
-              ),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 10), // Add spacing below the input field.
           ],
         ),
       ),
       actions: [
+        // Cancel button to close the dialog without saving.
         TextButton(
           onPressed: () => context.pop(),
           child: Text(AppLocalizations.of(context)!.cancelButton),
         ),
+        // Accept button to submit the filename.
         ElevatedButton(
           onPressed: _submit,
           child: Text(AppLocalizations.of(context)!.acceptButton),
