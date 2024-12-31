@@ -50,15 +50,28 @@ class FileService {
     return masoFile;
   }
 
+  /// Initiates the download of a `.maso` file by creating a blob from the provided content.
+  ///
+  /// - [filename]: The name of the file to be downloaded.
+  /// - [content]: The content of the file as a string, which will be encoded to bytes.
   void downloadMasoFile(String filename, String content) {
+    // Encode the string content to bytes for blob creation
     final bytes = utf8.encode(content);
+
+    // Create a new Blob containing the bytes
     final blob = html.Blob([bytes]);
+
+    // Generate a URL for the Blob, allowing it to be downloaded
     final url = html.Url.createObjectUrlFromBlob(blob);
+
+    // Create an anchor element for triggering the download
     html.AnchorElement(href: url)
-      ..target = 'blank'
-      ..download = filename
-      ..click();
-    html.Url.revokeObjectUrl(url); // Limpia la URL para liberar memoria.
+      ..target = 'blank' // Open the file in a new tab (if supported)
+      ..download = filename // Set the file name for the download
+      ..click(); // Simulate a click to start the download
+
+    // Release the Blob URL to free up memory after the download
+    html.Url.revokeObjectUrl(url); // Cleans up the URL to release memory.
   }
 
   /// Opens a file picker dialog for the user to select a `.maso` file.
@@ -74,7 +87,7 @@ class FileService {
     if (result != null) {
       final bytes = result.files.single.bytes;
       if (bytes != null) {
-        return decodeAndCreateMasoFile(null, bytes);
+        return decodeAndCreateMasoFile(result.files.single.path, bytes);
       }
     }
     return null; // Return null if no file is selected
