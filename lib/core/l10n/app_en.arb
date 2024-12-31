@@ -150,5 +150,7 @@
   "fileNameHint": "File name",
   "acceptButton": "Accept",
   "errorTitle": "Error",
-  "emptyFileNameMessage": "The file name cannot be empty."
+  "emptyFileNameMessage": "The file name cannot be empty.",
+  "fileNameRequiredError": "The file name is required.",
+  "fileDescriptionRequiredError": "The file description is required."
 }

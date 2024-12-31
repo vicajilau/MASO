@@ -150,5 +150,7 @@
   "fileNameHint": "Nombre del archivo",
   "acceptButton": "Aceptar",
   "errorTitle": "Error",
-  "emptyFileNameMessage": "El nombre del fichero no puede estar vacío."
+  "emptyFileNameMessage": "El nombre del fichero no puede estar vacío.",
+  "fileNameRequiredError": "El nombre del archivo es obligatorio.",
+  "fileDescriptionRequiredError": "La descripción del archivo es obligatoria."
 }
