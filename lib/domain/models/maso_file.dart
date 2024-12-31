@@ -16,7 +16,7 @@ class MasoFile {
   MasoFile({required this.metadata, required this.processes, this.filePath});
 
   /// Factory constructor to create a MasoFile instance from a JSON map.
-  factory MasoFile.fromJson(Map<String, dynamic> json, String filePath) {
+  factory MasoFile.fromJson(Map<String, dynamic> json, String? filePath) {
     checkIfJsonIsCorrect(json);
     return MasoFile(
         // Parse the 'metadata' field and create a Metadata instance

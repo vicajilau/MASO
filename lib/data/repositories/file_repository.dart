@@ -2,26 +2,42 @@ import 'package:maso/core/service_locator.dart';
 
 import '../../domain/models/maso_file.dart';
 import '../../domain/models/metadata.dart';
-import '../services/file_service.dart' if (dart.library.html) '../services/file_service_web.dart';
+import '../services/file_service.dart'
+    if (dart.library.html) '../services/file_service_web.dart';
 
-/// FileRepository class manages file-related operations by delegating tasks to FileService
+/// The `FileRepository` class manages file-related operations such as loading, saving,
+/// and selecting files. It delegates these tasks to an instance of `FileService`.
 class FileRepository {
-  /// Instance of FileService to handle file operations
+  /// Instance of `FileService` to handle file operations.
   final FileService _fileService;
 
-  /// Constructor to initialize FileRepository with a FileService instance
+  /// Constructor to initialize `FileRepository` with a `FileService` instance.
+  /// This allows for the delegation of file-related tasks.
+  ///
+  /// - [fileService]: The `FileService` instance that handles file operations.
   FileRepository(this._fileService);
 
-  /// Loads a `MasoFile` from a file.
-  /// This method calls the `readMasoFile` function from FileService to read the file.
+  /// Loads a `MasoFile` from a file at the specified [filePath].
+  /// This method calls `readMasoFile` from `FileService` to read the file,
+  /// and then registers the loaded file in the service locator.
+  ///
+  /// - [filePath]: The path to the file to load.
+  /// - Returns: A `Future<MasoFile>` containing the loaded `MasoFile`.
+  /// - Throws: An exception if there is an error loading the file.
   Future<MasoFile> loadMasoFile(String filePath) async {
     final masoFile = await _fileService.readMasoFile(filePath);
     ServiceLocator.instance.registerMasoFile(masoFile);
     return masoFile;
   }
 
-  /// Loads a `MasoFile` from a file.
-  /// This method calls the `readMasoFile` function from FileService to read the file.
+  /// Creates a new `MasoFile` with the specified metadata.
+  /// The method generates a new `MasoFile` with the provided `name`, `version`,
+  /// and `description`, then registers it in the service locator.
+  ///
+  /// - [name]: The name for the new `MasoFile`.
+  /// - [version]: The version for the new `MasoFile`.
+  /// - [description]: The description for the new `MasoFile`.
+  /// - Returns: A `Future<MasoFile>` containing the created `MasoFile`.
   Future<MasoFile> createMasoFile(
       {required String name,
       required String version,
@@ -34,37 +50,37 @@ class FileRepository {
     return masoFile;
   }
 
-  /// Saves a `MasoFile` to a file.
-  /// This method calls the `writeMasoFile` function from FileService to write the file.
+  /// Saves a `MasoFile` to a file using `FileService`.
+  /// This method calls the `saveMasoFile` function from `FileService` to save the file.
+  ///
+  /// - [masoFile]: The `MasoFile` to save.
+  /// - [dialogTitle]: The title of the file save dialog.
+  /// - Returns: A `Future<MasoFile>` containing the saved `MasoFile`.
+  /// - Throws: An exception if there is an error saving the file.
   Future<MasoFile> saveMasoFile(MasoFile masoFile, String dialogTitle) async {
     return await _fileService.saveMasoFile(masoFile, dialogTitle);
   }
 
-  /// Picks a file manually using the file service.
+  /// Picks a file manually using the file picker dialog.
+  /// This method delegates the task of selecting a file to the `_fileService`'s
+  /// `pickFile` method, and registers the selected file in the service locator.
   ///
-  /// This method delegates the task of file selection to the `_fileService`'s
-  /// `pickFile` method. It returns a [String] representing the file path of
-  /// the selected file, or [null] if no file is selected.
-  ///
-  /// Returns:
-  ///   A [Future<String?>] containing the path of the selected file, or [null].
-  Future<String?> pickFileManually() async {
-    return _fileService.pickFile();
+  /// - Returns: A `Future<MasoFile?>` containing the selected `MasoFile`, or `null` if no file was selected.
+  Future<MasoFile?> pickFileManually() async {
+    final masoFile = await _fileService.pickFile();
+    if (masoFile != null) {
+      ServiceLocator.instance.registerMasoFile(masoFile);
+    }
+    return masoFile;
   }
 
-  /// Checks if the file has changed by comparing the current file content
-  /// with the cached version of the file.
+  /// Checks if a `MasoFile` has changed by comparing the current file content
+  /// with the cached version of the file. This method reads the original file
+  /// content from [filePath] and compares it with the [cachedMasoFile].
   ///
-  /// This method reads the original content of the file specified by the
-  /// [filePath] and compares it with the [cachedMasoFile]. If the content
-  /// is different, it returns [true]; otherwise, it returns [false].
-  ///
-  /// Parameters:
-  ///   - [filePath]: The path to the file to be checked.
-  ///   - [cachedMasoFile]: The cached version of the file content to compare.
-  ///
-  /// Returns:
-  ///   A [Future<bool>] indicating whether the file content has changed.
+  /// - [filePath]: The path to the file to check.
+  /// - [cachedMasoFile]: The cached version of the `MasoFile` for comparison.
+  /// - Returns: A `Future<bool>` indicating whether the file content has changed (`true`) or not (`false`).
   Future<bool> hasMasoFileChanged(
       String? filePath, MasoFile cachedMasoFile) async {
     if (filePath == null) return true;
