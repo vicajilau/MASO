@@ -4,11 +4,13 @@ import 'package:go_router/go_router.dart';
 import 'package:maso/domain/models/list_processes_extension.dart';
 import 'package:maso/domain/models/process.dart';
 
+/// A dialog widget for creating or editing a process.
 class ProcessDialog extends StatefulWidget {
-  final Process? process;
-  final List<Process> existingProcesses;
-  final int? processPosition;
+  final Process? process; // The process being edited (if any).
+  final List<Process> existingProcesses; // List of already existing processes.
+  final int? processPosition; // Position of the process in the existing list.
 
+  /// Constructor to initialize the dialog with necessary parameters.
   const ProcessDialog(
       {super.key,
       this.process,
@@ -19,142 +21,169 @@ class ProcessDialog extends StatefulWidget {
   State<ProcessDialog> createState() => _ProcessDialogState();
 }
 
+/// State class for ProcessDialog.
 class _ProcessDialogState extends State<ProcessDialog> {
-  late TextEditingController _nameController;
-  late TextEditingController _arrivalTimeController;
-  late TextEditingController _serviceTimeController;
-  late bool _isEnabled;
-  String? _errorMessage;
+  late TextEditingController
+      _nameController; // Controller for the name input field.
+  late TextEditingController
+      _arrivalTimeController; // Controller for the arrival time input field.
+  late TextEditingController
+      _serviceTimeController; // Controller for the service time input field.
+  late bool _isEnabled; // Indicates if the process is enabled or disabled.
+
+  String? _nameError; // Error message for the name field.
+  String? _arrivalTimeError; // Error message for the arrival time field.
+  String? _serviceTimeError; // Error message for the service time field.
 
   @override
   void initState() {
     super.initState();
-    _nameController = TextEditingController(text: widget.process?.name ?? '');
-    _arrivalTimeController = TextEditingController(
-        text: widget.process?.arrivalTime.toString() ?? '');
-    _serviceTimeController = TextEditingController(
-        text: widget.process?.serviceTime.toString() ?? '');
-    _isEnabled =
-        widget.process?.enabled ?? true; // Default to enabled for creation
+    // Initialize the text controllers.
+    _nameController = TextEditingController();
+    _arrivalTimeController = TextEditingController();
+    _serviceTimeController = TextEditingController();
+    _isEnabled = true; // Default to enabled for the creation of a new process.
   }
 
   @override
   void dispose() {
+    // Dispose of the text controllers to free up resources.
     _nameController.dispose();
     _arrivalTimeController.dispose();
     _serviceTimeController.dispose();
     super.dispose();
   }
 
+  /// Validate the input fields.
   bool _validateInput() {
-    final name = _nameController.text.trim();
-    final arrivalTime = int.tryParse(_arrivalTimeController.text);
-    final serviceTime = int.tryParse(_serviceTimeController.text);
+    final name = _nameController.text.trim(); // Get trimmed name input.
+    final arrivalTime = int.tryParse(
+        _arrivalTimeController.text); // Parse arrival time to an integer.
+    final serviceTime = int.tryParse(
+        _serviceTimeController.text); // Parse service time to an integer.
 
+    // Reset error messages.
+    setState(() {
+      _nameError = null;
+      _arrivalTimeError = null;
+      _serviceTimeError = null;
+    });
+
+    // Validate name input.
     if (name.isEmpty) {
       setState(() {
-        _errorMessage = AppLocalizations.of(context)!.emptyNameError;
+        _nameError = AppLocalizations.of(context)!
+            .emptyNameError; // Set error for empty name.
       });
       return false;
     }
 
+    // Check for duplicate process names.
     if (widget.existingProcesses
         .containProcessWithName(name, position: widget.processPosition)) {
       setState(() {
-        _errorMessage = AppLocalizations.of(context)!.duplicateNameError;
+        _nameError = AppLocalizations.of(context)!
+            .duplicateNameError; // Set error for duplicate name.
       });
       return false;
     }
 
+    // Validate arrival time input.
     if (arrivalTime == null || arrivalTime < 0) {
       setState(() {
-        _errorMessage = AppLocalizations.of(context)!.invalidArrivalTimeError;
+        _arrivalTimeError = AppLocalizations.of(context)!
+            .invalidArrivalTimeError; // Set error for invalid arrival time.
       });
       return false;
     }
 
+    // Validate service time input.
     if (serviceTime == null || serviceTime <= arrivalTime) {
       setState(() {
-        _errorMessage =
-            AppLocalizations.of(context)!.invalidTimeDifferenceError;
+        _serviceTimeError = AppLocalizations.of(context)!
+            .invalidTimeDifferenceError; // Set error for invalid service time.
       });
       return false;
     }
 
-    if ((serviceTime - arrivalTime) < 1) {
-      setState(() {
-        _errorMessage =
-            AppLocalizations.of(context)!.timeDifferenceTooSmallError;
-      });
-      return false;
-    }
-
-    setState(() {
-      _errorMessage = null;
-    });
-    return true;
+    return true; // Input is valid.
   }
 
+  /// Submit the form if input is valid.
   void _submit() {
     if (_validateInput()) {
+      // Create a new or updated process instance.
       final newOrUpdatedProcess = Process(
         name: _nameController.text.trim(),
         arrivalTime: int.parse(_arrivalTimeController.text),
         serviceTime: int.parse(_serviceTimeController.text),
         enabled: _isEnabled,
       );
-      context.pop(newOrUpdatedProcess);
+      context.pop(
+          newOrUpdatedProcess); // Return the new/updated process to the previous context.
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final isEditing = widget.process != null;
-
     return AlertDialog(
-      title: Text(
-        isEditing
-            ? AppLocalizations.of(context)!.editProcessTitle
-            : AppLocalizations.of(context)!.createProcessTitle,
-      ),
+      title: Text(AppLocalizations.of(context)!
+          .createProcessTitle), // Title of the dialog.
       content: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            TextField(
+            // Name input field.
+            TextFormField(
               controller: _nameController,
               decoration: InputDecoration(
                 labelText: AppLocalizations.of(context)!.processNameLabel,
+                errorText: _nameError,
+                errorMaxLines: 2,
                 border: const OutlineInputBorder(),
               ),
+              onChanged: (value) {
+                setState(() {
+                  _nameError = null; // Clear error when the user types.
+                });
+              },
             ),
-            const SizedBox(height: 10),
-            TextField(
+            const SizedBox(height: 10), // Spacing between fields.
+            // Arrival time input field.
+            TextFormField(
               controller: _arrivalTimeController,
               decoration: InputDecoration(
                 labelText: AppLocalizations.of(context)!.arrivalTimeDialogLabel,
+                errorText: _arrivalTimeError,
+                errorMaxLines: 2,
                 border: const OutlineInputBorder(),
               ),
-              keyboardType: TextInputType.number,
+              keyboardType: TextInputType.number, // Numeric keyboard for input.
+              onChanged: (value) {
+                setState(() {
+                  _arrivalTimeError = null; // Clear error when the user types.
+                });
+              },
             ),
-            const SizedBox(height: 10),
-            TextField(
+            const SizedBox(height: 10), // Spacing between fields.
+            // Service time input field.
+            TextFormField(
               controller: _serviceTimeController,
               decoration: InputDecoration(
                 labelText: AppLocalizations.of(context)!.serviceTimeDialogLabel,
+                errorText: _serviceTimeError,
+                errorMaxLines: 2,
                 border: const OutlineInputBorder(),
               ),
-              keyboardType: TextInputType.number,
+              keyboardType: TextInputType.number, // Numeric keyboard for input.
+              onChanged: (value) {
+                setState(() {
+                  _serviceTimeError = null; // Clear error when the user types.
+                });
+              },
             ),
-            const SizedBox(height: 10),
-            if (_errorMessage != null)
-              Padding(
-                padding: const EdgeInsets.only(bottom: 10),
-                child: Text(
-                  _errorMessage!,
-                  style: TextStyle(color: Theme.of(context).colorScheme.error),
-                ),
-              ),
+            const SizedBox(height: 10), // Spacing between fields.
+            // Switch to toggle enabled/disabled state.
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -167,7 +196,7 @@ class _ProcessDialogState extends State<ProcessDialog> {
                   value: _isEnabled,
                   onChanged: (value) {
                     setState(() {
-                      _isEnabled = value;
+                      _isEnabled = value; // Update the enabled state.
                     });
                   },
                 ),
@@ -177,10 +206,12 @@ class _ProcessDialogState extends State<ProcessDialog> {
         ),
       ),
       actions: [
+        // Cancel button to close the dialog without saving.
         TextButton(
           onPressed: () => context.pop(),
           child: Text(AppLocalizations.of(context)!.cancelButton),
         ),
+        // Save button to submit the form.
         ElevatedButton(
           onPressed: _submit,
           child: Text(AppLocalizations.of(context)!.saveButton),
