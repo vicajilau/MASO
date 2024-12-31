@@ -53,8 +53,8 @@ class FileService {
         initialDirectory: masoFile.filePath,
         bytes: bytes);
 
-    // If a path is selected and the platform is not mobile, write the file
-    if (path != null && !PlatformDetail.isMobile) {
+    // If a path is selected and the platform is desktop, write the file
+    if (path != null && PlatformDetail.isDesktop) {
       masoFile.filePath = path;
       await _writeMasoFile(masoFile);
     }

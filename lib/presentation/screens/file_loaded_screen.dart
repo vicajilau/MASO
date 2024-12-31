@@ -120,10 +120,7 @@ class _FileLoadedScreenState extends State<FileLoadedScreen> {
                     tooltip: 'Execute',
                     onPressed: cachedMasoFile.processes.isNotEmpty
                         ? () {
-                            context.read<FileBloc>().add(FileSaveRequested(
-                                  cachedMasoFile,
-                                  AppLocalizations.of(context)!.saveDialogTitle,
-                                ));
+                            // context.read<FileBloc>().add(FileSaveRequested(cachedMasoFile, AppLocalizations.of(context)!.saveDialogTitle));
                           }
                         : null, // Disable button if file hasn't changed
                   ),

@@ -1,11 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:html' as html;
-import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:file_picker/file_picker.dart';
-import 'package:platform_detail/platform_detail.dart';
 
 import '../../domain/models/maso_file.dart';
 
@@ -46,38 +44,21 @@ class FileService {
   Future<MasoFile> saveMasoFile(MasoFile masoFile, String dialogTitle) async {
     // Convert the MasoFile object to JSON string and encode it to bytes
     String jsonString = jsonEncode(masoFile.toJson());
-    final bytes = utf8.encode(jsonString);
 
     // Open a save dialog for the user to select a file path
-    final path = await FilePicker.platform.saveFile(
-        dialogTitle: dialogTitle,
-        fileName: 'output-file.maso',
-        initialDirectory: masoFile.filePath,
-        bytes: bytes);
-
-    // If a path is selected and the platform is not mobile, write the file
-    if (path != null && !PlatformDetail.isMobile) {
-      masoFile.filePath = path;
-      await _writeMasoFile(masoFile);
-    }
+    downloadMasoFile('output-file.maso', jsonString);
     return masoFile;
   }
 
-  /// Writes a `MasoFile` object to its file path.
-  ///
-  /// This is a helper method used internally to perform the actual file writing
-  /// after a file path has been determined.
-  ///
-  /// - [masoFile]: The `MasoFile` object to write to the file.
-  Future<void> _writeMasoFile(MasoFile masoFile) async {
-    // Create a File object for the provided file path
-    final file = File(masoFile.filePath!);
-
-    // Convert the MasoFile object to JSON string format
-    final content = jsonEncode(masoFile.toJson());
-
-    // Write the content to the file
-    await file.writeAsString(content);
+  void downloadMasoFile(String filename, String content) {
+    final bytes = utf8.encode(content);
+    final blob = html.Blob([bytes]);
+    final url = html.Url.createObjectUrlFromBlob(blob);
+    html.AnchorElement(href: url)
+      ..target = 'blank'
+      ..download = filename
+      ..click();
+    html.Url.revokeObjectUrl(url); // Limpia la URL para liberar memoria.
   }
 
   /// Opens a file picker dialog for the user to select a `.maso` file.
