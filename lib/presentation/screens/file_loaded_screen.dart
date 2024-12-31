@@ -4,6 +4,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:maso/core/context_extension.dart';
 import 'package:maso/core/service_locator.dart';
+import 'package:maso/presentation/widgets/request_file_name_dialog.dart';
+import 'package:platform_detail/platform_detail.dart';
 
 import '../../domain/models/maso_file.dart';
 import '../../domain/models/process.dart';
@@ -11,9 +13,9 @@ import '../../domain/use_cases/check_file_changes_use_case.dart';
 import '../blocs/file_bloc/file_bloc.dart';
 import '../blocs/file_bloc/file_event.dart';
 import '../blocs/file_bloc/file_state.dart';
-import '../widgets/exit_confirmation_screen.dart';
-import '../widgets/maso_file_list.dart';
-import '../widgets/process_screen.dart';
+import '../widgets/dialogs/exit_confirmation_dialog.dart';
+import '../widgets/dialogs/process_dialog.dart';
+import '../widgets/maso_file_list_widget.dart';
 
 class FileLoadedScreen extends StatefulWidget {
   const FileLoadedScreen({super.key});
@@ -42,7 +44,7 @@ class _FileLoadedScreenState extends State<FileLoadedScreen> {
     if (await checkFileChangesUseCase.execute(cachedMasoFile) && mounted) {
       return await showDialog<bool>(
             context: context,
-            builder: (context) => ExitConfirmationScreen(),
+            builder: (context) => ExitConfirmationDialog(),
           ) ??
           false;
     }
@@ -90,7 +92,7 @@ class _FileLoadedScreenState extends State<FileLoadedScreen> {
                       onPressed: () async {
                         final createdProcess = await showDialog<Process>(
                           context: context,
-                          builder: (context) => ProcessScreen(
+                          builder: (context) => ProcessDialog(
                             existingProcesses: cachedMasoFile.processes,
                           ),
                         );
@@ -107,11 +109,25 @@ class _FileLoadedScreenState extends State<FileLoadedScreen> {
                     icon: const Icon(Icons.save),
                     tooltip: 'Save',
                     onPressed: _hasFileChanged
-                        ? () {
-                            context.read<FileBloc>().add(FileSaveRequested(
-                                  cachedMasoFile,
-                                  AppLocalizations.of(context)!.saveDialogTitle,
-                                ));
+                        ? () async {
+                            final String? fileName;
+                            if (PlatformDetail.isWeb) {
+                              // Crea el dialogo para obtener el nombre del fichero pasandole el nombre del antiguo fichero si lo tuvo
+                              final result = await showDialog<String>(
+                                context: context,
+                                builder: (_) => RequestFileNameDialog(),
+                              );
+                              fileName = result;
+                            } else {
+                              fileName =
+                                  AppLocalizations.of(context)!.saveDialogTitle;
+                            }
+                            if (fileName != null && context.mounted) {
+                              context.read<FileBloc>().add(FileSaveRequested(
+                                    cachedMasoFile,
+                                    fileName,
+                                  ));
+                            }
                           }
                         : null, // Disable button if file hasn't changed
                   ),
@@ -126,7 +142,7 @@ class _FileLoadedScreenState extends State<FileLoadedScreen> {
                   ),
                 ],
               ),
-              body: MasoFileList(
+              body: MasoFileListWidget(
                 masoFile: cachedMasoFile,
                 onFileChange: _checkFileChange,
               ),

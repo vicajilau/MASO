@@ -4,19 +4,19 @@ import 'package:go_router/go_router.dart';
 import 'package:maso/domain/models/maso_file.dart';
 
 import '../../domain/models/process.dart';
-import 'process_screen.dart';
+import 'dialogs/process_dialog.dart';
 
-class MasoFileList extends StatefulWidget {
+class MasoFileListWidget extends StatefulWidget {
   final MasoFile masoFile;
   final VoidCallback onFileChange;
-  const MasoFileList(
+  const MasoFileListWidget(
       {super.key, required this.masoFile, required this.onFileChange});
 
   @override
-  State<MasoFileList> createState() => _MasoFileListState();
+  State<MasoFileListWidget> createState() => _MasoFileListWidgetState();
 }
 
-class _MasoFileListState extends State<MasoFileList> {
+class _MasoFileListWidgetState extends State<MasoFileListWidget> {
   Future<bool> _confirmDismiss(BuildContext context, Process process) async {
     return await showDialog<bool>(
           context: context,
@@ -96,7 +96,7 @@ class _MasoFileListState extends State<MasoFileList> {
             onTap: () async {
               final updatedProcess = await showDialog<Process>(
                 context: context,
-                builder: (context) => ProcessScreen(
+                builder: (context) => ProcessDialog(
                   process: process,
                   existingProcesses: widget.masoFile.processes,
                   processPosition: index,

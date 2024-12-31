@@ -46,7 +46,7 @@ class FileService {
     String jsonString = jsonEncode(masoFile.toJson());
 
     // Open a save dialog for the user to select a file path
-    downloadMasoFile('output-file.maso', jsonString);
+    downloadMasoFile(dialogTitle, jsonString);
     return masoFile;
   }
 

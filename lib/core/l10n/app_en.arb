@@ -145,5 +145,10 @@
   "invalidArrivalTimeError": "Arrival time must be a positive integer.",
   "invalidServiceTimeError": "Service time must be a positive integer.",
   "invalidTimeDifferenceError": "Service time must be greater than arrival time.",
-  "timeDifferenceTooSmallError": "Service time must be at least 1 unit greater than arrival time."
+  "timeDifferenceTooSmallError": "Service time must be at least 1 unit greater than arrival time.",
+  "requestFileNameTitle": "Enter the MASO file name",
+  "fileNameHint": "File name",
+  "acceptButton": "Accept",
+  "errorTitle": "Error",
+  "emptyFileNameMessage": "The file name cannot be empty."
 }

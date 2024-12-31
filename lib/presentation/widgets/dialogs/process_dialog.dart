@@ -4,22 +4,22 @@ import 'package:go_router/go_router.dart';
 import 'package:maso/domain/models/list_processes_extension.dart';
 import 'package:maso/domain/models/process.dart';
 
-class ProcessScreen extends StatefulWidget {
+class ProcessDialog extends StatefulWidget {
   final Process? process;
   final List<Process> existingProcesses;
   final int? processPosition;
 
-  const ProcessScreen(
+  const ProcessDialog(
       {super.key,
       this.process,
       required this.existingProcesses,
       this.processPosition});
 
   @override
-  State<ProcessScreen> createState() => _ProcessDialogState();
+  State<ProcessDialog> createState() => _ProcessDialogState();
 }
 
-class _ProcessDialogState extends State<ProcessScreen> {
+class _ProcessDialogState extends State<ProcessDialog> {
   late TextEditingController _nameController;
   late TextEditingController _arrivalTimeController;
   late TextEditingController _serviceTimeController;

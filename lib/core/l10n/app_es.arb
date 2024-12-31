@@ -145,5 +145,10 @@
   "invalidArrivalTimeError": "El tiempo de llegada debe ser un número entero positivo.",
   "invalidServiceTimeError": "El tiempo de servicio debe ser un número entero positivo.",
   "invalidTimeDifferenceError": "El tiempo de servicio debe ser mayor que el tiempo de llegada.",
-  "timeDifferenceTooSmallError": "El tiempo de servicio debe ser al menos 1 unidad mayor que el tiempo de llegada."
+  "timeDifferenceTooSmallError": "El tiempo de servicio debe ser al menos 1 unidad mayor que el tiempo de llegada.",
+  "requestFileNameTitle": "Introduce el nombre del archivo MASO",
+  "fileNameHint": "Nombre del archivo",
+  "acceptButton": "Aceptar",
+  "errorTitle": "Error",
+  "emptyFileNameMessage": "El nombre del fichero no puede estar vacío."
 }

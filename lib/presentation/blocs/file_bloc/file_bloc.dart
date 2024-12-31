@@ -17,7 +17,8 @@ class FileBloc extends Bloc<FileEvent, FileState> {
   FileBloc(this.fileRepository) : super(FileInitial()) {
     // Handling the FileDropped event
     on<FileDropped>((event, emit) async {
-      emit(FileLoading()); // Emit loading state while the file is being processed
+      emit(
+          FileLoading()); // Emit loading state while the file is being processed
       try {
         final masoFile = await fileRepository.loadMasoFile(event.filePath);
         emit(FileLoaded(masoFile)); // Emit the loaded file state
@@ -36,7 +37,8 @@ class FileBloc extends Bloc<FileEvent, FileState> {
 
     // Handling the CreateMasoMetadata event
     on<CreateMasoMetadata>((event, emit) async {
-      emit(FileLoading()); // Emit loading state while the file is being processed
+      emit(
+          FileLoading()); // Emit loading state while the file is being processed
       try {
         final masoFile = await fileRepository.createMasoFile(
             name: event.name,
@@ -61,7 +63,8 @@ class FileBloc extends Bloc<FileEvent, FileState> {
         // Save the `MasoFile` and update the state with the saved file
         event.masoFile = await fileRepository.saveMasoFile(
             event.masoFile, event.dialogTitle);
-        emit(FileLoaded(event.masoFile)); // Emit the loaded file state after save
+        emit(FileLoaded(
+            event.masoFile)); // Emit the loaded file state after save
       } on Exception catch (e) {
         emit(FileError(
             reason: FileErrorType.errorSavingFile,
