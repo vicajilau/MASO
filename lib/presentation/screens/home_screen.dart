@@ -77,23 +77,29 @@ class _HomeScreenState extends State<HomeScreen> {
                 title: Text(AppLocalizations.of(context)!.titleAppBar),
                 actions: [
                   // Disable the create and load button if a file is loading
-                  TextButton(
-                    onPressed: _isLoading
-                        ? null
-                        : () => _showCreateMasoFileDialog(context),
-                    child: Text(
-                      AppLocalizations.of(context)!.create,
-                      style: const TextStyle(color: Colors.white),
+                  Tooltip(
+                    message: AppLocalizations.of(context)!.createFileTooltip,
+                    child: TextButton(
+                      onPressed: _isLoading
+                          ? null
+                          : () => _showCreateMasoFileDialog(context),
+                      child: Text(
+                        AppLocalizations.of(context)!.create,
+                        style: const TextStyle(color: Colors.white),
+                      ),
                     ),
                   ),
-                  TextButton(
-                    onPressed: _isLoading
-                        ? null
-                        : () =>
-                            context.read<FileBloc>().add(FilePickRequested()),
-                    child: Text(
-                      AppLocalizations.of(context)!.load,
-                      style: const TextStyle(color: Colors.white),
+                  Tooltip(
+                    message: AppLocalizations.of(context)!.loadFileTooltip,
+                    child: TextButton(
+                      onPressed: _isLoading
+                          ? null
+                          : () =>
+                              context.read<FileBloc>().add(FilePickRequested()),
+                      child: Text(
+                        AppLocalizations.of(context)!.load,
+                        style: const TextStyle(color: Colors.white),
+                      ),
                     ),
                   ),
                 ],
