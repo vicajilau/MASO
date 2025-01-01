@@ -21,23 +21,25 @@ class ExecutionTimeCalculatorService {
   /// Returns a new list of processes with their `executionTime` calculated based on the algorithm.
   List<Process> calculateExecutionTimes(List<Process> processes) {
     // Depending on the selected algorithm, calculate the execution time.
+    final filteredProcesses =
+        processes.where((process) => process.enabled).toList();
     switch (executionSetup.algorithm) {
       case SchedulingAlgorithm.firstComeFirstServed:
-        return _calculateFirstComeFirstServed(processes);
+        return _calculateFirstComeFirstServed(filteredProcesses);
       case SchedulingAlgorithm.shortestJobFirst:
-        return _calculateShortestJobFirst(processes);
+        return _calculateShortestJobFirst(filteredProcesses);
       case SchedulingAlgorithm.shortestRemainingTimeFirst:
-        return _calculateShortestRemainingTimeFirst(processes);
+        return _calculateShortestRemainingTimeFirst(filteredProcesses);
       case SchedulingAlgorithm.roundRobin:
-        return _calculateRoundRobin(processes);
+        return _calculateRoundRobin(filteredProcesses);
       case SchedulingAlgorithm.priorityBased:
-        return _calculatePriorityBased(processes);
+        return _calculatePriorityBased(filteredProcesses);
       case SchedulingAlgorithm.multiplePriorityQueues:
-        return _calculateMultiplePriorityQueues(processes);
+        return _calculateMultiplePriorityQueues(filteredProcesses);
       case SchedulingAlgorithm.multiplePriorityQueuesWithFeedback:
-        return _calculateMultiplePriorityQueuesWithFeedback(processes);
+        return _calculateMultiplePriorityQueuesWithFeedback(filteredProcesses);
       case SchedulingAlgorithm.timeLimit:
-        return _calculateTimeLimit(processes);
+        return _calculateTimeLimit(filteredProcesses);
     }
   }
 

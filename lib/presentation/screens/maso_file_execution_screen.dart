@@ -185,8 +185,8 @@ class _MasoFileExecutionScreenState extends State<MasoFileExecutionScreen> {
                         child: Text(
                           AppLocalizations.of(context)!
                               .timelineProcessDescription(
-                            process.name,
                             process.arrivalTime.toString(),
+                            process.name,
                             process.serviceTime.toString(),
                           ),
                         ),
