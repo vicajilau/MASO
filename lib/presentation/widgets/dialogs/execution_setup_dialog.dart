@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:maso/domain/models/scheduling_algorithm.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
+import 'package:maso/domain/models/scheduling_algorithm.dart';
 
 import '../../../domain/models/execution_setup.dart';
 
@@ -31,14 +32,13 @@ class _ExecutionSetupDialogState extends State<ExecutionSetupDialog> {
             },
             items: SchedulingAlgorithm.values
                 .map((algorithm) => DropdownMenuItem<SchedulingAlgorithm>(
-              value: algorithm,
-              child: Text(AppLocalizations.of(context)!
-                  .algorithmLabel(algorithm.name)),
-            ))
+                      value: algorithm,
+                      child: Text(AppLocalizations.of(context)!
+                          .algorithmLabel(algorithm.name)),
+                    ))
                 .toList(),
             decoration: InputDecoration(
-              labelText:
-              AppLocalizations.of(context)!.selectAlgorithmLabel,
+              labelText: AppLocalizations.of(context)!.selectAlgorithmLabel,
               border: OutlineInputBorder(),
             ),
           ),
@@ -46,15 +46,12 @@ class _ExecutionSetupDialogState extends State<ExecutionSetupDialog> {
       ),
       actions: [
         TextButton(
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => context.pop(),
           child: Text(AppLocalizations.of(context)!.cancelButton),
         ),
         ElevatedButton(
           onPressed: () {
-            Navigator.pop(
-              context,
-              ExecutionSetup(algorithm: _selectedAlgorithm),
-            );
+            context.pop(ExecutionSetup(algorithm: _selectedAlgorithm));
           },
           child: Text(AppLocalizations.of(context)!.acceptButton),
         ),
