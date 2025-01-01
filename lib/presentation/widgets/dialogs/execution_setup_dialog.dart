@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:maso/domain/models/scheduling_algorithm.dart';
 
+import '../../../core/service_locator.dart';
 import '../../../domain/models/execution_setup.dart';
 
 class ExecutionSetupDialog extends StatefulWidget {
@@ -13,8 +14,24 @@ class ExecutionSetupDialog extends StatefulWidget {
 }
 
 class _ExecutionSetupDialogState extends State<ExecutionSetupDialog> {
+  // The previous ExecutionSetup instance if available (can be null)
+  ExecutionSetup? _previousES;
+
+  // The selected scheduling algorithm, defaulting to 'firstComeFirstServed'
   SchedulingAlgorithm _selectedAlgorithm =
       SchedulingAlgorithm.firstComeFirstServed;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Check if ExecutionSetup is registered in the service locator before accessing it
+    if (ServiceLocator.instance.getIt.isRegistered<ExecutionSetup>()) {
+      // Assign the previous ExecutionSetup and update the selected algorithm
+      _previousES = ServiceLocator.instance.getIt<ExecutionSetup>();
+      _selectedAlgorithm = _previousES!.algorithm;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

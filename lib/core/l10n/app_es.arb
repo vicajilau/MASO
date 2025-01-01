@@ -163,5 +163,6 @@
   "addTooltip": "Agregar un nuevo proceso",
   "backSemanticLabel": "Botón de volver",
   "createFileTooltip": "Crear un nuevo archivo MASO",
-  "loadFileTooltip": "Cargar un archivo MASO existente"
+  "loadFileTooltip": "Cargar un archivo MASO existente",
+  "executionScreenTitle": "Resumen de Ejecución"
 }

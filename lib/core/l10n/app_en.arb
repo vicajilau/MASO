@@ -163,5 +163,6 @@
   "addTooltip": "Add a new process",
   "backSemanticLabel": "Back button",
   "createFileTooltip": "Create a new MASO file",
-  "loadFileTooltip": "Load an existing MASO file"
+  "loadFileTooltip": "Load an existing MASO file",
+  "executionScreenTitle": "Execution Overview"
 }
