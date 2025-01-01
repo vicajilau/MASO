@@ -9,18 +9,20 @@ import 'file_state.dart';
 /// It listens for file-related events and emits the corresponding states based on the outcome of those events.
 class FileBloc extends Bloc<FileEvent, FileState> {
   /// The repository responsible for handling file-related operations.
-  final FileRepository fileRepository;
+  final FileRepository _fileRepository;
 
   /// Constructor for `FileBloc` that initializes the state and event handlers.
   ///
   /// - [fileRepository]: An instance of `FileRepository` used to manage file operations.
-  FileBloc(this.fileRepository) : super(FileInitial()) {
+  FileBloc({required FileRepository fileRepository})
+      : _fileRepository = fileRepository,
+        super(FileInitial()) {
     // Handling the FileDropped event
     on<FileDropped>((event, emit) async {
       emit(
           FileLoading()); // Emit loading state while the file is being processed
       try {
-        final masoFile = await fileRepository.loadMasoFile(event.filePath);
+        final masoFile = await _fileRepository.loadMasoFile(event.filePath);
         emit(FileLoaded(masoFile)); // Emit the loaded file state
       } on FileInvalidException {
         emit(FileError(reason: FileErrorType.invalidExtension));
@@ -40,7 +42,7 @@ class FileBloc extends Bloc<FileEvent, FileState> {
       emit(
           FileLoading()); // Emit loading state while the file is being processed
       try {
-        final masoFile = await fileRepository.createMasoFile(
+        final masoFile = await _fileRepository.createMasoFile(
             name: event.name,
             version: event.version,
             description: event.description);
@@ -61,7 +63,7 @@ class FileBloc extends Bloc<FileEvent, FileState> {
       emit(FileLoading()); // Emit loading state while saving the file
       try {
         // Save the `MasoFile` and update the state with the saved file
-        event.masoFile = await fileRepository.saveMasoFile(
+        event.masoFile = await _fileRepository.saveMasoFile(
             event.masoFile, event.dialogTitle);
         emit(FileLoaded(
             event.masoFile)); // Emit the loaded file state after save
@@ -84,7 +86,7 @@ class FileBloc extends Bloc<FileEvent, FileState> {
     on<FilePickRequested>((event, emit) async {
       emit(FileLoading()); // Emit loading state while picking the file
       try {
-        final masoFile = await fileRepository.pickFileManually();
+        final masoFile = await _fileRepository.pickFileManually();
         if (masoFile != null) {
           emit(FileLoaded(masoFile)); // Emit the loaded file state if picked
         } else {

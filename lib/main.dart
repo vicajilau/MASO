@@ -23,7 +23,7 @@ class MasoApp extends StatelessWidget {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       debugShowCheckedModeBanner: false,
-      showSemanticsDebugger: true,
+      showSemanticsDebugger: false,
     );
   }
 }

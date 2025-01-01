@@ -7,7 +7,7 @@ class CheckFileChangesUseCase {
   final FileRepository _fileRepository;
 
   /// Constructor that receives the repository as a dependency.
-  CheckFileChangesUseCase(this._fileRepository);
+  CheckFileChangesUseCase({required FileRepository fileRepository}) : _fileRepository = fileRepository;
 
   /// Executes the business logic to check if the file has changed.
   ///

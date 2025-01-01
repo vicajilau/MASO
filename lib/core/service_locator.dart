@@ -1,7 +1,9 @@
 import 'package:get_it/get_it.dart';
 import 'package:maso/domain/models/execution_setup.dart';
+
 import '../data/repositories/file_repository.dart';
-import '../data/services/file_service.dart' if (dart.library.html) '../data/services/file_service_web.dart';
+import '../data/services/file_service.dart'
+    if (dart.library.html) '../data/services/file_service_web.dart';
 import '../domain/models/maso_file.dart';
 import '../domain/use_cases/check_file_changes_use_case.dart';
 import '../presentation/blocs/file_bloc/file_bloc.dart';
@@ -24,9 +26,11 @@ class ServiceLocator {
   void setup() {
     getIt.registerLazySingleton<FileService>(() => FileService());
     getIt.registerLazySingleton<FileRepository>(
-            () => FileRepository(getIt<FileService>()));
-    getIt.registerFactory<FileBloc>(() => FileBloc(getIt<FileRepository>()));
-    getIt.registerLazySingleton<CheckFileChangesUseCase>(() => CheckFileChangesUseCase(getIt<FileRepository>()));
+        () => FileRepository(fileService: getIt<FileService>()));
+    getIt.registerLazySingleton<CheckFileChangesUseCase>(
+        () => CheckFileChangesUseCase(fileRepository: getIt<FileRepository>()));
+    getIt.registerFactory<FileBloc>(
+        () => FileBloc(fileRepository: getIt<FileRepository>()));
   }
 
   // Function to register or update MasoFile in GetIt

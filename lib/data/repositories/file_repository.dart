@@ -15,7 +15,8 @@ class FileRepository {
   /// This allows for the delegation of file-related tasks.
   ///
   /// - [fileService]: The `FileService` instance that handles file operations.
-  FileRepository(this._fileService);
+  FileRepository({required FileService fileService})
+      : _fileService = fileService;
 
   /// Loads a `MasoFile` from a file at the specified [filePath].
   /// This method calls `readMasoFile` from `FileService` to read the file,
