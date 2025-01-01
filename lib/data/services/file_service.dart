@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:maso/domain/models/custom_exceptions/file_invalid_exception.dart';
@@ -40,8 +41,9 @@ class FileService {
   ///
   /// - [masoFile]: The `MasoFile` object to save.
   /// - [dialogTitle]: The title for the save dialog window.
+  /// - [fileName]: The name for the file.
   /// - Returns: The `MasoFile` object with an updated file path if the user selects a path.
-  Future<MasoFile> saveMasoFile(MasoFile masoFile, String dialogTitle) async {
+  Future<MasoFile> saveMasoFile(MasoFile masoFile, String dialogTitle, String fileName) async {
     // Convert the MasoFile object to JSON string and encode it to bytes
     String jsonString = jsonEncode(masoFile.toJson());
     final bytes = utf8.encode(jsonString);
@@ -49,7 +51,7 @@ class FileService {
     // Open a save dialog for the user to select a file path
     final path = await FilePicker.platform.saveFile(
         dialogTitle: dialogTitle,
-        fileName: 'output-file.maso',
+        fileName: fileName,
         initialDirectory: masoFile.filePath,
         bytes: bytes);
 
@@ -61,12 +63,34 @@ class FileService {
     return masoFile;
   }
 
+  /// Saves a `MasoFile` object to the file system.
+  ///
+  /// This method opens a save dialog for the user to choose the file path
+  /// and writes the `MasoFile` data in JSON format to the selected file.
+  ///
+  /// - [masoFile]: The `MasoFile` object to save.
+  /// - [dialogTitle]: The title for the save dialog window.
+  /// - [fileName]: The name for the file.
+  /// - Returns: The `MasoFile` object with an updated file path if the user selects a path.
+  Future<void> saveExportedFile(Uint8List bytes, String dialogTitle, String fileName) async {
+    // Convert the MasoFile object to JSON string and encode it to bytes
+
+    // Open a save dialog for the user to select a file path
+    final path = await FilePicker.platform.saveFile(
+        dialogTitle: dialogTitle,
+        fileName: fileName,
+        bytes: bytes);
+
+    // If a path is selected and the platform is desktop, write the file
+    if (path != null && PlatformDetail.isDesktop) {
+      await _writeExportedFile(bytes, path);
+    }
+  }
+
   /// Writes a `MasoFile` object to its file path.
   ///
   /// This is a helper method used internally to perform the actual file writing
   /// after a file path has been determined.
-  ///
-  /// - [masoFile]: The `MasoFile` object to write to the file.
   Future<void> _writeMasoFile(MasoFile masoFile) async {
     // Create a File object for the provided file path
     final file = File(masoFile.filePath!);
@@ -76,6 +100,18 @@ class FileService {
 
     // Write the content to the file
     await file.writeAsString(content);
+  }
+
+  /// Writes a `Uint8List` object to its file path.
+  ///
+  /// This is a helper method used internally to perform the actual file writing
+  /// after a file path has been determined.
+  Future<void> _writeExportedFile(Uint8List bytes, String path) async {
+    // Create a File object for the provided file path
+    final file = File(path);
+
+    // Write the content to the file
+    await file.writeAsBytes(bytes);
   }
 
   /// Opens a file picker dialog for the user to select a `.maso` file.

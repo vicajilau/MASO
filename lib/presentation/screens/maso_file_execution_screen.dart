@@ -1,10 +1,22 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'dart:ui' as ui;
 
-import '../../../core/service_locator.dart';
-import '../../../domain/models/maso_file.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:maso/core/context_extension.dart';
+import 'package:platform_detail/platform_detail.dart';
+import 'package:timeline_tile/timeline_tile.dart';
+
 import '../../../domain/models/process.dart';
+import '../../core/constants/maso_metadata.dart';
+import '../../core/service_locator.dart';
 import '../../data/services/execution_time_calculator_service.dart';
+import '../../domain/models/maso_file.dart';
+import '../blocs/file_bloc/file_bloc.dart';
+import '../blocs/file_bloc/file_event.dart';
+import '../widgets/request_file_name_dialog.dart';
 
 class MasoFileExecutionScreen extends StatefulWidget {
   const MasoFileExecutionScreen({super.key});
@@ -16,6 +28,7 @@ class MasoFileExecutionScreen extends StatefulWidget {
 
 class _MasoFileExecutionScreenState extends State<MasoFileExecutionScreen> {
   late List<Process> _processes;
+  final GlobalKey _repaintKey = GlobalKey(); // Key for capturing the content
 
   @override
   void initState() {
@@ -31,45 +44,170 @@ class _MasoFileExecutionScreenState extends State<MasoFileExecutionScreen> {
     executeProcesses();
   }
 
-  // Function to execute processes according to the selected algorithm
   void executeProcesses() {
     final executionTimeCalculator =
         ServiceLocator.instance.getIt<ExecutionTimeCalculatorService>();
 
-    // Use the executionTimeCalculator to calculate the execution times
     _processes = executionTimeCalculator.calculateExecutionTimes(_processes);
 
-    // Trigger UI update after execution
     setState(() {});
+  }
+
+  Future<Uint8List?> _captureImage() async {
+    try {
+      final boundary = _repaintKey.currentContext?.findRenderObject()
+          as RenderRepaintBoundary?;
+      if (boundary == null) return null;
+
+      final image = await boundary.toImage(pixelRatio: 3.0);
+      final byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+      return byteData?.buffer.asUint8List();
+    } catch (e) {
+      if (mounted) {
+        context.presentSnackBar(
+          AppLocalizations.of(context)!.failedToCaptureImage(e.toString()),
+        );
+      }
+      return null;
+    }
+  }
+
+  Future<void> _copyImageToClipboard() async {
+    final buffer = await _captureImage();
+    if (buffer != null) {
+      await Clipboard.setData(ClipboardData(text: buffer.toString()));
+      if (mounted) {
+        context.presentSnackBar(
+          AppLocalizations.of(context)!.imageCopiedToClipboard,
+        );
+      }
+    }
+  }
+
+  Future<void> _exportAsImage() async {
+    final buffer = await _captureImage();
+    if (buffer != null && mounted) {
+      final String? fileName;
+      if (PlatformDetail.isWeb) {
+        final result = await showDialog<String>(
+          context: context,
+          builder: (_) => RequestFileNameDialog(
+            format: '.png',
+          ),
+        );
+        fileName = result;
+      } else {
+        fileName = AppLocalizations.of(context)!.saveDialogTitle;
+      }
+      if (fileName != null && mounted) {
+        context.read<FileBloc>().add(ExportFileSaveRequested(
+            buffer, fileName, MasoMetadata.exportImageFileName));
+      }
+    }
+  }
+
+  Future<void> _exportAsPdf() async {
+    final buffer = await _captureImage();
+    print(buffer);
+  }
+
+  void _showExportOptions() {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return SafeArea(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTile(
+                leading: const Icon(Icons.image),
+                title: Text(AppLocalizations.of(context)!.exportTimelineImage),
+                onTap: () {
+                  Navigator.pop(context);
+                  _exportAsImage();
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.picture_as_pdf),
+                title: Text(AppLocalizations.of(context)!.exportTimelinePdf),
+                onTap: () {
+                  Navigator.pop(context);
+                  _exportAsPdf();
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.executionScreenTitle),
-        actions: [],
+        title: Text(AppLocalizations.of(context)!.executionTimelineTitle),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.copy),
+            tooltip: AppLocalizations.of(context)!.clipboardTooltip,
+            onPressed: _copyImageToClipboard,
+          ),
+          IconButton(
+            icon: const Icon(Icons.file_download),
+            tooltip: AppLocalizations.of(context)!.exportTooltip,
+            onPressed: _showExportOptions,
+          ),
+        ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            // Display a temporal line of process execution
-            Expanded(
-              child: ListView(
-                children: _processes.map((process) {
-                  return ListTile(
-                    title: Text(process.name),
-                    subtitle: Text(
-                        'Arrival Time: ${process.arrivalTime}, Service Time: ${process.serviceTime}'),
-                    // Display the calculated execution time
-                    trailing: Text(
-                        'Execution Time: ${process.executionTime ?? 'N/A'}'),
-                  );
-                }).toList(),
+      body: RepaintBoundary(
+        key: _repaintKey,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              Expanded(
+                child: ListView.builder(
+                  itemCount: _processes.length,
+                  itemBuilder: (context, index) {
+                    final process = _processes[index];
+                    return TimelineTile(
+                      alignment: TimelineAlign.center,
+                      isFirst: index == 0,
+                      isLast: index == _processes.length - 1,
+                      indicatorStyle: const IndicatorStyle(
+                        color: Colors.blue,
+                        width: 20,
+                        padding: EdgeInsets.all(8),
+                      ),
+                      endChild: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          AppLocalizations.of(context)!
+                              .timelineProcessDescription(
+                            process.name,
+                            process.arrivalTime.toString(),
+                            process.serviceTime.toString(),
+                          ),
+                        ),
+                      ),
+                      startChild: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          AppLocalizations.of(context)!
+                              .executionTimeDescription(
+                            process.executionTime?.toString() ??
+                                AppLocalizations.of(context)!
+                                    .executionTimeUnavailable,
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

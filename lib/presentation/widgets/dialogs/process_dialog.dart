@@ -42,7 +42,14 @@ class _ProcessDialogState extends State<ProcessDialog> {
     _nameController = TextEditingController();
     _arrivalTimeController = TextEditingController();
     _serviceTimeController = TextEditingController();
-    _isEnabled = true; // Default to enabled for the creation of a new process.
+    if (widget.process != null) {
+      _nameController.text = widget.process!.name;
+      _arrivalTimeController.text = widget.process!.arrivalTime.toString();
+      _serviceTimeController.text = widget.process!.serviceTime.toString();
+      _isEnabled = widget.process!.enabled;
+    } else {
+      _isEnabled = true;
+    }
   }
 
   @override

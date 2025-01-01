@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:maso/core/service_locator.dart';
 
 import '../../domain/models/maso_file.dart';
@@ -56,10 +58,23 @@ class FileRepository {
   ///
   /// - [masoFile]: The `MasoFile` to save.
   /// - [dialogTitle]: The title of the file save dialog.
+  /// - [fileName]: The name of the file.
   /// - Returns: A `Future<MasoFile>` containing the saved `MasoFile`.
   /// - Throws: An exception if there is an error saving the file.
-  Future<MasoFile> saveMasoFile(MasoFile masoFile, String dialogTitle) async {
-    return await _fileService.saveMasoFile(masoFile, dialogTitle);
+  Future<MasoFile> saveMasoFile(MasoFile masoFile, String dialogTitle, String fileName) async {
+    return await _fileService.saveMasoFile(masoFile, dialogTitle, fileName);
+  }
+
+  /// Saves a `MasoFile` to a file using `FileService`.
+  /// This method calls the `saveMasoFile` function from `FileService` to save the file.
+  ///
+  /// - [masoFile]: The `MasoFile` to save.
+  /// - [dialogTitle]: The title of the file save dialog.
+  /// - [fileName]: The name of the file.
+  /// - Returns: A `Future<MasoFile>` containing the saved `MasoFile`.
+  /// - Throws: An exception if there is an error saving the file.
+  Future<void> saveExportedFile(Uint8List bytes, String dialogTitle, String fileName) async {
+    return await _fileService.saveExportedFile(bytes, dialogTitle, fileName);
   }
 
   /// Picks a file manually using the file picker dialog.

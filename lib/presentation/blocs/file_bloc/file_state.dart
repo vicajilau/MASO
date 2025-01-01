@@ -19,6 +19,9 @@ class FileLoaded extends FileState {
   FileLoaded(this.masoFile);
 }
 
+/// State representing a successfully exported file, containing the file data and path.
+class FileExported extends FileState {}
+
 /// State representing an error during file operation, with an error message.
 class FileError extends FileState {
   final Exception? error; // Error exception
@@ -33,9 +36,11 @@ class FileError extends FileState {
       case FileErrorType.invalidExtension:
         return AppLocalizations.of(context)!.errorInvalidFile;
       case FileErrorType.errorOpeningFile:
-      case FileErrorType.errorSavingFile:
+      case FileErrorType.errorSavingMasoFile:
       case FileErrorType.errorPickingFileManually:
         return AppLocalizations.of(context)!.errorLoadingFile(error.toString());
+      case FileErrorType.errorSavingExportedFile:
+        return AppLocalizations.of(context)!.errorExportingFile(error.toString());
     }
   }
 }
@@ -48,8 +53,11 @@ enum FileErrorType {
   /// There was an error while trying to open the file.
   errorOpeningFile,
 
-  /// There was an error while trying to save the file.
-  errorSavingFile,
+  /// There was an error while trying to save the Maso file.
+  errorSavingMasoFile,
+
+  /// There was an error while trying to save the exported file.
+  errorSavingExportedFile,
 
   /// There was an error while trying to pick the file.
   errorPickingFileManually;

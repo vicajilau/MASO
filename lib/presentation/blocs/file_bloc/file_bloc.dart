@@ -58,32 +58,49 @@ class FileBloc extends Bloc<FileEvent, FileState> {
       }
     });
 
-    // Handling the FileSaveRequested event
-    on<FileSaveRequested>((event, emit) async {
+    // Handling the MasoFileSaveRequested event
+    on<MasoFileSaveRequested>((event, emit) async {
       emit(FileLoading()); // Emit loading state while saving the file
       try {
         // Save the `MasoFile` and update the state with the saved file
         event.masoFile = await _fileRepository.saveMasoFile(
-            event.masoFile, event.dialogTitle);
+            event.masoFile, event.dialogTitle, event.fileName);
         emit(FileLoaded(
             event.masoFile)); // Emit the loaded file state after save
       } on Exception catch (e) {
         emit(FileError(
-            reason: FileErrorType.errorSavingFile,
+            reason: FileErrorType.errorSavingMasoFile,
             error: e)); // Emit error if file saving fails
       } catch (e) {
         emit(FileError(
-            reason: FileErrorType.errorSavingFile, error: Exception(e)));
+            reason: FileErrorType.errorSavingMasoFile, error: Exception(e)));
       }
     });
 
-    // Handling the FileReset event
-    on<FileReset>((event, emit) async {
+    on<ExportFileSaveRequested>((event, emit) async {
+      emit(FileLoading()); // Emit loading state while saving the file
+      try {
+        // Save the `MasoFile` and update the state with the saved file
+        await _fileRepository.saveExportedFile(
+            event.bytes, event.dialogTitle, event.fileName);
+        emit(FileExported()); // Emit the loaded file state after save
+      } on Exception catch (e) {
+        emit(FileError(
+            reason: FileErrorType.errorSavingMasoFile,
+            error: e)); // Emit error if file saving fails
+      } catch (e) {
+        emit(FileError(
+            reason: FileErrorType.errorSavingMasoFile, error: Exception(e)));
+      }
+    });
+
+    // Handling the MasoFileReset event
+    on<MasoFileReset>((event, emit) async {
       emit(FileInitial()); // Emit initial state after reset
     });
 
-    // Handling the FilePickRequested event
-    on<FilePickRequested>((event, emit) async {
+    // Handling the MasoFilePickRequested event
+    on<MasoFilePickRequested>((event, emit) async {
       emit(FileLoading()); // Emit loading state while picking the file
       try {
         final masoFile = await _fileRepository.pickFileManually();

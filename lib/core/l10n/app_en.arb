@@ -59,6 +59,16 @@
         }
       }
     },
+  "errorExportingFile": "Error exporting the file: {error}",
+  "@errorExportingFile": {
+    "description": "Message displayed when there is an error while exporting a file.",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "File not found"
+      }
+    }
+  },
     "errorSavingFile": "Error saving file: {error}",
     "@errorSavingFile": {
       "description": "Message displayed when there is an error while saving a file.",
@@ -164,5 +174,16 @@
   "backSemanticLabel": "Back button",
   "createFileTooltip": "Create a new MASO file",
   "loadFileTooltip": "Load an existing MASO file",
-  "executionScreenTitle": "Execution Overview"
+  "executionScreenTitle": "Execution Overview",
+  "executionTimelineTitle": "Execution Timeline",
+  "failedToCaptureImage": "Failed to capture image: {error}",
+  "imageCopiedToClipboard": "Image copied to clipboard",
+  "exportTimelineImage": "Export as Image",
+  "exportTimelinePdf": "Export as PDF",
+  "clipboardTooltip": "Copy to clipboard",
+  "exportTooltip": "Export execution timeline",
+  "timelineProcessDescription": "{processName} (Arrival: {arrivalTime}, Service: {serviceTime})",
+  "executionTimeDescription": "Execution Time: {executionTime}",
+  "executionTimeUnavailable": "N/A",
+  "imageExported": "Image exported"
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:maso/core/constants/maso_metadata.dart';
 import 'package:maso/core/context_extension.dart';
 import 'package:maso/core/service_locator.dart';
 import 'package:maso/domain/models/execution_setup.dart';
@@ -162,17 +163,17 @@ class _FileLoadedScreenState extends State<FileLoadedScreen> {
     if (PlatformDetail.isWeb) {
       final result = await showDialog<String>(
         context: context,
-        builder: (_) => RequestFileNameDialog(),
+        builder: (_) => RequestFileNameDialog(
+          format: '.maso',
+        ),
       );
       fileName = result;
     } else {
       fileName = AppLocalizations.of(context)!.saveDialogTitle;
     }
     if (fileName != null && context.mounted) {
-      context.read<FileBloc>().add(FileSaveRequested(
-            cachedMasoFile,
-            fileName,
-          ));
+      context.read<FileBloc>().add(MasoFileSaveRequested(
+          cachedMasoFile, fileName, MasoMetadata.masoFileName));
     }
   }
 }

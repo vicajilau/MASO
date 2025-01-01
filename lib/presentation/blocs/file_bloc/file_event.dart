@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import '../../../domain/models/maso_file.dart';
 
 /// Abstract class representing the base event for file operations.
@@ -10,15 +12,24 @@ class FileDropped extends FileEvent {
 }
 
 /// Event triggered when a file save is requested, with the file path and data.
-class FileSaveRequested extends FileEvent {
+class MasoFileSaveRequested extends FileEvent {
   MasoFile masoFile; // The MasoFile object to be saved
   final String dialogTitle;
-  FileSaveRequested(this.masoFile, this.dialogTitle);
+  final String fileName;
+  MasoFileSaveRequested(this.masoFile, this.dialogTitle, this.fileName);
+}
+
+/// Event triggered when a exported file save is requested, with the file path and data.
+class ExportFileSaveRequested extends FileEvent {
+  final Uint8List bytes; // The object to be saved
+  final String dialogTitle;
+  final String fileName;
+  ExportFileSaveRequested(this.bytes, this.dialogTitle, this.fileName);
 }
 
 /// Event triggered when a file is requested to be picked.
 /// This event can be used to initiate the file selection process.
-class FilePickRequested extends FileEvent {}
+class MasoFilePickRequested extends FileEvent {}
 
 /// Event triggered when a file is requested to be picked.
 /// This event can be used to initiate the file selection process.
@@ -32,4 +43,4 @@ class CreateMasoMetadata extends FileEvent {
 
 /// Event triggered to reset the file state.
 /// This event can be used to clear any file-related data or state.
-class FileReset extends FileEvent {}
+class MasoFileReset extends FileEvent {}

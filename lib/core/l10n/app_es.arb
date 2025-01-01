@@ -59,6 +59,16 @@
         }
       }
     },
+  "errorExportingFile": "Error al exportar : {error}",
+  "@errorExportingFile": {
+    "description": "Mensaje mostrado cuando hay un error al exportar un archivo.",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Archivo no encontrado"
+      }
+    }
+  },
     "errorSavingFile": "Error al guardar el archivo: {error}",
     "@errorSavingFile": {
       "description": "Mensaje mostrado cuando hay un error al guardar un archivo.",
@@ -164,5 +174,16 @@
   "backSemanticLabel": "Botón de volver",
   "createFileTooltip": "Crear un nuevo archivo MASO",
   "loadFileTooltip": "Cargar un archivo MASO existente",
-  "executionScreenTitle": "Resumen de Ejecución"
+  "executionScreenTitle": "Resumen de Ejecución",
+  "executionTimelineTitle": "Línea de Tiempo de Ejecución",
+  "failedToCaptureImage": "No se pudo capturar la imagen: {error}",
+  "imageCopiedToClipboard": "Imagen copiada al portapapeles",
+  "exportTimelineImage": "Exportar como Imagen",
+  "exportTimelinePdf": "Exportar como PDF",
+  "clipboardTooltip": "Copiar al portapapeles",
+  "exportTooltip": "Exportar línea de tiempo de ejecución",
+  "timelineProcessDescription": "{processName} (Llegada: {arrivalTime}, Servicio: {serviceTime})",
+  "executionTimeDescription": "Tiempo de Ejecución: {executionTime}",
+  "executionTimeUnavailable": "N/D",
+  "imageExported": "Imagen exportada"
 }

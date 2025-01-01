@@ -4,7 +4,8 @@ import 'package:go_router/go_router.dart';
 
 /// A dialog widget for requesting a file name from the user.
 class RequestFileNameDialog extends StatefulWidget {
-  const RequestFileNameDialog({super.key});
+  final String format;
+  const RequestFileNameDialog({super.key, required this.format});
 
   @override
   State<RequestFileNameDialog> createState() => _RequestFileNameDialogState();
@@ -41,9 +42,9 @@ class _RequestFileNameDialogState extends State<RequestFileNameDialog> {
     }
 
     // Check if the filename ends with '.maso'; if not, append it.
-    if (!filename.endsWith('.maso')) {
+    if (!filename.endsWith(widget.format)) {
       _controller.text =
-          "$filename.maso"; // Update the text with the correct extension.
+          "$filename${widget.format}"; // Update the text with the correct extension.
     }
 
     setState(() {
