@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:maso/domain/models/execution_setup.dart';
 import '../data/repositories/file_repository.dart';
 import '../data/services/file_service.dart' if (dart.library.html) '../data/services/file_service_web.dart';
 import '../domain/models/maso_file.dart';
@@ -34,5 +35,13 @@ class ServiceLocator {
       getIt.unregister<MasoFile>();
     }
     getIt.registerLazySingleton<MasoFile>(() => masoFile);
+  }
+
+  // Function to register or update ExecutionSetup in GetIt
+  void registerExecutionSetup(ExecutionSetup es) {
+    if (getIt.isRegistered<ExecutionSetup>()) {
+      getIt.unregister<ExecutionSetup>();
+    }
+    getIt.registerLazySingleton<ExecutionSetup>(() => es);
   }
 }

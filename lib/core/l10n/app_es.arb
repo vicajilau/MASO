@@ -152,5 +152,8 @@
   "errorTitle": "Error",
   "emptyFileNameMessage": "El nombre del fichero no puede estar vacío.",
   "fileNameRequiredError": "El nombre del archivo es obligatorio.",
-  "fileDescriptionRequiredError": "La descripción del archivo es obligatoria."
+  "fileDescriptionRequiredError": "La descripción del archivo es obligatoria.",
+  "executionSetupTitle": "Configuración de Ejecución",
+  "selectAlgorithmLabel": "Seleccionar Algoritmo",
+  "algorithmLabel": "{algorithm, select, firstComeFirstServed {Primero en Llegar, Primero en Servir} shortestJobFirst {El Trabajo Más Corto Primero} shortestRemainingTimeFirst {El Tiempo Restante Más Corto Primero} roundRobin {Round Robin} priorityBased {Basado en Prioridad} multiplePriorityQueues {Colas de Prioridad Múltiples} multiplePriorityQueuesWithFeedback {Colas de Prioridad Múltiples con Retroalimentación} timeLimit {Límite de Tiempo} other {Desconocido}}"
 }

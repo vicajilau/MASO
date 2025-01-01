@@ -152,5 +152,8 @@
   "errorTitle": "Error",
   "emptyFileNameMessage": "The file name cannot be empty.",
   "fileNameRequiredError": "The file name is required.",
-  "fileDescriptionRequiredError": "The file description is required."
+  "fileDescriptionRequiredError": "The file description is required.",
+  "executionSetupTitle": "Execution Setup",
+  "selectAlgorithmLabel": "Select Algorithm",
+  "algorithmLabel": "{algorithm, select, firstComeFirstServed {First Come First Served} shortestJobFirst {Shortest Job First} shortestRemainingTimeFirst {Shortest Remaining Time First} roundRobin {Round Robin} priorityBased {Priority Based} multiplePriorityQueues {Multiple Priority Queues} multiplePriorityQueuesWithFeedback {Multiple Priority Queues with Feedback} timeLimit {Time Limit} other {Unknown}}"
 }
