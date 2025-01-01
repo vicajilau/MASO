@@ -9,6 +9,9 @@ class Process {
   /// The service time of the process
   final int serviceTime;
 
+  /// The execution time of the process
+  int? executionTime;
+
   /// If the process is enabled
   bool enabled;
 
@@ -17,6 +20,7 @@ class Process {
       {required this.name,
       required this.arrivalTime,
       required this.serviceTime,
+      this.executionTime,
       required this.enabled});
 
   /// Factory constructor to create a Process instance from a JSON map.

@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:maso/data/services/execution_time_calculator_service.dart';
 import 'package:maso/domain/models/execution_setup.dart';
 
 import '../data/repositories/file_repository.dart';
@@ -31,6 +32,9 @@ class ServiceLocator {
         () => CheckFileChangesUseCase(fileRepository: getIt<FileRepository>()));
     getIt.registerFactory<FileBloc>(
         () => FileBloc(fileRepository: getIt<FileRepository>()));
+    getIt.registerFactory<ExecutionTimeCalculatorService>(() =>
+        ExecutionTimeCalculatorService(
+            executionSetup: getIt<ExecutionSetup>()));
   }
 
   // Function to register or update MasoFile in GetIt
