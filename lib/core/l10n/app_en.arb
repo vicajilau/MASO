@@ -155,5 +155,11 @@
   "fileDescriptionRequiredError": "The file description is required.",
   "executionSetupTitle": "Execution Setup",
   "selectAlgorithmLabel": "Select Algorithm",
-  "algorithmLabel": "{algorithm, select, firstComeFirstServed {First Come First Served} shortestJobFirst {Shortest Job First} shortestRemainingTimeFirst {Shortest Remaining Time First} roundRobin {Round Robin} priorityBased {Priority Based} multiplePriorityQueues {Multiple Priority Queues} multiplePriorityQueuesWithFeedback {Multiple Priority Queues with Feedback} timeLimit {Time Limit} other {Unknown}}"
+  "algorithmLabel": "{algorithm, select, firstComeFirstServed {First Come First Served} shortestJobFirst {Shortest Job First} shortestRemainingTimeFirst {Shortest Remaining Time First} roundRobin {Round Robin} priorityBased {Priority Based} multiplePriorityQueues {Multiple Priority Queues} multiplePriorityQueuesWithFeedback {Multiple Priority Queues with Feedback} timeLimit {Time Limit} other {Unknown}}",
+  "saveTooltip": "Save the file",
+  "saveDisabledTooltip": "No changes to save",
+  "executeTooltip": "Execute the process",
+  "executeDisabledTooltip": "Add processes to execute",
+  "addTooltip": "Add a new process",
+  "backSemanticLabel": "Back button"
 }

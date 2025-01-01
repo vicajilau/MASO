@@ -34,7 +34,7 @@ class _FileLoadedScreenState extends State<FileLoadedScreen> {
   // Function to check if the file has changed
   Future<void> _checkFileChange() async {
     final CheckFileChangesUseCase checkFileChangesUseCase =
-    ServiceLocator.instance.getIt<CheckFileChangesUseCase>();
+        ServiceLocator.instance.getIt<CheckFileChangesUseCase>();
     bool hasChanged = await checkFileChangesUseCase.execute(cachedMasoFile);
     setState(() {
       _hasFileChanged = hasChanged;
@@ -43,12 +43,12 @@ class _FileLoadedScreenState extends State<FileLoadedScreen> {
 
   Future<bool> _confirmExit() async {
     final CheckFileChangesUseCase checkFileChangesUseCase =
-    ServiceLocator.instance.getIt<CheckFileChangesUseCase>();
+        ServiceLocator.instance.getIt<CheckFileChangesUseCase>();
     if (await checkFileChangesUseCase.execute(cachedMasoFile) && mounted) {
       return await showDialog<bool>(
-        context: context,
-        builder: (context) => ExitConfirmationDialog(),
-      ) ??
+            context: context,
+            builder: (context) => ExitConfirmationDialog(),
+          ) ??
           false;
     }
     return true;
@@ -82,7 +82,9 @@ class _FileLoadedScreenState extends State<FileLoadedScreen> {
                 title: Text(
                     "${cachedMasoFile.metadata.name} - ${cachedMasoFile.metadata.description}"),
                 leading: IconButton(
-                  icon: const Icon(Icons.arrow_back),
+                  icon: Icon(Icons.arrow_back,
+                      semanticLabel:
+                          AppLocalizations.of(context)!.backSemanticLabel),
                   onPressed: () async {
                     final shouldExit = await _confirmExit();
                     if (shouldExit && context.mounted) {
@@ -106,50 +108,40 @@ class _FileLoadedScreenState extends State<FileLoadedScreen> {
                           });
                         }
                       },
-                      icon: const Icon(Icons.add)),
+                      icon: const Icon(Icons.add),
+                      tooltip: AppLocalizations.of(context)!.addTooltip),
                   // Save Action
                   IconButton(
                     icon: const Icon(Icons.save),
-                    tooltip: 'Save',
+                    tooltip: _hasFileChanged
+                        ? AppLocalizations.of(context)!.saveTooltip
+                        : AppLocalizations.of(context)!.saveDisabledTooltip,
                     onPressed: _hasFileChanged
                         ? () async {
-                      final String? fileName;
-                      if (PlatformDetail.isWeb) {
-                        final result = await showDialog<String>(
-                          context: context,
-                          builder: (_) => RequestFileNameDialog(),
-                        );
-                        fileName = result;
-                      } else {
-                        fileName =
-                            AppLocalizations.of(context)!.saveDialogTitle;
-                      }
-                      if (fileName != null && context.mounted) {
-                        context.read<FileBloc>().add(FileSaveRequested(
-                          cachedMasoFile,
-                          fileName,
-                        ));
-                      }
-                    }
+                            await _onSavePressed(context);
+                          }
                         : null, // Disable button if file hasn't changed
                   ),
                   IconButton(
                     icon: const Icon(Icons.play_arrow),
-                    tooltip: 'Execute',
+                    tooltip: cachedMasoFile.processes.isNotEmpty
+                        ? AppLocalizations.of(context)!.executeTooltip
+                        : AppLocalizations.of(context)!.executeDisabledTooltip,
                     onPressed: cachedMasoFile.processes.isNotEmpty
                         ? () async {
-                      final executionSetup = await showDialog<ExecutionSetup>(
-                        context: context,
-                        builder: (context) => ExecutionSetupDialog(),
-                      );
-                      if (executionSetup != null) {
-                        ServiceLocator.instance.registerExecutionSetup(
-                            executionSetup);
-                        if (context.mounted) {
-                          context.push(AppRoutes.masoFileExecutionScreen);
-                        }
-                      }
-                    }
+                            final executionSetup =
+                                await showDialog<ExecutionSetup>(
+                              context: context,
+                              builder: (context) => ExecutionSetupDialog(),
+                            );
+                            if (executionSetup != null) {
+                              ServiceLocator.instance
+                                  .registerExecutionSetup(executionSetup);
+                              if (context.mounted) {
+                                context.push(AppRoutes.masoFileExecutionScreen);
+                              }
+                            }
+                          }
                         : null, // Disable button if file hasn't changed
                   ),
                 ],
@@ -163,5 +155,24 @@ class _FileLoadedScreenState extends State<FileLoadedScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> _onSavePressed(BuildContext context) async {
+    final String? fileName;
+    if (PlatformDetail.isWeb) {
+      final result = await showDialog<String>(
+        context: context,
+        builder: (_) => RequestFileNameDialog(),
+      );
+      fileName = result;
+    } else {
+      fileName = AppLocalizations.of(context)!.saveDialogTitle;
+    }
+    if (fileName != null && context.mounted) {
+      context.read<FileBloc>().add(FileSaveRequested(
+            cachedMasoFile,
+            fileName,
+          ));
+    }
   }
 }
