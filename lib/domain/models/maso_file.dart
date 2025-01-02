@@ -73,8 +73,7 @@ class MasoFile {
 
   /// Overrides the `hashCode` to be consistent with the equality operator.
   @override
-  int get hashCode =>
-      filePath.hashCode ^ metadata.hashCode ^ _processesHashCode(processes);
+  int get hashCode => metadata.hashCode ^ _processesHashCode(processes);
 
   /// Compares the 'processes' list deeply by checking each 'process' object.
   bool _processesEqual(List<Process> otherProcesses) {

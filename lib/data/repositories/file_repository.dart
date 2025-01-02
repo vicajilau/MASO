@@ -61,7 +61,7 @@ class FileRepository {
   /// - [fileName]: The name of the file.
   /// - Returns: A `Future<MasoFile>` containing the saved `MasoFile`.
   /// - Throws: An exception if there is an error saving the file.
-  Future<MasoFile> saveMasoFile(MasoFile masoFile, String dialogTitle, String fileName) async {
+  Future<MasoFile?> saveMasoFile(MasoFile masoFile, String dialogTitle, String fileName) async {
     return await _fileService.saveMasoFile(masoFile, dialogTitle, fileName);
   }
 

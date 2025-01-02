@@ -41,13 +41,42 @@ class FileService {
   /// - [dialogTitle]: The title of the save dialog window.
   /// - Returns: The `MasoFile` object with an updated file path if the user selects a path.
   /// - Throws: An exception if there is an error saving the file.
-  Future<MasoFile> saveMasoFile(MasoFile masoFile, String dialogTitle) async {
+  Future<MasoFile?> saveMasoFile(
+      MasoFile masoFile, String dialogTitle, String fileName) async {
     // Convert the MasoFile object to JSON string and encode it to bytes
     String jsonString = jsonEncode(masoFile.toJson());
 
     // Open a save dialog for the user to select a file path
     downloadMasoFile(dialogTitle, jsonString);
     return masoFile;
+  }
+
+  /// Saves a `Exported` object to the file system.
+  ///
+  /// This method opens a save dialog for the user to choose the file path
+  /// and writes the `MasoFile` data in JSON format to the selected file.
+  ///
+  /// - [masoFile]: The `MasoFile` object to save.
+  /// - [dialogTitle]: The title for the save dialog window.
+  /// - [fileName]: The name for the file.
+  /// - Returns: The `MasoFile` object with an updated file path if the user selects a path.
+  Future<void> saveExportedFile(
+      Uint8List bytes, String dialogTitle, String fileName) async {
+    // Open a save dialog for the user to select a file path
+    // Create a new Blob containing the bytes
+    final blob = html.Blob([bytes]);
+
+    // Generate a URL for the Blob, allowing it to be downloaded
+    final url = html.Url.createObjectUrlFromBlob(blob);
+
+    // Create an anchor element for triggering the download
+    html.AnchorElement(href: url)
+      ..target = 'blank' // Open the file in a new tab (if supported)
+      ..download = fileName // Set the file name for the download
+      ..click(); // Simulate a click to start the download
+
+    // Release the Blob URL to free up memory after the download
+    html.Url.revokeObjectUrl(url); // Cleans up the URL to release memory.
   }
 
   /// Initiates the download of a `.maso` file by creating a blob from the provided content.

@@ -43,7 +43,8 @@ class FileService {
   /// - [dialogTitle]: The title for the save dialog window.
   /// - [fileName]: The name for the file.
   /// - Returns: The `MasoFile` object with an updated file path if the user selects a path.
-  Future<MasoFile> saveMasoFile(MasoFile masoFile, String dialogTitle, String fileName) async {
+  Future<MasoFile?> saveMasoFile(
+      MasoFile masoFile, String dialogTitle, String fileName) async {
     // Convert the MasoFile object to JSON string and encode it to bytes
     String jsonString = jsonEncode(masoFile.toJson());
     final bytes = utf8.encode(jsonString);
@@ -55,9 +56,11 @@ class FileService {
         initialDirectory: masoFile.filePath,
         bytes: bytes);
 
+    if (path == null) return null;
+
     // If a path is selected and the platform is desktop, write the file
-    if (path != null && PlatformDetail.isDesktop) {
-      masoFile.filePath = path;
+    masoFile.filePath = path;
+    if (PlatformDetail.isDesktop) {
       await _writeMasoFile(masoFile);
     }
     return masoFile;
@@ -72,14 +75,13 @@ class FileService {
   /// - [dialogTitle]: The title for the save dialog window.
   /// - [fileName]: The name for the file.
   /// - Returns: The `MasoFile` object with an updated file path if the user selects a path.
-  Future<void> saveExportedFile(Uint8List bytes, String dialogTitle, String fileName) async {
+  Future<void> saveExportedFile(
+      Uint8List bytes, String dialogTitle, String fileName) async {
     // Convert the MasoFile object to JSON string and encode it to bytes
 
     // Open a save dialog for the user to select a file path
-    final path = await FilePicker.platform.saveFile(
-        dialogTitle: dialogTitle,
-        fileName: fileName,
-        bytes: bytes);
+    final path = await FilePicker.platform
+        .saveFile(dialogTitle: dialogTitle, fileName: fileName, bytes: bytes);
 
     // If a path is selected and the platform is desktop, write the file
     if (path != null && PlatformDetail.isDesktop) {
