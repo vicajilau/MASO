@@ -35,31 +35,47 @@ class _ExecutionSetupDialogState extends State<ExecutionSetupDialog> {
 
   @override
   Widget build(BuildContext context) {
+    // Get the screen width (you can also adjust the multiplier based on your design)
+    double screenWidth = MediaQuery.of(context).size.width;
+    double maxWidth = screenWidth * 0.5; // 50% of the screen width as max width
+
     return AlertDialog(
       title: Text(AppLocalizations.of(context)!.executionSetupTitle),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          DropdownButtonFormField<SchedulingAlgorithm>(
-            value: _selectedAlgorithm,
-            onChanged: (SchedulingAlgorithm? newValue) {
-              setState(() {
-                _selectedAlgorithm = newValue!;
-              });
-            },
-            items: SchedulingAlgorithm.values
-                .map((algorithm) => DropdownMenuItem<SchedulingAlgorithm>(
-                      value: algorithm,
-                      child: Text(AppLocalizations.of(context)!
-                          .algorithmLabel(algorithm.name)),
-                    ))
-                .toList(),
-            decoration: InputDecoration(
-              labelText: AppLocalizations.of(context)!.selectAlgorithmLabel,
-              border: OutlineInputBorder(),
+      content: SingleChildScrollView(
+        // Allow scrolling in case of long text
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            DropdownButtonFormField<SchedulingAlgorithm>(
+              value: _selectedAlgorithm,
+              onChanged: (SchedulingAlgorithm? newValue) {
+                setState(() {
+                  _selectedAlgorithm = newValue!;
+                });
+              },
+              items: SchedulingAlgorithm.values
+                  .map((algorithm) => DropdownMenuItem<SchedulingAlgorithm>(
+                        value: algorithm,
+                        child: ConstrainedBox(
+                          // Limit width dynamically
+                          constraints:
+                              BoxConstraints(maxWidth: maxWidth), // Adapt width
+                          child: Text(
+                            AppLocalizations.of(context)!
+                                .algorithmLabel(algorithm.name),
+                            overflow: TextOverflow
+                                .ellipsis, // Handle overflow with ellipsis
+                          ),
+                        ),
+                      ))
+                  .toList(),
+              decoration: InputDecoration(
+                labelText: AppLocalizations.of(context)!.selectAlgorithmLabel,
+                border: OutlineInputBorder(),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
       actions: [
         TextButton(
