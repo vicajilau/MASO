@@ -7,6 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:maso/core/context_extension.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
 import 'package:platform_detail/platform_detail.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 
@@ -109,8 +111,45 @@ class _MasoFileExecutionScreenState extends State<MasoFileExecutionScreen> {
   }
 
   Future<void> _exportAsPdf(BuildContext con) async {
-    final buffer = await _captureImage();
-    print(buffer);
+    final bytes = await _captureImage();
+    final buffer = await createPdfFromImage(bytes);
+    if (buffer != null && mounted) {
+      final String? fileName;
+      if (PlatformDetail.isWeb) {
+        final result = await showDialog<String>(
+          context: context,
+          builder: (_) => RequestFileNameDialog(
+            format: '.pdf',
+          ),
+        );
+        fileName = result;
+      } else {
+        fileName = AppLocalizations.of(context)!.saveDialogTitle;
+      }
+      if (fileName != null && con.mounted) {
+        con.read<FileBloc>().add(ExportedFileSaveRequested(
+            buffer, fileName, MasoMetadata.exportPdfFileName));
+      }
+    }
+  }
+
+  Future<Uint8List?> createPdfFromImage(Uint8List? bytes) async {
+    if (bytes == null) return null;
+    final pdf = pw.Document();
+    final image = pw.MemoryImage(bytes);
+
+    pdf.addPage(
+      pw.Page(
+        pageFormat: PdfPageFormat.a4,
+        build: (pw.Context context) {
+          return pw.Center(
+            child: pw.Image(image),
+          );
+        },
+      ),
+    );
+
+    return await pdf.save();
   }
 
   void _showExportOptions(BuildContext con) {

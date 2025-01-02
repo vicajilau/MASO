@@ -43,6 +43,7 @@ dependencies:
   go_router: ^14.6.2
   platform_detail: ^4.1.0
   timeline_tile: ^2.0.0
+  pdf: ^3.11.1
 
 dev_dependencies:
   flutter_test:
