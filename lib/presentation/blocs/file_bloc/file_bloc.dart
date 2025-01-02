@@ -84,7 +84,7 @@ class FileBloc extends Bloc<FileEvent, FileState> {
         // Save the exported file and update the state
         await _fileRepository.saveExportedFile(
             event.bytes, event.dialogTitle, event.fileName);
-        emit(FileExported()); // Emit the FileExported state after saving
+        emit(FileExported(event.fileFormat)); // Emit the FileExported state after saving
       } on Exception catch (e) {
         emit(FileError(
             reason: FileErrorType.errorSavingExportedFile,

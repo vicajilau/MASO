@@ -185,5 +185,6 @@
   "timelineProcessDescription": "{processName} (Llegada: {arrivalTime}, Servicio: {serviceTime})",
   "executionTimeDescription": "Tiempo de Ejecución: {executionTime}",
   "executionTimeUnavailable": "N/D",
-  "imageExported": "Imagen exportada"
+  "imageExported": "Imagen exportada",
+  "pdfExported": "PDF exportado"
 }

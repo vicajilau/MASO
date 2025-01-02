@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:maso/domain/models/export_formats.dart';
 
 import '../../../domain/models/maso_file.dart';
 
@@ -20,7 +21,10 @@ class FileLoaded extends FileState {
 }
 
 /// State representing a successfully exported file, containing the file data and path.
-class FileExported extends FileState {}
+class FileExported extends FileState {
+  final ExportFormats fileFormat;
+  FileExported(this.fileFormat);
+}
 
 /// State representing an error during file operation, with an error message.
 class FileError extends FileState {
@@ -40,7 +44,8 @@ class FileError extends FileState {
       case FileErrorType.errorPickingFileManually:
         return AppLocalizations.of(context)!.errorLoadingFile(error.toString());
       case FileErrorType.errorSavingExportedFile:
-        return AppLocalizations.of(context)!.errorExportingFile(error.toString());
+        return AppLocalizations.of(context)!
+            .errorExportingFile(error.toString());
     }
   }
 }

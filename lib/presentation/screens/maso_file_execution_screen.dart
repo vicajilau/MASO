@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:maso/core/context_extension.dart';
+import 'package:maso/domain/models/export_formats.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:platform_detail/platform_detail.dart';
@@ -96,7 +97,7 @@ class _MasoFileExecutionScreenState extends State<MasoFileExecutionScreen> {
         final result = await showDialog<String>(
           context: context,
           builder: (_) => RequestFileNameDialog(
-            format: '.png',
+            format: ExportFormats.image.getFormat(),
           ),
         );
         fileName = result;
@@ -104,8 +105,8 @@ class _MasoFileExecutionScreenState extends State<MasoFileExecutionScreen> {
         fileName = AppLocalizations.of(context)!.saveDialogTitle;
       }
       if (fileName != null && con.mounted) {
-        con.read<FileBloc>().add(ExportedFileSaveRequested(
-            buffer, fileName, MasoMetadata.exportImageFileName));
+        con.read<FileBloc>().add(ExportedFileSaveRequested(buffer, fileName,
+            MasoMetadata.exportImageFileName, ExportFormats.image));
       }
     }
   }
@@ -119,7 +120,7 @@ class _MasoFileExecutionScreenState extends State<MasoFileExecutionScreen> {
         final result = await showDialog<String>(
           context: context,
           builder: (_) => RequestFileNameDialog(
-            format: '.pdf',
+            format: ExportFormats.pdf.getFormat(),
           ),
         );
         fileName = result;
@@ -127,8 +128,8 @@ class _MasoFileExecutionScreenState extends State<MasoFileExecutionScreen> {
         fileName = AppLocalizations.of(context)!.saveDialogTitle;
       }
       if (fileName != null && con.mounted) {
-        con.read<FileBloc>().add(ExportedFileSaveRequested(
-            buffer, fileName, MasoMetadata.exportPdfFileName));
+        con.read<FileBloc>().add(ExportedFileSaveRequested(buffer, fileName,
+            MasoMetadata.exportPdfFileName, ExportFormats.pdf));
       }
     }
   }
@@ -189,9 +190,15 @@ class _MasoFileExecutionScreenState extends State<MasoFileExecutionScreen> {
       create: (_) => ServiceLocator.instance.getIt<FileBloc>(),
       child: BlocListener<FileBloc, FileState>(
         listener: (context, state) async {
-          if (state is FileLoaded) {
-            context.presentSnackBar(
-                AppLocalizations.of(context)!.exportTimelineImage);
+          if (state is FileExported) {
+            switch (state.fileFormat) {
+              case ExportFormats.pdf:
+                context
+                    .presentSnackBar(AppLocalizations.of(context)!.pdfExported);
+              case ExportFormats.image:
+                context.presentSnackBar(
+                    AppLocalizations.of(context)!.imageExported);
+            }
           }
           if (state is FileError && context.mounted) {
             context.presentSnackBar(state.getDescription(context));
