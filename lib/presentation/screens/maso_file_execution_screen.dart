@@ -5,6 +5,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 import 'package:maso/core/context_extension.dart';
 import 'package:platform_detail/platform_detail.dart';
 import 'package:timeline_tile/timeline_tile.dart';
@@ -16,6 +17,7 @@ import '../../data/services/execution_time_calculator_service.dart';
 import '../../domain/models/maso_file.dart';
 import '../blocs/file_bloc/file_bloc.dart';
 import '../blocs/file_bloc/file_event.dart';
+import '../blocs/file_bloc/file_state.dart';
 import '../widgets/request_file_name_dialog.dart';
 
 class MasoFileExecutionScreen extends StatefulWidget {
@@ -84,7 +86,7 @@ class _MasoFileExecutionScreenState extends State<MasoFileExecutionScreen> {
     }
   }
 
-  Future<void> _exportAsImage() async {
+  Future<void> _exportAsImage(BuildContext con) async {
     final buffer = await _captureImage();
     if (buffer != null && mounted) {
       final String? fileName;
@@ -99,19 +101,19 @@ class _MasoFileExecutionScreenState extends State<MasoFileExecutionScreen> {
       } else {
         fileName = AppLocalizations.of(context)!.saveDialogTitle;
       }
-      if (fileName != null && mounted) {
-        context.read<FileBloc>().add(ExportFileSaveRequested(
+      if (fileName != null && con.mounted) {
+        con.read<FileBloc>().add(ExportedFileSaveRequested(
             buffer, fileName, MasoMetadata.exportImageFileName));
       }
     }
   }
 
-  Future<void> _exportAsPdf() async {
+  Future<void> _exportAsPdf(BuildContext con) async {
     final buffer = await _captureImage();
     print(buffer);
   }
 
-  void _showExportOptions() {
+  void _showExportOptions(BuildContext con) {
     showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
@@ -123,16 +125,16 @@ class _MasoFileExecutionScreenState extends State<MasoFileExecutionScreen> {
                 leading: const Icon(Icons.image),
                 title: Text(AppLocalizations.of(context)!.exportTimelineImage),
                 onTap: () {
-                  Navigator.pop(context);
-                  _exportAsImage();
+                  context.pop();
+                  _exportAsImage(con);
                 },
               ),
               ListTile(
                 leading: const Icon(Icons.picture_as_pdf),
                 title: Text(AppLocalizations.of(context)!.exportTimelinePdf),
                 onTap: () {
-                  Navigator.pop(context);
-                  _exportAsPdf();
+                  context.pop();
+                  _exportAsPdf(con);
                 },
               ),
             ],
@@ -144,70 +146,89 @@ class _MasoFileExecutionScreenState extends State<MasoFileExecutionScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.executionTimelineTitle),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.copy),
-            tooltip: AppLocalizations.of(context)!.clipboardTooltip,
-            onPressed: _copyImageToClipboard,
-          ),
-          IconButton(
-            icon: const Icon(Icons.file_download),
-            tooltip: AppLocalizations.of(context)!.exportTooltip,
-            onPressed: _showExportOptions,
-          ),
-        ],
-      ),
-      body: RepaintBoundary(
-        key: _repaintKey,
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              Expanded(
-                child: ListView.builder(
-                  itemCount: _processes.length,
-                  itemBuilder: (context, index) {
-                    final process = _processes[index];
-                    return TimelineTile(
-                      alignment: TimelineAlign.center,
-                      isFirst: index == 0,
-                      isLast: index == _processes.length - 1,
-                      indicatorStyle: const IndicatorStyle(
-                        color: Colors.blue,
-                        width: 20,
-                        padding: EdgeInsets.all(8),
-                      ),
-                      endChild: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          AppLocalizations.of(context)!
-                              .timelineProcessDescription(
-                            process.arrivalTime.toString(),
-                            process.name,
-                            process.serviceTime.toString(),
-                          ),
+    return BlocProvider<FileBloc>(
+      create: (_) => ServiceLocator.instance.getIt<FileBloc>(),
+      child: BlocListener<FileBloc, FileState>(
+        listener: (context, state) async {
+          if (state is FileLoaded) {
+            context.presentSnackBar(
+                AppLocalizations.of(context)!.exportTimelineImage);
+          }
+          if (state is FileError && context.mounted) {
+            context.presentSnackBar(state.getDescription(context));
+          }
+        },
+        child: Builder(
+          builder: (context) {
+            return Scaffold(
+              appBar: AppBar(
+                title:
+                    Text(AppLocalizations.of(context)!.executionTimelineTitle),
+                actions: [
+                  IconButton(
+                    icon: const Icon(Icons.copy),
+                    tooltip: AppLocalizations.of(context)!.clipboardTooltip,
+                    onPressed: _copyImageToClipboard,
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.file_download),
+                    tooltip: AppLocalizations.of(context)!.exportTooltip,
+                    onPressed: () => _showExportOptions(context),
+                  ),
+                ],
+              ),
+              body: RepaintBoundary(
+                key: _repaintKey,
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: ListView.builder(
+                          itemCount: _processes.length,
+                          itemBuilder: (context, index) {
+                            final process = _processes[index];
+                            return TimelineTile(
+                              alignment: TimelineAlign.center,
+                              isFirst: index == 0,
+                              isLast: index == _processes.length - 1,
+                              indicatorStyle: const IndicatorStyle(
+                                color: Colors.blue,
+                                width: 20,
+                                padding: EdgeInsets.all(8),
+                              ),
+                              endChild: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  AppLocalizations.of(context)!
+                                      .timelineProcessDescription(
+                                    process.arrivalTime.toString(),
+                                    process.name,
+                                    process.serviceTime.toString(),
+                                  ),
+                                ),
+                              ),
+                              startChild: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  AppLocalizations.of(context)!
+                                      .executionTimeDescription(
+                                    process.executionTime?.toString() ??
+                                        AppLocalizations.of(context)!
+                                            .executionTimeUnavailable,
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
                         ),
                       ),
-                      startChild: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          AppLocalizations.of(context)!
-                              .executionTimeDescription(
-                            process.executionTime?.toString() ??
-                                AppLocalizations.of(context)!
-                                    .executionTimeUnavailable,
-                          ),
-                        ),
-                      ),
-                    );
-                  },
+                    ],
+                  ),
                 ),
               ),
-            ],
-          ),
+            );
+          },
         ),
       ),
     );

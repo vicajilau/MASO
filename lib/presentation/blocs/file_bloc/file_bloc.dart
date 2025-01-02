@@ -77,20 +77,21 @@ class FileBloc extends Bloc<FileEvent, FileState> {
       }
     });
 
-    on<ExportFileSaveRequested>((event, emit) async {
+    // Handling the ExportedFileSaveRequested event
+    on<ExportedFileSaveRequested>((event, emit) async {
       emit(FileLoading()); // Emit loading state while saving the file
       try {
-        // Save the `MasoFile` and update the state with the saved file
+        // Save the exported file and update the state
         await _fileRepository.saveExportedFile(
             event.bytes, event.dialogTitle, event.fileName);
-        emit(FileExported()); // Emit the loaded file state after save
+        emit(FileExported()); // Emit the FileExported state after saving
       } on Exception catch (e) {
         emit(FileError(
-            reason: FileErrorType.errorSavingMasoFile,
+            reason: FileErrorType.errorSavingExportedFile,
             error: e)); // Emit error if file saving fails
       } catch (e) {
         emit(FileError(
-            reason: FileErrorType.errorSavingMasoFile, error: Exception(e)));
+            reason: FileErrorType.errorSavingExportedFile, error: Exception(e)));
       }
     });
 

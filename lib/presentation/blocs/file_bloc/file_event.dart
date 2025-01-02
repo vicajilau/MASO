@@ -20,11 +20,11 @@ class MasoFileSaveRequested extends FileEvent {
 }
 
 /// Event triggered when a exported file save is requested, with the file path and data.
-class ExportFileSaveRequested extends FileEvent {
+class ExportedFileSaveRequested extends FileEvent {
   final Uint8List bytes; // The object to be saved
   final String dialogTitle;
   final String fileName;
-  ExportFileSaveRequested(this.bytes, this.dialogTitle, this.fileName);
+  ExportedFileSaveRequested(this.bytes, this.dialogTitle, this.fileName);
 }
 
 /// Event triggered when a file is requested to be picked.
