@@ -9,6 +9,7 @@ import 'package:maso/domain/models/execution_setup.dart';
 import 'package:maso/routes/app_router.dart';
 import 'package:platform_detail/platform_detail.dart';
 
+import '../../core/debug_print.dart';
 import '../../domain/models/maso_file.dart';
 import '../../domain/models/process.dart';
 import '../../domain/use_cases/check_file_changes_use_case.dart';
@@ -29,14 +30,21 @@ class FileLoadedScreen extends StatefulWidget {
 }
 
 class _FileLoadedScreenState extends State<FileLoadedScreen> {
-  final MasoFile cachedMasoFile = ServiceLocator.instance.getIt<MasoFile>();
+  MasoFile cachedMasoFile = ServiceLocator.instance.getIt<MasoFile>();
   bool _hasFileChanged = false; // Variable to track file change status
 
   // Function to check if the file has changed
   Future<void> _checkFileChange() async {
     final CheckFileChangesUseCase checkFileChangesUseCase =
         ServiceLocator.instance.getIt<CheckFileChangesUseCase>();
-    bool hasChanged = await checkFileChangesUseCase.execute(cachedMasoFile);
+    bool hasChanged = true;
+    try {
+      hasChanged = await checkFileChangesUseCase.execute(cachedMasoFile);
+    } catch (e) {
+      hasChanged = true;
+      printInDebug(
+          "Ha fallado al leer un fichero comprobando si ha cambiado. Excepción: $e");
+    }
     setState(() {
       _hasFileChanged = hasChanged;
     });
@@ -45,12 +53,18 @@ class _FileLoadedScreenState extends State<FileLoadedScreen> {
   Future<bool> _confirmExit() async {
     final CheckFileChangesUseCase checkFileChangesUseCase =
         ServiceLocator.instance.getIt<CheckFileChangesUseCase>();
-    if (await checkFileChangesUseCase.execute(cachedMasoFile) && mounted) {
-      return await showDialog<bool>(
-            context: context,
-            builder: (context) => ExitConfirmationDialog(),
-          ) ??
-          false;
+    try {
+      if (await checkFileChangesUseCase.execute(cachedMasoFile) && mounted) {
+        return await showDialog<bool>(
+              context: context,
+              builder: (context) => ExitConfirmationDialog(),
+            ) ??
+            false;
+      }
+    } catch (e) {
+      printInDebug(
+          "Ha fallado al leer un fichero confirmando el exit. Excepción: $e");
+      return true;
     }
     return true;
   }
@@ -70,6 +84,7 @@ class _FileLoadedScreenState extends State<FileLoadedScreen> {
           if (state is FileLoaded) {
             context.presentSnackBar(AppLocalizations.of(context)!
                 .fileSaved(state.masoFile.filePath!));
+            cachedMasoFile = state.masoFile;
             await _checkFileChange();
           }
           if (state is FileError && context.mounted) {
