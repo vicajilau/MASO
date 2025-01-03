@@ -22,7 +22,14 @@ import '../widgets/maso_file_list_widget.dart';
 import '../widgets/request_file_name_dialog.dart';
 
 class FileLoadedScreen extends StatefulWidget {
-  const FileLoadedScreen({super.key});
+  final FileBloc fileBloc;
+  final CheckFileChangesUseCase checkFileChangesUseCase;
+
+  const FileLoadedScreen({
+    super.key,
+    required this.fileBloc,
+    required this.checkFileChangesUseCase,
+  });
 
   @override
   State<FileLoadedScreen> createState() => _FileLoadedScreenState();
@@ -34,18 +41,14 @@ class _FileLoadedScreenState extends State<FileLoadedScreen> {
 
   // Function to check if the file has changed
   Future<void> _checkFileChange() async {
-    final CheckFileChangesUseCase checkFileChangesUseCase =
-        ServiceLocator.instance.getIt<CheckFileChangesUseCase>();
-    final hasChanged = checkFileChangesUseCase.execute(cachedMasoFile);
+    final hasChanged = widget.checkFileChangesUseCase.execute(cachedMasoFile);
     setState(() {
       _hasFileChanged = hasChanged;
     });
   }
 
   Future<bool> _confirmExit() async {
-    final CheckFileChangesUseCase checkFileChangesUseCase =
-        ServiceLocator.instance.getIt<CheckFileChangesUseCase>();
-    if (checkFileChangesUseCase.execute(cachedMasoFile)) {
+    if (widget.checkFileChangesUseCase.execute(cachedMasoFile)) {
       return await showDialog<bool>(
             context: context,
             builder: (context) => ExitConfirmationDialog(),
@@ -64,7 +67,7 @@ class _FileLoadedScreenState extends State<FileLoadedScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<FileBloc>(
-      create: (_) => ServiceLocator.instance.getIt<FileBloc>(),
+      create: (_) => widget.fileBloc,
       child: BlocListener<FileBloc, FileState>(
         listener: (context, state) async {
           if (state is FileLoaded) {
