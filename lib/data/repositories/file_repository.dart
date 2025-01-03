@@ -4,20 +4,19 @@ import 'package:maso/core/service_locator.dart';
 
 import '../../domain/models/maso_file.dart';
 import '../../domain/models/metadata.dart';
-import '../services/file_service/desktop_mobile_file_service.dart'
-    if (dart.library.html) '../services/file_service_web.dart';
+import '../services/file_service/i_file_service.dart';
 
 /// The `FileRepository` class manages file-related operations such as loading, saving,
 /// and selecting files. It delegates these tasks to an instance of `FileService`.
 class FileRepository {
   /// Instance of `FileService` to handle file operations.
-  final FileService _fileService;
+  final IFileService _fileService;
 
   /// Constructor to initialize `FileRepository` with a `FileService` instance.
   /// This allows for the delegation of file-related tasks.
   ///
   /// - [fileService]: The `FileService` instance that handles file operations.
-  FileRepository({required FileService fileService})
+  FileRepository({required IFileService fileService})
       : _fileService = fileService;
 
   /// Loads a `MasoFile` from a file at the specified [filePath].
