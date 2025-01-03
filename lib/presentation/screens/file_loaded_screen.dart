@@ -78,7 +78,7 @@ class _FileLoadedScreenState extends State<FileLoadedScreen> {
                 .fileSaved(state.masoFile.filePath!));
             _checkFileChange();
           }
-          if (state is FileError && context.mounted) {
+          if (state is FileError) {
             context.presentSnackBar(state.getDescription(context));
           }
         },
