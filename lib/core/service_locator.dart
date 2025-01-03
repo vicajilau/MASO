@@ -3,7 +3,7 @@ import 'package:maso/data/services/execution_time_calculator_service.dart';
 import 'package:maso/domain/models/execution_setup.dart';
 
 import '../data/repositories/file_repository.dart';
-import '../data/services/file_service.dart'
+import '../data/services/file_service/desktop_mobile_file_service.dart'
     if (dart.library.html) '../data/services/file_service_web.dart';
 import '../domain/models/maso_file.dart';
 import '../domain/use_cases/check_file_changes_use_case.dart';

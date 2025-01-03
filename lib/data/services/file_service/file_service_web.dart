@@ -5,20 +5,29 @@ import 'dart:typed_data';
 
 import 'package:file_picker/file_picker.dart';
 
-import '../../domain/models/maso_file.dart';
+import '../../../domain/models/maso_file.dart';
+import 'i_file_service.dart';
 
 /// The `FileService` class provides functionalities for managing `.maso` files.
 /// This includes reading, decoding, saving, and picking `.maso` files across platforms.
-class FileService {
+class FileService implements IFileService {
+
+  /// Keep an original copy of the Maso document in order to detect changes in the Maso document.
+  @override
+  MasoFile? originalFile;
+
   /// Reads a `.maso` file from the specified [filePath], retrieves its binary data,
   /// and decodes it into a `MasoFile` object.
   ///
   /// - [filePath]: The path or URL of the `.maso` file.
   /// - Returns: A `MasoFile` object containing the parsed data from the file.
   /// - Throws: An exception if there is an error reading or decoding the file.
+  @override
   Future<MasoFile> readMasoFile(String filePath) async {
     final codeUnits = await readBlobFile(filePath);
-    return decodeAndCreateMasoFile(filePath, codeUnits);
+    final masoFile = decodeAndCreateMasoFile(filePath, codeUnits);
+    originalFile = masoFile.copyWith();
+    return masoFile;
   }
 
   /// Decodes binary data [codeUnits] into a `MasoFile` object using the provided [filePath].
@@ -41,6 +50,7 @@ class FileService {
   /// - [dialogTitle]: The title of the save dialog window.
   /// - Returns: The `MasoFile` object with an updated file path if the user selects a path.
   /// - Throws: An exception if there is an error saving the file.
+  @override
   Future<MasoFile?> saveMasoFile(
       MasoFile masoFile, String dialogTitle, String fileName) async {
     // Convert the MasoFile object to JSON string and encode it to bytes
@@ -48,6 +58,7 @@ class FileService {
 
     // Open a save dialog for the user to select a file path
     downloadMasoFile(dialogTitle, jsonString);
+    originalFile = masoFile.copyWith();
     return masoFile;
   }
 
@@ -60,6 +71,7 @@ class FileService {
   /// - [dialogTitle]: The title for the save dialog window.
   /// - [fileName]: The name for the file.
   /// - Returns: The `MasoFile` object with an updated file path if the user selects a path.
+  @override
   Future<void> saveExportedFile(
       Uint8List bytes, String dialogTitle, String fileName) async {
     // Open a save dialog for the user to select a file path
@@ -108,6 +120,7 @@ class FileService {
   /// If a file is selected, it retrieves the file's binary data and decodes it into a `MasoFile` object.
   ///
   /// - Returns: A `MasoFile` object if a valid file is selected, or `null` if no file is selected.
+  @override
   Future<MasoFile?> pickFile() async {
     // Open the file picker dialog
     final result = await FilePicker.platform.pickFiles();

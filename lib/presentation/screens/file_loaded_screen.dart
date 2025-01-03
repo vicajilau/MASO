@@ -9,7 +9,6 @@ import 'package:maso/domain/models/execution_setup.dart';
 import 'package:maso/routes/app_router.dart';
 import 'package:platform_detail/platform_detail.dart';
 
-import '../../core/debug_print.dart';
 import '../../domain/models/maso_file.dart';
 import '../../domain/models/process.dart';
 import '../../domain/use_cases/check_file_changes_use_case.dart';
@@ -37,14 +36,7 @@ class _FileLoadedScreenState extends State<FileLoadedScreen> {
   Future<void> _checkFileChange() async {
     final CheckFileChangesUseCase checkFileChangesUseCase =
         ServiceLocator.instance.getIt<CheckFileChangesUseCase>();
-    bool hasChanged = true;
-    try {
-      hasChanged = await checkFileChangesUseCase.execute(cachedMasoFile);
-    } catch (e) {
-      hasChanged = true;
-      printInDebug(
-          "Ha fallado al leer un fichero comprobando si ha cambiado. Excepción: $e");
-    }
+    final hasChanged = checkFileChangesUseCase.execute(cachedMasoFile);
     setState(() {
       _hasFileChanged = hasChanged;
     });
@@ -53,18 +45,12 @@ class _FileLoadedScreenState extends State<FileLoadedScreen> {
   Future<bool> _confirmExit() async {
     final CheckFileChangesUseCase checkFileChangesUseCase =
         ServiceLocator.instance.getIt<CheckFileChangesUseCase>();
-    try {
-      if (await checkFileChangesUseCase.execute(cachedMasoFile) && mounted) {
-        return await showDialog<bool>(
-              context: context,
-              builder: (context) => ExitConfirmationDialog(),
-            ) ??
-            false;
-      }
-    } catch (e) {
-      printInDebug(
-          "Ha fallado al leer un fichero confirmando el exit. Excepción: $e");
-      return true;
+    if (checkFileChangesUseCase.execute(cachedMasoFile)) {
+      return await showDialog<bool>(
+            context: context,
+            builder: (context) => ExitConfirmationDialog(),
+          ) ??
+          false;
     }
     return true;
   }
@@ -84,7 +70,6 @@ class _FileLoadedScreenState extends State<FileLoadedScreen> {
           if (state is FileLoaded) {
             context.presentSnackBar(AppLocalizations.of(context)!
                 .fileSaved(state.masoFile.filePath!));
-            cachedMasoFile = state.masoFile;
             await _checkFileChange();
           }
           if (state is FileError && context.mounted) {

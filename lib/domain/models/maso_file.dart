@@ -17,8 +17,8 @@ class MasoFile {
 
   /// Factory constructor to create a `MasoFile` instance from a JSON map.
   factory MasoFile.fromJson(Map<String, dynamic> json, String? filePath) {
-    checkIfJsonIsCorrect(
-        json); // Verifies if the JSON is correct before creating the object.
+    // Verifies if the JSON is correct before creating the object.
+    checkIfJsonIsCorrect(json);
     return MasoFile(
         metadata: Metadata.fromJson(
             json['metadata'] as Map<String, dynamic>), // Parsing the metadata.
@@ -30,14 +30,12 @@ class MasoFile {
   }
 
   /// Converts the `MasoFile` instance to a JSON map.
-  Map<String, dynamic> toJson() {
-    return {
-      'metadata': metadata.toJson(), // Converts the metadata to JSON.
-      'processes': processes
-          .map((e) => e.toJson())
-          .toList(), // Converts each process to JSON.
-    };
-  }
+  Map<String, dynamic> toJson() => {
+        'metadata': metadata.toJson(), // Converts the metadata to JSON.
+        'processes': processes
+            .map((e) => e.toJson())
+            .toList(), // Converts each process to JSON.
+      };
 
   /// Static method to verify if the provided JSON is valid and has the correct structure.
   static void checkIfJsonIsCorrect(Map<String, dynamic> json) {
@@ -99,18 +97,35 @@ class MasoFile {
   }
 
   /// Creates a new `MasoFile` instance with modified values from the current instance.
-  MasoFile copyWith(
-      {String? filePath, Metadata? metadata, List<Process>? processes}) {
+  MasoFile copyWith({
+    String? filePath,
+    Metadata? metadata,
+    List<Process>? processes,
+  }) {
     return MasoFile(
-        metadata: metadata ??
-            this
-                .metadata, // If no 'metadata' is provided, uses the current value.
-        processes: processes ??
-            this
-                .processes, // If no 'processes' are provided, uses the current value.
-        filePath: filePath ??
-            this.filePath); // If no 'filePath' is provided, uses the current value.
+      filePath: filePath,
+      metadata: Metadata(
+        name: metadata?.name ?? this.metadata.name,
+        version: metadata?.version ?? this.metadata.version,
+        description: metadata?.description ?? this.metadata.description,
+      ),
+      processes: processes ??
+          this
+              .processes
+              .map((process) => Process(
+                    name: process.name,
+                    arrivalTime: process.arrivalTime,
+                    serviceTime: process.serviceTime,
+                    executionTime: process.executionTime,
+                    enabled: process.enabled,
+                  ))
+              .toList(),
+    );
   }
+
+  @override
+  String toString() =>
+      "Maso File {$metadata, $processes} with Hash($hashCode).";
 }
 
 enum MasoFileBadContent { metadataBadContent, processesBadContent }

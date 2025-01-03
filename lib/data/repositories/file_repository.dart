@@ -4,7 +4,7 @@ import 'package:maso/core/service_locator.dart';
 
 import '../../domain/models/maso_file.dart';
 import '../../domain/models/metadata.dart';
-import '../services/file_service.dart'
+import '../services/file_service/desktop_mobile_file_service.dart'
     if (dart.library.html) '../services/file_service_web.dart';
 
 /// The `FileRepository` class manages file-related operations such as loading, saving,
@@ -61,7 +61,8 @@ class FileRepository {
   /// - [fileName]: The name of the file.
   /// - Returns: A `Future<MasoFile>` containing the saved `MasoFile`.
   /// - Throws: An exception if there is an error saving the file.
-  Future<MasoFile?> saveMasoFile(MasoFile masoFile, String dialogTitle, String fileName) async {
+  Future<MasoFile?> saveMasoFile(
+      MasoFile masoFile, String dialogTitle, String fileName) async {
     return await _fileService.saveMasoFile(masoFile, dialogTitle, fileName);
   }
 
@@ -73,7 +74,8 @@ class FileRepository {
   /// - [fileName]: The name of the file.
   /// - Returns: A `Future<MasoFile>` containing the saved `MasoFile`.
   /// - Throws: An exception if there is an error saving the file.
-  Future<void> saveExportedFile(Uint8List bytes, String dialogTitle, String fileName) async {
+  Future<void> saveExportedFile(
+      Uint8List bytes, String dialogTitle, String fileName) async {
     return await _fileService.saveExportedFile(bytes, dialogTitle, fileName);
   }
 
@@ -97,10 +99,10 @@ class FileRepository {
   /// - [filePath]: The path to the file to check.
   /// - [cachedMasoFile]: The cached version of the `MasoFile` for comparison.
   /// - Returns: A `Future<bool>` indicating whether the file content has changed (`true`) or not (`false`).
-  Future<bool> hasMasoFileChanged(
-      String? filePath, MasoFile cachedMasoFile) async {
-    if (filePath == null) return true;
-    final originalMasoFile = await _fileService.readMasoFile(filePath);
-    return originalMasoFile != cachedMasoFile;
+  bool hasMasoFileChanged(MasoFile cachedMasoFile) {
+    if (cachedMasoFile.filePath == null) return true;
+    // printInDebug("El original es: ${_fileService.originalFile}");
+    // printInDebug("El cached es: $cachedMasoFile");
+    return _fileService.originalFile != cachedMasoFile;
   }
 }

@@ -14,9 +14,8 @@ class CheckFileChangesUseCase {
   /// [cachedFile] is the MasoFile that needs to be checked for changes.
   /// It calls the repository method to check whether the file has changed.
   /// Returns true if the file has changed, false otherwise.
-  Future<bool> execute(MasoFile cachedFile) async {
+  bool execute(MasoFile cachedFile) {
     // Calls the repository to check if the file has changed
-    return await _fileRepository.hasMasoFileChanged(
-        cachedFile.filePath, cachedFile);
+    return _fileRepository.hasMasoFileChanged(cachedFile);
   }
 }

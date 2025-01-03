@@ -17,23 +17,19 @@ class Metadata {
   });
 
   /// Factory constructor to create a Metadata instance from a JSON map.
-  factory Metadata.fromJson(Map<String, dynamic> json) {
-    return Metadata(
-      name: json['name'] as String, // Parse the 'name' field
-      version: json['version'] as String, // Parse the 'version' field
-      description:
-          json['description'] as String, // Parse the 'description' field
-    );
-  }
+  factory Metadata.fromJson(Map<String, dynamic> json) => Metadata(
+        name: json['name'] as String, // Parse the 'name' field
+        version: json['version'] as String, // Parse the 'version' field
+        description:
+            json['description'] as String, // Parse the 'description' field
+      );
 
   /// Converts the Metadata instance to a JSON map.
-  Map<String, dynamic> toJson() {
-    return {
-      'name': name, // Convert the 'name' field to JSON
-      'version': version, // Convert the 'version' field to JSON
-      'description': description, // Convert the 'description' field to JSON
-    };
-  }
+  Map<String, dynamic> toJson() => {
+        'name': name, // Convert the 'name' field to JSON
+        'version': version, // Convert the 'version' field to JSON
+        'description': description, // Convert the 'description' field to JSON
+      };
 
   /// Override the equality operator to compare Metadata instances based on their values.
   @override
@@ -48,4 +44,8 @@ class Metadata {
   /// Override the hashCode to be consistent with the equality operator.
   @override
   int get hashCode => name.hashCode ^ version.hashCode ^ description.hashCode;
+
+  @override
+  String toString() =>
+      "Metadata {name: $name, version: $version, description: $description}";
 }
