@@ -24,11 +24,13 @@ import '../widgets/request_file_name_dialog.dart';
 class FileLoadedScreen extends StatefulWidget {
   final FileBloc fileBloc;
   final CheckFileChangesUseCase checkFileChangesUseCase;
+  final MasoFile masoFile;
 
   const FileLoadedScreen({
     super.key,
     required this.fileBloc,
     required this.checkFileChangesUseCase,
+    required this.masoFile,
   });
 
   @override
@@ -36,11 +38,11 @@ class FileLoadedScreen extends StatefulWidget {
 }
 
 class _FileLoadedScreenState extends State<FileLoadedScreen> {
-  MasoFile cachedMasoFile = ServiceLocator.instance.getIt<MasoFile>();
+  late MasoFile cachedMasoFile;
   bool _hasFileChanged = false; // Variable to track file change status
 
   // Function to check if the file has changed
-  Future<void> _checkFileChange() async {
+  void _checkFileChange() {
     final hasChanged = widget.checkFileChangesUseCase.execute(cachedMasoFile);
     setState(() {
       _hasFileChanged = hasChanged;
@@ -61,6 +63,7 @@ class _FileLoadedScreenState extends State<FileLoadedScreen> {
   @override
   void initState() {
     super.initState();
+    cachedMasoFile = widget.masoFile;
     _checkFileChange(); // Check the file change status when the screen is loaded
   }
 
@@ -69,11 +72,11 @@ class _FileLoadedScreenState extends State<FileLoadedScreen> {
     return BlocProvider<FileBloc>(
       create: (_) => widget.fileBloc,
       child: BlocListener<FileBloc, FileState>(
-        listener: (context, state) async {
+        listener: (context, state) {
           if (state is FileLoaded) {
             context.presentSnackBar(AppLocalizations.of(context)!
                 .fileSaved(state.masoFile.filePath!));
-            await _checkFileChange();
+            _checkFileChange();
           }
           if (state is FileError && context.mounted) {
             context.presentSnackBar(state.getDescription(context));
