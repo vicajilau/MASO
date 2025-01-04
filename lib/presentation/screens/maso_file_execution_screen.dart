@@ -8,6 +8,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:maso/core/context_extension.dart';
 import 'package:maso/domain/models/export_formats.dart';
+import 'package:pasteboard/pasteboard.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:platform_detail/platform_detail.dart';
@@ -80,7 +81,7 @@ class _MasoFileExecutionScreenState extends State<MasoFileExecutionScreen> {
   Future<void> _copyImageToClipboard() async {
     final buffer = await _captureImage();
     if (buffer != null) {
-      await Clipboard.setData(ClipboardData(text: buffer.toString()));
+      await Pasteboard.writeImage(buffer);
       if (mounted) {
         context.presentSnackBar(
           AppLocalizations.of(context)!.imageCopiedToClipboard,
