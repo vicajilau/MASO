@@ -51,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
           if (state is FileLoaded) {
             context.presentSnackBar(AppLocalizations.of(context)!.fileLoaded(
                 state.masoFile.filePath ??
-                    "${state.masoFile.metadata.name}.maso"));
+                    "${state.masoFile.metadata.name}${MasoMetadata.format}"));
             final _ = await context.push(AppRoutes.fileLoadedScreen);
             if (context.mounted) {
               context.read<FileBloc>().add(MasoFileReset());
@@ -94,8 +94,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: TextButton(
                       onPressed: _isLoading
                           ? null
-                          : () =>
-                              context.read<FileBloc>().add(MasoFilePickRequested()),
+                          : () => context
+                              .read<FileBloc>()
+                              .add(MasoFilePickRequested()),
                       child: Text(
                         AppLocalizations.of(context)!.load,
                         style: const TextStyle(color: Colors.white),
