@@ -314,8 +314,8 @@ packages:
     description:
       path: "packages/pasteboard"
       ref: HEAD
-      resolved-ref: "58748dae405df5e68a131e4905d48e75d0624be2"
-      url: "https://github.com/Seidko/flutter-plugins"
+      resolved-ref: "611bddac885871a297eb270ecf3302421f199804"
+      url: "https://github.com/MixinNetwork/flutter-plugins"
     source: git
     version: "0.3.0"
   path:
