@@ -1,0 +1,235 @@
+\doxysection{Execution\+Time\+Calculator\+Service Class Reference}
+\hypertarget{class_execution_time_calculator_service}{}\label{class_execution_time_calculator_service}\index{ExecutionTimeCalculatorService@{ExecutionTimeCalculatorService}}
+
+
+Collaboration diagram for Execution\+Time\+Calculator\+Service\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=239pt]{class_execution_time_calculator_service__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_execution_time_calculator_service_aed468a81934473e5bffd73578d094989}{Execution\+Time\+Calculator\+Service}} (\{required this.\+execution\+Setup\})
+\item 
+List$<$ \mbox{\hyperlink{class_process}{Process}} $>$ \mbox{\hyperlink{class_execution_time_calculator_service_a8454b3649da551c804803e748993485f}{calculate\+Execution\+Times}} (List$<$ \mbox{\hyperlink{class_process}{Process}} $>$ processes)
+\item 
+List$<$ \mbox{\hyperlink{class_process}{Process}} $>$ \mbox{\hyperlink{class_execution_time_calculator_service_ac3cfd8a3f142616975c5880de008e133}{\+\_\+calculate\+First\+Come\+First\+Served}} (List$<$ \mbox{\hyperlink{class_process}{Process}} $>$ processes)
+\item 
+List$<$ \mbox{\hyperlink{class_process}{Process}} $>$ \mbox{\hyperlink{class_execution_time_calculator_service_a69a8c6e0d2462e029525f7772cd0bcd8}{\+\_\+calculate\+Shortest\+Job\+First}} (List$<$ \mbox{\hyperlink{class_process}{Process}} $>$ processes)
+\item 
+List$<$ \mbox{\hyperlink{class_process}{Process}} $>$ \mbox{\hyperlink{class_execution_time_calculator_service_a3bd61dbb84759aa76b0522d5b27f773d}{\+\_\+calculate\+Shortest\+Remaining\+Time\+First}} (List$<$ \mbox{\hyperlink{class_process}{Process}} $>$ processes)
+\item 
+List$<$ \mbox{\hyperlink{class_process}{Process}} $>$ \mbox{\hyperlink{class_execution_time_calculator_service_ab026e2b4173f3129de23c9583ddabb27}{\+\_\+calculate\+Round\+Robin}} (List$<$ \mbox{\hyperlink{class_process}{Process}} $>$ processes)
+\item 
+List$<$ \mbox{\hyperlink{class_process}{Process}} $>$ \mbox{\hyperlink{class_execution_time_calculator_service_a881af68c0c691b471d7978c2b84b81bf}{\+\_\+calculate\+Priority\+Based}} (List$<$ \mbox{\hyperlink{class_process}{Process}} $>$ processes)
+\item 
+List$<$ \mbox{\hyperlink{class_process}{Process}} $>$ \mbox{\hyperlink{class_execution_time_calculator_service_ad69352454d0ad27515929e14d7bb6405}{\+\_\+calculate\+Multiple\+Priority\+Queues}} (List$<$ \mbox{\hyperlink{class_process}{Process}} $>$ processes)
+\item 
+List$<$ \mbox{\hyperlink{class_process}{Process}} $>$ \mbox{\hyperlink{class_execution_time_calculator_service_a1096b70f1c47a3e597c864ca2ba4ee8f}{\+\_\+calculate\+Multiple\+Priority\+Queues\+With\+Feedback}} (List$<$ \mbox{\hyperlink{class_process}{Process}} $>$ processes)
+\item 
+List$<$ \mbox{\hyperlink{class_process}{Process}} $>$ \mbox{\hyperlink{class_execution_time_calculator_service_a92a58dfe3012d617b8595ccc21465bc1}{\+\_\+calculate\+Time\+Limit}} (List$<$ \mbox{\hyperlink{class_process}{Process}} $>$ processes)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+final \mbox{\hyperlink{class_execution_setup}{Execution\+Setup}} \mbox{\hyperlink{class_execution_time_calculator_service_aaf740278d11e0dffff0837ddbebcb547}{execution\+Setup}}
+\begin{DoxyCompactList}\small\item\em The execution setup that holds the selected scheduling algorithm. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class responsible for calculating the execution time of processes based on the selected scheduling algorithm. This class uses the {\ttfamily \doxylink{class_execution_setup}{Execution\+Setup}} to determine the algorithm to apply. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_execution_time_calculator_service_aed468a81934473e5bffd73578d094989}\index{ExecutionTimeCalculatorService@{ExecutionTimeCalculatorService}!ExecutionTimeCalculatorService@{ExecutionTimeCalculatorService}}
+\index{ExecutionTimeCalculatorService@{ExecutionTimeCalculatorService}!ExecutionTimeCalculatorService@{ExecutionTimeCalculatorService}}
+\doxysubsubsection{\texorpdfstring{ExecutionTimeCalculatorService()}{ExecutionTimeCalculatorService()}}
+{\footnotesize\ttfamily \label{class_execution_time_calculator_service_aed468a81934473e5bffd73578d094989} 
+Execution\+Time\+Calculator\+Service\+::\+Execution\+Time\+Calculator\+Service (\begin{DoxyParamCaption}\item[{\{required this.\+execution\+Setup\}}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Constructor to initialize the {\ttfamily Execution\+Time\+Calculator} with the required {\ttfamily \doxylink{class_execution_setup}{Execution\+Setup}}. The {\ttfamily \doxylink{class_execution_setup}{Execution\+Setup}} contains the scheduling algorithm to be used for calculating the execution time. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_execution_time_calculator_service_ac3cfd8a3f142616975c5880de008e133}\index{ExecutionTimeCalculatorService@{ExecutionTimeCalculatorService}!\_calculateFirstComeFirstServed@{\_calculateFirstComeFirstServed}}
+\index{\_calculateFirstComeFirstServed@{\_calculateFirstComeFirstServed}!ExecutionTimeCalculatorService@{ExecutionTimeCalculatorService}}
+\doxysubsubsection{\texorpdfstring{\_calculateFirstComeFirstServed()}{\_calculateFirstComeFirstServed()}}
+{\footnotesize\ttfamily \label{class_execution_time_calculator_service_ac3cfd8a3f142616975c5880de008e133} 
+List$<$ \mbox{\hyperlink{class_process}{Process}} $>$ Execution\+Time\+Calculator\+Service\+::\+\_\+calculate\+First\+Come\+First\+Served (\begin{DoxyParamCaption}\item[{List$<$ \mbox{\hyperlink{class_process}{Process}} $>$}]{processes}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+Calculates the execution time for the "{}\+First Come First Served"{} (FCFS) algorithm.
+
+\mbox{[}processes\mbox{]} List of processes to be processed.
+
+Returns the list of processes with the execution time calculated according to FCFS. Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_execution_time_calculator_service_ac3cfd8a3f142616975c5880de008e133_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_execution_time_calculator_service_ad69352454d0ad27515929e14d7bb6405}\index{ExecutionTimeCalculatorService@{ExecutionTimeCalculatorService}!\_calculateMultiplePriorityQueues@{\_calculateMultiplePriorityQueues}}
+\index{\_calculateMultiplePriorityQueues@{\_calculateMultiplePriorityQueues}!ExecutionTimeCalculatorService@{ExecutionTimeCalculatorService}}
+\doxysubsubsection{\texorpdfstring{\_calculateMultiplePriorityQueues()}{\_calculateMultiplePriorityQueues()}}
+{\footnotesize\ttfamily \label{class_execution_time_calculator_service_ad69352454d0ad27515929e14d7bb6405} 
+List$<$ \mbox{\hyperlink{class_process}{Process}} $>$ Execution\+Time\+Calculator\+Service\+::\+\_\+calculate\+Multiple\+Priority\+Queues (\begin{DoxyParamCaption}\item[{List$<$ \mbox{\hyperlink{class_process}{Process}} $>$}]{processes}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+Calculates the execution time for the "{}\+Multiple Priority Queues"{} scheduling algorithm.
+
+\mbox{[}processes\mbox{]} List of processes to be processed.
+
+Returns the list of processes with the execution time calculated according to Multiple Priority Queues. Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_execution_time_calculator_service_ad69352454d0ad27515929e14d7bb6405_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_execution_time_calculator_service_a1096b70f1c47a3e597c864ca2ba4ee8f}\index{ExecutionTimeCalculatorService@{ExecutionTimeCalculatorService}!\_calculateMultiplePriorityQueuesWithFeedback@{\_calculateMultiplePriorityQueuesWithFeedback}}
+\index{\_calculateMultiplePriorityQueuesWithFeedback@{\_calculateMultiplePriorityQueuesWithFeedback}!ExecutionTimeCalculatorService@{ExecutionTimeCalculatorService}}
+\doxysubsubsection{\texorpdfstring{\_calculateMultiplePriorityQueuesWithFeedback()}{\_calculateMultiplePriorityQueuesWithFeedback()}}
+{\footnotesize\ttfamily \label{class_execution_time_calculator_service_a1096b70f1c47a3e597c864ca2ba4ee8f} 
+List$<$ \mbox{\hyperlink{class_process}{Process}} $>$ Execution\+Time\+Calculator\+Service\+::\+\_\+calculate\+Multiple\+Priority\+Queues\+With\+Feedback (\begin{DoxyParamCaption}\item[{List$<$ \mbox{\hyperlink{class_process}{Process}} $>$}]{processes}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+Calculates the execution time for the "{}\+Multiple Priority Queues with Feedback"{} scheduling algorithm.
+
+\mbox{[}processes\mbox{]} List of processes to be processed.
+
+Returns the list of processes with the execution time calculated according to Multiple Priority Queues with Feedback. Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_execution_time_calculator_service_a1096b70f1c47a3e597c864ca2ba4ee8f_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_execution_time_calculator_service_a881af68c0c691b471d7978c2b84b81bf}\index{ExecutionTimeCalculatorService@{ExecutionTimeCalculatorService}!\_calculatePriorityBased@{\_calculatePriorityBased}}
+\index{\_calculatePriorityBased@{\_calculatePriorityBased}!ExecutionTimeCalculatorService@{ExecutionTimeCalculatorService}}
+\doxysubsubsection{\texorpdfstring{\_calculatePriorityBased()}{\_calculatePriorityBased()}}
+{\footnotesize\ttfamily \label{class_execution_time_calculator_service_a881af68c0c691b471d7978c2b84b81bf} 
+List$<$ \mbox{\hyperlink{class_process}{Process}} $>$ Execution\+Time\+Calculator\+Service\+::\+\_\+calculate\+Priority\+Based (\begin{DoxyParamCaption}\item[{List$<$ \mbox{\hyperlink{class_process}{Process}} $>$}]{processes}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+Calculates the execution time for the "{}\+Priority Based"{} scheduling algorithm.
+
+\mbox{[}processes\mbox{]} List of processes to be processed.
+
+Returns the list of processes with the execution time calculated according to the Priority Based algorithm. Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_execution_time_calculator_service_a881af68c0c691b471d7978c2b84b81bf_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_execution_time_calculator_service_ab026e2b4173f3129de23c9583ddabb27}\index{ExecutionTimeCalculatorService@{ExecutionTimeCalculatorService}!\_calculateRoundRobin@{\_calculateRoundRobin}}
+\index{\_calculateRoundRobin@{\_calculateRoundRobin}!ExecutionTimeCalculatorService@{ExecutionTimeCalculatorService}}
+\doxysubsubsection{\texorpdfstring{\_calculateRoundRobin()}{\_calculateRoundRobin()}}
+{\footnotesize\ttfamily \label{class_execution_time_calculator_service_ab026e2b4173f3129de23c9583ddabb27} 
+List$<$ \mbox{\hyperlink{class_process}{Process}} $>$ Execution\+Time\+Calculator\+Service\+::\+\_\+calculate\+Round\+Robin (\begin{DoxyParamCaption}\item[{List$<$ \mbox{\hyperlink{class_process}{Process}} $>$}]{processes}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+Calculates the execution time for the "{}\+Round Robin"{} (RR) algorithm.
+
+\mbox{[}processes\mbox{]} List of processes to be processed.
+
+Returns the list of processes with the execution time calculated according to Round Robin. Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_execution_time_calculator_service_ab026e2b4173f3129de23c9583ddabb27_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_execution_time_calculator_service_a69a8c6e0d2462e029525f7772cd0bcd8}\index{ExecutionTimeCalculatorService@{ExecutionTimeCalculatorService}!\_calculateShortestJobFirst@{\_calculateShortestJobFirst}}
+\index{\_calculateShortestJobFirst@{\_calculateShortestJobFirst}!ExecutionTimeCalculatorService@{ExecutionTimeCalculatorService}}
+\doxysubsubsection{\texorpdfstring{\_calculateShortestJobFirst()}{\_calculateShortestJobFirst()}}
+{\footnotesize\ttfamily \label{class_execution_time_calculator_service_a69a8c6e0d2462e029525f7772cd0bcd8} 
+List$<$ \mbox{\hyperlink{class_process}{Process}} $>$ Execution\+Time\+Calculator\+Service\+::\+\_\+calculate\+Shortest\+Job\+First (\begin{DoxyParamCaption}\item[{List$<$ \mbox{\hyperlink{class_process}{Process}} $>$}]{processes}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+Calculates the execution time for the "{}\+Shortest Job First"{} (SJF) algorithm.
+
+\mbox{[}processes\mbox{]} List of processes to be processed.
+
+Returns the list of processes with the execution time calculated according to SJF. Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_execution_time_calculator_service_a69a8c6e0d2462e029525f7772cd0bcd8_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_execution_time_calculator_service_a3bd61dbb84759aa76b0522d5b27f773d}\index{ExecutionTimeCalculatorService@{ExecutionTimeCalculatorService}!\_calculateShortestRemainingTimeFirst@{\_calculateShortestRemainingTimeFirst}}
+\index{\_calculateShortestRemainingTimeFirst@{\_calculateShortestRemainingTimeFirst}!ExecutionTimeCalculatorService@{ExecutionTimeCalculatorService}}
+\doxysubsubsection{\texorpdfstring{\_calculateShortestRemainingTimeFirst()}{\_calculateShortestRemainingTimeFirst()}}
+{\footnotesize\ttfamily \label{class_execution_time_calculator_service_a3bd61dbb84759aa76b0522d5b27f773d} 
+List$<$ \mbox{\hyperlink{class_process}{Process}} $>$ Execution\+Time\+Calculator\+Service\+::\+\_\+calculate\+Shortest\+Remaining\+Time\+First (\begin{DoxyParamCaption}\item[{List$<$ \mbox{\hyperlink{class_process}{Process}} $>$}]{processes}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+Calculates the execution time for the "{}\+Shortest Remaining Time First"{} (SRTF) algorithm.
+
+\mbox{[}processes\mbox{]} List of processes to be processed.
+
+Returns the list of processes with the execution time calculated according to SRTF. Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_execution_time_calculator_service_a3bd61dbb84759aa76b0522d5b27f773d_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_execution_time_calculator_service_a92a58dfe3012d617b8595ccc21465bc1}\index{ExecutionTimeCalculatorService@{ExecutionTimeCalculatorService}!\_calculateTimeLimit@{\_calculateTimeLimit}}
+\index{\_calculateTimeLimit@{\_calculateTimeLimit}!ExecutionTimeCalculatorService@{ExecutionTimeCalculatorService}}
+\doxysubsubsection{\texorpdfstring{\_calculateTimeLimit()}{\_calculateTimeLimit()}}
+{\footnotesize\ttfamily \label{class_execution_time_calculator_service_a92a58dfe3012d617b8595ccc21465bc1} 
+List$<$ \mbox{\hyperlink{class_process}{Process}} $>$ Execution\+Time\+Calculator\+Service\+::\+\_\+calculate\+Time\+Limit (\begin{DoxyParamCaption}\item[{List$<$ \mbox{\hyperlink{class_process}{Process}} $>$}]{processes}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+Calculates the execution time for the "{}\+Time Limit"{} scheduling algorithm.
+
+\mbox{[}processes\mbox{]} List of processes to be processed.
+
+Returns the list of processes with the execution time calculated according to Time Limit. Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_execution_time_calculator_service_a92a58dfe3012d617b8595ccc21465bc1_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_execution_time_calculator_service_a8454b3649da551c804803e748993485f}\index{ExecutionTimeCalculatorService@{ExecutionTimeCalculatorService}!calculateExecutionTimes@{calculateExecutionTimes}}
+\index{calculateExecutionTimes@{calculateExecutionTimes}!ExecutionTimeCalculatorService@{ExecutionTimeCalculatorService}}
+\doxysubsubsection{\texorpdfstring{calculateExecutionTimes()}{calculateExecutionTimes()}}
+{\footnotesize\ttfamily \label{class_execution_time_calculator_service_a8454b3649da551c804803e748993485f} 
+List$<$ \mbox{\hyperlink{class_process}{Process}} $>$ Execution\+Time\+Calculator\+Service\+::calculate\+Execution\+Times (\begin{DoxyParamCaption}\item[{List$<$ \mbox{\hyperlink{class_process}{Process}} $>$}]{processes}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+Method to calculate the execution times of a list of processes based on the selected scheduling algorithm. It switches between different algorithms and applies the corresponding calculation method.
+
+\mbox{[}processes\mbox{]} List of processes whose execution times need to be calculated.
+
+Returns a new list of processes with their {\ttfamily execution\+Time} calculated based on the algorithm. Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_execution_time_calculator_service_a8454b3649da551c804803e748993485f_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_execution_time_calculator_service_aaf740278d11e0dffff0837ddbebcb547}\index{ExecutionTimeCalculatorService@{ExecutionTimeCalculatorService}!executionSetup@{executionSetup}}
+\index{executionSetup@{executionSetup}!ExecutionTimeCalculatorService@{ExecutionTimeCalculatorService}}
+\doxysubsubsection{\texorpdfstring{executionSetup}{executionSetup}}
+{\footnotesize\ttfamily \label{class_execution_time_calculator_service_aaf740278d11e0dffff0837ddbebcb547} 
+final \mbox{\hyperlink{class_execution_setup}{Execution\+Setup}} Execution\+Time\+Calculator\+Service\+::execution\+Setup\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The execution setup that holds the selected scheduling algorithm. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/data/services/\mbox{\hyperlink{execution__time__calculator__service_8dart}{execution\+\_\+time\+\_\+calculator\+\_\+service.\+dart}}\end{DoxyCompactItemize}

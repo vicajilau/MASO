@@ -1,0 +1,13 @@
+<map id="lib/core/l10n/app_localizations_es.dart" name="lib/core/l10n/app_localizations_es.dart">
+<area shape="rect" id="Node000001" title=" " alt="" coords="111,5,306,46"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,94,76,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="168,49,81,89,79,85,165,44"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="100,94,165,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="192,48,157,84,153,81,188,45"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="189,94,228,120"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="211,46,211,78,206,78,206,46"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="252,94,290,120"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="226,45,254,80,250,83,222,48"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="315,94,462,120"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="255,44,348,85,346,90,252,49"/>
+</map>

@@ -1,0 +1,27 @@
+var searchData=
+[
+  ['main_0',['main',['../main_8dart.html#acdef7a1fd863a6d3770c1268cb06add3',1,'main.dart']]],
+  ['main_2edart_1',['main.dart',['../main_8dart.html',1,'']]],
+  ['maso_2',['MASO',['../md__r_e_a_d_m_e.html#autotoc_md2',1,'']]],
+  ['maso_5ffile_2edart_3',['maso_file.dart',['../maso__file_8dart.html',1,'']]],
+  ['maso_5ffile_5fexecution_5fscreen_2edart_4',['maso_file_execution_screen.dart',['../maso__file__execution__screen_8dart.html',1,'']]],
+  ['maso_5ffile_5flist_5fwidget_2edart_5',['maso_file_list_widget.dart',['../maso__file__list__widget_8dart.html',1,'']]],
+  ['maso_5fmetadata_2edart_6',['maso_metadata.dart',['../maso__metadata_8dart.html',1,'']]],
+  ['masoapp_7',['MasoApp',['../class_stateless_widget.html#a283138653ce2c2310101d63b68308ed9',1,'StatelessWidget']]],
+  ['masofile_8',['MasoFile',['../class_maso_file.html',1,'MasoFile'],['../class_maso_file.html#a326ddc61de56be977949d778d56b9493',1,'MasoFile::MasoFile()']]],
+  ['masofile_9',['masoFile',['../class_file_event.html#abda89f5ffbc3874fd4a49f41a804e86c',1,'FileEvent::masoFile'],['../class_stateful_widget.html#a2e803a4653a78d30f8aa0caf3a335fef',1,'StatefulWidget::masoFile'],['../file__state_8dart.html#ad3cf10c66c7f57ddae0e72ac997d1188',1,'masoFile:&#160;file_state.dart'],['../maso__file__list__widget_8dart.html#a2da99037b698e2497a9acf511e0e2b3f',1,'masoFile:&#160;maso_file_list_widget.dart']]],
+  ['masofileexecutionscreen_10',['MasoFileExecutionScreen',['../class_stateful_widget.html#a3018137ce03c677cb4c64e4b21285b59',1,'StatefulWidget']]],
+  ['masofileexecutionscreen_11',['masoFileExecutionScreen',['../class_app_routes.html#a4804eddaf6850c7cad1ce14f952fe2df',1,'AppRoutes']]],
+  ['masofilelistwidget_12',['MasoFileListWidget',['../class_stateful_widget.html#a2007f6e0f7f81cc1bebf6e07ce786961',1,'StatefulWidget::MasoFileListWidget()'],['../maso__file__list__widget_8dart.html#a315cd095e665760ceb745caabf131d52',1,'MasoFileListWidget():&#160;maso_file_list_widget.dart']]],
+  ['masofilename_13',['masoFileName',['../class_maso_metadata.html#adba2461bcef6243109db26e8c22bc8fc',1,'MasoMetadata']]],
+  ['masofilesaverequested_14',['MasoFileSaveRequested',['../class_file_event.html#a8eb08d950646875979faaa6ca54e0744',1,'FileEvent']]],
+  ['masometadata_15',['MasoMetadata',['../class_maso_metadata.html',1,'']]],
+  ['message_16',['message',['../class_exception.html#a54d53c978320c8b3fa6178b1e210712f',1,'Exception']]],
+  ['metadata_17',['Metadata',['../class_metadata.html',1,'Metadata'],['../class_metadata.html#a1680b3c7cb5dddaac57160fdc5edce0c',1,'Metadata::Metadata()']]],
+  ['metadata_18',['metadata',['../class_maso_file.html#a8a750b2d12237cc113b1c3224ef21485',1,'MasoFile']]],
+  ['metadata_2edart_19',['metadata.dart',['../metadata_8dart.html',1,'']]],
+  ['metadatabadcontent_20',['metadataBadContent',['../maso__file_8dart.html#a38082bf39a11807bc4ef793ed8410f74',1,'maso_file.dart']]],
+  ['mobile_5fdesktop_5ffile_5fservice_2edart_21',['mobile_desktop_file_service.dart',['../mobile__desktop__file__service_8dart.html',1,'']]],
+  ['multiplepriorityqueues_22',['multiplePriorityQueues',['../scheduling__algorithm_8dart.html#a1b8b4cc53c3083ad70fc96590269d829a200ddd37b4cdeb2f0b8b2debd0465a21',1,'scheduling_algorithm.dart']]],
+  ['multiplepriorityqueueswithfeedback_23',['multiplePriorityQueuesWithFeedback',['../scheduling__algorithm_8dart.html#a1b8b4cc53c3083ad70fc96590269d829ac87d6ecdba349c05314761cde1f683d4',1,'scheduling_algorithm.dart']]]
+];

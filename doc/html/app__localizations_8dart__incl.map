@@ -1,0 +1,23 @@
+<map id="lib/core/l10n/app_localizations.dart" name="lib/core/l10n/app_localizations.dart">
+<area shape="rect" id="Node000001" title=" " alt="" coords="452,5,674,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,49,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="452,29,274,47,171,62,65,82,64,76,170,56,273,41,452,24"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="73,79,144,105"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="463,34,323,54,159,81,158,76,323,48,462,29"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="168,79,275,105"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="505,34,291,79,290,74,504,29"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="300,79,392,105"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="527,34,398,76,396,71,525,29"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="415,79,575,105"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="554,33,519,70,515,66,550,29"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="599,79,663,105"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="576,29,611,66,607,70,572,33"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="688,79,726,105"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="589,29,675,72,673,77,586,34"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="750,79,789,105"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="600,29,737,76,735,81,598,34"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="814,79,982,105"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="621,29,827,73,826,78,620,34"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="1006,79,1174,105"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="653,29,990,74,989,80,653,34"/>
+</map>

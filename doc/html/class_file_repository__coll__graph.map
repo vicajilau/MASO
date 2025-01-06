@@ -1,0 +1,9 @@
+<map id="FileRepository" name="FileRepository">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,271,111,297"/>
+<area shape="rect" id="Node000002" href="$class_i_file_service.html" title=" " alt="" coords="13,183,103,208"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="61,224,61,271,55,271,55,224"/>
+<area shape="rect" id="Node000003" href="$class_maso_file.html" title="The MasoFile class represents a MASO file, which consists of metadata and a list of processes." alt="" coords="21,94,95,120"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="61,135,61,182,55,182,55,135"/>
+<area shape="rect" id="Node000004" href="$class_metadata.html" title="The Metadata class represents the metadata of a MASO file, including its name, version,..." alt="" coords="20,5,96,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="61,47,61,94,55,94,55,47"/>
+</map>

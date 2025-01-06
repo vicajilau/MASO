@@ -1,0 +1,23 @@
+<map id="lib/presentation/widgets/dialogs/process_dialog.dart" name="lib/presentation/widgets/dialogs/process_dialog.dart">
+<area shape="rect" id="Node000001" title=" " alt="" coords="445,5,628,46"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,94,76,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="445,41,284,63,91,96,91,91,283,58,444,36"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="99,94,192,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="445,48,208,96,207,90,444,43"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="217,94,317,120"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="470,49,324,92,322,87,468,44"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="341,94,404,120"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="497,49,412,89,410,85,494,44"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="429,94,492,120"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="520,48,485,84,481,81,516,45"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="517,94,711,120"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="558,45,593,81,589,84,554,48"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="735,94,828,120"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="599,44,730,86,728,91,597,49"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="852,94,898,120"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="629,42,726,63,837,91,836,96,725,68,628,47"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="922,94,967,120"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="629,37,757,59,908,91,907,96,756,64,628,42"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="991,94,1138,120"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="629,38,976,90,975,95,628,43"/>
+</map>

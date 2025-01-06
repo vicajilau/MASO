@@ -1,0 +1,13 @@
+<map id="lib/data/services/file_service/i_file_service.dart" name="lib/data/services/file_service/i_file_service.dart">
+<area shape="rect" id="Node000001" title=" " alt="" coords="111,5,287,46"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,94,49,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="157,49,64,92,62,87,155,44"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="73,94,144,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="178,48,135,86,132,82,175,44"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="167,94,231,120"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="202,46,202,78,196,78,196,46"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="255,94,319,120"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="223,44,264,81,260,85,219,48"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="343,94,447,120"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="249,44,352,85,350,90,247,49"/>
+</map>

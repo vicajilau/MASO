@@ -1,0 +1,9 @@
+<map id="build" name="build">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,31,54,56"/>
+<area shape="rect" id="Node000002" href="$create__maso__dialog_8dart.html#a15c418581c228e6e72c1d8207d0bd096" title="Validates inputs and handles form submission." alt="" coords="102,5,169,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="54,35,86,27,87,32,55,40"/>
+<area shape="rect" id="Node000003" href="$class_app_localizations.html#af92236984e62c92393560a9cf423cfa4" title=" " alt="" coords="217,31,356,56"/>
+<area shape="poly" id="edge4_Node000001_Node000003" title=" " alt="" coords="54,41,202,41,202,46,54,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="170,21,202,27,201,32,169,26"/>
+<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="261,32,256,22,259,12,269,6,287,4,305,7,315,13,312,18,303,12,287,9,271,11,263,16,261,22,265,29"/>
+</map>

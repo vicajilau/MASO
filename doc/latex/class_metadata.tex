@@ -1,0 +1,166 @@
+\doxysection{Metadata Class Reference}
+\hypertarget{class_metadata}{}\label{class_metadata}\index{Metadata@{Metadata}}
+
+
+The \doxylink{class_metadata}{Metadata} class represents the metadata of a MASO file, including its name, version, and description.  
+
+
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_metadata_a1680b3c7cb5dddaac57160fdc5edce0c}{Metadata}} (\{ required this.\+name, required this.\+version, required this.\+description, \})
+\begin{DoxyCompactList}\small\item\em Constructor for creating a \doxylink{class_metadata}{Metadata} instance with name, version, and description. \end{DoxyCompactList}\item 
+factory \mbox{\hyperlink{class_metadata}{Metadata}} \mbox{\hyperlink{class_metadata_a2bd04d897e56daf493b30150838c3236}{from\+Json}} (Map$<$ String, dynamic $>$ json)
+\begin{DoxyCompactList}\small\item\em Factory constructor to create a \doxylink{class_metadata}{Metadata} instance from a JSON map. \end{DoxyCompactList}\item 
+Map$<$ String, dynamic $>$ \mbox{\hyperlink{class_metadata_ac2e2b618d960b97d6ffeda1ad2aa1813}{to\+Json}} ()
+\begin{DoxyCompactList}\small\item\em Converts the \doxylink{class_metadata}{Metadata} instance to a JSON map. \end{DoxyCompactList}\item 
+override bool \mbox{\hyperlink{class_metadata_a6b3fb5684c6d7083f6097f9b198ddb75}{operator==}} (Object other)
+\begin{DoxyCompactList}\small\item\em Override the equality operator to compare \doxylink{class_metadata}{Metadata} instances based on their values. \end{DoxyCompactList}\item 
+override String \mbox{\hyperlink{class_metadata_a9e12a0ec2347fed7d5341694aa1f0e8b}{to\+String}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+final String \mbox{\hyperlink{class_metadata_a73794a1e116c1deecb9a661427ecc027}{name}}
+\begin{DoxyCompactList}\small\item\em The name of the MASO file. \end{DoxyCompactList}\item 
+final String \mbox{\hyperlink{class_metadata_a14d5113e5956814b745bf0f8b8f8a5a9}{version}}
+\begin{DoxyCompactList}\small\item\em The version of the MASO file. \end{DoxyCompactList}\item 
+final String \mbox{\hyperlink{class_metadata_a40bd7ae2630684db53b4328a05f7f0d8}{description}}
+\begin{DoxyCompactList}\small\item\em A description of the MASO file. \end{DoxyCompactList}\item 
+override int get \mbox{\hyperlink{class_metadata_a90ac16e87132e063fa9c60ec127527c1}{hash\+Code}} =$>$ name.\+hash\+Code \texorpdfstring{$^\wedge$}{\string^} version.\+hash\+Code \texorpdfstring{$^\wedge$}{\string^} description.\+hash\+Code
+\begin{DoxyCompactList}\small\item\em Override the hash\+Code to be consistent with the equality operator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The \doxylink{class_metadata}{Metadata} class represents the metadata of a MASO file, including its name, version, and description. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_metadata_a1680b3c7cb5dddaac57160fdc5edce0c}\index{Metadata@{Metadata}!Metadata@{Metadata}}
+\index{Metadata@{Metadata}!Metadata@{Metadata}}
+\doxysubsubsection{\texorpdfstring{Metadata()}{Metadata()}}
+{\footnotesize\ttfamily \label{class_metadata_a1680b3c7cb5dddaac57160fdc5edce0c} 
+Metadata\+::\+Metadata (\begin{DoxyParamCaption}\item[{\{ required this.\+name, required this.\+version, required this.\+description, \}}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Constructor for creating a \doxylink{class_metadata}{Metadata} instance with name, version, and description. 
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_metadata_a1680b3c7cb5dddaac57160fdc5edce0c_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_metadata_a2bd04d897e56daf493b30150838c3236}\index{Metadata@{Metadata}!fromJson@{fromJson}}
+\index{fromJson@{fromJson}!Metadata@{Metadata}}
+\doxysubsubsection{\texorpdfstring{fromJson()}{fromJson()}}
+{\footnotesize\ttfamily \label{class_metadata_a2bd04d897e56daf493b30150838c3236} 
+factory \mbox{\hyperlink{class_metadata}{Metadata}} Metadata\+::from\+Json (\begin{DoxyParamCaption}\item[{Map$<$ String, dynamic $>$}]{json}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Factory constructor to create a \doxylink{class_metadata}{Metadata} instance from a JSON map. 
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=322pt]{class_metadata_a2bd04d897e56daf493b30150838c3236_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_metadata_a2bd04d897e56daf493b30150838c3236_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_metadata_a6b3fb5684c6d7083f6097f9b198ddb75}\index{Metadata@{Metadata}!operator==@{operator==}}
+\index{operator==@{operator==}!Metadata@{Metadata}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily \label{class_metadata_a6b3fb5684c6d7083f6097f9b198ddb75} 
+override bool Metadata\+::operator== (\begin{DoxyParamCaption}\item[{Object}]{other}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Override the equality operator to compare \doxylink{class_metadata}{Metadata} instances based on their values. 
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=329pt]{class_metadata_a6b3fb5684c6d7083f6097f9b198ddb75_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_metadata_ac2e2b618d960b97d6ffeda1ad2aa1813}\index{Metadata@{Metadata}!toJson@{toJson}}
+\index{toJson@{toJson}!Metadata@{Metadata}}
+\doxysubsubsection{\texorpdfstring{toJson()}{toJson()}}
+{\footnotesize\ttfamily \label{class_metadata_ac2e2b618d960b97d6ffeda1ad2aa1813} 
+Map$<$ String, dynamic $>$ Metadata\+::to\+Json (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Converts the \doxylink{class_metadata}{Metadata} instance to a JSON map. 
+
+\Hypertarget{class_metadata_a9e12a0ec2347fed7d5341694aa1f0e8b}\index{Metadata@{Metadata}!toString@{toString}}
+\index{toString@{toString}!Metadata@{Metadata}}
+\doxysubsubsection{\texorpdfstring{toString()}{toString()}}
+{\footnotesize\ttfamily \label{class_metadata_a9e12a0ec2347fed7d5341694aa1f0e8b} 
+override String Metadata\+::to\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_metadata_a40bd7ae2630684db53b4328a05f7f0d8}\index{Metadata@{Metadata}!description@{description}}
+\index{description@{description}!Metadata@{Metadata}}
+\doxysubsubsection{\texorpdfstring{description}{description}}
+{\footnotesize\ttfamily \label{class_metadata_a40bd7ae2630684db53b4328a05f7f0d8} 
+final String Metadata\+::description\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+A description of the MASO file. 
+
+\Hypertarget{class_metadata_a90ac16e87132e063fa9c60ec127527c1}\index{Metadata@{Metadata}!hashCode@{hashCode}}
+\index{hashCode@{hashCode}!Metadata@{Metadata}}
+\doxysubsubsection{\texorpdfstring{hashCode}{hashCode}}
+{\footnotesize\ttfamily \label{class_metadata_a90ac16e87132e063fa9c60ec127527c1} 
+override int get Metadata\+::hash\+Code =$>$ name.\+hash\+Code \texorpdfstring{$^\wedge$}{\string^} version.\+hash\+Code \texorpdfstring{$^\wedge$}{\string^} description.\+hash\+Code\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Override the hash\+Code to be consistent with the equality operator. 
+
+\Hypertarget{class_metadata_a73794a1e116c1deecb9a661427ecc027}\index{Metadata@{Metadata}!name@{name}}
+\index{name@{name}!Metadata@{Metadata}}
+\doxysubsubsection{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily \label{class_metadata_a73794a1e116c1deecb9a661427ecc027} 
+final String Metadata\+::name\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The name of the MASO file. 
+
+\Hypertarget{class_metadata_a14d5113e5956814b745bf0f8b8f8a5a9}\index{Metadata@{Metadata}!version@{version}}
+\index{version@{version}!Metadata@{Metadata}}
+\doxysubsubsection{\texorpdfstring{version}{version}}
+{\footnotesize\ttfamily \label{class_metadata_a14d5113e5956814b745bf0f8b8f8a5a9} 
+final String Metadata\+::version\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The version of the MASO file. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/domain/models/\mbox{\hyperlink{metadata_8dart}{metadata.\+dart}}\end{DoxyCompactItemize}

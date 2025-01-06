@@ -1,0 +1,5 @@
+<map id="MasoFile" name="MasoFile">
+<area shape="rect" id="Node000001" title="The MasoFile class represents a MASO file, which consists of metadata and a list of processes." alt="" coords="6,94,80,120"/>
+<area shape="rect" id="Node000002" href="$class_metadata.html" title="The Metadata class represents the metadata of a MASO file, including its name, version,..." alt="" coords="5,5,81,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="46,47,46,94,40,94,40,47"/>
+</map>

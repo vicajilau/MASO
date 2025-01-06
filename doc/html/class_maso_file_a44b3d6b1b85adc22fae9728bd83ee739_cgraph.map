@@ -1,0 +1,7 @@
+<map id="MasoFile::operator==" name="MasoFile::operator==">
+<area shape="rect" id="Node000001" title="Overrides the equality operator to compare MasoFile instances based on their values." alt="" coords="5,31,151,56"/>
+<area shape="rect" id="Node000002" href="$class_maso_file.html#aca5a16f41a59fb1d24cfcb0fedc18291" title="Compares the &#39;processes&#39; list deeply by checking each &#39;process&#39; object." alt="" coords="199,5,381,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="151,32,183,28,183,34,152,37"/>
+<area shape="rect" id="Node000003" href="$class_maso_file.html#a326ddc61de56be977949d778d56b9493" title="Constructor for creating a MasoFile instance with metadata and processes." alt="" coords="222,55,358,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="152,49,207,55,206,61,151,54"/>
+</map>

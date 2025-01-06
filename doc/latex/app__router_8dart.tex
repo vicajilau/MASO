@@ -1,0 +1,71 @@
+\doxysection{lib/routes/app\+\_\+router.dart File Reference}
+\hypertarget{app__router_8dart}{}\label{app__router_8dart}\index{lib/routes/app\_router.dart@{lib/routes/app\_router.dart}}
+{\ttfamily import package;}\newline
+{\ttfamily import go\+\_\+router.\+dart;}\newline
+{\ttfamily import presentation;}\newline
+{\ttfamily import screens;}\newline
+{\ttfamily import file\+\_\+loaded\+\_\+screen.\+dart;}\newline
+{\ttfamily import maso\+\_\+file\+\_\+execution\+\_\+screen.\+dart;}\newline
+{\ttfamily import core;}\newline
+{\ttfamily import service\+\_\+locator.\+dart;}\newline
+{\ttfamily import domain;}\newline
+{\ttfamily import models;}\newline
+{\ttfamily import maso\+\_\+file.\+dart;}\newline
+{\ttfamily import use\+\_\+cases;}\newline
+{\ttfamily import check\+\_\+file\+\_\+changes\+\_\+use\+\_\+case.\+dart;}\newline
+{\ttfamily import blocs;}\newline
+{\ttfamily import file\+\_\+bloc;}\newline
+{\ttfamily import file\+\_\+bloc.\+dart;}\newline
+{\ttfamily import home\+\_\+screen.\+dart;}\newline
+Include dependency graph for app\+\_\+router.\+dart\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{app__router_8dart__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_app_routes}{App\+Routes}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_app_routes}{App\+Routes}} \mbox{\hyperlink{app__router_8dart_afa02e5041d7dedb7413c8676dd4dd22a}{app\+Router}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{app__router_8dart_afa02e5041d7dedb7413c8676dd4dd22a}\index{app\_router.dart@{app\_router.dart}!appRouter@{appRouter}}
+\index{appRouter@{appRouter}!app\_router.dart@{app\_router.dart}}
+\doxysubsubsection{\texorpdfstring{appRouter}{appRouter}}
+{\footnotesize\ttfamily \label{app__router_8dart_afa02e5041d7dedb7413c8676dd4dd22a} 
+class \mbox{\hyperlink{class_app_routes}{App\+Routes}} app\+Router}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ GoRouter(}
+\DoxyCodeLine{\ \ routes:\ [}
+\DoxyCodeLine{\ \ \ \ GoRoute(}
+\DoxyCodeLine{\ \ \ \ \ \ path:\ \mbox{\hyperlink{class_app_routes}{AppRoutes}}.\mbox{\hyperlink{class_app_routes_a7bf1bc64ca83712a4e291711bcf86213}{home}},}
+\DoxyCodeLine{\ \ \ \ \ \ builder:\ (context,\ state)\ =>\ \textcolor{keyword}{const}\ HomeScreen(),}
+\DoxyCodeLine{\ \ \ \ ),}
+\DoxyCodeLine{\ \ \ \ GoRoute(}
+\DoxyCodeLine{\ \ \ \ \ \ path:\ \mbox{\hyperlink{class_app_routes}{AppRoutes}}.\mbox{\hyperlink{class_app_routes_a08b5b31343b5699747b01dd098e7d58c}{fileLoadedScreen}},}
+\DoxyCodeLine{\ \ \ \ \ \ builder:\ (context,\ state)\ =>\ FileLoadedScreen(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ fileBloc:\ \mbox{\hyperlink{class_service_locator}{ServiceLocator}}.\mbox{\hyperlink{class_service_locator_a23affb1dfcd1eb39441a5c12e3e90280}{instance}}.\mbox{\hyperlink{class_service_locator_a518083f59147e4678f77aef3a6e82616}{getIt}}<FileBloc>(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ checkFileChangesUseCase:}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_service_locator}{ServiceLocator}}.\mbox{\hyperlink{class_service_locator_a23affb1dfcd1eb39441a5c12e3e90280}{instance}}.\mbox{\hyperlink{class_service_locator_a518083f59147e4678f77aef3a6e82616}{getIt}}<\mbox{\hyperlink{class_check_file_changes_use_case}{CheckFileChangesUseCase}}>(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{file__state_8dart_ad3cf10c66c7f57ddae0e72ac997d1188}{masoFile}}:\ \mbox{\hyperlink{class_service_locator}{ServiceLocator}}.\mbox{\hyperlink{class_service_locator_a23affb1dfcd1eb39441a5c12e3e90280}{instance}}.\mbox{\hyperlink{class_service_locator_a518083f59147e4678f77aef3a6e82616}{getIt}}<\mbox{\hyperlink{class_maso_file}{MasoFile}}>(),}
+\DoxyCodeLine{\ \ \ \ \ \ ),}
+\DoxyCodeLine{\ \ \ \ ),}
+\DoxyCodeLine{\ \ \ \ GoRoute(}
+\DoxyCodeLine{\ \ \ \ \ \ path:\ \mbox{\hyperlink{class_app_routes}{AppRoutes}}.\mbox{\hyperlink{class_app_routes_a4804eddaf6850c7cad1ce14f952fe2df}{masoFileExecutionScreen}},}
+\DoxyCodeLine{\ \ \ \ \ \ builder:\ (context,\ state)\ =>\ \textcolor{keyword}{const}\ MasoFileExecutionScreen(),}
+\DoxyCodeLine{\ \ \ \ ),}
+\DoxyCodeLine{\ \ ],}
+\DoxyCodeLine{)}
+
+\end{DoxyCode}

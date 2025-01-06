@@ -1,0 +1,155 @@
+\doxysection{lib/presentation/blocs/file\+\_\+bloc/file\+\_\+state.dart File Reference}
+\hypertarget{file__state_8dart}{}\label{file__state_8dart}\index{lib/presentation/blocs/file\_bloc/file\_state.dart@{lib/presentation/blocs/file\_bloc/file\_state.dart}}
+{\ttfamily import package;}\newline
+{\ttfamily import material.\+dart;}\newline
+{\ttfamily import domain;}\newline
+{\ttfamily import models;}\newline
+{\ttfamily import export\+\_\+formats.\+dart;}\newline
+{\ttfamily import core;}\newline
+{\ttfamily import l10n;}\newline
+{\ttfamily import app\+\_\+localizations.\+dart;}\newline
+{\ttfamily import maso\+\_\+file.\+dart;}\newline
+Include dependency graph for file\+\_\+state.\+dart\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{file__state_8dart__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_file_state}{File\+State}}
+\begin{DoxyCompactList}\small\item\em Abstract class representing the base state for file operations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{file__state_8dart_af59511cc1b57e3976011e0b80c57dc09}{File\+Error\+Type}} \{ \newline
+\mbox{\hyperlink{file__state_8dart_af59511cc1b57e3976011e0b80c57dc09a18d065b50a92c5e2fd1825d87523fe41}{invalid\+Extension}}
+, \mbox{\hyperlink{file__state_8dart_af59511cc1b57e3976011e0b80c57dc09a1a8b8b3f533b98da21ca69aa4ad12e21}{error\+Opening\+File}}
+, \mbox{\hyperlink{file__state_8dart_af59511cc1b57e3976011e0b80c57dc09a77d73e87bc6ab895a90410a7c4d330ab}{error\+Saving\+Maso\+File}}
+, \mbox{\hyperlink{file__state_8dart_af59511cc1b57e3976011e0b80c57dc09aba4ba90f72aeba592f3ee7a6c28ede1c}{error\+Saving\+Exported\+File}}
+, \newline
+\mbox{\hyperlink{file__state_8dart_af59511cc1b57e3976011e0b80c57dc09a9d514830cf45462037fa4e95f52dca0f}{error\+Picking\+File\+Manually}}
+ \}
+\begin{DoxyCompactList}\small\item\em Enumeration representing specific reasons for file-\/related errors. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{file__state_8dart_a34a9c0e3d2d34cd0be494620d190333a}{File\+Loaded}} (\mbox{\hyperlink{file__state_8dart_ad3cf10c66c7f57ddae0e72ac997d1188}{this.\+maso\+File}})
+\item 
+\mbox{\hyperlink{file__state_8dart_a34338fc5b7d799355a7c5ca3ceadc860}{File\+Error}} (\{required \mbox{\hyperlink{file__state_8dart_afdc7daa9f77940008e38f15bafe1c08e}{this.\+reason}}, \mbox{\hyperlink{file__state_8dart_a6cb5f44bd5ed13d5b6b72af870acf649}{this.\+error}}\})
+\item 
+String \mbox{\hyperlink{file__state_8dart_a6b373de7cf24fa0c4f40171dc8114b78}{get\+Description}} (Build\+Context context)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+abstract class \mbox{\hyperlink{class_file_state}{File\+State}} \mbox{\hyperlink{file__state_8dart_ad3cf10c66c7f57ddae0e72ac997d1188}{maso\+File}}
+\begin{DoxyCompactList}\small\item\em Initial state when no file operation is in progress. \end{DoxyCompactList}\item 
+class File\+Exported extends \mbox{\hyperlink{class_file_state}{File\+State}} \mbox{\hyperlink{file__state_8dart_a6cb5f44bd5ed13d5b6b72af870acf649}{error}}
+\begin{DoxyCompactList}\small\item\em State representing an error during file operation, with an error message. \end{DoxyCompactList}\item 
+final \mbox{\hyperlink{file__state_8dart_af59511cc1b57e3976011e0b80c57dc09}{File\+Error\+Type}} \mbox{\hyperlink{file__state_8dart_afdc7daa9f77940008e38f15bafe1c08e}{reason}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{file__state_8dart_af59511cc1b57e3976011e0b80c57dc09}\index{file\_state.dart@{file\_state.dart}!FileErrorType@{FileErrorType}}
+\index{FileErrorType@{FileErrorType}!file\_state.dart@{file\_state.dart}}
+\doxysubsubsection{\texorpdfstring{FileErrorType}{FileErrorType}}
+{\footnotesize\ttfamily \label{file__state_8dart_af59511cc1b57e3976011e0b80c57dc09} 
+enum \mbox{\hyperlink{file__state_8dart_af59511cc1b57e3976011e0b80c57dc09}{File\+Error\+Type}}}
+
+
+
+Enumeration representing specific reasons for file-\/related errors. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{invalidExtension@{invalidExtension}!file\_state.dart@{file\_state.dart}}\index{file\_state.dart@{file\_state.dart}!invalidExtension@{invalidExtension}}}\Hypertarget{file__state_8dart_af59511cc1b57e3976011e0b80c57dc09a18d065b50a92c5e2fd1825d87523fe41}\label{file__state_8dart_af59511cc1b57e3976011e0b80c57dc09a18d065b50a92c5e2fd1825d87523fe41} 
+invalid\+Extension&The file has an unsupported or incorrect extension. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{errorOpeningFile@{errorOpeningFile}!file\_state.dart@{file\_state.dart}}\index{file\_state.dart@{file\_state.dart}!errorOpeningFile@{errorOpeningFile}}}\Hypertarget{file__state_8dart_af59511cc1b57e3976011e0b80c57dc09a1a8b8b3f533b98da21ca69aa4ad12e21}\label{file__state_8dart_af59511cc1b57e3976011e0b80c57dc09a1a8b8b3f533b98da21ca69aa4ad12e21} 
+error\+Opening\+File&There was an error while trying to open the file. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{errorSavingMasoFile@{errorSavingMasoFile}!file\_state.dart@{file\_state.dart}}\index{file\_state.dart@{file\_state.dart}!errorSavingMasoFile@{errorSavingMasoFile}}}\Hypertarget{file__state_8dart_af59511cc1b57e3976011e0b80c57dc09a77d73e87bc6ab895a90410a7c4d330ab}\label{file__state_8dart_af59511cc1b57e3976011e0b80c57dc09a77d73e87bc6ab895a90410a7c4d330ab} 
+error\+Saving\+Maso\+File&There was an error while trying to save the Maso file. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{errorSavingExportedFile@{errorSavingExportedFile}!file\_state.dart@{file\_state.dart}}\index{file\_state.dart@{file\_state.dart}!errorSavingExportedFile@{errorSavingExportedFile}}}\Hypertarget{file__state_8dart_af59511cc1b57e3976011e0b80c57dc09aba4ba90f72aeba592f3ee7a6c28ede1c}\label{file__state_8dart_af59511cc1b57e3976011e0b80c57dc09aba4ba90f72aeba592f3ee7a6c28ede1c} 
+error\+Saving\+Exported\+File&There was an error while trying to save the exported file. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{errorPickingFileManually@{errorPickingFileManually}!file\_state.dart@{file\_state.dart}}\index{file\_state.dart@{file\_state.dart}!errorPickingFileManually@{errorPickingFileManually}}}\Hypertarget{file__state_8dart_af59511cc1b57e3976011e0b80c57dc09a9d514830cf45462037fa4e95f52dca0f}\label{file__state_8dart_af59511cc1b57e3976011e0b80c57dc09a9d514830cf45462037fa4e95f52dca0f} 
+error\+Picking\+File\+Manually&There was an error while trying to pick the file. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{file__state_8dart_a34338fc5b7d799355a7c5ca3ceadc860}\index{file\_state.dart@{file\_state.dart}!FileError@{FileError}}
+\index{FileError@{FileError}!file\_state.dart@{file\_state.dart}}
+\doxysubsubsection{\texorpdfstring{FileError()}{FileError()}}
+{\footnotesize\ttfamily \label{file__state_8dart_a34338fc5b7d799355a7c5ca3ceadc860} 
+File\+Error (\begin{DoxyParamCaption}\item[{\{required \mbox{\hyperlink{file__state_8dart_afdc7daa9f77940008e38f15bafe1c08e}{this.\+reason}}, \mbox{\hyperlink{file__state_8dart_a6cb5f44bd5ed13d5b6b72af870acf649}{this.\+error}}\}}]{}{}\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{file__state_8dart_a34338fc5b7d799355a7c5ca3ceadc860_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{file__state_8dart_a34a9c0e3d2d34cd0be494620d190333a}\index{file\_state.dart@{file\_state.dart}!FileLoaded@{FileLoaded}}
+\index{FileLoaded@{FileLoaded}!file\_state.dart@{file\_state.dart}}
+\doxysubsubsection{\texorpdfstring{FileLoaded()}{FileLoaded()}}
+{\footnotesize\ttfamily \label{file__state_8dart_a34a9c0e3d2d34cd0be494620d190333a} 
+File\+Loaded (\begin{DoxyParamCaption}\item[{this.}]{maso\+File}{}\end{DoxyParamCaption})}
+
+\Hypertarget{file__state_8dart_a6b373de7cf24fa0c4f40171dc8114b78}\index{file\_state.dart@{file\_state.dart}!getDescription@{getDescription}}
+\index{getDescription@{getDescription}!file\_state.dart@{file\_state.dart}}
+\doxysubsubsection{\texorpdfstring{getDescription()}{getDescription()}}
+{\footnotesize\ttfamily \label{file__state_8dart_a6b373de7cf24fa0c4f40171dc8114b78} 
+String get\+Description (\begin{DoxyParamCaption}\item[{Build\+Context}]{context}{}\end{DoxyParamCaption})}
+
+Returns a descriptive string for the error type. The \mbox{[}context\mbox{]} parameter can be used for localization if needed. Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{file__state_8dart_a6b373de7cf24fa0c4f40171dc8114b78_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{file__state_8dart_a6cb5f44bd5ed13d5b6b72af870acf649}\index{file\_state.dart@{file\_state.dart}!error@{error}}
+\index{error@{error}!file\_state.dart@{file\_state.dart}}
+\doxysubsubsection{\texorpdfstring{error}{error}}
+{\footnotesize\ttfamily \label{file__state_8dart_a6cb5f44bd5ed13d5b6b72af870acf649} 
+class File\+Exported extends \mbox{\hyperlink{class_file_state}{File\+State}} error}
+
+
+
+State representing an error during file operation, with an error message. 
+
+\Hypertarget{file__state_8dart_ad3cf10c66c7f57ddae0e72ac997d1188}\index{file\_state.dart@{file\_state.dart}!masoFile@{masoFile}}
+\index{masoFile@{masoFile}!file\_state.dart@{file\_state.dart}}
+\doxysubsubsection{\texorpdfstring{masoFile}{masoFile}}
+{\footnotesize\ttfamily \label{file__state_8dart_ad3cf10c66c7f57ddae0e72ac997d1188} 
+abstract class \mbox{\hyperlink{class_file_state}{File\+State}} maso\+File}
+
+
+
+Initial state when no file operation is in progress. 
+
+State representing that a file operation is currently loading. State representing a successfully loaded file, containing the file data and path. \Hypertarget{file__state_8dart_afdc7daa9f77940008e38f15bafe1c08e}\index{file\_state.dart@{file\_state.dart}!reason@{reason}}
+\index{reason@{reason}!file\_state.dart@{file\_state.dart}}
+\doxysubsubsection{\texorpdfstring{reason}{reason}}
+{\footnotesize\ttfamily \label{file__state_8dart_afdc7daa9f77940008e38f15bafe1c08e} 
+final \mbox{\hyperlink{file__state_8dart_af59511cc1b57e3976011e0b80c57dc09}{File\+Error\+Type}} reason}
+

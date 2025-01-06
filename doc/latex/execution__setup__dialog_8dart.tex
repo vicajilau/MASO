@@ -1,0 +1,84 @@
+\doxysection{lib/presentation/widgets/dialogs/execution\+\_\+setup\+\_\+dialog.dart File Reference}
+\hypertarget{execution__setup__dialog_8dart}{}\label{execution__setup__dialog_8dart}\index{lib/presentation/widgets/dialogs/execution\_setup\_dialog.dart@{lib/presentation/widgets/dialogs/execution\_setup\_dialog.dart}}
+{\ttfamily import package;}\newline
+{\ttfamily import material.\+dart;}\newline
+{\ttfamily import go\+\_\+router.\+dart;}\newline
+{\ttfamily import domain;}\newline
+{\ttfamily import models;}\newline
+{\ttfamily import scheduling\+\_\+algorithm.\+dart;}\newline
+{\ttfamily import core;}\newline
+{\ttfamily import l10n;}\newline
+{\ttfamily import app\+\_\+localizations.\+dart;}\newline
+{\ttfamily import service\+\_\+locator.\+dart;}\newline
+{\ttfamily import execution\+\_\+setup.\+dart;}\newline
+Include dependency graph for execution\+\_\+setup\+\_\+dialog.\+dart\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{execution__setup__dialog_8dart__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_stateful_widget}{Stateful\+Widget}}
+\begin{DoxyCompactList}\small\item\em A dialog widget for creating or editing a process. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+override void \mbox{\hyperlink{execution__setup__dialog_8dart_ab339d53d3945a16dfdd20004616a8ddc}{init\+State}} ()
+\item 
+override Widget \mbox{\hyperlink{execution__setup__dialog_8dart_ab022cbdb8080a3d9d6ccf33cead2b33a}{build}} (Build\+Context context)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+class Execution\+Setup\+Dialog extends \mbox{\hyperlink{class_stateful_widget}{Stateful\+Widget}} \mbox{\hyperlink{execution__setup__dialog_8dart_a8f1e75b60e7bfd34e8da6bf470635b8a}{\+\_\+previous\+ES}}
+\item 
+\mbox{\hyperlink{scheduling__algorithm_8dart_a1b8b4cc53c3083ad70fc96590269d829}{Scheduling\+Algorithm}} \mbox{\hyperlink{execution__setup__dialog_8dart_a63074ac23f5ec3f7adba83d3b7066ce8}{\+\_\+selected\+Algorithm}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{execution__setup__dialog_8dart_ab022cbdb8080a3d9d6ccf33cead2b33a}\index{execution\_setup\_dialog.dart@{execution\_setup\_dialog.dart}!build@{build}}
+\index{build@{build}!execution\_setup\_dialog.dart@{execution\_setup\_dialog.dart}}
+\doxysubsubsection{\texorpdfstring{build()}{build()}}
+{\footnotesize\ttfamily \label{execution__setup__dialog_8dart_ab022cbdb8080a3d9d6ccf33cead2b33a} 
+override Widget build (\begin{DoxyParamCaption}\item[{Build\+Context}]{context}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=257pt]{execution__setup__dialog_8dart_ab022cbdb8080a3d9d6ccf33cead2b33a_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{execution__setup__dialog_8dart_ab339d53d3945a16dfdd20004616a8ddc}\index{execution\_setup\_dialog.dart@{execution\_setup\_dialog.dart}!initState@{initState}}
+\index{initState@{initState}!execution\_setup\_dialog.dart@{execution\_setup\_dialog.dart}}
+\doxysubsubsection{\texorpdfstring{initState()}{initState()}}
+{\footnotesize\ttfamily \label{execution__setup__dialog_8dart_ab339d53d3945a16dfdd20004616a8ddc} 
+override void init\+State (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{execution__setup__dialog_8dart_a8f1e75b60e7bfd34e8da6bf470635b8a}\index{execution\_setup\_dialog.dart@{execution\_setup\_dialog.dart}!\_previousES@{\_previousES}}
+\index{\_previousES@{\_previousES}!execution\_setup\_dialog.dart@{execution\_setup\_dialog.dart}}
+\doxysubsubsection{\texorpdfstring{\_previousES}{\_previousES}}
+{\footnotesize\ttfamily \label{execution__setup__dialog_8dart_a8f1e75b60e7bfd34e8da6bf470635b8a} 
+class Execution\+Setup\+Dialog extends \mbox{\hyperlink{class_stateful_widget}{Stateful\+Widget}} \+\_\+previous\+ES}
+
+\Hypertarget{execution__setup__dialog_8dart_a63074ac23f5ec3f7adba83d3b7066ce8}\index{execution\_setup\_dialog.dart@{execution\_setup\_dialog.dart}!\_selectedAlgorithm@{\_selectedAlgorithm}}
+\index{\_selectedAlgorithm@{\_selectedAlgorithm}!execution\_setup\_dialog.dart@{execution\_setup\_dialog.dart}}
+\doxysubsubsection{\texorpdfstring{\_selectedAlgorithm}{\_selectedAlgorithm}}
+{\footnotesize\ttfamily \label{execution__setup__dialog_8dart_a63074ac23f5ec3f7adba83d3b7066ce8} 
+\mbox{\hyperlink{scheduling__algorithm_8dart_a1b8b4cc53c3083ad70fc96590269d829}{Scheduling\+Algorithm}} \+\_\+selected\+Algorithm}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{scheduling__algorithm_8dart_a1b8b4cc53c3083ad70fc96590269d829}{SchedulingAlgorithm}}.firstComeFirstServed}
+
+\end{DoxyCode}

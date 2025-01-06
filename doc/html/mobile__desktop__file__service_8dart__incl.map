@@ -1,0 +1,23 @@
+<map id="lib/data/services/file_service/mobile_desktop_file_service.dart" name="lib/data/services/file_service/mobile_desktop_file_service.dart">
+<area shape="rect" id="Node000001" title=" " alt="" coords="395,5,560,61"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,109,49,135"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="395,48,245,73,65,111,64,106,244,68,394,43"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="73,109,144,135"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="395,56,159,111,158,106,394,51"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="168,109,273,135"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="397,64,272,106,270,101,396,59"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="297,109,360,135"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="432,64,364,103,361,99,429,59"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="385,109,448,135"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="461,63,436,98,432,94,456,60"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="472,109,606,135"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="499,60,524,94,519,98,495,63"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="631,109,802,135"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="553,59,670,101,668,106,552,64"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="826,109,958,135"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="561,49,820,103,819,108,560,54"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="982,109,1085,135"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="561,44,967,106,966,111,560,49"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="1109,109,1233,135"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="561,41,796,68,1094,106,1094,111,796,73,560,46"/>
+</map>

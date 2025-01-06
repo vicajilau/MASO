@@ -1,0 +1,5 @@
+<map id="Process::fromJson" name="Process::fromJson">
+<area shape="rect" id="Node000001" title="Factory constructor to create a Process instance from a JSON map." alt="" coords="5,5,137,31"/>
+<area shape="rect" id="Node000002" href="$class_process.html#a7d453b8e68f90d1728e790f19867c7b0" title="Constructor for creating a Process instance with name, arrival time, and service time." alt="" coords="185,5,310,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="137,16,169,16,169,21,137,21"/>
+</map>

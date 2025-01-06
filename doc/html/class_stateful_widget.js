@@ -1,0 +1,27 @@
+var class_stateful_widget =
+[
+    [ "CreateMasoFileDialog", "class_stateful_widget.html#a814653c31b16f6825259dee52fb8fa09", null ],
+    [ "createState", "class_stateful_widget.html#a22bacb4f57fecf199927c3319fd12021", null ],
+    [ "createState", "class_stateful_widget.html#a057b40be095ddfd439c1874aafafe99e", null ],
+    [ "createState", "class_stateful_widget.html#ae2014f31d83f1d896c099bfbd9702625", null ],
+    [ "createState", "class_stateful_widget.html#a599ca55ec447ea0d35961028165f6ac6", null ],
+    [ "createState", "class_stateful_widget.html#a9dd85215ba894cace1bd2924e201cfc0", null ],
+    [ "createState", "class_stateful_widget.html#a73e27750967ca0fad4df45f132d1c228", null ],
+    [ "createState", "class_stateful_widget.html#a17f6ecadfecdf0a3799a3deeb716dafc", null ],
+    [ "createState", "class_stateful_widget.html#a471a1d44fe3f20d1ddca66033f8e529c", null ],
+    [ "ExecutionSetupDialog", "class_stateful_widget.html#a004f4f14dba4369905babb3b0e0dfd29", null ],
+    [ "FileLoadedScreen", "class_stateful_widget.html#ad3bba3cbca9acd54081b9e8e4d1b405e", null ],
+    [ "HomeScreen", "class_stateful_widget.html#aadfe1815667104ffda174cf274613879", null ],
+    [ "MasoFileExecutionScreen", "class_stateful_widget.html#a3018137ce03c677cb4c64e4b21285b59", null ],
+    [ "MasoFileListWidget", "class_stateful_widget.html#a2007f6e0f7f81cc1bebf6e07ce786961", null ],
+    [ "ProcessDialog", "class_stateful_widget.html#abd3423760bdf2a6e4161030baea3c783", null ],
+    [ "RequestFileNameDialog", "class_stateful_widget.html#a62fa8fd449675b4fa234802dbfb136ef", null ],
+    [ "checkFileChangesUseCase", "class_stateful_widget.html#a9d9d2937b79ddb66c3992ee798f60adc", null ],
+    [ "existingProcesses", "class_stateful_widget.html#a878aec968683edc9ad0146ad42ee5b50", null ],
+    [ "fileBloc", "class_stateful_widget.html#a9abf21393902d21e0292764e2068cd2f", null ],
+    [ "format", "class_stateful_widget.html#a63cf1da17a0f30809c9dc38e0fe8da63", null ],
+    [ "masoFile", "class_stateful_widget.html#a2e803a4653a78d30f8aa0caf3a335fef", null ],
+    [ "onFileChange", "class_stateful_widget.html#a9a7a032980e4010bcefa63c7435ad77a", null ],
+    [ "process", "class_stateful_widget.html#a1509b1e12c0145d97014cc3f22db1915", null ],
+    [ "processPosition", "class_stateful_widget.html#a4d1f1d4c09e9cdbc71c25b27bab93dcd", null ]
+];

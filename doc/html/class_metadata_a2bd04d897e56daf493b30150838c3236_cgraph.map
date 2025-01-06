@@ -1,0 +1,5 @@
+<map id="Metadata::fromJson" name="Metadata::fromJson">
+<area shape="rect" id="Node000001" title="Factory constructor to create a Metadata instance from a JSON map." alt="" coords="5,5,143,31"/>
+<area shape="rect" id="Node000002" href="$class_metadata.html#a1680b3c7cb5dddaac57160fdc5edce0c" title="Constructor for creating a Metadata instance with name, version, and description." alt="" coords="191,5,328,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="143,16,175,16,175,21,143,21"/>
+</map>

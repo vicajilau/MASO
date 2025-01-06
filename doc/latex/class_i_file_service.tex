@@ -1,0 +1,437 @@
+\doxysection{IFile\+Service Class Reference}
+\hypertarget{class_i_file_service}{}\label{class_i_file_service}\index{IFileService@{IFileService}}
+
+
+Collaboration diagram for IFile\+Service\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=163pt]{class_i_file_service__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+Future$<$ \mbox{\hyperlink{class_maso_file}{Maso\+File}} $>$ \mbox{\hyperlink{class_i_file_service_a7746bbe1a4f88fa0568909127ad7c0c6}{read\+Maso\+File}} (String \mbox{\hyperlink{file__event_8dart_a51af45a3e0720847ce45b9e0a7df5e75}{file\+Path}})
+\item 
+Future$<$ \mbox{\hyperlink{class_maso_file}{Maso\+File}}?$>$ \mbox{\hyperlink{class_i_file_service_aa0a3247217fb4e54461611b42944edca}{save\+Maso\+File}} (\mbox{\hyperlink{class_maso_file}{Maso\+File}} \mbox{\hyperlink{file__state_8dart_ad3cf10c66c7f57ddae0e72ac997d1188}{maso\+File}}, String \mbox{\hyperlink{file__event_8dart_a277e00f71c1a023fe4f9035b531e43fe}{dialog\+Title}}, String \mbox{\hyperlink{file__event_8dart_aa3c483f78eab77f5a9cd4212f37b8f6e}{file\+Name}})
+\item 
+Future$<$ void $>$ \mbox{\hyperlink{class_i_file_service_a7c617a6f815889a7c8550c741371598f}{save\+Exported\+File}} (Uint8\+List \mbox{\hyperlink{file__event_8dart_a4bff269539f3fd0899908554866181a5}{bytes}}, String \mbox{\hyperlink{file__event_8dart_a277e00f71c1a023fe4f9035b531e43fe}{dialog\+Title}}, String \mbox{\hyperlink{file__event_8dart_aa3c483f78eab77f5a9cd4212f37b8f6e}{file\+Name}})
+\item 
+Future$<$ \mbox{\hyperlink{class_maso_file}{Maso\+File}}?$>$ \mbox{\hyperlink{class_i_file_service_ad03380011cb6e8875297210b35ad5b07}{pick\+File}} ()
+\item 
+override Future$<$ \mbox{\hyperlink{class_maso_file}{Maso\+File}} $>$ \mbox{\hyperlink{class_i_file_service_a690e0ae7ffcbe27bd6be55added768de}{read\+Maso\+File}} (String \mbox{\hyperlink{file__event_8dart_a51af45a3e0720847ce45b9e0a7df5e75}{file\+Path}}) async
+\item 
+override Future$<$ \mbox{\hyperlink{class_maso_file}{Maso\+File}}?$>$ \mbox{\hyperlink{class_i_file_service_ad1a4d8b32412451c44da12cc4dd99d00}{save\+Maso\+File}} (\mbox{\hyperlink{class_maso_file}{Maso\+File}} \mbox{\hyperlink{file__state_8dart_ad3cf10c66c7f57ddae0e72ac997d1188}{maso\+File}}, String \mbox{\hyperlink{file__event_8dart_a277e00f71c1a023fe4f9035b531e43fe}{dialog\+Title}}, String \mbox{\hyperlink{file__event_8dart_aa3c483f78eab77f5a9cd4212f37b8f6e}{file\+Name}}) async
+\item 
+override Future$<$ void $>$ \mbox{\hyperlink{class_i_file_service_ac9a003830325043c33baed9e6fa777b6}{save\+Exported\+File}} (Uint8\+List \mbox{\hyperlink{file__event_8dart_a4bff269539f3fd0899908554866181a5}{bytes}}, String \mbox{\hyperlink{file__event_8dart_a277e00f71c1a023fe4f9035b531e43fe}{dialog\+Title}}, String \mbox{\hyperlink{file__event_8dart_aa3c483f78eab77f5a9cd4212f37b8f6e}{file\+Name}}) async
+\item 
+Future$<$ void $>$ \mbox{\hyperlink{class_i_file_service_a0a8c9a597da9b524a15c592407fb312a}{\+\_\+write\+Maso\+File}} (\mbox{\hyperlink{class_maso_file}{Maso\+File}} \mbox{\hyperlink{file__state_8dart_ad3cf10c66c7f57ddae0e72ac997d1188}{maso\+File}}) async
+\item 
+Future$<$ void $>$ \mbox{\hyperlink{class_i_file_service_a67355f50e5b0ca99b8f7a87c90291215}{\+\_\+write\+Exported\+File}} (Uint8\+List \mbox{\hyperlink{file__event_8dart_a4bff269539f3fd0899908554866181a5}{bytes}}, String path) async
+\item 
+override Future$<$ \mbox{\hyperlink{class_maso_file}{Maso\+File}}?$>$ \mbox{\hyperlink{class_i_file_service_a43df7297e3c2ee172d4af023add1b560}{pick\+File}} () async
+\item 
+override Future$<$ \mbox{\hyperlink{class_maso_file}{Maso\+File}} $>$ \mbox{\hyperlink{class_i_file_service_a690e0ae7ffcbe27bd6be55added768de}{read\+Maso\+File}} (String \mbox{\hyperlink{file__event_8dart_a51af45a3e0720847ce45b9e0a7df5e75}{file\+Path}}) async
+\item 
+\mbox{\hyperlink{class_maso_file}{Maso\+File}} \mbox{\hyperlink{class_i_file_service_ade356e25f248fabb661fa252bf99ee96}{decode\+And\+Create\+Maso\+File}} (String? \mbox{\hyperlink{file__event_8dart_a51af45a3e0720847ce45b9e0a7df5e75}{file\+Path}}, Uint8\+List code\+Units)
+\item 
+override Future$<$ \mbox{\hyperlink{class_maso_file}{Maso\+File}}?$>$ \mbox{\hyperlink{class_i_file_service_ad1a4d8b32412451c44da12cc4dd99d00}{save\+Maso\+File}} (\mbox{\hyperlink{class_maso_file}{Maso\+File}} \mbox{\hyperlink{file__state_8dart_ad3cf10c66c7f57ddae0e72ac997d1188}{maso\+File}}, String \mbox{\hyperlink{file__event_8dart_a277e00f71c1a023fe4f9035b531e43fe}{dialog\+Title}}, String \mbox{\hyperlink{file__event_8dart_aa3c483f78eab77f5a9cd4212f37b8f6e}{file\+Name}}) async
+\item 
+override Future$<$ void $>$ \mbox{\hyperlink{class_i_file_service_ac9a003830325043c33baed9e6fa777b6}{save\+Exported\+File}} (Uint8\+List \mbox{\hyperlink{file__event_8dart_a4bff269539f3fd0899908554866181a5}{bytes}}, String \mbox{\hyperlink{file__event_8dart_a277e00f71c1a023fe4f9035b531e43fe}{dialog\+Title}}, String \mbox{\hyperlink{file__event_8dart_aa3c483f78eab77f5a9cd4212f37b8f6e}{file\+Name}}) async
+\item 
+void \mbox{\hyperlink{class_i_file_service_aa465634ac3df75aa9aa09580bddb8a70}{download\+Maso\+File}} (String filename, String content)
+\item 
+override Future$<$ \mbox{\hyperlink{class_maso_file}{Maso\+File}}?$>$ \mbox{\hyperlink{class_i_file_service_a43df7297e3c2ee172d4af023add1b560}{pick\+File}} () async
+\item 
+Future$<$ Uint8\+List $>$ \mbox{\hyperlink{class_i_file_service_a6b9862f1367559e5b34d004f5f2ef3f1}{read\+Blob\+File}} (String blob\+Url) async
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_maso_file}{Maso\+File}} \mbox{\hyperlink{class_i_file_service_ad0795e6d5e722746c8df77b70e290ef6}{original\+File}}
+\begin{DoxyCompactList}\small\item\em Stores an original copy of the {\ttfamily \doxylink{class_maso_file}{Maso\+File}} to track changes. \end{DoxyCompactList}\item 
+override \mbox{\hyperlink{class_maso_file}{Maso\+File}} \mbox{\hyperlink{class_i_file_service_ad0795e6d5e722746c8df77b70e290ef6}{original\+File}}
+\begin{DoxyCompactList}\small\item\em Keep an original copy of the Maso document in order to detect changes in the Maso document. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Interface for file handling services, defining methods for reading, saving, and exporting {\ttfamily .maso} files across different platforms.
+
+The {\ttfamily File\+Service} class provides functionalities for managing {\ttfamily .maso} files. This includes reading a {\ttfamily .maso} file, saving a {\ttfamily \doxylink{class_maso_file}{Maso\+File}} object to the file system, and interacting with the user for file selection.
+
+The {\ttfamily File\+Service} class provides functionalities for managing {\ttfamily .maso} files. This includes reading, decoding, saving, and picking {\ttfamily .maso} files across platforms. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_i_file_service_a67355f50e5b0ca99b8f7a87c90291215}\index{IFileService@{IFileService}!\_writeExportedFile@{\_writeExportedFile}}
+\index{\_writeExportedFile@{\_writeExportedFile}!IFileService@{IFileService}}
+\doxysubsubsection{\texorpdfstring{\_writeExportedFile()}{\_writeExportedFile()}}
+{\footnotesize\ttfamily \label{class_i_file_service_a67355f50e5b0ca99b8f7a87c90291215} 
+Future$<$ void $>$ IFile\+Service\+::\+\_\+write\+Exported\+File (\begin{DoxyParamCaption}\item[{Uint8\+List}]{bytes}{, }\item[{String}]{path}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+Writes a {\ttfamily Uint8\+List} object to its file path.
+
+This is a helper method used internally to perform the actual file writing after a file path has been determined. Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_i_file_service_a67355f50e5b0ca99b8f7a87c90291215_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_i_file_service_a0a8c9a597da9b524a15c592407fb312a}\index{IFileService@{IFileService}!\_writeMasoFile@{\_writeMasoFile}}
+\index{\_writeMasoFile@{\_writeMasoFile}!IFileService@{IFileService}}
+\doxysubsubsection{\texorpdfstring{\_writeMasoFile()}{\_writeMasoFile()}}
+{\footnotesize\ttfamily \label{class_i_file_service_a0a8c9a597da9b524a15c592407fb312a} 
+Future$<$ void $>$ IFile\+Service\+::\+\_\+write\+Maso\+File (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_maso_file}{Maso\+File}}}]{maso\+File}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+Writes a {\ttfamily \doxylink{class_maso_file}{Maso\+File}} object to its file path.
+
+This is a helper method used internally to perform the actual file writing after a file path has been determined. Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_i_file_service_a0a8c9a597da9b524a15c592407fb312a_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_i_file_service_ade356e25f248fabb661fa252bf99ee96}\index{IFileService@{IFileService}!decodeAndCreateMasoFile@{decodeAndCreateMasoFile}}
+\index{decodeAndCreateMasoFile@{decodeAndCreateMasoFile}!IFileService@{IFileService}}
+\doxysubsubsection{\texorpdfstring{decodeAndCreateMasoFile()}{decodeAndCreateMasoFile()}}
+{\footnotesize\ttfamily \label{class_i_file_service_ade356e25f248fabb661fa252bf99ee96} 
+\mbox{\hyperlink{class_maso_file}{Maso\+File}} IFile\+Service\+::decode\+And\+Create\+Maso\+File (\begin{DoxyParamCaption}\item[{String?}]{file\+Path}{, }\item[{Uint8\+List}]{code\+Units}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+Decodes binary data \mbox{[}code\+Units\mbox{]} into a {\ttfamily \doxylink{class_maso_file}{Maso\+File}} object using the provided \mbox{[}file\+Path\mbox{]}.
+
+
+\begin{DoxyItemize}
+\item \mbox{[}file\+Path\mbox{]}\+: The path of the file being decoded.
+\item \mbox{[}code\+Units\mbox{]}\+: The binary content of the file as {\ttfamily Uint8\+List}.
+\item Returns\+: A {\ttfamily \doxylink{class_maso_file}{Maso\+File}} object containing the parsed data. 
+\end{DoxyItemize}Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_i_file_service_ade356e25f248fabb661fa252bf99ee96_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_i_file_service_ade356e25f248fabb661fa252bf99ee96_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_i_file_service_aa465634ac3df75aa9aa09580bddb8a70}\index{IFileService@{IFileService}!downloadMasoFile@{downloadMasoFile}}
+\index{downloadMasoFile@{downloadMasoFile}!IFileService@{IFileService}}
+\doxysubsubsection{\texorpdfstring{downloadMasoFile()}{downloadMasoFile()}}
+{\footnotesize\ttfamily \label{class_i_file_service_aa465634ac3df75aa9aa09580bddb8a70} 
+void IFile\+Service\+::download\+Maso\+File (\begin{DoxyParamCaption}\item[{String}]{filename}{, }\item[{String}]{content}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+Initiates the download of a {\ttfamily .maso} file by creating a blob from the provided content.
+
+
+\begin{DoxyItemize}
+\item \mbox{[}filename\mbox{]}\+: The name of the file to be downloaded.
+\item \mbox{[}content\mbox{]}\+: The content of the file as a string, which will be encoded to bytes. 
+\end{DoxyItemize}Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_i_file_service_aa465634ac3df75aa9aa09580bddb8a70_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_i_file_service_ad03380011cb6e8875297210b35ad5b07}\index{IFileService@{IFileService}!pickFile@{pickFile}}
+\index{pickFile@{pickFile}!IFileService@{IFileService}}
+\doxysubsubsection{\texorpdfstring{pickFile()}{pickFile()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{class_i_file_service_ad03380011cb6e8875297210b35ad5b07} 
+Future$<$ \mbox{\hyperlink{class_maso_file}{Maso\+File}}?$>$ IFile\+Service\+::pick\+File (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Opens a file picker dialog for the user to select a {\ttfamily .maso} file.
+
+If a valid file is selected, it reads and parses the file into a {\ttfamily \doxylink{class_maso_file}{Maso\+File}} object.
+
+
+\begin{DoxyItemize}
+\item Returns\+: A {\ttfamily \doxylink{class_maso_file}{Maso\+File}} object if a valid file is selected, or {\ttfamily null} if no file is selected. 
+\end{DoxyItemize}\Hypertarget{class_i_file_service_a43df7297e3c2ee172d4af023add1b560}\index{IFileService@{IFileService}!pickFile@{pickFile}}
+\index{pickFile@{pickFile}!IFileService@{IFileService}}
+\doxysubsubsection{\texorpdfstring{pickFile()}{pickFile()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{class_i_file_service_a43df7297e3c2ee172d4af023add1b560} 
+override Future$<$ \mbox{\hyperlink{class_maso_file}{Maso\+File}}?$>$ IFile\+Service\+::pick\+File (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+Opens a file picker dialog for the user to select a {\ttfamily .maso} file.
+
+If a file is selected, it reads and parses the file into a {\ttfamily \doxylink{class_maso_file}{Maso\+File}} object.
+
+
+\begin{DoxyItemize}
+\item Returns\+: A {\ttfamily \doxylink{class_maso_file}{Maso\+File}} object if a valid file is selected, or {\ttfamily null} if no file is selected. 
+\end{DoxyItemize}Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_i_file_service_a43df7297e3c2ee172d4af023add1b560_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_i_file_service_a43df7297e3c2ee172d4af023add1b560}\index{IFileService@{IFileService}!pickFile@{pickFile}}
+\index{pickFile@{pickFile}!IFileService@{IFileService}}
+\doxysubsubsection{\texorpdfstring{pickFile()}{pickFile()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{class_i_file_service_a43df7297e3c2ee172d4af023add1b560} 
+override Future$<$ \mbox{\hyperlink{class_maso_file}{Maso\+File}}?$>$ IFile\+Service\+::pick\+File (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+Opens a file picker dialog for the user to select a {\ttfamily .maso} file.
+
+If a file is selected, it retrieves the file\textquotesingle{}s binary data and decodes it into a {\ttfamily \doxylink{class_maso_file}{Maso\+File}} object.
+
+
+\begin{DoxyItemize}
+\item Returns\+: A {\ttfamily \doxylink{class_maso_file}{Maso\+File}} object if a valid file is selected, or {\ttfamily null} if no file is selected. 
+\end{DoxyItemize}Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_i_file_service_a43df7297e3c2ee172d4af023add1b560_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_i_file_service_a6b9862f1367559e5b34d004f5f2ef3f1}\index{IFileService@{IFileService}!readBlobFile@{readBlobFile}}
+\index{readBlobFile@{readBlobFile}!IFileService@{IFileService}}
+\doxysubsubsection{\texorpdfstring{readBlobFile()}{readBlobFile()}}
+{\footnotesize\ttfamily \label{class_i_file_service_a6b9862f1367559e5b34d004f5f2ef3f1} 
+Future$<$ Uint8\+List $>$ IFile\+Service\+::read\+Blob\+File (\begin{DoxyParamCaption}\item[{String}]{blob\+Url}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+Reads the binary data of a file from a Blob URL.
+
+This method fetches the file from the provided \mbox{[}blob\+Url\mbox{]}, processes it as a Blob, and reads its content as an {\ttfamily Uint8\+List}.
+
+
+\begin{DoxyItemize}
+\item \mbox{[}blob\+Url\mbox{]}\+: The URL of the file to read.
+\item Returns\+: A {\ttfamily Uint8\+List} containing the binary content of the file.
+\item Throws\+: An exception if there is an error fetching or reading the file. 
+\end{DoxyItemize}Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_i_file_service_a6b9862f1367559e5b34d004f5f2ef3f1_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_i_file_service_a7746bbe1a4f88fa0568909127ad7c0c6}\index{IFileService@{IFileService}!readMasoFile@{readMasoFile}}
+\index{readMasoFile@{readMasoFile}!IFileService@{IFileService}}
+\doxysubsubsection{\texorpdfstring{readMasoFile()}{readMasoFile()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{class_i_file_service_a7746bbe1a4f88fa0568909127ad7c0c6} 
+Future$<$ \mbox{\hyperlink{class_maso_file}{Maso\+File}} $>$ IFile\+Service\+::read\+Maso\+File (\begin{DoxyParamCaption}\item[{String}]{file\+Path}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Reads a {\ttfamily .maso} file from the specified \mbox{[}file\+Path\mbox{]} and returns a {\ttfamily \doxylink{class_maso_file}{Maso\+File}} object.
+
+
+\begin{DoxyItemize}
+\item Throws a \mbox{[}File\+Invalid\+Exception\mbox{]} if the file does not have a {\ttfamily .maso} extension.
+\item \mbox{[}file\+Path\mbox{]}\+: The path to the {\ttfamily .maso} file.
+\item Returns\+: A {\ttfamily \doxylink{class_maso_file}{Maso\+File}} object containing the parsed data from the file. 
+\end{DoxyItemize}Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_i_file_service_a7746bbe1a4f88fa0568909127ad7c0c6_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_i_file_service_a690e0ae7ffcbe27bd6be55added768de}\index{IFileService@{IFileService}!readMasoFile@{readMasoFile}}
+\index{readMasoFile@{readMasoFile}!IFileService@{IFileService}}
+\doxysubsubsection{\texorpdfstring{readMasoFile()}{readMasoFile()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{class_i_file_service_a690e0ae7ffcbe27bd6be55added768de} 
+override Future$<$ \mbox{\hyperlink{class_maso_file}{Maso\+File}} $>$ IFile\+Service\+::read\+Maso\+File (\begin{DoxyParamCaption}\item[{String}]{file\+Path}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+Reads a {\ttfamily .maso} file from the specified \mbox{[}file\+Path\mbox{]} and parses it into a {\ttfamily \doxylink{class_maso_file}{Maso\+File}} object.
+
+Throws a \mbox{[}File\+Invalid\+Exception\mbox{]} if the file does not have a {\ttfamily .maso} extension.
+
+
+\begin{DoxyItemize}
+\item \mbox{[}file\+Path\mbox{]}\+: The path to the {\ttfamily .maso} file.
+\item Returns\+: A {\ttfamily \doxylink{class_maso_file}{Maso\+File}} object containing the parsed data from the file.
+\item Throws\+: \mbox{[}File\+Invalid\+Exception\mbox{]} if the file extension is invalid. 
+\end{DoxyItemize}Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_i_file_service_a690e0ae7ffcbe27bd6be55added768de_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_i_file_service_a690e0ae7ffcbe27bd6be55added768de}\index{IFileService@{IFileService}!readMasoFile@{readMasoFile}}
+\index{readMasoFile@{readMasoFile}!IFileService@{IFileService}}
+\doxysubsubsection{\texorpdfstring{readMasoFile()}{readMasoFile()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{class_i_file_service_a690e0ae7ffcbe27bd6be55added768de} 
+override Future$<$ \mbox{\hyperlink{class_maso_file}{Maso\+File}} $>$ IFile\+Service\+::read\+Maso\+File (\begin{DoxyParamCaption}\item[{String}]{file\+Path}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+Reads a {\ttfamily .maso} file from the specified \mbox{[}file\+Path\mbox{]}, retrieves its binary data, and decodes it into a {\ttfamily \doxylink{class_maso_file}{Maso\+File}} object.
+
+
+\begin{DoxyItemize}
+\item \mbox{[}file\+Path\mbox{]}\+: The path or URL of the {\ttfamily .maso} file.
+\item Returns\+: A {\ttfamily \doxylink{class_maso_file}{Maso\+File}} object containing the parsed data from the file.
+\item Throws\+: An exception if there is an error reading or decoding the file. 
+\end{DoxyItemize}Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_i_file_service_a690e0ae7ffcbe27bd6be55added768de_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_i_file_service_a7c617a6f815889a7c8550c741371598f}\index{IFileService@{IFileService}!saveExportedFile@{saveExportedFile}}
+\index{saveExportedFile@{saveExportedFile}!IFileService@{IFileService}}
+\doxysubsubsection{\texorpdfstring{saveExportedFile()}{saveExportedFile()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{class_i_file_service_a7c617a6f815889a7c8550c741371598f} 
+Future$<$ void $>$ IFile\+Service\+::save\+Exported\+File (\begin{DoxyParamCaption}\item[{Uint8\+List}]{bytes}{, }\item[{String}]{dialog\+Title}{, }\item[{String}]{file\+Name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Saves an exported file to the file system.
+
+Opens a save dialog for the user to choose the file path and writes the provided {\ttfamily Uint8\+List} byte data to the selected file.
+
+
+\begin{DoxyItemize}
+\item \mbox{[}bytes\mbox{]}\+: The binary content to be saved.
+\item \mbox{[}dialog\+Title\mbox{]}\+: The title for the save dialog window.
+\item \mbox{[}file\+Name\mbox{]}\+: The name of the file. 
+\end{DoxyItemize}\Hypertarget{class_i_file_service_ac9a003830325043c33baed9e6fa777b6}\index{IFileService@{IFileService}!saveExportedFile@{saveExportedFile}}
+\index{saveExportedFile@{saveExportedFile}!IFileService@{IFileService}}
+\doxysubsubsection{\texorpdfstring{saveExportedFile()}{saveExportedFile()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{class_i_file_service_ac9a003830325043c33baed9e6fa777b6} 
+override Future$<$ void $>$ IFile\+Service\+::save\+Exported\+File (\begin{DoxyParamCaption}\item[{Uint8\+List}]{bytes}{, }\item[{String}]{dialog\+Title}{, }\item[{String}]{file\+Name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+Saves a {\ttfamily \doxylink{class_maso_file}{Maso\+File}} object to the file system.
+
+This method opens a save dialog for the user to choose the file path and writes the {\ttfamily \doxylink{class_maso_file}{Maso\+File}} data in JSON format to the selected file.
+
+
+\begin{DoxyItemize}
+\item \mbox{[}maso\+File\mbox{]}\+: The {\ttfamily \doxylink{class_maso_file}{Maso\+File}} object to save.
+\item \mbox{[}dialog\+Title\mbox{]}\+: The title for the save dialog window.
+\item \mbox{[}file\+Name\mbox{]}\+: The name for the file.
+\item Returns\+: The {\ttfamily \doxylink{class_maso_file}{Maso\+File}} object with an updated file path if the user selects a path. 
+\end{DoxyItemize}Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_i_file_service_ac9a003830325043c33baed9e6fa777b6_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_i_file_service_ac9a003830325043c33baed9e6fa777b6}\index{IFileService@{IFileService}!saveExportedFile@{saveExportedFile}}
+\index{saveExportedFile@{saveExportedFile}!IFileService@{IFileService}}
+\doxysubsubsection{\texorpdfstring{saveExportedFile()}{saveExportedFile()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{class_i_file_service_ac9a003830325043c33baed9e6fa777b6} 
+override Future$<$ void $>$ IFile\+Service\+::save\+Exported\+File (\begin{DoxyParamCaption}\item[{Uint8\+List}]{bytes}{, }\item[{String}]{dialog\+Title}{, }\item[{String}]{file\+Name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+Saves a {\ttfamily Exported} object to the file system.
+
+This method opens a save dialog for the user to choose the file path and writes the {\ttfamily \doxylink{class_maso_file}{Maso\+File}} data in JSON format to the selected file.
+
+
+\begin{DoxyItemize}
+\item \mbox{[}maso\+File\mbox{]}\+: The {\ttfamily \doxylink{class_maso_file}{Maso\+File}} object to save.
+\item \mbox{[}dialog\+Title\mbox{]}\+: The title for the save dialog window.
+\item \mbox{[}file\+Name\mbox{]}\+: The name for the file.
+\item Returns\+: The {\ttfamily \doxylink{class_maso_file}{Maso\+File}} object with an updated file path if the user selects a path. 
+\end{DoxyItemize}\Hypertarget{class_i_file_service_aa0a3247217fb4e54461611b42944edca}\index{IFileService@{IFileService}!saveMasoFile@{saveMasoFile}}
+\index{saveMasoFile@{saveMasoFile}!IFileService@{IFileService}}
+\doxysubsubsection{\texorpdfstring{saveMasoFile()}{saveMasoFile()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{class_i_file_service_aa0a3247217fb4e54461611b42944edca} 
+Future$<$ \mbox{\hyperlink{class_maso_file}{Maso\+File}}?$>$ IFile\+Service\+::save\+Maso\+File (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_maso_file}{Maso\+File}}}]{maso\+File}{, }\item[{String}]{dialog\+Title}{, }\item[{String}]{file\+Name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Saves a {\ttfamily \doxylink{class_maso_file}{Maso\+File}} object to the file system.
+
+Opens a save dialog for the user to choose the file path and writes the {\ttfamily \doxylink{class_maso_file}{Maso\+File}} data in JSON format to the selected file.
+
+
+\begin{DoxyItemize}
+\item \mbox{[}maso\+File\mbox{]}\+: The {\ttfamily \doxylink{class_maso_file}{Maso\+File}} object to save.
+\item \mbox{[}dialog\+Title\mbox{]}\+: The title for the save dialog window.
+\item \mbox{[}file\+Name\mbox{]}\+: The name of the file.
+\item Returns\+: The {\ttfamily \doxylink{class_maso_file}{Maso\+File}} object with an updated file path if the user selects a path. 
+\end{DoxyItemize}\Hypertarget{class_i_file_service_ad1a4d8b32412451c44da12cc4dd99d00}\index{IFileService@{IFileService}!saveMasoFile@{saveMasoFile}}
+\index{saveMasoFile@{saveMasoFile}!IFileService@{IFileService}}
+\doxysubsubsection{\texorpdfstring{saveMasoFile()}{saveMasoFile()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{class_i_file_service_ad1a4d8b32412451c44da12cc4dd99d00} 
+override Future$<$ \mbox{\hyperlink{class_maso_file}{Maso\+File}}?$>$ IFile\+Service\+::save\+Maso\+File (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_maso_file}{Maso\+File}}}]{maso\+File}{, }\item[{String}]{dialog\+Title}{, }\item[{String}]{file\+Name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+Saves a {\ttfamily \doxylink{class_maso_file}{Maso\+File}} object to the file system.
+
+This method opens a save dialog for the user to choose the file path and writes the {\ttfamily \doxylink{class_maso_file}{Maso\+File}} data in JSON format to the selected file.
+
+
+\begin{DoxyItemize}
+\item \mbox{[}maso\+File\mbox{]}\+: The {\ttfamily \doxylink{class_maso_file}{Maso\+File}} object to save.
+\item \mbox{[}dialog\+Title\mbox{]}\+: The title for the save dialog window.
+\item \mbox{[}file\+Name\mbox{]}\+: The name for the file.
+\item Returns\+: The {\ttfamily \doxylink{class_maso_file}{Maso\+File}} object with an updated file path if the user selects a path. 
+\end{DoxyItemize}Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_i_file_service_ad1a4d8b32412451c44da12cc4dd99d00_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_i_file_service_ad1a4d8b32412451c44da12cc4dd99d00}\index{IFileService@{IFileService}!saveMasoFile@{saveMasoFile}}
+\index{saveMasoFile@{saveMasoFile}!IFileService@{IFileService}}
+\doxysubsubsection{\texorpdfstring{saveMasoFile()}{saveMasoFile()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{class_i_file_service_ad1a4d8b32412451c44da12cc4dd99d00} 
+override Future$<$ \mbox{\hyperlink{class_maso_file}{Maso\+File}}?$>$ IFile\+Service\+::save\+Maso\+File (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_maso_file}{Maso\+File}}}]{maso\+File}{, }\item[{String}]{dialog\+Title}{, }\item[{String}]{file\+Name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+Saves a {\ttfamily \doxylink{class_maso_file}{Maso\+File}} object to the file system by opening a save dialog.
+
+
+\begin{DoxyItemize}
+\item \mbox{[}maso\+File\mbox{]}\+: The {\ttfamily \doxylink{class_maso_file}{Maso\+File}} object to save.
+\item \mbox{[}dialog\+Title\mbox{]}\+: The title of the save dialog window.
+\item Returns\+: The {\ttfamily \doxylink{class_maso_file}{Maso\+File}} object with an updated file path if the user selects a path.
+\item Throws\+: An exception if there is an error saving the file. 
+\end{DoxyItemize}Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_i_file_service_ad1a4d8b32412451c44da12cc4dd99d00_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_i_file_service_ad0795e6d5e722746c8df77b70e290ef6}\index{IFileService@{IFileService}!originalFile@{originalFile}}
+\index{originalFile@{originalFile}!IFileService@{IFileService}}
+\doxysubsubsection{\texorpdfstring{originalFile}{originalFile}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_i_file_service_ad0795e6d5e722746c8df77b70e290ef6} 
+override \mbox{\hyperlink{class_maso_file}{Maso\+File}} IFile\+Service\+::original\+File\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Stores an original copy of the {\ttfamily \doxylink{class_maso_file}{Maso\+File}} to track changes. 
+
+Keep an original copy of the Maso document in order to detect changes in the Maso document. \Hypertarget{class_i_file_service_ad0795e6d5e722746c8df77b70e290ef6}\index{IFileService@{IFileService}!originalFile@{originalFile}}
+\index{originalFile@{originalFile}!IFileService@{IFileService}}
+\doxysubsubsection{\texorpdfstring{originalFile}{originalFile}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_i_file_service_ad0795e6d5e722746c8df77b70e290ef6} 
+override \mbox{\hyperlink{class_maso_file}{Maso\+File}} IFile\+Service\+::original\+File\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Keep an original copy of the Maso document in order to detect changes in the Maso document. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+lib/data/services/file\+\_\+service/\mbox{\hyperlink{i__file__service_8dart}{i\+\_\+file\+\_\+service.\+dart}}\item 
+lib/data/services/file\+\_\+service/\mbox{\hyperlink{mobile__desktop__file__service_8dart}{mobile\+\_\+desktop\+\_\+file\+\_\+service.\+dart}}\item 
+lib/data/services/file\+\_\+service/\mbox{\hyperlink{web__file__service_8dart}{web\+\_\+file\+\_\+service.\+dart}}\end{DoxyCompactItemize}

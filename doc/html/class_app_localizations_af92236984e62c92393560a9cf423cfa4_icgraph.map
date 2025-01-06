@@ -1,0 +1,32 @@
+<map id="AppLocalizations::of" name="AppLocalizations::of">
+<area shape="rect" id="Node000001" title=" " alt="" coords="415,244,554,270"/>
+<area shape="poly" id="edge17_Node000001_Node000001" title=" " alt="" coords="518,232,507,225,485,223,464,225,453,229,451,235,457,242,452,245,446,235,450,226,463,219,485,217,509,220,521,227"/>
+<area shape="rect" id="Node000002" href="$maso__file__execution__screen_8dart.html#a211b96fcb39cbc54611387b90c957413" title=" " alt="" coords="237,93,344,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="462,233,420,187,366,140,330,122,333,117,368,136,424,183,466,230"/>
+<area shape="rect" id="Node000003" href="$maso__file__execution__screen_8dart.html#aabf0626d32e70421f7a5819c7931fadc" title=" " alt="" coords="5,5,167,31"/>
+<area shape="poly" id="edge5_Node000001_Node000003" title=" " alt="" coords="474,230,461,189,439,140,407,91,388,70,366,52,318,29,267,16,215,11,167,12,167,6,215,6,268,11,320,24,368,48,391,66,411,88,443,137,465,187,479,228"/>
+<area shape="rect" id="Node000004" href="$maso__file__execution__screen_8dart.html#a3f0b91b0db5183389d2d042355602595" title=" " alt="" coords="28,80,144,106"/>
+<area shape="poly" id="edge6_Node000001_Node000004" title=" " alt="" coords="472,230,457,194,435,153,405,113,386,97,366,83,336,71,305,63,239,61,177,69,127,82,126,77,176,64,239,55,305,58,338,66,368,78,389,92,408,110,439,150,462,192,477,228"/>
+<area shape="rect" id="Node000005" href="$maso__file__execution__screen_8dart.html#aad037b9f8773fab44ce62cde15187551" title=" " alt="" coords="36,144,136,170"/>
+<area shape="poly" id="edge7_Node000001_Node000005" title=" " alt="" coords="455,236,414,208,366,185,306,169,244,160,137,157,137,152,245,155,307,164,368,180,417,204,458,232"/>
+<area shape="rect" id="Node000006" href="$file__loaded__screen_8dart.html#a19715a049b2efdfbcb12631ef77c1b96" title=" " alt="" coords="231,195,351,220"/>
+<area shape="poly" id="edge8_Node000001_Node000006" title=" " alt="" coords="416,242,344,224,345,218,417,237"/>
+<area shape="rect" id="Node000007" href="$maso__file__execution__screen_8dart.html#a32ca4b33af0c109a9cd7df0ce7d84a6a" title=" " alt="" coords="220,244,362,270"/>
+<area shape="poly" id="edge9_Node000001_Node000007" title=" " alt="" coords="400,260,362,260,362,254,400,254"/>
+<area shape="rect" id="Node000008" href="$create__maso__dialog_8dart.html#a15c418581c228e6e72c1d8207d0bd096" title="Validates inputs and handles form submission." alt="" coords="257,293,324,319"/>
+<area shape="poly" id="edge10_Node000001_Node000008" title=" " alt="" coords="417,277,326,300,324,295,416,272"/>
+<area shape="rect" id="Node000009" href="$create__maso__dialog_8dart.html#ab022cbdb8080a3d9d6ccf33cead2b33a" title=" " alt="" coords="62,319,110,344"/>
+<area shape="poly" id="edge14_Node000001_Node000009" title=" " alt="" coords="459,282,418,311,368,334,295,347,223,349,158,345,110,338,111,333,159,340,223,344,295,342,366,329,415,306,456,278"/>
+<area shape="rect" id="Node000010" href="$process__dialog_8dart.html#a9e6349074142e4f6736cc01a89196b3a" title="Validate the input fields." alt="" coords="240,395,342,420"/>
+<area shape="poly" id="edge12_Node000001_Node000010" title=" " alt="" coords="466,284,424,331,368,378,333,396,330,392,366,373,420,327,462,280"/>
+<area shape="rect" id="Node000012" href="$class_stateless_widget.html#a83e664747f18091d3843e55bfa470e5b" title=" " alt="" coords="215,444,367,470"/>
+<area shape="poly" id="edge15_Node000001_Node000012" title=" " alt="" coords="475,285,458,319,435,360,405,400,369,435,350,446,347,441,365,431,401,397,431,357,454,317,470,283"/>
+<area shape="rect" id="Node000013" href="$file__state_8dart.html#a6b373de7cf24fa0c4f40171dc8114b78" title=" " alt="" coords="238,493,344,519"/>
+<area shape="poly" id="edge16_Node000001_Node000013" title=" " alt="" coords="479,286,465,329,443,382,411,437,391,462,369,484,345,498,343,493,365,480,387,459,407,434,438,380,460,327,474,284"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="244,89,117,34,119,29,246,84"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="222,104,144,99,145,94,222,99"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="223,126,137,147,136,142,222,120"/>
+<area shape="poly" id="edge11_Node000008_Node000009" title=" " alt="" coords="242,315,111,331,110,326,241,310"/>
+<area shape="rect" id="Node000011" href="$process__dialog_8dart.html#a15c418581c228e6e72c1d8207d0bd096" title="Submit the form if input is valid." alt="" coords="52,395,120,420"/>
+<area shape="poly" id="edge13_Node000010_Node000011" title=" " alt="" coords="224,410,120,410,120,405,224,405"/>
+</map>

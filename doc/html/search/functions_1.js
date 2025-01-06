@@ -1,0 +1,5 @@
+var searchData=
+[
+  ['algorithmlabel_0',['algorithmLabel',['../class_app_localizations.html#a6a0d8bcf496171bb8343cea7bbc33d41',1,'AppLocalizations::algorithmLabel(String algorithm)'],['../class_app_localizations.html#ad5c8a91b1025e13c244056f1e3149a08',1,'AppLocalizations::algorithmLabel(String algorithm)'],['../class_app_localizations.html#ad5c8a91b1025e13c244056f1e3149a08',1,'AppLocalizations::algorithmLabel(String algorithm)'],['../app__localizations_8dart.html#a546610e75c1a56ce28ec32c47471f81e',1,'algorithmLabel():&#160;app_localizations.dart']]],
+  ['arrivaltimelabel_1',['arrivalTimeLabel',['../class_app_localizations.html#ace19c7441464aea90aea04a7fb22cf43',1,'AppLocalizations::arrivalTimeLabel(String arrivalTime)'],['../class_app_localizations.html#a99f4fddaeeff02a340b8d8fdffce6256',1,'AppLocalizations::arrivalTimeLabel(String arrivalTime)'],['../class_app_localizations.html#a99f4fddaeeff02a340b8d8fdffce6256',1,'AppLocalizations::arrivalTimeLabel(String arrivalTime)'],['../app__localizations_8dart.html#a3732b78348b0b3cc3b986be479d02659',1,'arrivalTimeLabel():&#160;app_localizations.dart']]]
+];

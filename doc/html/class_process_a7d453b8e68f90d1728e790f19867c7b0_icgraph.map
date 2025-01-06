@@ -1,0 +1,19 @@
+<map id="Process::Process" name="Process::Process">
+<area shape="rect" id="Node000001" title="Constructor for creating a Process instance with name, arrival time, and service time." alt="" coords="1108,68,1233,93"/>
+<area shape="rect" id="Node000002" href="$class_process.html#aebb52b5d006fd9d5540d5933138df06f" title="Factory constructor to create a Process instance from a JSON map." alt="" coords="924,42,1056,68"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1092,72,1056,67,1056,62,1093,67"/>
+<area shape="rect" id="Node000008" href="$class_process.html#a09d27bc3de83c51aa990f98878fbf98d" title="Override the equality operator to compare Process instances based on their values." alt="" coords="920,92,1060,117"/>
+<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="1093,93,1061,98,1060,92,1092,88"/>
+<area shape="rect" id="Node000003" href="$class_maso_file.html#af430d4b1e9d04e88aee7816649e75c78" title="Static method to verify if the provided JSON is valid and has the correct structure." alt="" coords="664,17,872,42"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="909,48,872,44,872,39,909,43"/>
+<area shape="rect" id="Node000004" href="$class_maso_file.html#ad58a93641fae37abdb20b8c0b88c9ca5" title="Factory constructor to create a MasoFile instance from a JSON map." alt="" coords="480,42,616,68"/>
+<area shape="poly" id="edge8_Node000002_Node000004" title=" " alt="" coords="909,58,617,58,617,52,909,52"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="649,46,617,50,616,45,648,41"/>
+<area shape="rect" id="Node000005" href="$class_i_file_service.html#ade356e25f248fabb661fa252bf99ee96" title=" " alt="" coords="230,5,432,46"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="464,46,432,42,433,37,465,41"/>
+<area shape="rect" id="Node000007" href="$class_i_file_service.html#a690e0ae7ffcbe27bd6be55added768de" title=" " alt="" coords="5,66,182,92"/>
+<area shape="poly" id="edge7_Node000004_Node000007" title=" " alt="" coords="465,62,182,77,182,72,465,57"/>
+<area shape="rect" id="Node000006" href="$class_i_file_service.html#a43df7297e3c2ee172d4af023add1b560" title=" " alt="" coords="22,13,165,38"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="214,28,166,28,166,23,214,23"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="223,53,155,68,154,63,222,47"/>
+</map>

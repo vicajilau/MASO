@@ -1,0 +1,5 @@
+<map id="Process::operator==" name="Process::operator==">
+<area shape="rect" id="Node000001" title="Override the equality operator to compare Process instances based on their values." alt="" coords="5,5,146,31"/>
+<area shape="rect" id="Node000002" href="$class_process.html#a7d453b8e68f90d1728e790f19867c7b0" title="Constructor for creating a Process instance with name, arrival time, and service time." alt="" coords="194,5,319,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="146,16,178,16,178,21,146,21"/>
+</map>

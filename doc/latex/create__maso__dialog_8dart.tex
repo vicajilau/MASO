@@ -1,0 +1,157 @@
+\doxysection{lib/presentation/widgets/dialogs/create\+\_\+maso\+\_\+dialog.dart File Reference}
+\hypertarget{create__maso__dialog_8dart}{}\label{create__maso__dialog_8dart}\index{lib/presentation/widgets/dialogs/create\_maso\_dialog.dart@{lib/presentation/widgets/dialogs/create\_maso\_dialog.dart}}
+{\ttfamily import package;}\newline
+{\ttfamily import material.\+dart;}\newline
+{\ttfamily import go\+\_\+router.\+dart;}\newline
+{\ttfamily import core;}\newline
+{\ttfamily import l10n;}\newline
+{\ttfamily import app\+\_\+localizations.\+dart;}\newline
+Include dependency graph for create\+\_\+maso\+\_\+dialog.\+dart\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{create__maso__dialog_8dart__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_stateful_widget}{Stateful\+Widget}}
+\begin{DoxyCompactList}\small\item\em A dialog widget for creating or editing a process. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+override void \mbox{\hyperlink{create__maso__dialog_8dart_acc340fabce6d1fd6056b3c2e871d98d2}{dispose}} ()
+\item 
+void \mbox{\hyperlink{create__maso__dialog_8dart_aeb8c390c8b75a47a00eaac530fca77af}{\+\_\+on\+Name\+Changed}} (String value)
+\begin{DoxyCompactList}\small\item\em Clears the name error message when the user types into the name field. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{create__maso__dialog_8dart_aafddc4362f5671658d57210398cb99a3}{\+\_\+on\+Description\+Changed}} (String value)
+\begin{DoxyCompactList}\small\item\em Clears the description error message when the user types into the description field. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{create__maso__dialog_8dart_a15c418581c228e6e72c1d8207d0bd096}{\+\_\+submit}} ()
+\begin{DoxyCompactList}\small\item\em Validates inputs and handles form submission. \end{DoxyCompactList}\item 
+override Widget \mbox{\hyperlink{create__maso__dialog_8dart_ab022cbdb8080a3d9d6ccf33cead2b33a}{build}} (Build\+Context context)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+class Create\+Maso\+File\+Dialog extends \mbox{\hyperlink{class_stateful_widget}{Stateful\+Widget}} \mbox{\hyperlink{create__maso__dialog_8dart_aa44160e6c702f2a6f23d383ab3a54151}{\+\_\+name\+Controller}} = Text\+Editing\+Controller()
+\item 
+final Text\+Editing\+Controller \mbox{\hyperlink{create__maso__dialog_8dart_a7cc82d0af7b956ece79db414e36e0b20}{\+\_\+description\+Controller}} = Text\+Editing\+Controller()
+\item 
+String \mbox{\hyperlink{create__maso__dialog_8dart_a8ec1b49169a8cd9eb903652051657ea4}{\+\_\+name\+Error}}
+\item 
+String \mbox{\hyperlink{create__maso__dialog_8dart_a011171713fd169ad2fa76dba67e02bbf}{\+\_\+description\+Error}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{create__maso__dialog_8dart_aafddc4362f5671658d57210398cb99a3}\index{create\_maso\_dialog.dart@{create\_maso\_dialog.dart}!\_onDescriptionChanged@{\_onDescriptionChanged}}
+\index{\_onDescriptionChanged@{\_onDescriptionChanged}!create\_maso\_dialog.dart@{create\_maso\_dialog.dart}}
+\doxysubsubsection{\texorpdfstring{\_onDescriptionChanged()}{\_onDescriptionChanged()}}
+{\footnotesize\ttfamily \label{create__maso__dialog_8dart_aafddc4362f5671658d57210398cb99a3} 
+void \+\_\+on\+Description\+Changed (\begin{DoxyParamCaption}\item[{String}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Clears the description error message when the user types into the description field. 
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=273pt]{create__maso__dialog_8dart_aafddc4362f5671658d57210398cb99a3_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{create__maso__dialog_8dart_aeb8c390c8b75a47a00eaac530fca77af}\index{create\_maso\_dialog.dart@{create\_maso\_dialog.dart}!\_onNameChanged@{\_onNameChanged}}
+\index{\_onNameChanged@{\_onNameChanged}!create\_maso\_dialog.dart@{create\_maso\_dialog.dart}}
+\doxysubsubsection{\texorpdfstring{\_onNameChanged()}{\_onNameChanged()}}
+{\footnotesize\ttfamily \label{create__maso__dialog_8dart_aeb8c390c8b75a47a00eaac530fca77af} 
+void \+\_\+on\+Name\+Changed (\begin{DoxyParamCaption}\item[{String}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Clears the name error message when the user types into the name field. 
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=249pt]{create__maso__dialog_8dart_aeb8c390c8b75a47a00eaac530fca77af_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{create__maso__dialog_8dart_a15c418581c228e6e72c1d8207d0bd096}\index{create\_maso\_dialog.dart@{create\_maso\_dialog.dart}!\_submit@{\_submit}}
+\index{\_submit@{\_submit}!create\_maso\_dialog.dart@{create\_maso\_dialog.dart}}
+\doxysubsubsection{\texorpdfstring{\_submit()}{\_submit()}}
+{\footnotesize\ttfamily \label{create__maso__dialog_8dart_a15c418581c228e6e72c1d8207d0bd096} 
+void \+\_\+submit (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Validates inputs and handles form submission. 
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=271pt]{create__maso__dialog_8dart_a15c418581c228e6e72c1d8207d0bd096_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=203pt]{create__maso__dialog_8dart_a15c418581c228e6e72c1d8207d0bd096_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{create__maso__dialog_8dart_ab022cbdb8080a3d9d6ccf33cead2b33a}\index{create\_maso\_dialog.dart@{create\_maso\_dialog.dart}!build@{build}}
+\index{build@{build}!create\_maso\_dialog.dart@{create\_maso\_dialog.dart}}
+\doxysubsubsection{\texorpdfstring{build()}{build()}}
+{\footnotesize\ttfamily \label{create__maso__dialog_8dart_ab022cbdb8080a3d9d6ccf33cead2b33a} 
+override Widget build (\begin{DoxyParamCaption}\item[{Build\+Context}]{context}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{create__maso__dialog_8dart_ab022cbdb8080a3d9d6ccf33cead2b33a_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{create__maso__dialog_8dart_acc340fabce6d1fd6056b3c2e871d98d2}\index{create\_maso\_dialog.dart@{create\_maso\_dialog.dart}!dispose@{dispose}}
+\index{dispose@{dispose}!create\_maso\_dialog.dart@{create\_maso\_dialog.dart}}
+\doxysubsubsection{\texorpdfstring{dispose()}{dispose()}}
+{\footnotesize\ttfamily \label{create__maso__dialog_8dart_acc340fabce6d1fd6056b3c2e871d98d2} 
+override void dispose (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{create__maso__dialog_8dart_a7cc82d0af7b956ece79db414e36e0b20}\index{create\_maso\_dialog.dart@{create\_maso\_dialog.dart}!\_descriptionController@{\_descriptionController}}
+\index{\_descriptionController@{\_descriptionController}!create\_maso\_dialog.dart@{create\_maso\_dialog.dart}}
+\doxysubsubsection{\texorpdfstring{\_descriptionController}{\_descriptionController}}
+{\footnotesize\ttfamily \label{create__maso__dialog_8dart_a7cc82d0af7b956ece79db414e36e0b20} 
+final Text\+Editing\+Controller \+\_\+description\+Controller = Text\+Editing\+Controller()}
+
+\Hypertarget{create__maso__dialog_8dart_a011171713fd169ad2fa76dba67e02bbf}\index{create\_maso\_dialog.dart@{create\_maso\_dialog.dart}!\_descriptionError@{\_descriptionError}}
+\index{\_descriptionError@{\_descriptionError}!create\_maso\_dialog.dart@{create\_maso\_dialog.dart}}
+\doxysubsubsection{\texorpdfstring{\_descriptionError}{\_descriptionError}}
+{\footnotesize\ttfamily \label{create__maso__dialog_8dart_a011171713fd169ad2fa76dba67e02bbf} 
+String \+\_\+description\+Error}
+
+\Hypertarget{create__maso__dialog_8dart_aa44160e6c702f2a6f23d383ab3a54151}\index{create\_maso\_dialog.dart@{create\_maso\_dialog.dart}!\_nameController@{\_nameController}}
+\index{\_nameController@{\_nameController}!create\_maso\_dialog.dart@{create\_maso\_dialog.dart}}
+\doxysubsubsection{\texorpdfstring{\_nameController}{\_nameController}}
+{\footnotesize\ttfamily \label{create__maso__dialog_8dart_aa44160e6c702f2a6f23d383ab3a54151} 
+class Create\+Maso\+File\+Dialog extends \mbox{\hyperlink{class_stateful_widget}{Stateful\+Widget}} \+\_\+name\+Controller = Text\+Editing\+Controller()}
+
+\Hypertarget{create__maso__dialog_8dart_a8ec1b49169a8cd9eb903652051657ea4}\index{create\_maso\_dialog.dart@{create\_maso\_dialog.dart}!\_nameError@{\_nameError}}
+\index{\_nameError@{\_nameError}!create\_maso\_dialog.dart@{create\_maso\_dialog.dart}}
+\doxysubsubsection{\texorpdfstring{\_nameError}{\_nameError}}
+{\footnotesize\ttfamily \label{create__maso__dialog_8dart_a8ec1b49169a8cd9eb903652051657ea4} 
+String \+\_\+name\+Error}
+

@@ -1,0 +1,255 @@
+\doxysection{Maso\+File Class Reference}
+\hypertarget{class_maso_file}{}\label{class_maso_file}\index{MasoFile@{MasoFile}}
+
+
+The {\ttfamily \doxylink{class_maso_file}{Maso\+File}} class represents a MASO file, which consists of metadata and a list of processes.  
+
+
+
+
+Collaboration diagram for Maso\+File\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=152pt]{class_maso_file__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_maso_file_a326ddc61de56be977949d778d56b9493}{Maso\+File}} (\{required this.\+metadata, required this.\+processes, this.\+file\+Path\})
+\begin{DoxyCompactList}\small\item\em Constructor for creating a {\ttfamily \doxylink{class_maso_file}{Maso\+File}} instance with metadata and processes. \end{DoxyCompactList}\item 
+factory \mbox{\hyperlink{class_maso_file}{Maso\+File}} \mbox{\hyperlink{class_maso_file_ad58a93641fae37abdb20b8c0b88c9ca5}{from\+Json}} (Map$<$ String, dynamic $>$ json, String? \mbox{\hyperlink{class_maso_file_a37229691607e99e98cce2cdf769c202d}{file\+Path}})
+\begin{DoxyCompactList}\small\item\em Factory constructor to create a {\ttfamily \doxylink{class_maso_file}{Maso\+File}} instance from a JSON map. \end{DoxyCompactList}\item 
+Map$<$ String, dynamic $>$ \mbox{\hyperlink{class_maso_file_afff805683433920b9411914585ae786f}{to\+Json}} ()
+\begin{DoxyCompactList}\small\item\em Converts the {\ttfamily \doxylink{class_maso_file}{Maso\+File}} instance to a JSON map. \end{DoxyCompactList}\item 
+override bool \mbox{\hyperlink{class_maso_file_a44b3d6b1b85adc22fae9728bd83ee739}{operator==}} (Object other)
+\begin{DoxyCompactList}\small\item\em Overrides the equality operator to compare {\ttfamily \doxylink{class_maso_file}{Maso\+File}} instances based on their values. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_maso_file_aca5a16f41a59fb1d24cfcb0fedc18291}{\+\_\+processes\+Equal}} (List$<$ \mbox{\hyperlink{class_process}{Process}} $>$ other\+Processes)
+\begin{DoxyCompactList}\small\item\em Compares the \textquotesingle{}processes\textquotesingle{} list deeply by checking each \textquotesingle{}process\textquotesingle{} object. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_maso_file_a2440a51c974c7c19d4db96d69553e242}{\+\_\+processes\+Hash\+Code}} (List$<$ \mbox{\hyperlink{class_process}{Process}} $>$ \mbox{\hyperlink{class_maso_file_a1cfa31f2ff9a8bbb44046d3f0de3ec0d}{processes}})
+\begin{DoxyCompactList}\small\item\em Generates a {\ttfamily hash\+Code} for the \textquotesingle{}processes\textquotesingle{} list based on each \textquotesingle{}process\textquotesingle{} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_maso_file}{Maso\+File}} \mbox{\hyperlink{class_maso_file_a145330e89e2047b6666d6283b7c53d80}{copy\+With}} (\{ String? \mbox{\hyperlink{class_maso_file_a37229691607e99e98cce2cdf769c202d}{file\+Path}}, \mbox{\hyperlink{class_metadata}{Metadata}}? \mbox{\hyperlink{class_maso_file_a8a750b2d12237cc113b1c3224ef21485}{metadata}}, List$<$ \mbox{\hyperlink{class_process}{Process}} $>$? \mbox{\hyperlink{class_maso_file_a1cfa31f2ff9a8bbb44046d3f0de3ec0d}{processes}}, \})
+\begin{DoxyCompactList}\small\item\em Creates a new {\ttfamily \doxylink{class_maso_file}{Maso\+File}} instance with modified values from the current instance. \end{DoxyCompactList}\item 
+override String \mbox{\hyperlink{class_maso_file_a7f713c18095110755678e23619357f0e}{to\+String}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{class_maso_file_af430d4b1e9d04e88aee7816649e75c78}{check\+If\+Json\+Is\+Correct}} (Map$<$ String, dynamic $>$ json)
+\begin{DoxyCompactList}\small\item\em Static method to verify if the provided JSON is valid and has the correct structure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+String \mbox{\hyperlink{class_maso_file_a37229691607e99e98cce2cdf769c202d}{file\+Path}}
+\item 
+final \mbox{\hyperlink{class_metadata}{Metadata}} \mbox{\hyperlink{class_maso_file_a8a750b2d12237cc113b1c3224ef21485}{metadata}}
+\begin{DoxyCompactList}\small\item\em The metadata of the MASO file. \end{DoxyCompactList}\item 
+final List$<$ \mbox{\hyperlink{class_process}{Process}} $>$ \mbox{\hyperlink{class_maso_file_a1cfa31f2ff9a8bbb44046d3f0de3ec0d}{processes}}
+\begin{DoxyCompactList}\small\item\em The list of processes described in the MASO file. \end{DoxyCompactList}\item 
+override int get \mbox{\hyperlink{class_maso_file_a0d03a3384b23e526215738d6c94431fb}{hash\+Code}} =$>$ metadata.\+hash\+Code \texorpdfstring{$^\wedge$}{\string^} \mbox{\hyperlink{class_maso_file_a2440a51c974c7c19d4db96d69553e242}{\+\_\+processes\+Hash\+Code}}(\mbox{\hyperlink{class_maso_file_a1cfa31f2ff9a8bbb44046d3f0de3ec0d}{processes}})
+\begin{DoxyCompactList}\small\item\em Overrides the {\ttfamily hash\+Code} to be consistent with the equality operator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The {\ttfamily \doxylink{class_maso_file}{Maso\+File}} class represents a MASO file, which consists of metadata and a list of processes. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_maso_file_a326ddc61de56be977949d778d56b9493}\index{MasoFile@{MasoFile}!MasoFile@{MasoFile}}
+\index{MasoFile@{MasoFile}!MasoFile@{MasoFile}}
+\doxysubsubsection{\texorpdfstring{MasoFile()}{MasoFile()}}
+{\footnotesize\ttfamily \label{class_maso_file_a326ddc61de56be977949d778d56b9493} 
+Maso\+File\+::\+Maso\+File (\begin{DoxyParamCaption}\item[{\{required this.\+metadata, required this.\+processes, this.\+file\+Path\}}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Constructor for creating a {\ttfamily \doxylink{class_maso_file}{Maso\+File}} instance with metadata and processes. 
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_maso_file_a326ddc61de56be977949d778d56b9493_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_maso_file_aca5a16f41a59fb1d24cfcb0fedc18291}\index{MasoFile@{MasoFile}!\_processesEqual@{\_processesEqual}}
+\index{\_processesEqual@{\_processesEqual}!MasoFile@{MasoFile}}
+\doxysubsubsection{\texorpdfstring{\_processesEqual()}{\_processesEqual()}}
+{\footnotesize\ttfamily \label{class_maso_file_aca5a16f41a59fb1d24cfcb0fedc18291} 
+bool Maso\+File\+::\+\_\+processes\+Equal (\begin{DoxyParamCaption}\item[{List$<$ \mbox{\hyperlink{class_process}{Process}} $>$}]{other\+Processes}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Compares the \textquotesingle{}processes\textquotesingle{} list deeply by checking each \textquotesingle{}process\textquotesingle{} object. 
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_maso_file_aca5a16f41a59fb1d24cfcb0fedc18291_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_maso_file_a2440a51c974c7c19d4db96d69553e242}\index{MasoFile@{MasoFile}!\_processesHashCode@{\_processesHashCode}}
+\index{\_processesHashCode@{\_processesHashCode}!MasoFile@{MasoFile}}
+\doxysubsubsection{\texorpdfstring{\_processesHashCode()}{\_processesHashCode()}}
+{\footnotesize\ttfamily \label{class_maso_file_a2440a51c974c7c19d4db96d69553e242} 
+int Maso\+File\+::\+\_\+processes\+Hash\+Code (\begin{DoxyParamCaption}\item[{List$<$ \mbox{\hyperlink{class_process}{Process}} $>$}]{processes}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Generates a {\ttfamily hash\+Code} for the \textquotesingle{}processes\textquotesingle{} list based on each \textquotesingle{}process\textquotesingle{} object. 
+
+\Hypertarget{class_maso_file_af430d4b1e9d04e88aee7816649e75c78}\index{MasoFile@{MasoFile}!checkIfJsonIsCorrect@{checkIfJsonIsCorrect}}
+\index{checkIfJsonIsCorrect@{checkIfJsonIsCorrect}!MasoFile@{MasoFile}}
+\doxysubsubsection{\texorpdfstring{checkIfJsonIsCorrect()}{checkIfJsonIsCorrect()}}
+{\footnotesize\ttfamily \label{class_maso_file_af430d4b1e9d04e88aee7816649e75c78} 
+static void Maso\+File\+::check\+If\+Json\+Is\+Correct (\begin{DoxyParamCaption}\item[{Map$<$ String, dynamic $>$}]{json}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Static method to verify if the provided JSON is valid and has the correct structure. 
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_maso_file_af430d4b1e9d04e88aee7816649e75c78_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_maso_file_af430d4b1e9d04e88aee7816649e75c78_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_maso_file_a145330e89e2047b6666d6283b7c53d80}\index{MasoFile@{MasoFile}!copyWith@{copyWith}}
+\index{copyWith@{copyWith}!MasoFile@{MasoFile}}
+\doxysubsubsection{\texorpdfstring{copyWith()}{copyWith()}}
+{\footnotesize\ttfamily \label{class_maso_file_a145330e89e2047b6666d6283b7c53d80} 
+\mbox{\hyperlink{class_maso_file}{Maso\+File}} Maso\+File\+::copy\+With (\begin{DoxyParamCaption}\item[{\{ String? \mbox{\hyperlink{class_maso_file_a37229691607e99e98cce2cdf769c202d}{file\+Path}}, \mbox{\hyperlink{class_metadata}{Metadata}}? \mbox{\hyperlink{class_maso_file_a8a750b2d12237cc113b1c3224ef21485}{metadata}}, List$<$ \mbox{\hyperlink{class_process}{Process}} $>$? \mbox{\hyperlink{class_maso_file_a1cfa31f2ff9a8bbb44046d3f0de3ec0d}{processes}}, \}}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Creates a new {\ttfamily \doxylink{class_maso_file}{Maso\+File}} instance with modified values from the current instance. 
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=321pt]{class_maso_file_a145330e89e2047b6666d6283b7c53d80_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_maso_file_ad58a93641fae37abdb20b8c0b88c9ca5}\index{MasoFile@{MasoFile}!fromJson@{fromJson}}
+\index{fromJson@{fromJson}!MasoFile@{MasoFile}}
+\doxysubsubsection{\texorpdfstring{fromJson()}{fromJson()}}
+{\footnotesize\ttfamily \label{class_maso_file_ad58a93641fae37abdb20b8c0b88c9ca5} 
+factory \mbox{\hyperlink{class_maso_file}{Maso\+File}} Maso\+File\+::from\+Json (\begin{DoxyParamCaption}\item[{Map$<$ String, dynamic $>$}]{json}{, }\item[{String?}]{file\+Path}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Factory constructor to create a {\ttfamily \doxylink{class_maso_file}{Maso\+File}} instance from a JSON map. 
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_maso_file_ad58a93641fae37abdb20b8c0b88c9ca5_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_maso_file_ad58a93641fae37abdb20b8c0b88c9ca5_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_maso_file_a44b3d6b1b85adc22fae9728bd83ee739}\index{MasoFile@{MasoFile}!operator==@{operator==}}
+\index{operator==@{operator==}!MasoFile@{MasoFile}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily \label{class_maso_file_a44b3d6b1b85adc22fae9728bd83ee739} 
+override bool Maso\+File\+::operator== (\begin{DoxyParamCaption}\item[{Object}]{other}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Overrides the equality operator to compare {\ttfamily \doxylink{class_maso_file}{Maso\+File}} instances based on their values. 
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_maso_file_a44b3d6b1b85adc22fae9728bd83ee739_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_maso_file_afff805683433920b9411914585ae786f}\index{MasoFile@{MasoFile}!toJson@{toJson}}
+\index{toJson@{toJson}!MasoFile@{MasoFile}}
+\doxysubsubsection{\texorpdfstring{toJson()}{toJson()}}
+{\footnotesize\ttfamily \label{class_maso_file_afff805683433920b9411914585ae786f} 
+Map$<$ String, dynamic $>$ Maso\+File\+::to\+Json (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Converts the {\ttfamily \doxylink{class_maso_file}{Maso\+File}} instance to a JSON map. 
+
+\Hypertarget{class_maso_file_a7f713c18095110755678e23619357f0e}\index{MasoFile@{MasoFile}!toString@{toString}}
+\index{toString@{toString}!MasoFile@{MasoFile}}
+\doxysubsubsection{\texorpdfstring{toString()}{toString()}}
+{\footnotesize\ttfamily \label{class_maso_file_a7f713c18095110755678e23619357f0e} 
+override String Maso\+File\+::to\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_maso_file_a37229691607e99e98cce2cdf769c202d}\index{MasoFile@{MasoFile}!filePath@{filePath}}
+\index{filePath@{filePath}!MasoFile@{MasoFile}}
+\doxysubsubsection{\texorpdfstring{filePath}{filePath}}
+{\footnotesize\ttfamily \label{class_maso_file_a37229691607e99e98cce2cdf769c202d} 
+String Maso\+File\+::file\+Path\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_maso_file_a0d03a3384b23e526215738d6c94431fb}\index{MasoFile@{MasoFile}!hashCode@{hashCode}}
+\index{hashCode@{hashCode}!MasoFile@{MasoFile}}
+\doxysubsubsection{\texorpdfstring{hashCode}{hashCode}}
+{\footnotesize\ttfamily \label{class_maso_file_a0d03a3384b23e526215738d6c94431fb} 
+override int get Maso\+File\+::hash\+Code =$>$ metadata.\+hash\+Code \texorpdfstring{$^\wedge$}{\string^} \mbox{\hyperlink{class_maso_file_a2440a51c974c7c19d4db96d69553e242}{\+\_\+processes\+Hash\+Code}}(\mbox{\hyperlink{class_maso_file_a1cfa31f2ff9a8bbb44046d3f0de3ec0d}{processes}})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Overrides the {\ttfamily hash\+Code} to be consistent with the equality operator. 
+
+\Hypertarget{class_maso_file_a8a750b2d12237cc113b1c3224ef21485}\index{MasoFile@{MasoFile}!metadata@{metadata}}
+\index{metadata@{metadata}!MasoFile@{MasoFile}}
+\doxysubsubsection{\texorpdfstring{metadata}{metadata}}
+{\footnotesize\ttfamily \label{class_maso_file_a8a750b2d12237cc113b1c3224ef21485} 
+final \mbox{\hyperlink{class_metadata}{Metadata}} Maso\+File\+::metadata\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The metadata of the MASO file. 
+
+\Hypertarget{class_maso_file_a1cfa31f2ff9a8bbb44046d3f0de3ec0d}\index{MasoFile@{MasoFile}!processes@{processes}}
+\index{processes@{processes}!MasoFile@{MasoFile}}
+\doxysubsubsection{\texorpdfstring{processes}{processes}}
+{\footnotesize\ttfamily \label{class_maso_file_a1cfa31f2ff9a8bbb44046d3f0de3ec0d} 
+final List$<$\mbox{\hyperlink{class_process}{Process}}$>$ Maso\+File\+::processes\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The list of processes described in the MASO file. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/domain/models/\mbox{\hyperlink{maso__file_8dart}{maso\+\_\+file.\+dart}}\end{DoxyCompactItemize}

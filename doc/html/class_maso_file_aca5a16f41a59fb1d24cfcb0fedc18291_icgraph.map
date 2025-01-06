@@ -1,0 +1,5 @@
+<map id="MasoFile::_processesEqual" name="MasoFile::_processesEqual">
+<area shape="rect" id="Node000001" title="Compares the &#39;processes&#39; list deeply by checking each &#39;process&#39; object." alt="" coords="199,5,381,31"/>
+<area shape="rect" id="Node000002" href="$class_maso_file.html#a44b3d6b1b85adc22fae9728bd83ee739" title="Overrides the equality operator to compare MasoFile instances based on their values." alt="" coords="5,5,151,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="184,21,151,21,151,16,184,16"/>
+</map>

@@ -1,0 +1,10 @@
+<map id="getDescription" name="getDescription">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,55,111,80"/>
+<area shape="rect" id="Node000002" href="$class_app_localizations.html#aafddc47deda8be2678960ad787435ea3" title=" " alt="" coords="159,5,389,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="110,51,158,40,191,32,192,37,159,45,111,57"/>
+<area shape="rect" id="Node000003" href="$class_app_localizations.html#a2c3ae247a2621bf20a695a0a997259df" title=" " alt="" coords="164,55,384,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="111,65,148,65,148,70,111,70"/>
+<area shape="rect" id="Node000004" href="$class_app_localizations.html#af92236984e62c92393560a9cf423cfa4" title=" " alt="" coords="204,128,344,154"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="99,78,220,120,218,125,98,83"/>
+<area shape="poly" id="edge4_Node000004_Node000004" title=" " alt="" coords="238,129,231,119,235,110,250,103,274,101,300,104,314,111,311,116,299,109,274,107,251,109,239,113,236,119,242,126"/>
+</map>

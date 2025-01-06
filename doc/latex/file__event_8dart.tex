@@ -1,0 +1,145 @@
+\doxysection{lib/presentation/blocs/file\+\_\+bloc/file\+\_\+event.dart File Reference}
+\hypertarget{file__event_8dart}{}\label{file__event_8dart}\index{lib/presentation/blocs/file\_bloc/file\_event.dart@{lib/presentation/blocs/file\_bloc/file\_event.dart}}
+{\ttfamily import dart;}\newline
+{\ttfamily import package;}\newline
+{\ttfamily import domain;}\newline
+{\ttfamily import models;}\newline
+{\ttfamily import export\+\_\+formats.\+dart;}\newline
+{\ttfamily import maso\+\_\+file.\+dart;}\newline
+Include dependency graph for file\+\_\+event.\+dart\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{file__event_8dart__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_file_event}{File\+Event}}
+\begin{DoxyCompactList}\small\item\em Abstract class representing the base event for file operations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{file__event_8dart_a421569558362897156e5d6a937cf5d59}{File\+Dropped}} (\mbox{\hyperlink{file__event_8dart_a51af45a3e0720847ce45b9e0a7df5e75}{this.\+file\+Path}})
+\item 
+\mbox{\hyperlink{file__event_8dart_acd4f4bf6c7e5a1dabe5524dcd9b753a1}{Exported\+File\+Save\+Requested}} (\mbox{\hyperlink{file__event_8dart_a4bff269539f3fd0899908554866181a5}{this.\+bytes}}, \mbox{\hyperlink{file__event_8dart_a277e00f71c1a023fe4f9035b531e43fe}{this.\+dialog\+Title}}, \mbox{\hyperlink{file__event_8dart_aa3c483f78eab77f5a9cd4212f37b8f6e}{this.\+file\+Name}}, \mbox{\hyperlink{file__event_8dart_a5a5492db48cda051def0a51899679783}{this.\+file\+Format}})
+\item 
+\mbox{\hyperlink{file__event_8dart_ad190dbe38623bdcf13dbffc2c8841372}{Create\+Maso\+Metadata}} (\{required \mbox{\hyperlink{file__event_8dart_ac8c05b4eea48e18d68a2ce032893087c}{this.\+name}}, required \mbox{\hyperlink{file__event_8dart_a9a2912077b542dacbc5d71e0b14c55b7}{this.\+version}}, required \mbox{\hyperlink{file__event_8dart_ab64918f8c1480972c11828a0ab8a25e8}{this.\+description}}\})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+abstract class \mbox{\hyperlink{class_file_event}{File\+Event}} \mbox{\hyperlink{file__event_8dart_a51af45a3e0720847ce45b9e0a7df5e75}{file\+Path}}
+\begin{DoxyCompactList}\small\item\em Event triggered when a file is dropped into the application. \end{DoxyCompactList}\item 
+class Maso\+File\+Save\+Requested extends \mbox{\hyperlink{class_file_event}{File\+Event}} \mbox{\hyperlink{file__event_8dart_a4bff269539f3fd0899908554866181a5}{bytes}}
+\begin{DoxyCompactList}\small\item\em Event triggered when a exported file save is requested, with the file path and data. \end{DoxyCompactList}\item 
+final String \mbox{\hyperlink{file__event_8dart_a277e00f71c1a023fe4f9035b531e43fe}{dialog\+Title}}
+\item 
+final String \mbox{\hyperlink{file__event_8dart_aa3c483f78eab77f5a9cd4212f37b8f6e}{file\+Name}}
+\item 
+final \mbox{\hyperlink{export__formats_8dart_a25e7889198496393bf5fbe86f66201e5}{Export\+Formats}} \mbox{\hyperlink{file__event_8dart_a5a5492db48cda051def0a51899679783}{file\+Format}}
+\item 
+class Maso\+File\+Pick\+Requested extends \mbox{\hyperlink{class_file_event}{File\+Event}} \mbox{\hyperlink{file__event_8dart_ac8c05b4eea48e18d68a2ce032893087c}{name}}
+\item 
+final String \mbox{\hyperlink{file__event_8dart_a9a2912077b542dacbc5d71e0b14c55b7}{version}}
+\item 
+final String \mbox{\hyperlink{file__event_8dart_ab64918f8c1480972c11828a0ab8a25e8}{description}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{file__event_8dart_ad190dbe38623bdcf13dbffc2c8841372}\index{file\_event.dart@{file\_event.dart}!CreateMasoMetadata@{CreateMasoMetadata}}
+\index{CreateMasoMetadata@{CreateMasoMetadata}!file\_event.dart@{file\_event.dart}}
+\doxysubsubsection{\texorpdfstring{CreateMasoMetadata()}{CreateMasoMetadata()}}
+{\footnotesize\ttfamily \label{file__event_8dart_ad190dbe38623bdcf13dbffc2c8841372} 
+Create\+Maso\+Metadata (\begin{DoxyParamCaption}\item[{\{required \mbox{\hyperlink{file__event_8dart_ac8c05b4eea48e18d68a2ce032893087c}{this.\+name}}, required \mbox{\hyperlink{file__event_8dart_a9a2912077b542dacbc5d71e0b14c55b7}{this.\+version}}, required \mbox{\hyperlink{file__event_8dart_ab64918f8c1480972c11828a0ab8a25e8}{this.\+description}}\}}]{}{}\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{file__event_8dart_ad190dbe38623bdcf13dbffc2c8841372_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{file__event_8dart_acd4f4bf6c7e5a1dabe5524dcd9b753a1}\index{file\_event.dart@{file\_event.dart}!ExportedFileSaveRequested@{ExportedFileSaveRequested}}
+\index{ExportedFileSaveRequested@{ExportedFileSaveRequested}!file\_event.dart@{file\_event.dart}}
+\doxysubsubsection{\texorpdfstring{ExportedFileSaveRequested()}{ExportedFileSaveRequested()}}
+{\footnotesize\ttfamily \label{file__event_8dart_acd4f4bf6c7e5a1dabe5524dcd9b753a1} 
+Exported\+File\+Save\+Requested (\begin{DoxyParamCaption}\item[{this.}]{bytes}{, }\item[{this.}]{dialog\+Title}{, }\item[{this.}]{file\+Name}{, }\item[{this.}]{file\+Format}{}\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=344pt]{file__event_8dart_acd4f4bf6c7e5a1dabe5524dcd9b753a1_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{file__event_8dart_a421569558362897156e5d6a937cf5d59}\index{file\_event.dart@{file\_event.dart}!FileDropped@{FileDropped}}
+\index{FileDropped@{FileDropped}!file\_event.dart@{file\_event.dart}}
+\doxysubsubsection{\texorpdfstring{FileDropped()}{FileDropped()}}
+{\footnotesize\ttfamily \label{file__event_8dart_a421569558362897156e5d6a937cf5d59} 
+File\+Dropped (\begin{DoxyParamCaption}\item[{this.}]{file\+Path}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{file__event_8dart_a4bff269539f3fd0899908554866181a5}\index{file\_event.dart@{file\_event.dart}!bytes@{bytes}}
+\index{bytes@{bytes}!file\_event.dart@{file\_event.dart}}
+\doxysubsubsection{\texorpdfstring{bytes}{bytes}}
+{\footnotesize\ttfamily \label{file__event_8dart_a4bff269539f3fd0899908554866181a5} 
+class Maso\+File\+Save\+Requested extends \mbox{\hyperlink{class_file_event}{File\+Event}} bytes}
+
+
+
+Event triggered when a exported file save is requested, with the file path and data. 
+
+\Hypertarget{file__event_8dart_ab64918f8c1480972c11828a0ab8a25e8}\index{file\_event.dart@{file\_event.dart}!description@{description}}
+\index{description@{description}!file\_event.dart@{file\_event.dart}}
+\doxysubsubsection{\texorpdfstring{description}{description}}
+{\footnotesize\ttfamily \label{file__event_8dart_ab64918f8c1480972c11828a0ab8a25e8} 
+final String description}
+
+\Hypertarget{file__event_8dart_a277e00f71c1a023fe4f9035b531e43fe}\index{file\_event.dart@{file\_event.dart}!dialogTitle@{dialogTitle}}
+\index{dialogTitle@{dialogTitle}!file\_event.dart@{file\_event.dart}}
+\doxysubsubsection{\texorpdfstring{dialogTitle}{dialogTitle}}
+{\footnotesize\ttfamily \label{file__event_8dart_a277e00f71c1a023fe4f9035b531e43fe} 
+final String dialog\+Title}
+
+\Hypertarget{file__event_8dart_a5a5492db48cda051def0a51899679783}\index{file\_event.dart@{file\_event.dart}!fileFormat@{fileFormat}}
+\index{fileFormat@{fileFormat}!file\_event.dart@{file\_event.dart}}
+\doxysubsubsection{\texorpdfstring{fileFormat}{fileFormat}}
+{\footnotesize\ttfamily \label{file__event_8dart_a5a5492db48cda051def0a51899679783} 
+final \mbox{\hyperlink{export__formats_8dart_a25e7889198496393bf5fbe86f66201e5}{Export\+Formats}} file\+Format}
+
+\Hypertarget{file__event_8dart_aa3c483f78eab77f5a9cd4212f37b8f6e}\index{file\_event.dart@{file\_event.dart}!fileName@{fileName}}
+\index{fileName@{fileName}!file\_event.dart@{file\_event.dart}}
+\doxysubsubsection{\texorpdfstring{fileName}{fileName}}
+{\footnotesize\ttfamily \label{file__event_8dart_aa3c483f78eab77f5a9cd4212f37b8f6e} 
+final String file\+Name}
+
+\Hypertarget{file__event_8dart_a51af45a3e0720847ce45b9e0a7df5e75}\index{file\_event.dart@{file\_event.dart}!filePath@{filePath}}
+\index{filePath@{filePath}!file\_event.dart@{file\_event.dart}}
+\doxysubsubsection{\texorpdfstring{filePath}{filePath}}
+{\footnotesize\ttfamily \label{file__event_8dart_a51af45a3e0720847ce45b9e0a7df5e75} 
+abstract class \mbox{\hyperlink{class_file_event}{File\+Event}} file\+Path}
+
+
+
+Event triggered when a file is dropped into the application. 
+
+\Hypertarget{file__event_8dart_ac8c05b4eea48e18d68a2ce032893087c}\index{file\_event.dart@{file\_event.dart}!name@{name}}
+\index{name@{name}!file\_event.dart@{file\_event.dart}}
+\doxysubsubsection{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily \label{file__event_8dart_ac8c05b4eea48e18d68a2ce032893087c} 
+class Maso\+File\+Pick\+Requested extends \mbox{\hyperlink{class_file_event}{File\+Event}} name}
+
+Event triggered when a file is requested to be picked. This event can be used to initiate the file selection process. \Hypertarget{file__event_8dart_a9a2912077b542dacbc5d71e0b14c55b7}\index{file\_event.dart@{file\_event.dart}!version@{version}}
+\index{version@{version}!file\_event.dart@{file\_event.dart}}
+\doxysubsubsection{\texorpdfstring{version}{version}}
+{\footnotesize\ttfamily \label{file__event_8dart_a9a2912077b542dacbc5d71e0b14c55b7} 
+final String version}
+

@@ -1,0 +1,156 @@
+\doxysection{lib/presentation/screens/file\+\_\+loaded\+\_\+screen.dart File Reference}
+\hypertarget{file__loaded__screen_8dart}{}\label{file__loaded__screen_8dart}\index{lib/presentation/screens/file\_loaded\_screen.dart@{lib/presentation/screens/file\_loaded\_screen.dart}}
+{\ttfamily import package;}\newline
+{\ttfamily import material.\+dart;}\newline
+{\ttfamily import flutter\+\_\+bloc.\+dart;}\newline
+{\ttfamily import go\+\_\+router.\+dart;}\newline
+{\ttfamily import core;}\newline
+{\ttfamily import constants;}\newline
+{\ttfamily import maso\+\_\+metadata.\+dart;}\newline
+{\ttfamily import context\+\_\+extension.\+dart;}\newline
+{\ttfamily import service\+\_\+locator.\+dart;}\newline
+{\ttfamily import domain;}\newline
+{\ttfamily import models;}\newline
+{\ttfamily import execution\+\_\+setup.\+dart;}\newline
+{\ttfamily import routes;}\newline
+{\ttfamily import app\+\_\+router.\+dart;}\newline
+{\ttfamily import platform\+\_\+detail.\+dart;}\newline
+{\ttfamily import l10n;}\newline
+{\ttfamily import app\+\_\+localizations.\+dart;}\newline
+{\ttfamily import maso\+\_\+file.\+dart;}\newline
+{\ttfamily import process.\+dart;}\newline
+{\ttfamily import use\+\_\+cases;}\newline
+{\ttfamily import check\+\_\+file\+\_\+changes\+\_\+use\+\_\+case.\+dart;}\newline
+{\ttfamily import blocs;}\newline
+{\ttfamily import file\+\_\+bloc;}\newline
+{\ttfamily import file\+\_\+bloc.\+dart;}\newline
+{\ttfamily import file\+\_\+event.\+dart;}\newline
+{\ttfamily import file\+\_\+state.\+dart;}\newline
+{\ttfamily import widgets;}\newline
+{\ttfamily import dialogs;}\newline
+{\ttfamily import execution\+\_\+setup\+\_\+dialog.\+dart;}\newline
+{\ttfamily import exit\+\_\+confirmation\+\_\+dialog.\+dart;}\newline
+{\ttfamily import process\+\_\+dialog.\+dart;}\newline
+{\ttfamily import maso\+\_\+file\+\_\+list\+\_\+widget.\+dart;}\newline
+{\ttfamily import request\+\_\+file\+\_\+name\+\_\+dialog.\+dart;}\newline
+Include dependency graph for file\+\_\+loaded\+\_\+screen.\+dart\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{file__loaded__screen_8dart__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_stateful_widget}{Stateful\+Widget}}
+\begin{DoxyCompactList}\small\item\em A dialog widget for creating or editing a process. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{file__loaded__screen_8dart_a2251e338ebfc6f99bec2c9a07d2a7b0b}{\+\_\+check\+File\+Change}} ()
+\item 
+Future$<$ bool $>$ \mbox{\hyperlink{file__loaded__screen_8dart_a47b97e5f4d6720bd3da5ee9cfee120cb}{\+\_\+confirm\+Exit}} () async
+\item 
+override void \mbox{\hyperlink{file__loaded__screen_8dart_ab339d53d3945a16dfdd20004616a8ddc}{init\+State}} ()
+\item 
+override Widget \mbox{\hyperlink{file__loaded__screen_8dart_ab022cbdb8080a3d9d6ccf33cead2b33a}{build}} (Build\+Context context)
+\item 
+Future$<$ void $>$ \mbox{\hyperlink{file__loaded__screen_8dart_a19715a049b2efdfbcb12631ef77c1b96}{\+\_\+on\+Save\+Pressed}} (Build\+Context context) async
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+class File\+Loaded\+Screen extends \mbox{\hyperlink{class_stateful_widget}{Stateful\+Widget}} \mbox{\hyperlink{file__loaded__screen_8dart_a55f8fb4a84c60d43cd94f3f49ff1bf98}{cached\+Maso\+File}}
+\item 
+bool \mbox{\hyperlink{file__loaded__screen_8dart_a5680a4517c478f2d1b3fad59e13dfc7f}{\+\_\+has\+File\+Changed}} = false
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{file__loaded__screen_8dart_a2251e338ebfc6f99bec2c9a07d2a7b0b}\index{file\_loaded\_screen.dart@{file\_loaded\_screen.dart}!\_checkFileChange@{\_checkFileChange}}
+\index{\_checkFileChange@{\_checkFileChange}!file\_loaded\_screen.dart@{file\_loaded\_screen.dart}}
+\doxysubsubsection{\texorpdfstring{\_checkFileChange()}{\_checkFileChange()}}
+{\footnotesize\ttfamily \label{file__loaded__screen_8dart_a2251e338ebfc6f99bec2c9a07d2a7b0b} 
+void \+\_\+check\+File\+Change (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=265pt]{file__loaded__screen_8dart_a2251e338ebfc6f99bec2c9a07d2a7b0b_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{file__loaded__screen_8dart_a47b97e5f4d6720bd3da5ee9cfee120cb}\index{file\_loaded\_screen.dart@{file\_loaded\_screen.dart}!\_confirmExit@{\_confirmExit}}
+\index{\_confirmExit@{\_confirmExit}!file\_loaded\_screen.dart@{file\_loaded\_screen.dart}}
+\doxysubsubsection{\texorpdfstring{\_confirmExit()}{\_confirmExit()}}
+{\footnotesize\ttfamily \label{file__loaded__screen_8dart_a47b97e5f4d6720bd3da5ee9cfee120cb} 
+Future$<$ bool $>$ \+\_\+confirm\+Exit (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{file__loaded__screen_8dart_a19715a049b2efdfbcb12631ef77c1b96}\index{file\_loaded\_screen.dart@{file\_loaded\_screen.dart}!\_onSavePressed@{\_onSavePressed}}
+\index{\_onSavePressed@{\_onSavePressed}!file\_loaded\_screen.dart@{file\_loaded\_screen.dart}}
+\doxysubsubsection{\texorpdfstring{\_onSavePressed()}{\_onSavePressed()}}
+{\footnotesize\ttfamily \label{file__loaded__screen_8dart_a19715a049b2efdfbcb12631ef77c1b96} 
+Future$<$ void $>$ \+\_\+on\+Save\+Pressed (\begin{DoxyParamCaption}\item[{Build\+Context}]{context}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=311pt]{file__loaded__screen_8dart_a19715a049b2efdfbcb12631ef77c1b96_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{file__loaded__screen_8dart_ab022cbdb8080a3d9d6ccf33cead2b33a}\index{file\_loaded\_screen.dart@{file\_loaded\_screen.dart}!build@{build}}
+\index{build@{build}!file\_loaded\_screen.dart@{file\_loaded\_screen.dart}}
+\doxysubsubsection{\texorpdfstring{build()}{build()}}
+{\footnotesize\ttfamily \label{file__loaded__screen_8dart_ab022cbdb8080a3d9d6ccf33cead2b33a} 
+override Widget build (\begin{DoxyParamCaption}\item[{Build\+Context}]{context}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=205pt]{file__loaded__screen_8dart_ab022cbdb8080a3d9d6ccf33cead2b33a_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{file__loaded__screen_8dart_ab022cbdb8080a3d9d6ccf33cead2b33a_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{file__loaded__screen_8dart_ab339d53d3945a16dfdd20004616a8ddc}\index{file\_loaded\_screen.dart@{file\_loaded\_screen.dart}!initState@{initState}}
+\index{initState@{initState}!file\_loaded\_screen.dart@{file\_loaded\_screen.dart}}
+\doxysubsubsection{\texorpdfstring{initState()}{initState()}}
+{\footnotesize\ttfamily \label{file__loaded__screen_8dart_ab339d53d3945a16dfdd20004616a8ddc} 
+override void init\+State (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=265pt]{file__loaded__screen_8dart_ab339d53d3945a16dfdd20004616a8ddc_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{file__loaded__screen_8dart_a5680a4517c478f2d1b3fad59e13dfc7f}\index{file\_loaded\_screen.dart@{file\_loaded\_screen.dart}!\_hasFileChanged@{\_hasFileChanged}}
+\index{\_hasFileChanged@{\_hasFileChanged}!file\_loaded\_screen.dart@{file\_loaded\_screen.dart}}
+\doxysubsubsection{\texorpdfstring{\_hasFileChanged}{\_hasFileChanged}}
+{\footnotesize\ttfamily \label{file__loaded__screen_8dart_a5680a4517c478f2d1b3fad59e13dfc7f} 
+bool \+\_\+has\+File\+Changed = false}
+
+\Hypertarget{file__loaded__screen_8dart_a55f8fb4a84c60d43cd94f3f49ff1bf98}\index{file\_loaded\_screen.dart@{file\_loaded\_screen.dart}!cachedMasoFile@{cachedMasoFile}}
+\index{cachedMasoFile@{cachedMasoFile}!file\_loaded\_screen.dart@{file\_loaded\_screen.dart}}
+\doxysubsubsection{\texorpdfstring{cachedMasoFile}{cachedMasoFile}}
+{\footnotesize\ttfamily \label{file__loaded__screen_8dart_a55f8fb4a84c60d43cd94f3f49ff1bf98} 
+class File\+Loaded\+Screen extends \mbox{\hyperlink{class_stateful_widget}{Stateful\+Widget}} cached\+Maso\+File}
+

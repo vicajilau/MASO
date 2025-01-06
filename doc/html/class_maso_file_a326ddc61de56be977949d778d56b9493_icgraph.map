@@ -1,0 +1,16 @@
+<map id="MasoFile::MasoFile" name="MasoFile::MasoFile">
+<area shape="rect" id="Node000001" title="Constructor for creating a MasoFile instance with metadata and processes." alt="" coords="673,55,809,80"/>
+<area shape="rect" id="Node000002" href="$class_maso_file.html#a145330e89e2047b6666d6283b7c53d80" title="Creates a new MasoFile instance with modified values from the current instance." alt="" coords="484,5,621,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="674,53,604,34,605,29,675,48"/>
+<area shape="rect" id="Node000003" href="$class_maso_file.html#ad58a93641fae37abdb20b8c0b88c9ca5" title="Factory constructor to create a MasoFile instance from a JSON map." alt="" coords="484,55,621,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="658,70,621,70,621,65,658,65"/>
+<area shape="rect" id="Node000007" href="$class_maso_file.html#a44b3d6b1b85adc22fae9728bd83ee739" title="Overrides the equality operator to compare MasoFile instances based on their values." alt="" coords="480,104,625,130"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="675,87,605,106,604,101,674,82"/>
+<area shape="rect" id="Node000004" href="$class_i_file_service.html#ade356e25f248fabb661fa252bf99ee96" title=" " alt="" coords="230,19,432,60"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="469,60,432,55,433,50,470,54"/>
+<area shape="rect" id="Node000006" href="$class_i_file_service.html#a690e0ae7ffcbe27bd6be55added768de" title=" " alt="" coords="5,80,182,106"/>
+<area shape="poly" id="edge6_Node000003_Node000006" title=" " alt="" coords="469,75,182,91,182,85,469,69"/>
+<area shape="rect" id="Node000005" href="$class_i_file_service.html#a43df7297e3c2ee172d4af023add1b560" title=" " alt="" coords="22,27,165,52"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="214,42,166,42,166,37,214,37"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="223,66,155,82,154,77,222,61"/>
+</map>

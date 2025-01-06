@@ -1,0 +1,19 @@
+<map id="IFileService::decodeAndCreateMasoFile" name="IFileService::decodeAndCreateMasoFile">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,49,208,90"/>
+<area shape="rect" id="Node000002" href="$class_maso_file.html#ad58a93641fae37abdb20b8c0b88c9ca5" title="Factory constructor to create a MasoFile instance from a JSON map." alt="" coords="256,57,392,82"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="208,67,240,67,240,72,208,72"/>
+<area shape="rect" id="Node000003" href="$class_maso_file.html#af430d4b1e9d04e88aee7816649e75c78" title="Static method to verify if the provided JSON is valid and has the correct structure." alt="" coords="440,31,647,57"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="392,59,424,55,425,60,392,64"/>
+<area shape="rect" id="Node000004" href="$class_metadata.html#a2bd04d897e56daf493b30150838c3236" title="Factory constructor to create a Metadata instance from a JSON map." alt="" coords="695,7,833,33"/>
+<area shape="poly" id="edge7_Node000002_Node000004" title=" " alt="" coords="347,54,389,33,439,16,502,7,565,3,680,8,680,13,565,9,502,12,441,21,391,38,349,58"/>
+<area shape="rect" id="Node000006" href="$class_process.html#aebb52b5d006fd9d5540d5933138df06f" title="Factory constructor to create a Process instance from a JSON map." alt="" coords="698,57,830,82"/>
+<area shape="poly" id="edge8_Node000002_Node000006" title=" " alt="" coords="393,67,683,67,683,72,393,72"/>
+<area shape="rect" id="Node000008" href="$class_maso_file.html#a326ddc61de56be977949d778d56b9493" title="Constructor for creating a MasoFile instance with metadata and processes." alt="" coords="476,133,611,158"/>
+<area shape="poly" id="edge9_Node000002_Node000008" title=" " alt="" coords="360,80,441,111,484,125,482,130,439,116,358,85"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="647,30,679,27,680,32,648,35"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="648,53,683,57,683,63,647,59"/>
+<area shape="rect" id="Node000005" href="$class_metadata.html#a1680b3c7cb5dddaac57160fdc5edce0c" title="Constructor for creating a Metadata instance with name, version, and description." alt="" coords="881,7,1018,33"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="833,17,865,17,865,23,833,23"/>
+<area shape="rect" id="Node000007" href="$class_process.html#a7d453b8e68f90d1728e790f19867c7b0" title="Constructor for creating a Process instance with name, arrival time, and service time." alt="" coords="887,57,1012,82"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="830,67,871,67,871,72,830,72"/>
+</map>

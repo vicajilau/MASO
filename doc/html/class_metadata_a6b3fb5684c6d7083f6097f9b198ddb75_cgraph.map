@@ -1,0 +1,5 @@
+<map id="Metadata::operator==" name="Metadata::operator==">
+<area shape="rect" id="Node000001" title="Override the equality operator to compare Metadata instances based on their values." alt="" coords="5,5,152,31"/>
+<area shape="rect" id="Node000002" href="$class_metadata.html#a1680b3c7cb5dddaac57160fdc5edce0c" title="Constructor for creating a Metadata instance with name, version, and description." alt="" coords="200,5,337,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="152,16,184,16,184,21,152,21"/>
+</map>

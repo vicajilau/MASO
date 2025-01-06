@@ -1,0 +1,13 @@
+var searchData=
+[
+  ['calculateexecutiontimes_0',['calculateExecutionTimes',['../class_execution_time_calculator_service.html#a8454b3649da551c804803e748993485f',1,'ExecutionTimeCalculatorService']]],
+  ['checkifjsoniscorrect_1',['checkIfJsonIsCorrect',['../class_maso_file.html#af430d4b1e9d04e88aee7816649e75c78',1,'MasoFile']]],
+  ['confirmdeletemessage_2',['confirmDeleteMessage',['../class_app_localizations.html#adef035ddfa85ca6d53401d37433b93c0',1,'AppLocalizations::confirmDeleteMessage(Object processName)'],['../class_app_localizations.html#afcdb92190c1346dac4288b48700d803a',1,'AppLocalizations::confirmDeleteMessage(Object processName)'],['../class_app_localizations.html#afcdb92190c1346dac4288b48700d803a',1,'AppLocalizations::confirmDeleteMessage(Object processName)'],['../app__localizations_8dart.html#aff9254f298316021c6426599433ec212',1,'confirmDeleteMessage(Object processName):&#160;app_localizations.dart']]],
+  ['contains_3',['contains',['../app__localizations_8dart.html#ad3b8784cae8c06f7ea0202df6e7e5ff5',1,'app_localizations.dart']]],
+  ['copywith_4',['copyWith',['../class_maso_file.html#a145330e89e2047b6666d6283b7c53d80',1,'MasoFile']]],
+  ['createmasofile_5',['createMasoFile',['../class_file_repository.html#a45e51c93328d59a9b1b284b793edd50e',1,'FileRepository']]],
+  ['createmasofiledialog_6',['CreateMasoFileDialog',['../class_stateful_widget.html#a814653c31b16f6825259dee52fb8fa09',1,'StatefulWidget']]],
+  ['createmasometadata_7',['CreateMasoMetadata',['../file__event_8dart.html#ad190dbe38623bdcf13dbffc2c8841372',1,'file_event.dart']]],
+  ['createpdffromimage_8',['createPdfFromImage',['../maso__file__execution__screen_8dart.html#a409f1781fc8a00fce54fa47b2e707267',1,'maso_file_execution_screen.dart']]],
+  ['createstate_9',['createState',['../class_stateful_widget.html#a22bacb4f57fecf199927c3319fd12021',1,'StatefulWidget::createState()'],['../class_stateful_widget.html#a057b40be095ddfd439c1874aafafe99e',1,'StatefulWidget::createState()'],['../class_stateful_widget.html#ae2014f31d83f1d896c099bfbd9702625',1,'StatefulWidget::createState()'],['../class_stateful_widget.html#a599ca55ec447ea0d35961028165f6ac6',1,'StatefulWidget::createState()'],['../class_stateful_widget.html#a9dd85215ba894cace1bd2924e201cfc0',1,'StatefulWidget::createState()'],['../class_stateful_widget.html#a73e27750967ca0fad4df45f132d1c228',1,'StatefulWidget::createState()'],['../class_stateful_widget.html#a17f6ecadfecdf0a3799a3deeb716dafc',1,'StatefulWidget::createState()'],['../class_stateful_widget.html#a471a1d44fe3f20d1ddca66033f8e529c',1,'StatefulWidget::createState()'],['../maso__file__list__widget_8dart.html#aafc51c4e562acd24b2abc8b3ea6dcefe',1,'createState():&#160;maso_file_list_widget.dart']]]
+];

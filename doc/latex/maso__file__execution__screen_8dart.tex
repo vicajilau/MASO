@@ -1,0 +1,240 @@
+\doxysection{lib/presentation/screens/maso\+\_\+file\+\_\+execution\+\_\+screen.dart File Reference}
+\hypertarget{maso__file__execution__screen_8dart}{}\label{maso__file__execution__screen_8dart}\index{lib/presentation/screens/maso\_file\_execution\_screen.dart@{lib/presentation/screens/maso\_file\_execution\_screen.dart}}
+{\ttfamily import dart;}\newline
+{\ttfamily import as;}\newline
+{\ttfamily import ui;}\newline
+{\ttfamily import package;}\newline
+{\ttfamily import material.\+dart;}\newline
+{\ttfamily import rendering.\+dart;}\newline
+{\ttfamily import services.\+dart;}\newline
+{\ttfamily import flutter\+\_\+bloc.\+dart;}\newline
+{\ttfamily import go\+\_\+router.\+dart;}\newline
+{\ttfamily import core;}\newline
+{\ttfamily import context\+\_\+extension.\+dart;}\newline
+{\ttfamily import domain;}\newline
+{\ttfamily import models;}\newline
+{\ttfamily import export\+\_\+formats.\+dart;}\newline
+{\ttfamily import pasteboard.\+dart;}\newline
+{\ttfamily import pdf.\+dart;}\newline
+{\ttfamily import widgets.\+dart;}\newline
+{\ttfamily import pw;}\newline
+{\ttfamily import platform\+\_\+detail.\+dart;}\newline
+{\ttfamily import timeline\+\_\+tile.\+dart;}\newline
+{\ttfamily import process.\+dart;}\newline
+{\ttfamily import constants;}\newline
+{\ttfamily import maso\+\_\+metadata.\+dart;}\newline
+{\ttfamily import l10n;}\newline
+{\ttfamily import app\+\_\+localizations.\+dart;}\newline
+{\ttfamily import service\+\_\+locator.\+dart;}\newline
+{\ttfamily import data;}\newline
+{\ttfamily import services;}\newline
+{\ttfamily import execution\+\_\+time\+\_\+calculator\+\_\+service.\+dart;}\newline
+{\ttfamily import maso\+\_\+file.\+dart;}\newline
+{\ttfamily import blocs;}\newline
+{\ttfamily import file\+\_\+bloc;}\newline
+{\ttfamily import file\+\_\+bloc.\+dart;}\newline
+{\ttfamily import file\+\_\+event.\+dart;}\newline
+{\ttfamily import file\+\_\+state.\+dart;}\newline
+{\ttfamily import widgets;}\newline
+{\ttfamily import request\+\_\+file\+\_\+name\+\_\+dialog.\+dart;}\newline
+Include dependency graph for maso\+\_\+file\+\_\+execution\+\_\+screen.\+dart\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{maso__file__execution__screen_8dart__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_stateful_widget}{Stateful\+Widget}}
+\begin{DoxyCompactList}\small\item\em A dialog widget for creating or editing a process. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+override void \mbox{\hyperlink{maso__file__execution__screen_8dart_ab339d53d3945a16dfdd20004616a8ddc}{init\+State}} ()
+\item 
+void \mbox{\hyperlink{maso__file__execution__screen_8dart_af0ab8485c22958cc6601b709568da009}{execute\+Processes}} ()
+\item 
+Future$<$ Uint8\+List?$>$ \mbox{\hyperlink{maso__file__execution__screen_8dart_a211b96fcb39cbc54611387b90c957413}{\+\_\+capture\+Image}} () async
+\item 
+Future$<$ void $>$ \mbox{\hyperlink{maso__file__execution__screen_8dart_aabf0626d32e70421f7a5819c7931fadc}{\+\_\+copy\+Image\+To\+Clipboard}} () async
+\item 
+Future$<$ void $>$ \mbox{\hyperlink{maso__file__execution__screen_8dart_a3f0b91b0db5183389d2d042355602595}{\+\_\+export\+As\+Image}} (Build\+Context con) async
+\item 
+Future$<$ void $>$ \mbox{\hyperlink{maso__file__execution__screen_8dart_aad037b9f8773fab44ce62cde15187551}{\+\_\+export\+As\+Pdf}} (Build\+Context con) async
+\item 
+Future$<$ Uint8\+List?$>$ \mbox{\hyperlink{maso__file__execution__screen_8dart_a409f1781fc8a00fce54fa47b2e707267}{create\+Pdf\+From\+Image}} (Uint8\+List? \mbox{\hyperlink{file__event_8dart_a4bff269539f3fd0899908554866181a5}{bytes}}) async
+\item 
+void \mbox{\hyperlink{maso__file__execution__screen_8dart_a32ca4b33af0c109a9cd7df0ce7d84a6a}{\+\_\+show\+Export\+Options}} (Build\+Context con)
+\item 
+override Widget \mbox{\hyperlink{maso__file__execution__screen_8dart_ab022cbdb8080a3d9d6ccf33cead2b33a}{build}} (Build\+Context context)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+class Maso\+File\+Execution\+Screen extends \mbox{\hyperlink{class_stateful_widget}{Stateful\+Widget}} \mbox{\hyperlink{maso__file__execution__screen_8dart_a18d741d0d0d0e9f41339991b12adc4fd}{\+\_\+processes}}
+\item 
+final Global\+Key \mbox{\hyperlink{maso__file__execution__screen_8dart_a991a9b696fbd89f29099a74511503e25}{\+\_\+repaint\+Key}} = Global\+Key()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{maso__file__execution__screen_8dart_a211b96fcb39cbc54611387b90c957413}\index{maso\_file\_execution\_screen.dart@{maso\_file\_execution\_screen.dart}!\_captureImage@{\_captureImage}}
+\index{\_captureImage@{\_captureImage}!maso\_file\_execution\_screen.dart@{maso\_file\_execution\_screen.dart}}
+\doxysubsubsection{\texorpdfstring{\_captureImage()}{\_captureImage()}}
+{\footnotesize\ttfamily \label{maso__file__execution__screen_8dart_a211b96fcb39cbc54611387b90c957413} 
+Future$<$ Uint8\+List?$>$ \+\_\+capture\+Image (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=316pt]{maso__file__execution__screen_8dart_a211b96fcb39cbc54611387b90c957413_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=318pt]{maso__file__execution__screen_8dart_a211b96fcb39cbc54611387b90c957413_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{maso__file__execution__screen_8dart_aabf0626d32e70421f7a5819c7931fadc}\index{maso\_file\_execution\_screen.dart@{maso\_file\_execution\_screen.dart}!\_copyImageToClipboard@{\_copyImageToClipboard}}
+\index{\_copyImageToClipboard@{\_copyImageToClipboard}!maso\_file\_execution\_screen.dart@{maso\_file\_execution\_screen.dart}}
+\doxysubsubsection{\texorpdfstring{\_copyImageToClipboard()}{\_copyImageToClipboard()}}
+{\footnotesize\ttfamily \label{maso__file__execution__screen_8dart_aabf0626d32e70421f7a5819c7931fadc} 
+Future$<$ void $>$ \+\_\+copy\+Image\+To\+Clipboard (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{maso__file__execution__screen_8dart_aabf0626d32e70421f7a5819c7931fadc_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{maso__file__execution__screen_8dart_a3f0b91b0db5183389d2d042355602595}\index{maso\_file\_execution\_screen.dart@{maso\_file\_execution\_screen.dart}!\_exportAsImage@{\_exportAsImage}}
+\index{\_exportAsImage@{\_exportAsImage}!maso\_file\_execution\_screen.dart@{maso\_file\_execution\_screen.dart}}
+\doxysubsubsection{\texorpdfstring{\_exportAsImage()}{\_exportAsImage()}}
+{\footnotesize\ttfamily \label{maso__file__execution__screen_8dart_a3f0b91b0db5183389d2d042355602595} 
+Future$<$ void $>$ \+\_\+export\+As\+Image (\begin{DoxyParamCaption}\item[{Build\+Context}]{con}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{maso__file__execution__screen_8dart_a3f0b91b0db5183389d2d042355602595_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{maso__file__execution__screen_8dart_aad037b9f8773fab44ce62cde15187551}\index{maso\_file\_execution\_screen.dart@{maso\_file\_execution\_screen.dart}!\_exportAsPdf@{\_exportAsPdf}}
+\index{\_exportAsPdf@{\_exportAsPdf}!maso\_file\_execution\_screen.dart@{maso\_file\_execution\_screen.dart}}
+\doxysubsubsection{\texorpdfstring{\_exportAsPdf()}{\_exportAsPdf()}}
+{\footnotesize\ttfamily \label{maso__file__execution__screen_8dart_aad037b9f8773fab44ce62cde15187551} 
+Future$<$ void $>$ \+\_\+export\+As\+Pdf (\begin{DoxyParamCaption}\item[{Build\+Context}]{con}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{maso__file__execution__screen_8dart_aad037b9f8773fab44ce62cde15187551_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{maso__file__execution__screen_8dart_a32ca4b33af0c109a9cd7df0ce7d84a6a}\index{maso\_file\_execution\_screen.dart@{maso\_file\_execution\_screen.dart}!\_showExportOptions@{\_showExportOptions}}
+\index{\_showExportOptions@{\_showExportOptions}!maso\_file\_execution\_screen.dart@{maso\_file\_execution\_screen.dart}}
+\doxysubsubsection{\texorpdfstring{\_showExportOptions()}{\_showExportOptions()}}
+{\footnotesize\ttfamily \label{maso__file__execution__screen_8dart_a32ca4b33af0c109a9cd7df0ce7d84a6a} 
+void \+\_\+show\+Export\+Options (\begin{DoxyParamCaption}\item[{Build\+Context}]{con}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=327pt]{maso__file__execution__screen_8dart_a32ca4b33af0c109a9cd7df0ce7d84a6a_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{maso__file__execution__screen_8dart_ab022cbdb8080a3d9d6ccf33cead2b33a}\index{maso\_file\_execution\_screen.dart@{maso\_file\_execution\_screen.dart}!build@{build}}
+\index{build@{build}!maso\_file\_execution\_screen.dart@{maso\_file\_execution\_screen.dart}}
+\doxysubsubsection{\texorpdfstring{build()}{build()}}
+{\footnotesize\ttfamily \label{maso__file__execution__screen_8dart_ab022cbdb8080a3d9d6ccf33cead2b33a} 
+override Widget build (\begin{DoxyParamCaption}\item[{Build\+Context}]{context}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=205pt]{maso__file__execution__screen_8dart_ab022cbdb8080a3d9d6ccf33cead2b33a_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{maso__file__execution__screen_8dart_a409f1781fc8a00fce54fa47b2e707267}\index{maso\_file\_execution\_screen.dart@{maso\_file\_execution\_screen.dart}!createPdfFromImage@{createPdfFromImage}}
+\index{createPdfFromImage@{createPdfFromImage}!maso\_file\_execution\_screen.dart@{maso\_file\_execution\_screen.dart}}
+\doxysubsubsection{\texorpdfstring{createPdfFromImage()}{createPdfFromImage()}}
+{\footnotesize\ttfamily \label{maso__file__execution__screen_8dart_a409f1781fc8a00fce54fa47b2e707267} 
+Future$<$ Uint8\+List?$>$ create\+Pdf\+From\+Image (\begin{DoxyParamCaption}\item[{Uint8\+List?}]{bytes}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=349pt]{maso__file__execution__screen_8dart_a409f1781fc8a00fce54fa47b2e707267_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=299pt]{maso__file__execution__screen_8dart_a409f1781fc8a00fce54fa47b2e707267_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{maso__file__execution__screen_8dart_af0ab8485c22958cc6601b709568da009}\index{maso\_file\_execution\_screen.dart@{maso\_file\_execution\_screen.dart}!executeProcesses@{executeProcesses}}
+\index{executeProcesses@{executeProcesses}!maso\_file\_execution\_screen.dart@{maso\_file\_execution\_screen.dart}}
+\doxysubsubsection{\texorpdfstring{executeProcesses()}{executeProcesses()}}
+{\footnotesize\ttfamily \label{maso__file__execution__screen_8dart_af0ab8485c22958cc6601b709568da009} 
+void execute\+Processes (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=265pt]{maso__file__execution__screen_8dart_af0ab8485c22958cc6601b709568da009_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{maso__file__execution__screen_8dart_ab339d53d3945a16dfdd20004616a8ddc}\index{maso\_file\_execution\_screen.dart@{maso\_file\_execution\_screen.dart}!initState@{initState}}
+\index{initState@{initState}!maso\_file\_execution\_screen.dart@{maso\_file\_execution\_screen.dart}}
+\doxysubsubsection{\texorpdfstring{initState()}{initState()}}
+{\footnotesize\ttfamily \label{maso__file__execution__screen_8dart_ab339d53d3945a16dfdd20004616a8ddc} 
+override void init\+State (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=265pt]{maso__file__execution__screen_8dart_ab339d53d3945a16dfdd20004616a8ddc_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{maso__file__execution__screen_8dart_a18d741d0d0d0e9f41339991b12adc4fd}\index{maso\_file\_execution\_screen.dart@{maso\_file\_execution\_screen.dart}!\_processes@{\_processes}}
+\index{\_processes@{\_processes}!maso\_file\_execution\_screen.dart@{maso\_file\_execution\_screen.dart}}
+\doxysubsubsection{\texorpdfstring{\_processes}{\_processes}}
+{\footnotesize\ttfamily \label{maso__file__execution__screen_8dart_a18d741d0d0d0e9f41339991b12adc4fd} 
+class Maso\+File\+Execution\+Screen extends \mbox{\hyperlink{class_stateful_widget}{Stateful\+Widget}} \+\_\+processes}
+
+\Hypertarget{maso__file__execution__screen_8dart_a991a9b696fbd89f29099a74511503e25}\index{maso\_file\_execution\_screen.dart@{maso\_file\_execution\_screen.dart}!\_repaintKey@{\_repaintKey}}
+\index{\_repaintKey@{\_repaintKey}!maso\_file\_execution\_screen.dart@{maso\_file\_execution\_screen.dart}}
+\doxysubsubsection{\texorpdfstring{\_repaintKey}{\_repaintKey}}
+{\footnotesize\ttfamily \label{maso__file__execution__screen_8dart_a991a9b696fbd89f29099a74511503e25} 
+final Global\+Key \+\_\+repaint\+Key = Global\+Key()}
+

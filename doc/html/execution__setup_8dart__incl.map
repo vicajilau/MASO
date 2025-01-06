@@ -1,0 +1,11 @@
+<map id="lib/domain/models/execution_setup.dart" name="lib/domain/models/execution_setup.dart">
+<area shape="rect" id="Node000001" title=" " alt="" coords="82,5,268,46"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,94,76,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="143,49,76,88,73,83,140,44"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="100,94,163,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="167,48,148,82,143,79,162,45"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="188,94,251,120"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="188,45,207,79,203,82,184,48"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="274,94,444,120"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="222,44,318,85,316,90,220,49"/>
+</map>

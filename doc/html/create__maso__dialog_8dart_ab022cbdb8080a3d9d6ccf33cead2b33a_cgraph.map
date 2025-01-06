@@ -1,0 +1,13 @@
+<map id="build" name="build">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,80,54,106"/>
+<area shape="rect" id="Node000002" href="$create__maso__dialog_8dart.html#aafddc4362f5671658d57210398cb99a3" title="Clears the description error message when the user types into the description field." alt="" coords="102,5,262,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="45,77,70,58,100,40,113,34,115,39,103,45,73,63,48,82"/>
+<area shape="rect" id="Node000003" href="$create__maso__dialog_8dart.html#aeb8c390c8b75a47a00eaac530fca77af" title="Clears the name error message when the user types into the name field." alt="" coords="117,55,246,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="54,86,102,78,102,83,55,92"/>
+<area shape="rect" id="Node000004" href="$create__maso__dialog_8dart.html#a15c418581c228e6e72c1d8207d0bd096" title="Validates inputs and handles form submission." alt="" coords="148,104,216,130"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="55,94,133,107,132,112,54,99"/>
+<area shape="rect" id="Node000005" href="$class_app_localizations.html#af92236984e62c92393560a9cf423cfa4" title=" " alt="" coords="310,129,449,155"/>
+<area shape="poly" id="edge6_Node000001_Node000005" title=" " alt="" coords="46,104,71,124,103,140,151,151,201,155,294,152,294,158,200,161,150,156,101,145,68,128,43,108"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="216,118,295,129,294,134,215,124"/>
+<area shape="poly" id="edge5_Node000005_Node000005" title=" " alt="" coords="347,130,340,121,344,111,357,105,380,103,404,105,416,112,414,117,402,110,380,108,359,110,348,115,345,120,351,127"/>
+</map>

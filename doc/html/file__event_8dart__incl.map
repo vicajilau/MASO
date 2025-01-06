@@ -1,0 +1,15 @@
+<map id="lib/presentation/blocs/file_bloc/file_event.dart" name="lib/presentation/blocs/file_bloc/file_event.dart">
+<area shape="rect" id="Node000001" title=" " alt="" coords="163,5,323,46"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,94,49,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="190,49,64,95,62,90,188,44"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="73,94,144,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="211,49,144,88,141,83,208,44"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="167,94,231,120"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="234,48,215,82,211,79,230,45"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="255,94,319,120"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="256,45,275,79,271,82,252,48"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="342,94,477,120"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="286,44,371,85,369,89,283,49"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="501,94,604,120"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="321,44,491,87,489,92,320,49"/>
+</map>

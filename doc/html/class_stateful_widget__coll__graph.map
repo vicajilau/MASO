@@ -1,0 +1,16 @@
+<map id="StatefulWidget" name="StatefulWidget">
+<area shape="rect" id="Node000001" title="A dialog widget for creating or editing a process." alt="" coords="77,449,185,474"/>
+<area shape="rect" id="Node000002" href="$class_check_file_changes_use_case.html" title="Use case for checking if a MasoFile has changed." alt="" coords="60,360,247,386"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="139,400,135,410,132,430,132,448,127,448,126,430,129,409,134,398"/>
+<area shape="rect" id="Node000003" href="$class_file_repository.html" title=" " alt="" coords="102,271,208,297"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="157,313,157,360,151,360,152,313"/>
+<area shape="rect" id="Node000004" href="$class_i_file_service.html" title=" " alt="" coords="84,183,175,208"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="140,222,154,270,149,272,135,224"/>
+<area shape="rect" id="Node000005" href="$class_maso_file.html" title="The MasoFile class represents a MASO file, which consists of metadata and a list of processes." alt="" coords="6,94,80,120"/>
+<area shape="poly" id="edge6_Node000001_Node000005" title=" " alt="" coords="36,135,28,163,24,194,24,374,31,398,47,418,70,434,95,446,92,450,67,439,44,422,26,401,19,375,19,194,23,162,30,134"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="67,129,120,180,116,184,64,132"/>
+<area shape="rect" id="Node000006" href="$class_metadata.html" title="The Metadata class represents the metadata of a MASO file, including its name, version,..." alt="" coords="5,5,81,31"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="46,47,46,94,40,94,40,47"/>
+<area shape="rect" id="Node000007" href="$class_process.html" title="The Process class represents a process with a name, arrival time, and service time." alt="" coords="294,360,363,386"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="321,401,312,415,301,427,273,442,244,453,186,462,185,457,242,448,271,437,297,423,308,412,316,398"/>
+</map>

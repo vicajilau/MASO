@@ -1,0 +1,11 @@
+<map id="MasoFile::checkIfJsonIsCorrect" name="MasoFile::checkIfJsonIsCorrect">
+<area shape="rect" id="Node000001" title="Static method to verify if the provided JSON is valid and has the correct structure." alt="" coords="5,31,213,56"/>
+<area shape="rect" id="Node000002" href="$class_metadata.html#a2bd04d897e56daf493b30150838c3236" title="Factory constructor to create a Metadata instance from a JSON map." alt="" coords="261,5,398,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="212,29,245,25,245,30,213,34"/>
+<area shape="rect" id="Node000004" href="$class_process.html#aebb52b5d006fd9d5540d5933138df06f" title="Factory constructor to create a Process instance from a JSON map." alt="" coords="264,55,395,80"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="213,52,249,56,248,61,213,57"/>
+<area shape="rect" id="Node000003" href="$class_metadata.html#a1680b3c7cb5dddaac57160fdc5edce0c" title="Constructor for creating a Metadata instance with name, version, and description." alt="" coords="446,5,583,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="398,16,430,16,430,21,398,21"/>
+<area shape="rect" id="Node000005" href="$class_process.html#a7d453b8e68f90d1728e790f19867c7b0" title="Constructor for creating a Process instance with name, arrival time, and service time." alt="" coords="452,55,577,80"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="396,65,437,65,437,70,396,70"/>
+</map>

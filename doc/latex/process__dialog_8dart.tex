@@ -1,0 +1,177 @@
+\doxysection{lib/presentation/widgets/dialogs/process\+\_\+dialog.dart File Reference}
+\hypertarget{process__dialog_8dart}{}\label{process__dialog_8dart}\index{lib/presentation/widgets/dialogs/process\_dialog.dart@{lib/presentation/widgets/dialogs/process\_dialog.dart}}
+{\ttfamily import package;}\newline
+{\ttfamily import material.\+dart;}\newline
+{\ttfamily import go\+\_\+router.\+dart;}\newline
+{\ttfamily import domain;}\newline
+{\ttfamily import models;}\newline
+{\ttfamily import list\+\_\+processes\+\_\+extension.\+dart;}\newline
+{\ttfamily import process.\+dart;}\newline
+{\ttfamily import core;}\newline
+{\ttfamily import l10n;}\newline
+{\ttfamily import app\+\_\+localizations.\+dart;}\newline
+Include dependency graph for process\+\_\+dialog.\+dart\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{process__dialog_8dart__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_stateful_widget}{Stateful\+Widget}}
+\begin{DoxyCompactList}\small\item\em A dialog widget for creating or editing a process. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+override void \mbox{\hyperlink{process__dialog_8dart_ab339d53d3945a16dfdd20004616a8ddc}{init\+State}} ()
+\item 
+override void \mbox{\hyperlink{process__dialog_8dart_acc340fabce6d1fd6056b3c2e871d98d2}{dispose}} ()
+\item 
+bool \mbox{\hyperlink{process__dialog_8dart_a9e6349074142e4f6736cc01a89196b3a}{\+\_\+validate\+Input}} ()
+\begin{DoxyCompactList}\small\item\em Validate the input fields. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{process__dialog_8dart_a15c418581c228e6e72c1d8207d0bd096}{\+\_\+submit}} ()
+\begin{DoxyCompactList}\small\item\em Submit the form if input is valid. \end{DoxyCompactList}\item 
+override Widget \mbox{\hyperlink{process__dialog_8dart_ab022cbdb8080a3d9d6ccf33cead2b33a}{build}} (Build\+Context context)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+class Process\+Dialog extends \mbox{\hyperlink{class_stateful_widget}{Stateful\+Widget}} \mbox{\hyperlink{process__dialog_8dart_ab831d554056ed2773ad0e6cabfe8f44e}{\+\_\+name\+Controller}}
+\begin{DoxyCompactList}\small\item\em State class for Process\+Dialog. \end{DoxyCompactList}\item 
+late Text\+Editing\+Controller \mbox{\hyperlink{process__dialog_8dart_a8b20de7768741cdde8b69a66cf7dbe77}{\+\_\+arrival\+Time\+Controller}}
+\item 
+late Text\+Editing\+Controller \mbox{\hyperlink{process__dialog_8dart_a51024d2fe40534ca474fd05684714cd4}{\+\_\+service\+Time\+Controller}}
+\item 
+late bool \mbox{\hyperlink{process__dialog_8dart_a7eed4736876b9de6288b4affb048e8e5}{\+\_\+is\+Enabled}}
+\item 
+String \mbox{\hyperlink{process__dialog_8dart_a8ec1b49169a8cd9eb903652051657ea4}{\+\_\+name\+Error}}
+\item 
+String \mbox{\hyperlink{process__dialog_8dart_a4ee3a8e55a106f26d7a960ece3d2cc98}{\+\_\+arrival\+Time\+Error}}
+\item 
+String \mbox{\hyperlink{process__dialog_8dart_a8fcb22701737dddc2c38ca0a871ba15d}{\+\_\+service\+Time\+Error}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{process__dialog_8dart_a15c418581c228e6e72c1d8207d0bd096}\index{process\_dialog.dart@{process\_dialog.dart}!\_submit@{\_submit}}
+\index{\_submit@{\_submit}!process\_dialog.dart@{process\_dialog.dart}}
+\doxysubsubsection{\texorpdfstring{\_submit()}{\_submit()}}
+{\footnotesize\ttfamily \label{process__dialog_8dart_a15c418581c228e6e72c1d8207d0bd096} 
+void \+\_\+submit (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Submit the form if input is valid. 
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{process__dialog_8dart_a15c418581c228e6e72c1d8207d0bd096_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{process__dialog_8dart_a9e6349074142e4f6736cc01a89196b3a}\index{process\_dialog.dart@{process\_dialog.dart}!\_validateInput@{\_validateInput}}
+\index{\_validateInput@{\_validateInput}!process\_dialog.dart@{process\_dialog.dart}}
+\doxysubsubsection{\texorpdfstring{\_validateInput()}{\_validateInput()}}
+{\footnotesize\ttfamily \label{process__dialog_8dart_a9e6349074142e4f6736cc01a89196b3a} 
+bool \+\_\+validate\+Input (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Validate the input fields. 
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=297pt]{process__dialog_8dart_a9e6349074142e4f6736cc01a89196b3a_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=243pt]{process__dialog_8dart_a9e6349074142e4f6736cc01a89196b3a_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{process__dialog_8dart_ab022cbdb8080a3d9d6ccf33cead2b33a}\index{process\_dialog.dart@{process\_dialog.dart}!build@{build}}
+\index{build@{build}!process\_dialog.dart@{process\_dialog.dart}}
+\doxysubsubsection{\texorpdfstring{build()}{build()}}
+{\footnotesize\ttfamily \label{process__dialog_8dart_ab022cbdb8080a3d9d6ccf33cead2b33a} 
+override Widget build (\begin{DoxyParamCaption}\item[{Build\+Context}]{context}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=257pt]{process__dialog_8dart_ab022cbdb8080a3d9d6ccf33cead2b33a_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{process__dialog_8dart_acc340fabce6d1fd6056b3c2e871d98d2}\index{process\_dialog.dart@{process\_dialog.dart}!dispose@{dispose}}
+\index{dispose@{dispose}!process\_dialog.dart@{process\_dialog.dart}}
+\doxysubsubsection{\texorpdfstring{dispose()}{dispose()}}
+{\footnotesize\ttfamily \label{process__dialog_8dart_acc340fabce6d1fd6056b3c2e871d98d2} 
+override void dispose (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{process__dialog_8dart_ab339d53d3945a16dfdd20004616a8ddc}\index{process\_dialog.dart@{process\_dialog.dart}!initState@{initState}}
+\index{initState@{initState}!process\_dialog.dart@{process\_dialog.dart}}
+\doxysubsubsection{\texorpdfstring{initState()}{initState()}}
+{\footnotesize\ttfamily \label{process__dialog_8dart_ab339d53d3945a16dfdd20004616a8ddc} 
+override void init\+State (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{process__dialog_8dart_a8b20de7768741cdde8b69a66cf7dbe77}\index{process\_dialog.dart@{process\_dialog.dart}!\_arrivalTimeController@{\_arrivalTimeController}}
+\index{\_arrivalTimeController@{\_arrivalTimeController}!process\_dialog.dart@{process\_dialog.dart}}
+\doxysubsubsection{\texorpdfstring{\_arrivalTimeController}{\_arrivalTimeController}}
+{\footnotesize\ttfamily \label{process__dialog_8dart_a8b20de7768741cdde8b69a66cf7dbe77} 
+late Text\+Editing\+Controller \+\_\+arrival\+Time\+Controller}
+
+\Hypertarget{process__dialog_8dart_a4ee3a8e55a106f26d7a960ece3d2cc98}\index{process\_dialog.dart@{process\_dialog.dart}!\_arrivalTimeError@{\_arrivalTimeError}}
+\index{\_arrivalTimeError@{\_arrivalTimeError}!process\_dialog.dart@{process\_dialog.dart}}
+\doxysubsubsection{\texorpdfstring{\_arrivalTimeError}{\_arrivalTimeError}}
+{\footnotesize\ttfamily \label{process__dialog_8dart_a4ee3a8e55a106f26d7a960ece3d2cc98} 
+String \+\_\+arrival\+Time\+Error}
+
+\Hypertarget{process__dialog_8dart_a7eed4736876b9de6288b4affb048e8e5}\index{process\_dialog.dart@{process\_dialog.dart}!\_isEnabled@{\_isEnabled}}
+\index{\_isEnabled@{\_isEnabled}!process\_dialog.dart@{process\_dialog.dart}}
+\doxysubsubsection{\texorpdfstring{\_isEnabled}{\_isEnabled}}
+{\footnotesize\ttfamily \label{process__dialog_8dart_a7eed4736876b9de6288b4affb048e8e5} 
+late bool \+\_\+is\+Enabled}
+
+\Hypertarget{process__dialog_8dart_ab831d554056ed2773ad0e6cabfe8f44e}\index{process\_dialog.dart@{process\_dialog.dart}!\_nameController@{\_nameController}}
+\index{\_nameController@{\_nameController}!process\_dialog.dart@{process\_dialog.dart}}
+\doxysubsubsection{\texorpdfstring{\_nameController}{\_nameController}}
+{\footnotesize\ttfamily \label{process__dialog_8dart_ab831d554056ed2773ad0e6cabfe8f44e} 
+class Process\+Dialog extends \mbox{\hyperlink{class_stateful_widget}{Stateful\+Widget}} \+\_\+name\+Controller}
+
+
+
+State class for Process\+Dialog. 
+
+\Hypertarget{process__dialog_8dart_a8ec1b49169a8cd9eb903652051657ea4}\index{process\_dialog.dart@{process\_dialog.dart}!\_nameError@{\_nameError}}
+\index{\_nameError@{\_nameError}!process\_dialog.dart@{process\_dialog.dart}}
+\doxysubsubsection{\texorpdfstring{\_nameError}{\_nameError}}
+{\footnotesize\ttfamily \label{process__dialog_8dart_a8ec1b49169a8cd9eb903652051657ea4} 
+String \+\_\+name\+Error}
+
+\Hypertarget{process__dialog_8dart_a51024d2fe40534ca474fd05684714cd4}\index{process\_dialog.dart@{process\_dialog.dart}!\_serviceTimeController@{\_serviceTimeController}}
+\index{\_serviceTimeController@{\_serviceTimeController}!process\_dialog.dart@{process\_dialog.dart}}
+\doxysubsubsection{\texorpdfstring{\_serviceTimeController}{\_serviceTimeController}}
+{\footnotesize\ttfamily \label{process__dialog_8dart_a51024d2fe40534ca474fd05684714cd4} 
+late Text\+Editing\+Controller \+\_\+service\+Time\+Controller}
+
+\Hypertarget{process__dialog_8dart_a8fcb22701737dddc2c38ca0a871ba15d}\index{process\_dialog.dart@{process\_dialog.dart}!\_serviceTimeError@{\_serviceTimeError}}
+\index{\_serviceTimeError@{\_serviceTimeError}!process\_dialog.dart@{process\_dialog.dart}}
+\doxysubsubsection{\texorpdfstring{\_serviceTimeError}{\_serviceTimeError}}
+{\footnotesize\ttfamily \label{process__dialog_8dart_a8fcb22701737dddc2c38ca0a871ba15d} 
+String \+\_\+service\+Time\+Error}
+

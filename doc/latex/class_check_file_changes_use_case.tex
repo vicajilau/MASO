@@ -1,0 +1,59 @@
+\doxysection{Check\+File\+Changes\+Use\+Case Class Reference}
+\hypertarget{class_check_file_changes_use_case}{}\label{class_check_file_changes_use_case}\index{CheckFileChangesUseCase@{CheckFileChangesUseCase}}
+
+
+Use case for checking if a \doxylink{class_maso_file}{Maso\+File} has changed.  
+
+
+
+
+Collaboration diagram for Check\+File\+Changes\+Use\+Case\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=221pt]{class_check_file_changes_use_case__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_check_file_changes_use_case}{Check\+File\+Changes\+Use\+Case}}(\{required \mbox{\hyperlink{class_file_repository}{File\+Repository}} file\+Repository\}) bool \mbox{\hyperlink{class_check_file_changes_use_case_a87e3764299fd777bf76ee33027ce8daf}{execute}} (\mbox{\hyperlink{class_maso_file}{Maso\+File}} cached\+File)
+\begin{DoxyCompactList}\small\item\em Constructor that receives the repository as a dependency. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+final \mbox{\hyperlink{class_file_repository}{File\+Repository}} \mbox{\hyperlink{class_check_file_changes_use_case_a0edd9b664be129e6e86b48439fb90c38}{\+\_\+file\+Repository}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Use case for checking if a \doxylink{class_maso_file}{Maso\+File} has changed. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_check_file_changes_use_case_a87e3764299fd777bf76ee33027ce8daf}\index{CheckFileChangesUseCase@{CheckFileChangesUseCase}!execute@{execute}}
+\index{execute@{execute}!CheckFileChangesUseCase@{CheckFileChangesUseCase}}
+\doxysubsubsection{\texorpdfstring{execute()}{execute()}}
+{\footnotesize\ttfamily \label{class_check_file_changes_use_case_a87e3764299fd777bf76ee33027ce8daf} 
+\mbox{\hyperlink{class_check_file_changes_use_case}{Check\+File\+Changes\+Use\+Case}}(\{required \mbox{\hyperlink{class_file_repository}{File\+Repository}} file\+Repository\}) bool Check\+File\+Changes\+Use\+Case\+::execute (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_maso_file}{Maso\+File}}}]{cached\+File}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Constructor that receives the repository as a dependency. 
+
+Executes the business logic to check if the file has changed.
+
+\mbox{[}cached\+File\mbox{]} is the \doxylink{class_maso_file}{Maso\+File} that needs to be checked for changes. It calls the repository method to check whether the file has changed. Returns true if the file has changed, false otherwise. 
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_check_file_changes_use_case_a0edd9b664be129e6e86b48439fb90c38}\index{CheckFileChangesUseCase@{CheckFileChangesUseCase}!\_fileRepository@{\_fileRepository}}
+\index{\_fileRepository@{\_fileRepository}!CheckFileChangesUseCase@{CheckFileChangesUseCase}}
+\doxysubsubsection{\texorpdfstring{\_fileRepository}{\_fileRepository}}
+{\footnotesize\ttfamily \label{class_check_file_changes_use_case_a0edd9b664be129e6e86b48439fb90c38} 
+final \mbox{\hyperlink{class_file_repository}{File\+Repository}} Check\+File\+Changes\+Use\+Case\+::\+\_\+file\+Repository\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/domain/use\+\_\+cases/\mbox{\hyperlink{check__file__changes__use__case_8dart}{check\+\_\+file\+\_\+changes\+\_\+use\+\_\+case.\+dart}}\end{DoxyCompactItemize}

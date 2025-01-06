@@ -1,0 +1,154 @@
+\doxysection{File\+Repository Class Reference}
+\hypertarget{class_file_repository}{}\label{class_file_repository}\index{FileRepository@{FileRepository}}
+
+
+Collaboration diagram for File\+Repository\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=174pt]{class_file_repository__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_file_repository}{File\+Repository}}(\{required \mbox{\hyperlink{class_i_file_service}{IFile\+Service}} file\+Service\}) Future$<$ \mbox{\hyperlink{class_maso_file}{Maso\+File}} $>$ \mbox{\hyperlink{class_file_repository_ad79bbab533ddbd2b8e18819e79495d28}{load\+Maso\+File}} (String \mbox{\hyperlink{file__event_8dart_a51af45a3e0720847ce45b9e0a7df5e75}{file\+Path}}) async
+\item 
+Future$<$ \mbox{\hyperlink{class_maso_file}{Maso\+File}} $>$ \mbox{\hyperlink{class_file_repository_a45e51c93328d59a9b1b284b793edd50e}{create\+Maso\+File}} (\{required String \mbox{\hyperlink{file__event_8dart_ac8c05b4eea48e18d68a2ce032893087c}{name}}, required String \mbox{\hyperlink{file__event_8dart_a9a2912077b542dacbc5d71e0b14c55b7}{version}}, required String \mbox{\hyperlink{file__event_8dart_ab64918f8c1480972c11828a0ab8a25e8}{description}}\}) async
+\item 
+Future$<$ \mbox{\hyperlink{class_maso_file}{Maso\+File}}?$>$ \mbox{\hyperlink{class_file_repository_a0ac340c68ac4ec09bc83816c8494685d}{save\+Maso\+File}} (\mbox{\hyperlink{class_maso_file}{Maso\+File}} \mbox{\hyperlink{file__state_8dart_ad3cf10c66c7f57ddae0e72ac997d1188}{maso\+File}}, String \mbox{\hyperlink{file__event_8dart_a277e00f71c1a023fe4f9035b531e43fe}{dialog\+Title}}, String \mbox{\hyperlink{file__event_8dart_aa3c483f78eab77f5a9cd4212f37b8f6e}{file\+Name}}) async
+\item 
+Future$<$ void $>$ \mbox{\hyperlink{class_file_repository_ab9f4ff8bbd8935624a8719eb6002919a}{save\+Exported\+File}} (Uint8\+List \mbox{\hyperlink{file__event_8dart_a4bff269539f3fd0899908554866181a5}{bytes}}, String \mbox{\hyperlink{file__event_8dart_a277e00f71c1a023fe4f9035b531e43fe}{dialog\+Title}}, String \mbox{\hyperlink{file__event_8dart_aa3c483f78eab77f5a9cd4212f37b8f6e}{file\+Name}}) async
+\item 
+Future$<$ \mbox{\hyperlink{class_maso_file}{Maso\+File}}?$>$ \mbox{\hyperlink{class_file_repository_adc5d34ecc7b75e328a4a8e6b3939528c}{pick\+File\+Manually}} () async
+\item 
+bool \mbox{\hyperlink{class_file_repository_a942ac7e7e20b657afb5a032a7cb2a921}{has\+Maso\+File\+Changed}} (\mbox{\hyperlink{class_maso_file}{Maso\+File}} \mbox{\hyperlink{file__loaded__screen_8dart_a55f8fb4a84c60d43cd94f3f49ff1bf98}{cached\+Maso\+File}})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+final \mbox{\hyperlink{class_i_file_service}{IFile\+Service}} \mbox{\hyperlink{class_file_repository_a9180d05ad8e59d6ab1c15c3072842dd2}{\+\_\+file\+Service}}
+\begin{DoxyCompactList}\small\item\em Instance of {\ttfamily File\+Service} to handle file operations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The {\ttfamily \doxylink{class_file_repository}{File\+Repository}} class manages file-\/related operations such as loading, saving, and selecting files. It delegates these tasks to an instance of {\ttfamily File\+Service}. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_file_repository_a45e51c93328d59a9b1b284b793edd50e}\index{FileRepository@{FileRepository}!createMasoFile@{createMasoFile}}
+\index{createMasoFile@{createMasoFile}!FileRepository@{FileRepository}}
+\doxysubsubsection{\texorpdfstring{createMasoFile()}{createMasoFile()}}
+{\footnotesize\ttfamily \label{class_file_repository_a45e51c93328d59a9b1b284b793edd50e} 
+Future$<$ \mbox{\hyperlink{class_maso_file}{Maso\+File}} $>$ File\+Repository\+::create\+Maso\+File (\begin{DoxyParamCaption}\item[{\{required String \mbox{\hyperlink{file__event_8dart_ac8c05b4eea48e18d68a2ce032893087c}{name}}, required String \mbox{\hyperlink{file__event_8dart_a9a2912077b542dacbc5d71e0b14c55b7}{version}}, required String \mbox{\hyperlink{file__event_8dart_ab64918f8c1480972c11828a0ab8a25e8}{description}}\}}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+Creates a new {\ttfamily \doxylink{class_maso_file}{Maso\+File}} with the specified metadata. The method generates a new {\ttfamily \doxylink{class_maso_file}{Maso\+File}} with the provided {\ttfamily name}, {\ttfamily version}, and {\ttfamily description}, then registers it in the service locator.
+
+
+\begin{DoxyItemize}
+\item \mbox{[}name\mbox{]}\+: The name for the new {\ttfamily \doxylink{class_maso_file}{Maso\+File}}.
+\item \mbox{[}version\mbox{]}\+: The version for the new {\ttfamily \doxylink{class_maso_file}{Maso\+File}}.
+\item \mbox{[}description\mbox{]}\+: The description for the new {\ttfamily \doxylink{class_maso_file}{Maso\+File}}.
+\item Returns\+: A {\ttfamily Future\texorpdfstring{$<$}{<}\doxylink{class_maso_file}{Maso\+File}\texorpdfstring{$>$}{>}} containing the created {\ttfamily \doxylink{class_maso_file}{Maso\+File}}. 
+\end{DoxyItemize}\Hypertarget{class_file_repository_a942ac7e7e20b657afb5a032a7cb2a921}\index{FileRepository@{FileRepository}!hasMasoFileChanged@{hasMasoFileChanged}}
+\index{hasMasoFileChanged@{hasMasoFileChanged}!FileRepository@{FileRepository}}
+\doxysubsubsection{\texorpdfstring{hasMasoFileChanged()}{hasMasoFileChanged()}}
+{\footnotesize\ttfamily \label{class_file_repository_a942ac7e7e20b657afb5a032a7cb2a921} 
+bool File\+Repository\+::has\+Maso\+File\+Changed (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_maso_file}{Maso\+File}}}]{cached\+Maso\+File}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+Checks if a {\ttfamily \doxylink{class_maso_file}{Maso\+File}} has changed by comparing the current file content with the cached version of the file. This method reads the original file content from \mbox{[}file\+Path\mbox{]} and compares it with the \mbox{[}cached\+Maso\+File\mbox{]}.
+
+
+\begin{DoxyItemize}
+\item \mbox{[}file\+Path\mbox{]}\+: The path to the file to check.
+\item \mbox{[}cached\+Maso\+File\mbox{]}\+: The cached version of the {\ttfamily \doxylink{class_maso_file}{Maso\+File}} for comparison.
+\item Returns\+: A {\ttfamily Future\texorpdfstring{$<$}{<}bool\texorpdfstring{$>$}{>}} indicating whether the file content has changed ({\ttfamily true}) or not ({\ttfamily false}). 
+\end{DoxyItemize}\Hypertarget{class_file_repository_ad79bbab533ddbd2b8e18819e79495d28}\index{FileRepository@{FileRepository}!loadMasoFile@{loadMasoFile}}
+\index{loadMasoFile@{loadMasoFile}!FileRepository@{FileRepository}}
+\doxysubsubsection{\texorpdfstring{loadMasoFile()}{loadMasoFile()}}
+{\footnotesize\ttfamily \label{class_file_repository_ad79bbab533ddbd2b8e18819e79495d28} 
+\mbox{\hyperlink{class_file_repository}{File\+Repository}}(\{required \mbox{\hyperlink{class_i_file_service}{IFile\+Service}} file\+Service\}) Future$<$ \mbox{\hyperlink{class_maso_file}{Maso\+File}} $>$ File\+Repository\+::load\+Maso\+File (\begin{DoxyParamCaption}\item[{String}]{file\+Path}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+Constructor to initialize {\ttfamily \doxylink{class_file_repository}{File\+Repository}} with a {\ttfamily File\+Service} instance. This allows for the delegation of file-\/related tasks.
+
+
+\begin{DoxyItemize}
+\item \mbox{[}file\+Service\mbox{]}\+: The {\ttfamily File\+Service} instance that handles file operations. Loads a {\ttfamily \doxylink{class_maso_file}{Maso\+File}} from a file at the specified \mbox{[}file\+Path\mbox{]}. This method calls {\ttfamily read\+Maso\+File} from {\ttfamily File\+Service} to read the file, and then registers the loaded file in the service locator.
+\item \mbox{[}file\+Path\mbox{]}\+: The path to the file to load.
+\item Returns\+: A {\ttfamily Future\texorpdfstring{$<$}{<}\doxylink{class_maso_file}{Maso\+File}\texorpdfstring{$>$}{>}} containing the loaded {\ttfamily \doxylink{class_maso_file}{Maso\+File}}.
+\item Throws\+: An exception if there is an error loading the file. 
+\end{DoxyItemize}Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_file_repository_ad79bbab533ddbd2b8e18819e79495d28_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_file_repository_adc5d34ecc7b75e328a4a8e6b3939528c}\index{FileRepository@{FileRepository}!pickFileManually@{pickFileManually}}
+\index{pickFileManually@{pickFileManually}!FileRepository@{FileRepository}}
+\doxysubsubsection{\texorpdfstring{pickFileManually()}{pickFileManually()}}
+{\footnotesize\ttfamily \label{class_file_repository_adc5d34ecc7b75e328a4a8e6b3939528c} 
+Future$<$ \mbox{\hyperlink{class_maso_file}{Maso\+File}}?$>$ File\+Repository\+::pick\+File\+Manually (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+Picks a file manually using the file picker dialog. This method delegates the task of selecting a file to the {\ttfamily \+\_\+file\+Service}\textquotesingle{}s {\ttfamily pick\+File} method, and registers the selected file in the service locator.
+
+
+\begin{DoxyItemize}
+\item Returns\+: A {\ttfamily Future\texorpdfstring{$<$}{<}\doxylink{class_maso_file}{Maso\+File}?\texorpdfstring{$>$}{>}} containing the selected {\ttfamily \doxylink{class_maso_file}{Maso\+File}}, or {\ttfamily null} if no file was selected. 
+\end{DoxyItemize}Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_file_repository_adc5d34ecc7b75e328a4a8e6b3939528c_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_file_repository_ab9f4ff8bbd8935624a8719eb6002919a}\index{FileRepository@{FileRepository}!saveExportedFile@{saveExportedFile}}
+\index{saveExportedFile@{saveExportedFile}!FileRepository@{FileRepository}}
+\doxysubsubsection{\texorpdfstring{saveExportedFile()}{saveExportedFile()}}
+{\footnotesize\ttfamily \label{class_file_repository_ab9f4ff8bbd8935624a8719eb6002919a} 
+Future$<$ void $>$ File\+Repository\+::save\+Exported\+File (\begin{DoxyParamCaption}\item[{Uint8\+List}]{bytes}{, }\item[{String}]{dialog\+Title}{, }\item[{String}]{file\+Name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+Saves a {\ttfamily \doxylink{class_maso_file}{Maso\+File}} to a file using {\ttfamily File\+Service}. This method calls the {\ttfamily save\+Maso\+File} function from {\ttfamily File\+Service} to save the file.
+
+
+\begin{DoxyItemize}
+\item \mbox{[}maso\+File\mbox{]}\+: The {\ttfamily \doxylink{class_maso_file}{Maso\+File}} to save.
+\item \mbox{[}dialog\+Title\mbox{]}\+: The title of the file save dialog.
+\item \mbox{[}file\+Name\mbox{]}\+: The name of the file.
+\item Returns\+: A {\ttfamily Future\texorpdfstring{$<$}{<}\doxylink{class_maso_file}{Maso\+File}\texorpdfstring{$>$}{>}} containing the saved {\ttfamily \doxylink{class_maso_file}{Maso\+File}}.
+\item Throws\+: An exception if there is an error saving the file. 
+\end{DoxyItemize}\Hypertarget{class_file_repository_a0ac340c68ac4ec09bc83816c8494685d}\index{FileRepository@{FileRepository}!saveMasoFile@{saveMasoFile}}
+\index{saveMasoFile@{saveMasoFile}!FileRepository@{FileRepository}}
+\doxysubsubsection{\texorpdfstring{saveMasoFile()}{saveMasoFile()}}
+{\footnotesize\ttfamily \label{class_file_repository_a0ac340c68ac4ec09bc83816c8494685d} 
+Future$<$ \mbox{\hyperlink{class_maso_file}{Maso\+File}}?$>$ File\+Repository\+::save\+Maso\+File (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_maso_file}{Maso\+File}}}]{maso\+File}{, }\item[{String}]{dialog\+Title}{, }\item[{String}]{file\+Name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+Saves a {\ttfamily \doxylink{class_maso_file}{Maso\+File}} to a file using {\ttfamily File\+Service}. This method calls the {\ttfamily save\+Maso\+File} function from {\ttfamily File\+Service} to save the file.
+
+
+\begin{DoxyItemize}
+\item \mbox{[}maso\+File\mbox{]}\+: The {\ttfamily \doxylink{class_maso_file}{Maso\+File}} to save.
+\item \mbox{[}dialog\+Title\mbox{]}\+: The title of the file save dialog.
+\item \mbox{[}file\+Name\mbox{]}\+: The name of the file.
+\item Returns\+: A {\ttfamily Future\texorpdfstring{$<$}{<}\doxylink{class_maso_file}{Maso\+File}\texorpdfstring{$>$}{>}} containing the saved {\ttfamily \doxylink{class_maso_file}{Maso\+File}}.
+\item Throws\+: An exception if there is an error saving the file. 
+\end{DoxyItemize}
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_file_repository_a9180d05ad8e59d6ab1c15c3072842dd2}\index{FileRepository@{FileRepository}!\_fileService@{\_fileService}}
+\index{\_fileService@{\_fileService}!FileRepository@{FileRepository}}
+\doxysubsubsection{\texorpdfstring{\_fileService}{\_fileService}}
+{\footnotesize\ttfamily \label{class_file_repository_a9180d05ad8e59d6ab1c15c3072842dd2} 
+final \mbox{\hyperlink{class_i_file_service}{IFile\+Service}} File\+Repository\+::\+\_\+file\+Service\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Instance of {\ttfamily File\+Service} to handle file operations. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/data/repositories/\mbox{\hyperlink{file__repository_8dart}{file\+\_\+repository.\+dart}}\end{DoxyCompactItemize}

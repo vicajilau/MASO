@@ -1,0 +1,75 @@
+\doxysection{File\+Event Class Reference}
+\hypertarget{class_file_event}{}\label{class_file_event}\index{FileEvent@{FileEvent}}
+
+
+Abstract class representing the base event for file operations.  
+
+
+
+
+Collaboration diagram for File\+Event\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=152pt]{class_file_event__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_file_event_a8eb08d950646875979faaa6ca54e0744}{Maso\+File\+Save\+Requested}} (this.\+maso\+File, this.\+dialog\+Title, this.\+file\+Name)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_maso_file}{Maso\+File}} \mbox{\hyperlink{class_file_event_abda89f5ffbc3874fd4a49f41a804e86c}{maso\+File}}
+\item 
+final String \mbox{\hyperlink{class_file_event_a298608e5971e734440202f0f4b352b13}{dialog\+Title}}
+\item 
+final String \mbox{\hyperlink{class_file_event_a68c750cbd0a340891b936cc823db98d3}{file\+Name}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Abstract class representing the base event for file operations. 
+
+Event triggered when a file save is requested, with the file path and data.
+
+Event triggered when a file is requested to be picked. This event can be used to initiate the file selection process.
+
+Event triggered to reset the file state. This event can be used to clear any file-\/related data or state. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_file_event_a8eb08d950646875979faaa6ca54e0744}\index{FileEvent@{FileEvent}!MasoFileSaveRequested@{MasoFileSaveRequested}}
+\index{MasoFileSaveRequested@{MasoFileSaveRequested}!FileEvent@{FileEvent}}
+\doxysubsubsection{\texorpdfstring{MasoFileSaveRequested()}{MasoFileSaveRequested()}}
+{\footnotesize\ttfamily \label{class_file_event_a8eb08d950646875979faaa6ca54e0744} 
+File\+Event\+::\+Maso\+File\+Save\+Requested (\begin{DoxyParamCaption}\item[{this.}]{maso\+File}{, }\item[{this.}]{dialog\+Title}{, }\item[{this.}]{file\+Name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_file_event_a298608e5971e734440202f0f4b352b13}\index{FileEvent@{FileEvent}!dialogTitle@{dialogTitle}}
+\index{dialogTitle@{dialogTitle}!FileEvent@{FileEvent}}
+\doxysubsubsection{\texorpdfstring{dialogTitle}{dialogTitle}}
+{\footnotesize\ttfamily \label{class_file_event_a298608e5971e734440202f0f4b352b13} 
+final String File\+Event\+::dialog\+Title\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_file_event_a68c750cbd0a340891b936cc823db98d3}\index{FileEvent@{FileEvent}!fileName@{fileName}}
+\index{fileName@{fileName}!FileEvent@{FileEvent}}
+\doxysubsubsection{\texorpdfstring{fileName}{fileName}}
+{\footnotesize\ttfamily \label{class_file_event_a68c750cbd0a340891b936cc823db98d3} 
+final String File\+Event\+::file\+Name\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_file_event_abda89f5ffbc3874fd4a49f41a804e86c}\index{FileEvent@{FileEvent}!masoFile@{masoFile}}
+\index{masoFile@{masoFile}!FileEvent@{FileEvent}}
+\doxysubsubsection{\texorpdfstring{masoFile}{masoFile}}
+{\footnotesize\ttfamily \label{class_file_event_abda89f5ffbc3874fd4a49f41a804e86c} 
+\mbox{\hyperlink{class_maso_file}{Maso\+File}} File\+Event\+::maso\+File\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/presentation/blocs/file\+\_\+bloc/\mbox{\hyperlink{file__event_8dart}{file\+\_\+event.\+dart}}\end{DoxyCompactItemize}

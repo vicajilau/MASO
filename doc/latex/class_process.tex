@@ -1,0 +1,199 @@
+\doxysection{Process Class Reference}
+\hypertarget{class_process}{}\label{class_process}\index{Process@{Process}}
+
+
+The \doxylink{class_process}{Process} class represents a process with a name, arrival time, and service time.  
+
+
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_process_a7d453b8e68f90d1728e790f19867c7b0}{Process}} (\{ required this.\+name, required this.\+arrival\+Time, required this.\+service\+Time, this.\+execution\+Time, required this.\+enabled, \})
+\begin{DoxyCompactList}\small\item\em Constructor for creating a \doxylink{class_process}{Process} instance with name, arrival time, and service time. \end{DoxyCompactList}\item 
+factory \mbox{\hyperlink{class_process}{Process}} \mbox{\hyperlink{class_process_aebb52b5d006fd9d5540d5933138df06f}{from\+Json}} (Map$<$ String, dynamic $>$ json)
+\begin{DoxyCompactList}\small\item\em Factory constructor to create a \doxylink{class_process}{Process} instance from a JSON map. \end{DoxyCompactList}\item 
+Map$<$ String, dynamic $>$ \mbox{\hyperlink{class_process_a913a4b462212eb7df6f537ea00874e74}{to\+Json}} ()
+\begin{DoxyCompactList}\small\item\em Converts the \doxylink{class_process}{Process} instance to a JSON map. \end{DoxyCompactList}\item 
+override bool \mbox{\hyperlink{class_process_a09d27bc3de83c51aa990f98878fbf98d}{operator==}} (Object other)
+\begin{DoxyCompactList}\small\item\em Override the equality operator to compare \doxylink{class_process}{Process} instances based on their values. \end{DoxyCompactList}\item 
+override String \mbox{\hyperlink{class_process_ad58b2bfe0a395a5430fe5dde3ba4ef29}{to\+String}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+final String \mbox{\hyperlink{class_process_a6e31d64ee26d81bbf253c34cac309478}{name}}
+\begin{DoxyCompactList}\small\item\em The name of the process. \end{DoxyCompactList}\item 
+final int \mbox{\hyperlink{class_process_a80739f9b854c5c2e6e1f0e56e212460f}{arrival\+Time}}
+\begin{DoxyCompactList}\small\item\em The arrival time of the process. \end{DoxyCompactList}\item 
+final int \mbox{\hyperlink{class_process_a4b2ff157026638fb856347c598616420}{service\+Time}}
+\begin{DoxyCompactList}\small\item\em The service time of the process. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_process_a40a7ac09ce5e2ca8ebdaf75452de4b31}{execution\+Time}}
+\begin{DoxyCompactList}\small\item\em The execution time of the process. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_process_a85704bb8a21fe4a24f9071139e0d1827}{enabled}}
+\begin{DoxyCompactList}\small\item\em If the process is enabled. \end{DoxyCompactList}\item 
+override int get \mbox{\hyperlink{class_process_afb20ab34b777909d957e3a0a3bbdaa7e}{hash\+Code}}
+\begin{DoxyCompactList}\small\item\em Override the hash\+Code to be consistent with the equality operator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The \doxylink{class_process}{Process} class represents a process with a name, arrival time, and service time. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_process_a7d453b8e68f90d1728e790f19867c7b0}\index{Process@{Process}!Process@{Process}}
+\index{Process@{Process}!Process@{Process}}
+\doxysubsubsection{\texorpdfstring{Process()}{Process()}}
+{\footnotesize\ttfamily \label{class_process_a7d453b8e68f90d1728e790f19867c7b0} 
+Process\+::\+Process (\begin{DoxyParamCaption}\item[{\{ required this.\+name, required this.\+arrival\+Time, required this.\+service\+Time, this.\+execution\+Time, required this.\+enabled, \}}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Constructor for creating a \doxylink{class_process}{Process} instance with name, arrival time, and service time. 
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_process_a7d453b8e68f90d1728e790f19867c7b0_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_process_aebb52b5d006fd9d5540d5933138df06f}\index{Process@{Process}!fromJson@{fromJson}}
+\index{fromJson@{fromJson}!Process@{Process}}
+\doxysubsubsection{\texorpdfstring{fromJson()}{fromJson()}}
+{\footnotesize\ttfamily \label{class_process_aebb52b5d006fd9d5540d5933138df06f} 
+factory \mbox{\hyperlink{class_process}{Process}} Process\+::from\+Json (\begin{DoxyParamCaption}\item[{Map$<$ String, dynamic $>$}]{json}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Factory constructor to create a \doxylink{class_process}{Process} instance from a JSON map. 
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=309pt]{class_process_aebb52b5d006fd9d5540d5933138df06f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_process_aebb52b5d006fd9d5540d5933138df06f_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_process_a09d27bc3de83c51aa990f98878fbf98d}\index{Process@{Process}!operator==@{operator==}}
+\index{operator==@{operator==}!Process@{Process}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily \label{class_process_a09d27bc3de83c51aa990f98878fbf98d} 
+override bool Process\+::operator== (\begin{DoxyParamCaption}\item[{Object}]{other}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Override the equality operator to compare \doxylink{class_process}{Process} instances based on their values. 
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=315pt]{class_process_a09d27bc3de83c51aa990f98878fbf98d_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_process_a913a4b462212eb7df6f537ea00874e74}\index{Process@{Process}!toJson@{toJson}}
+\index{toJson@{toJson}!Process@{Process}}
+\doxysubsubsection{\texorpdfstring{toJson()}{toJson()}}
+{\footnotesize\ttfamily \label{class_process_a913a4b462212eb7df6f537ea00874e74} 
+Map$<$ String, dynamic $>$ Process\+::to\+Json (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Converts the \doxylink{class_process}{Process} instance to a JSON map. 
+
+\Hypertarget{class_process_ad58b2bfe0a395a5430fe5dde3ba4ef29}\index{Process@{Process}!toString@{toString}}
+\index{toString@{toString}!Process@{Process}}
+\doxysubsubsection{\texorpdfstring{toString()}{toString()}}
+{\footnotesize\ttfamily \label{class_process_ad58b2bfe0a395a5430fe5dde3ba4ef29} 
+override String Process\+::to\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_process_a80739f9b854c5c2e6e1f0e56e212460f}\index{Process@{Process}!arrivalTime@{arrivalTime}}
+\index{arrivalTime@{arrivalTime}!Process@{Process}}
+\doxysubsubsection{\texorpdfstring{arrivalTime}{arrivalTime}}
+{\footnotesize\ttfamily \label{class_process_a80739f9b854c5c2e6e1f0e56e212460f} 
+final int Process\+::arrival\+Time\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The arrival time of the process. 
+
+\Hypertarget{class_process_a85704bb8a21fe4a24f9071139e0d1827}\index{Process@{Process}!enabled@{enabled}}
+\index{enabled@{enabled}!Process@{Process}}
+\doxysubsubsection{\texorpdfstring{enabled}{enabled}}
+{\footnotesize\ttfamily \label{class_process_a85704bb8a21fe4a24f9071139e0d1827} 
+bool Process\+::enabled\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+If the process is enabled. 
+
+\Hypertarget{class_process_a40a7ac09ce5e2ca8ebdaf75452de4b31}\index{Process@{Process}!executionTime@{executionTime}}
+\index{executionTime@{executionTime}!Process@{Process}}
+\doxysubsubsection{\texorpdfstring{executionTime}{executionTime}}
+{\footnotesize\ttfamily \label{class_process_a40a7ac09ce5e2ca8ebdaf75452de4b31} 
+int Process\+::execution\+Time\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The execution time of the process. 
+
+\Hypertarget{class_process_afb20ab34b777909d957e3a0a3bbdaa7e}\index{Process@{Process}!hashCode@{hashCode}}
+\index{hashCode@{hashCode}!Process@{Process}}
+\doxysubsubsection{\texorpdfstring{hashCode}{hashCode}}
+{\footnotesize\ttfamily \label{class_process_afb20ab34b777909d957e3a0a3bbdaa7e} 
+override int get Process\+::hash\+Code\hspace{0.3cm}{\ttfamily [private]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=>}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{class_process_a6e31d64ee26d81bbf253c34cac309478}{name}}.hashCode\ \string^}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{class_process_a80739f9b854c5c2e6e1f0e56e212460f}{arrivalTime}}.hashCode\ \string^}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{class_process_a4b2ff157026638fb856347c598616420}{serviceTime}}.hashCode\ \string^}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{class_process_a85704bb8a21fe4a24f9071139e0d1827}{enabled}}.hashCode}
+
+\end{DoxyCode}
+
+
+Override the hash\+Code to be consistent with the equality operator. 
+
+\Hypertarget{class_process_a6e31d64ee26d81bbf253c34cac309478}\index{Process@{Process}!name@{name}}
+\index{name@{name}!Process@{Process}}
+\doxysubsubsection{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily \label{class_process_a6e31d64ee26d81bbf253c34cac309478} 
+final String Process\+::name\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The name of the process. 
+
+\Hypertarget{class_process_a4b2ff157026638fb856347c598616420}\index{Process@{Process}!serviceTime@{serviceTime}}
+\index{serviceTime@{serviceTime}!Process@{Process}}
+\doxysubsubsection{\texorpdfstring{serviceTime}{serviceTime}}
+{\footnotesize\ttfamily \label{class_process_a4b2ff157026638fb856347c598616420} 
+final int Process\+::service\+Time\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The service time of the process. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/domain/models/\mbox{\hyperlink{process_8dart}{process.\+dart}}\end{DoxyCompactItemize}

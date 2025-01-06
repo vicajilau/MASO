@@ -1,0 +1,60 @@
+\doxysection{lib/domain/models/scheduling\+\_\+algorithm.dart File Reference}
+\hypertarget{scheduling__algorithm_8dart}{}\label{scheduling__algorithm_8dart}\index{lib/domain/models/scheduling\_algorithm.dart@{lib/domain/models/scheduling\_algorithm.dart}}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{scheduling__algorithm_8dart_a1b8b4cc53c3083ad70fc96590269d829}{Scheduling\+Algorithm}} \{ \newline
+\mbox{\hyperlink{scheduling__algorithm_8dart_a1b8b4cc53c3083ad70fc96590269d829ac7187cc7c9dc635cf2528260fc09dc90}{first\+Come\+First\+Served}}
+, \mbox{\hyperlink{scheduling__algorithm_8dart_a1b8b4cc53c3083ad70fc96590269d829a3a8f9ba039f1f45a0409211eab91a7c1}{shortest\+Job\+First}}
+, \mbox{\hyperlink{scheduling__algorithm_8dart_a1b8b4cc53c3083ad70fc96590269d829aeac5a76ed8c50612fa69719b06c6e7d3}{shortest\+Remaining\+Time\+First}}
+, \mbox{\hyperlink{scheduling__algorithm_8dart_a1b8b4cc53c3083ad70fc96590269d829a22ba509e56dcb911e23fcbc9efdf22e8}{round\+Robin}}
+, \newline
+\mbox{\hyperlink{scheduling__algorithm_8dart_a1b8b4cc53c3083ad70fc96590269d829a92d174aa6f4dc59b7fbe4d352f602a81}{priority\+Based}}
+, \mbox{\hyperlink{scheduling__algorithm_8dart_a1b8b4cc53c3083ad70fc96590269d829a200ddd37b4cdeb2f0b8b2debd0465a21}{multiple\+Priority\+Queues}}
+, \mbox{\hyperlink{scheduling__algorithm_8dart_a1b8b4cc53c3083ad70fc96590269d829ac87d6ecdba349c05314761cde1f683d4}{multiple\+Priority\+Queues\+With\+Feedback}}
+, \mbox{\hyperlink{scheduling__algorithm_8dart_a1b8b4cc53c3083ad70fc96590269d829ab9663511304bbb990a3beb997e9d8e94}{time\+Limit}}
+ \}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{scheduling__algorithm_8dart_a1b8b4cc53c3083ad70fc96590269d829}\index{scheduling\_algorithm.dart@{scheduling\_algorithm.dart}!SchedulingAlgorithm@{SchedulingAlgorithm}}
+\index{SchedulingAlgorithm@{SchedulingAlgorithm}!scheduling\_algorithm.dart@{scheduling\_algorithm.dart}}
+\doxysubsubsection{\texorpdfstring{SchedulingAlgorithm}{SchedulingAlgorithm}}
+{\footnotesize\ttfamily \label{scheduling__algorithm_8dart_a1b8b4cc53c3083ad70fc96590269d829} 
+enum \mbox{\hyperlink{scheduling__algorithm_8dart_a1b8b4cc53c3083ad70fc96590269d829}{Scheduling\+Algorithm}}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{firstComeFirstServed@{firstComeFirstServed}!scheduling\_algorithm.dart@{scheduling\_algorithm.dart}}\index{scheduling\_algorithm.dart@{scheduling\_algorithm.dart}!firstComeFirstServed@{firstComeFirstServed}}}\Hypertarget{scheduling__algorithm_8dart_a1b8b4cc53c3083ad70fc96590269d829ac7187cc7c9dc635cf2528260fc09dc90}\label{scheduling__algorithm_8dart_a1b8b4cc53c3083ad70fc96590269d829ac7187cc7c9dc635cf2528260fc09dc90} 
+first\+Come\+First\+Served&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{shortestJobFirst@{shortestJobFirst}!scheduling\_algorithm.dart@{scheduling\_algorithm.dart}}\index{scheduling\_algorithm.dart@{scheduling\_algorithm.dart}!shortestJobFirst@{shortestJobFirst}}}\Hypertarget{scheduling__algorithm_8dart_a1b8b4cc53c3083ad70fc96590269d829a3a8f9ba039f1f45a0409211eab91a7c1}\label{scheduling__algorithm_8dart_a1b8b4cc53c3083ad70fc96590269d829a3a8f9ba039f1f45a0409211eab91a7c1} 
+shortest\+Job\+First&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{shortestRemainingTimeFirst@{shortestRemainingTimeFirst}!scheduling\_algorithm.dart@{scheduling\_algorithm.dart}}\index{scheduling\_algorithm.dart@{scheduling\_algorithm.dart}!shortestRemainingTimeFirst@{shortestRemainingTimeFirst}}}\Hypertarget{scheduling__algorithm_8dart_a1b8b4cc53c3083ad70fc96590269d829aeac5a76ed8c50612fa69719b06c6e7d3}\label{scheduling__algorithm_8dart_a1b8b4cc53c3083ad70fc96590269d829aeac5a76ed8c50612fa69719b06c6e7d3} 
+shortest\+Remaining\+Time\+First&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{roundRobin@{roundRobin}!scheduling\_algorithm.dart@{scheduling\_algorithm.dart}}\index{scheduling\_algorithm.dart@{scheduling\_algorithm.dart}!roundRobin@{roundRobin}}}\Hypertarget{scheduling__algorithm_8dart_a1b8b4cc53c3083ad70fc96590269d829a22ba509e56dcb911e23fcbc9efdf22e8}\label{scheduling__algorithm_8dart_a1b8b4cc53c3083ad70fc96590269d829a22ba509e56dcb911e23fcbc9efdf22e8} 
+round\+Robin&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{priorityBased@{priorityBased}!scheduling\_algorithm.dart@{scheduling\_algorithm.dart}}\index{scheduling\_algorithm.dart@{scheduling\_algorithm.dart}!priorityBased@{priorityBased}}}\Hypertarget{scheduling__algorithm_8dart_a1b8b4cc53c3083ad70fc96590269d829a92d174aa6f4dc59b7fbe4d352f602a81}\label{scheduling__algorithm_8dart_a1b8b4cc53c3083ad70fc96590269d829a92d174aa6f4dc59b7fbe4d352f602a81} 
+priority\+Based&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{multiplePriorityQueues@{multiplePriorityQueues}!scheduling\_algorithm.dart@{scheduling\_algorithm.dart}}\index{scheduling\_algorithm.dart@{scheduling\_algorithm.dart}!multiplePriorityQueues@{multiplePriorityQueues}}}\Hypertarget{scheduling__algorithm_8dart_a1b8b4cc53c3083ad70fc96590269d829a200ddd37b4cdeb2f0b8b2debd0465a21}\label{scheduling__algorithm_8dart_a1b8b4cc53c3083ad70fc96590269d829a200ddd37b4cdeb2f0b8b2debd0465a21} 
+multiple\+Priority\+Queues&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{multiplePriorityQueuesWithFeedback@{multiplePriorityQueuesWithFeedback}!scheduling\_algorithm.dart@{scheduling\_algorithm.dart}}\index{scheduling\_algorithm.dart@{scheduling\_algorithm.dart}!multiplePriorityQueuesWithFeedback@{multiplePriorityQueuesWithFeedback}}}\Hypertarget{scheduling__algorithm_8dart_a1b8b4cc53c3083ad70fc96590269d829ac87d6ecdba349c05314761cde1f683d4}\label{scheduling__algorithm_8dart_a1b8b4cc53c3083ad70fc96590269d829ac87d6ecdba349c05314761cde1f683d4} 
+multiple\+Priority\+Queues\+With\+Feedback&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{timeLimit@{timeLimit}!scheduling\_algorithm.dart@{scheduling\_algorithm.dart}}\index{scheduling\_algorithm.dart@{scheduling\_algorithm.dart}!timeLimit@{timeLimit}}}\Hypertarget{scheduling__algorithm_8dart_a1b8b4cc53c3083ad70fc96590269d829ab9663511304bbb990a3beb997e9d8e94}\label{scheduling__algorithm_8dart_a1b8b4cc53c3083ad70fc96590269d829ab9663511304bbb990a3beb997e9d8e94} 
+time\+Limit&\\
+\hline
+
+\end{DoxyEnumFields}
