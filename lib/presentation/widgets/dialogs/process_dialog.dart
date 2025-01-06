@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:maso/domain/models/list_processes_extension.dart';
 import 'package:maso/domain/models/process.dart';
+
+import '../../../core/l10n/app_localizations.dart';
 
 /// A dialog widget for creating or editing a process.
 class ProcessDialog extends StatefulWidget {

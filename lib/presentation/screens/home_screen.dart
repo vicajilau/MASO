@@ -1,12 +1,12 @@
 import 'package:desktop_drop/desktop_drop.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:maso/core/context_extension.dart';
 import 'package:platform_detail/platform_detail.dart';
 
 import '../../core/constants/maso_metadata.dart';
+import '../../core/l10n/app_localizations.dart';
 import '../../core/service_locator.dart';
 import '../../routes/app_router.dart';
 import '../blocs/file_bloc/file_bloc.dart';
