@@ -30,7 +30,6 @@ class BadMasoFileException implements Exception {
   /// - `unsupportedVersion`: The file version is not supported by the current app.
   /// - `invalidExtension`: The file does not have a valid `.maso` extension.
   String description(BuildContext context) {
-    print("object");
     switch (type) {
       case BadMasoFileErrorType.metadataBadContent:
         return AppLocalizations.of(context)!.metadataBadContent;
