@@ -8,6 +8,7 @@ import 'package:platform_detail/platform_detail.dart';
 import '../../core/constants/maso_metadata.dart';
 import '../../core/l10n/app_localizations.dart';
 import '../../core/service_locator.dart';
+import '../../domain/models/custom_exceptions/bad_maso_file_exception.dart';
 import '../../routes/app_router.dart';
 import '../blocs/file_bloc/file_bloc.dart';
 import '../blocs/file_bloc/file_event.dart';
@@ -58,7 +59,12 @@ class _HomeScreenState extends State<HomeScreen> {
             }
           }
           if (state is FileError && context.mounted) {
-            context.presentSnackBar(state.getDescription(context));
+            if (state.error is BadMasoFileException) {
+              final badFileException = state.error as BadMasoFileException;
+              context.presentSnackBar(badFileException.description(context));
+            } else {
+              context.presentSnackBar(state.getDescription(context));
+            }
           }
           if (state is FileLoading) {
             setState(() {

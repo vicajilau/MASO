@@ -260,4 +260,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get pdfExported => 'PDF exported';
+
+  @override
+  String get metadataBadContent => 'The file metadata is invalid or corrupted.';
+
+  @override
+  String get processesBadContent => 'The process list contains invalid data.';
+
+  @override
+  String get unsupportedVersion => 'The file version is not supported by the current application.';
+
+  @override
+  String get invalidExtension => 'The file does not have a valid .maso extension.';
 }

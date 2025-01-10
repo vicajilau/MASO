@@ -520,6 +520,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'PDF exported'**
   String get pdfExported;
+
+  /// No description provided for @metadataBadContent.
+  ///
+  /// In en, this message translates to:
+  /// **'The file metadata is invalid or corrupted.'**
+  String get metadataBadContent;
+
+  /// No description provided for @processesBadContent.
+  ///
+  /// In en, this message translates to:
+  /// **'The process list contains invalid data.'**
+  String get processesBadContent;
+
+  /// No description provided for @unsupportedVersion.
+  ///
+  /// In en, this message translates to:
+  /// **'The file version is not supported by the current application.'**
+  String get unsupportedVersion;
+
+  /// No description provided for @invalidExtension.
+  ///
+  /// In en, this message translates to:
+  /// **'The file does not have a valid .maso extension.'**
+  String get invalidExtension;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

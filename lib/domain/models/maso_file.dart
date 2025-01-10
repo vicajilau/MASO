@@ -1,5 +1,7 @@
+import 'package:maso/core/constants/maso_metadata.dart';
 import 'package:maso/domain/models/process.dart';
 
+import 'custom_exceptions/bad_maso_file_exception.dart';
 import 'metadata.dart';
 
 /// The `MasoFile` class represents a MASO file, which consists of metadata and a list of processes.
@@ -41,11 +43,18 @@ class MasoFile {
   static void checkIfJsonIsCorrect(Map<String, dynamic> json) {
     try {
       // Attempts to deserialize the 'metadata' object from the JSON into a 'Metadata' instance.
-      Metadata.fromJson(json['metadata'] as Map<String, dynamic>);
+      final metadata =
+          Metadata.fromJson(json['metadata'] as Map<String, dynamic>);
+      if (!MasoMetadata.isSupportedVersion(metadata.version)) {
+        throw BadMasoFileException(BadMasoFileErrorType.unsupportedVersion);
+      }
     } catch (e) {
       // If an error occurs (e.g., if 'metadata' is not in the correct format),
       // throws an exception with a specific message about the incorrect 'metadata' content.
-      throw Exception(MasoFileBadContent.metadataBadContent);
+      if (e is BadMasoFileException) {
+        rethrow;
+      }
+      throw BadMasoFileException(BadMasoFileErrorType.metadataBadContent);
     }
 
     try {
@@ -56,7 +65,7 @@ class MasoFile {
     } catch (e) {
       // If an error occurs (e.g., if 'processes' does not have the expected structure),
       // throws an exception with a specific message about the incorrect 'processes' content.
-      throw Exception(MasoFileBadContent.processesBadContent);
+      throw BadMasoFileException(BadMasoFileErrorType.processesBadContent);
     }
   }
 
@@ -127,5 +136,3 @@ class MasoFile {
   String toString() =>
       "Maso File {$metadata, $processes} with Hash($hashCode).";
 }
-
-enum MasoFileBadContent { metadataBadContent, processesBadContent }

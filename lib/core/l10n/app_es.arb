@@ -186,5 +186,9 @@
   "executionTimeDescription": "Tiempo de Ejecución: {executionTime}",
   "executionTimeUnavailable": "N/D",
   "imageExported": "Imagen exportada",
-  "pdfExported": "PDF exportado"
+  "pdfExported": "PDF exportado",
+  "metadataBadContent": "Los metadatos del archivo son inválidos o están corruptos.",
+  "processesBadContent": "La lista de procesos contiene datos inválidos.",
+  "unsupportedVersion": "La versión del archivo no es compatible con la aplicación actual.",
+  "invalidExtension": "El archivo no tiene una extensión .maso válida."
 }

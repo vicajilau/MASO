@@ -186,5 +186,9 @@
   "executionTimeDescription": "Execution Time: {executionTime}",
   "executionTimeUnavailable": "N/A",
   "imageExported": "Image exported",
-  "pdfExported": "PDF exported"
+  "pdfExported": "PDF exported",
+  "metadataBadContent": "The file metadata is invalid or corrupted.",
+  "processesBadContent": "The process list contains invalid data.",
+  "unsupportedVersion": "The file version is not supported by the current application.",
+  "invalidExtension": "The file does not have a valid .maso extension."
 }

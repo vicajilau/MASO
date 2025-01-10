@@ -79,6 +79,8 @@ class _FileLoadedScreenState extends State<FileLoadedScreen> {
             _checkFileChange();
           }
           if (state is FileError) {
+            print("state.error: ${state.error}");
+            print("state.error.runtimeType: ${state.error.runtimeType}");
             context.presentSnackBar(state.getDescription(context));
           }
         },

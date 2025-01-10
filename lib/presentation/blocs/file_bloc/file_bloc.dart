@@ -1,7 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../data/repositories/file_repository.dart';
-import '../../../domain/models/custom_exceptions/file_invalid_exception.dart';
 import 'file_event.dart';
 import 'file_state.dart';
 
@@ -24,8 +23,6 @@ class FileBloc extends Bloc<FileEvent, FileState> {
       try {
         final masoFile = await _fileRepository.loadMasoFile(event.filePath);
         emit(FileLoaded(masoFile)); // Emit the loaded file state
-      } on FileInvalidException {
-        emit(FileError(reason: FileErrorType.invalidExtension));
       } on Exception catch (e) {
         emit(FileError(
             reason: FileErrorType.errorOpeningFile,

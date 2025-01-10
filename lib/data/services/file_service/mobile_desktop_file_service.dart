@@ -4,7 +4,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:file_picker/file_picker.dart';
-import 'package:maso/domain/models/custom_exceptions/file_invalid_exception.dart';
+import 'package:maso/domain/models/custom_exceptions/bad_maso_file_exception.dart';
 import 'package:platform_detail/platform_detail.dart';
 
 import '../../../domain/models/maso_file.dart';
@@ -27,7 +27,7 @@ class FileService implements IFileService {
   @override
   Future<MasoFile> readMasoFile(String filePath) async {
     if (!filePath.endsWith('.maso')) {
-      throw FileInvalidException("File does not have a .maso extension.");
+      throw BadMasoFileException(BadMasoFileErrorType.invalidExtension);
     }
     // Create a File object for the provided file path
     final file = File(filePath);
