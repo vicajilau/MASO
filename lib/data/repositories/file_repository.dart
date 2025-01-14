@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:maso/core/service_locator.dart';
+import 'package:maso/domain/models/processes.dart';
 
 import '../../domain/models/maso_file.dart';
 import '../../domain/models/metadata.dart';
@@ -44,10 +45,12 @@ class FileRepository {
       {required String name,
       required String version,
       required String description}) async {
+    final processes = Processes(mode: ProcessesMode.regular, elements: []);
     final masoFile = MasoFile(
         metadata:
             Metadata(name: name, version: version, description: description),
-        processes: []);
+        processes: processes,
+        ioDevices: []);
     ServiceLocator.instance.registerMasoFile(masoFile);
     return masoFile;
   }

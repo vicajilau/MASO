@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:maso/domain/models/list_processes_extension.dart';
-import 'package:maso/domain/models/process.dart';
+import 'package:maso/domain/models/maso_file.dart';
 
 import '../../../core/l10n/app_localizations.dart';
+import '../../../domain/models/i_process.dart';
+import '../../../domain/models/regular_process.dart';
 
 /// A dialog widget for creating or editing a process.
 class ProcessDialog extends StatefulWidget {
-  final Process? process; // The process being edited (if any).
-  final List<Process> existingProcesses; // List of already existing processes.
+  final IProcess? process; // The process being edited (if any).
+  final MasoFile masoFile; // List of already existing processes.
   final int? processPosition; // Position of the process in the existing list.
 
   /// Constructor to initialize the dialog with necessary parameters.
   const ProcessDialog(
-      {super.key,
-      this.process,
-      required this.existingProcesses,
-      this.processPosition});
+      {super.key, this.process, required this.masoFile, this.processPosition});
 
   @override
   State<ProcessDialog> createState() => _ProcessDialogState();
@@ -46,7 +45,10 @@ class _ProcessDialogState extends State<ProcessDialog> {
     if (widget.process != null) {
       _nameController.text = widget.process!.name;
       _arrivalTimeController.text = widget.process!.arrivalTime.toString();
-      _serviceTimeController.text = widget.process!.serviceTime.toString();
+      if (widget.masoFile.processes is RegularProcess) {
+        _serviceTimeController.text =
+            (widget.process as RegularProcess).serviceTime.toString();
+      }
       _isEnabled = widget.process!.enabled;
     } else {
       _isEnabled = true;
@@ -87,8 +89,7 @@ class _ProcessDialogState extends State<ProcessDialog> {
     }
 
     // Check for duplicate process names.
-    if (widget.existingProcesses
-        .containProcessWithName(name, position: widget.processPosition)) {
+    if (widget.masoFile.processes.elements.containProcessWithName(name, position: widget.processPosition)) {
       setState(() {
         _nameError = AppLocalizations.of(context)!
             .duplicateNameError; // Set error for duplicate name.
@@ -121,11 +122,12 @@ class _ProcessDialogState extends State<ProcessDialog> {
   void _submit() {
     if (_validateInput()) {
       // Create a new or updated process instance.
-      final newOrUpdatedProcess = Process(
+      final newOrUpdatedProcess = RegularProcess(
         name: _nameController.text.trim(),
         arrivalTime: int.parse(_arrivalTimeController.text),
         serviceTime: int.parse(_serviceTimeController.text),
         enabled: _isEnabled,
+        ioDevice: '',
       );
       context.pop(
           newOrUpdatedProcess); // Return the new/updated process to the previous context.

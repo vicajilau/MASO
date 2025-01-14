@@ -9,8 +9,8 @@ import 'package:maso/routes/app_router.dart';
 import 'package:platform_detail/platform_detail.dart';
 
 import '../../core/l10n/app_localizations.dart';
+import '../../domain/models/i_process.dart';
 import '../../domain/models/maso_file.dart';
-import '../../domain/models/process.dart';
 import '../../domain/use_cases/check_file_changes_use_case.dart';
 import '../blocs/file_bloc/file_bloc.dart';
 import '../blocs/file_bloc/file_event.dart';
@@ -102,15 +102,15 @@ class _FileLoadedScreenState extends State<FileLoadedScreen> {
                 actions: [
                   IconButton(
                       onPressed: () async {
-                        final createdProcess = await showDialog<Process>(
+                        final createdProcess = await showDialog<IProcess>(
                           context: context,
                           builder: (context) => ProcessDialog(
-                            existingProcesses: cachedMasoFile.processes,
+                            masoFile: cachedMasoFile,
                           ),
                         );
                         if (createdProcess != null) {
                           setState(() {
-                            cachedMasoFile.processes.add(createdProcess);
+                            cachedMasoFile.processes.elements.add(createdProcess);
                             _checkFileChange();
                           });
                         }
@@ -131,10 +131,10 @@ class _FileLoadedScreenState extends State<FileLoadedScreen> {
                   ),
                   IconButton(
                     icon: const Icon(Icons.play_arrow),
-                    tooltip: cachedMasoFile.processes.isNotEmpty
+                    tooltip: cachedMasoFile.processes.elements.isNotEmpty
                         ? AppLocalizations.of(context)!.executeTooltip
                         : AppLocalizations.of(context)!.executeDisabledTooltip,
-                    onPressed: cachedMasoFile.processes.isNotEmpty
+                    onPressed: cachedMasoFile.processes.elements.isNotEmpty
                         ? () async {
                             final executionSetup =
                                 await showDialog<ExecutionSetup>(
