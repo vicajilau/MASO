@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:maso/domain/models/i_process.dart';
-import 'package:maso/domain/models/maso_file.dart';
-import 'package:maso/domain/models/regular_process.dart';
+
+import 'package:maso/domain/models/maso/regular_process.dart';
 import '../../core/l10n/app_localizations.dart';
-import '../../domain/models/burst_process.dart';
+import '../../domain/models/maso/burst_process.dart';
+import '../../domain/models/maso/i_process.dart';
+import '../../domain/models/maso/maso_file.dart';
 import 'dialogs/process_dialog.dart';
 
 class MasoFileListWidget extends StatefulWidget {

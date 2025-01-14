@@ -1,4 +1,6 @@
-import 'package:maso/domain/models/regular_process.dart';
+
+
+import 'package:maso/domain/models/maso/regular_process.dart';
 
 import 'burst_process.dart';
 import 'i_process.dart';
@@ -37,15 +39,15 @@ class Processes {
   factory Processes.fromJson(Map<String, dynamic> json) {
     final mode = ProcessesMode.fromJson(json['mode'] as String);
 
-    final List<IProcess> elements = (json['elements'] as List<dynamic>)
-        .map<IProcess>((e) {
+    final List<IProcess> elements =
+        (json['elements'] as List<dynamic>).map<IProcess>((e) {
       final data = e as Map<String, dynamic>;
       switch (mode) {
         case ProcessesMode.regular:
           return RegularProcess.fromJson(data);
         case ProcessesMode.burst:
           return BurstProcess.fromJson(data);
-        }
+      }
     }).toList();
 
     return Processes(mode: mode, elements: elements);

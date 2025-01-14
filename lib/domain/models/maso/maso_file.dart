@@ -1,9 +1,9 @@
 import 'package:maso/core/constants/maso_metadata.dart';
+import 'package:maso/domain/models/maso/processes.dart';
 
-import 'custom_exceptions/bad_maso_file_exception.dart';
+import '../custom_exceptions/bad_maso_file_exception.dart';
 import 'io_device.dart';
 import 'metadata.dart';
-import 'processes.dart';
 
 /// The `MasoFile` class represents a MASO file, which consists of metadata, I/O devices,
 /// and a list of processes. This class provides methods for deserialization, validation,

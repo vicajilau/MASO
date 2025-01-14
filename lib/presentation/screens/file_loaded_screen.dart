@@ -9,8 +9,8 @@ import 'package:maso/routes/app_router.dart';
 import 'package:platform_detail/platform_detail.dart';
 
 import '../../core/l10n/app_localizations.dart';
-import '../../domain/models/i_process.dart';
-import '../../domain/models/maso_file.dart';
+import '../../domain/models/maso/i_process.dart';
+import '../../domain/models/maso/maso_file.dart';
 import '../../domain/use_cases/check_file_changes_use_case.dart';
 import '../blocs/file_bloc/file_bloc.dart';
 import '../blocs/file_bloc/file_event.dart';

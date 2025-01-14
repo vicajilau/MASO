@@ -1,10 +1,11 @@
 import 'dart:typed_data';
 
 import 'package:maso/core/service_locator.dart';
-import 'package:maso/domain/models/processes.dart';
 
-import '../../domain/models/maso_file.dart';
-import '../../domain/models/metadata.dart';
+
+import '../../domain/models/maso/maso_file.dart';
+import '../../domain/models/maso/metadata.dart';
+import '../../domain/models/maso/processes.dart';
 import '../services/file_service/i_file_service.dart';
 
 /// The `FileRepository` class manages file-related operations such as loading, saving,

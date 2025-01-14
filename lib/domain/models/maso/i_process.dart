@@ -1,4 +1,5 @@
-import 'package:maso/domain/models/regular_process.dart';
+import 'package:maso/domain/models/maso/regular_process.dart';
+
 import 'burst_process.dart';
 
 /// The `IProcess` abstract class represents a generic process with common attributes.

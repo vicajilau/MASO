@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:maso/domain/models/export_formats.dart';
 
 import '../../../core/l10n/app_localizations.dart';
-import '../../../domain/models/maso_file.dart';
+import '../../../domain/models/maso/maso_file.dart';
 
 /// Abstract class representing the base state for file operations.
 abstract class FileState {}

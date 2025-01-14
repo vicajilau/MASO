@@ -1,4 +1,6 @@
-import 'package:maso/domain/models/i_process.dart';
+
+
+import 'i_process.dart';
 
 /// The `RegularProcess` class implements the `IProcess` interface,
 /// representing a regular process in a scheduling system.

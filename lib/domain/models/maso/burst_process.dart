@@ -1,4 +1,6 @@
-import 'package:maso/domain/models/i_process.dart';
+
+
+import 'i_process.dart';
 
 /// The `BurstProcess` class extends the `IProcess` interface,
 /// representing a process with a list of CPU burst durations.

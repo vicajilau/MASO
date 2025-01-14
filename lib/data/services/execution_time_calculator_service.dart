@@ -1,5 +1,5 @@
 import '../../domain/models/execution_setup.dart';
-import '../../domain/models/i_process.dart';
+import '../../domain/models/maso/i_process.dart';
 import '../../domain/models/scheduling_algorithm.dart';
 
 /// A class responsible for calculating the execution time of processes based on the selected scheduling algorithm.
