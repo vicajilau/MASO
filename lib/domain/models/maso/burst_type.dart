@@ -1,0 +1,1 @@
+enum BurstType { io, cpu }

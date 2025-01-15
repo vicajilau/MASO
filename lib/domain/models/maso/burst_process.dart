@@ -1,3 +1,6 @@
+import 'package:maso/core/deep_collection_equality.dart';
+import 'package:maso/domain/models/maso/burst.dart';
+
 import 'i_process.dart';
 
 /// The `BurstProcess` class extends the `IProcess` interface,
@@ -6,15 +9,14 @@ import 'i_process.dart';
 /// `arrivalTime`, `cpuBurstDuration`, `enabled`, and `ioDevice`
 /// to describe the process and its behavior during execution.
 class BurstProcess extends IProcess {
-  final List<int> cpuBurstDuration;
+  final List<Burst> bursts;
 
   /// Constructor to initialize the attributes of the BurstProcess.
   BurstProcess({
     required super.name,
     required super.arrivalTime,
-    required this.cpuBurstDuration,
+    required this.bursts,
     required super.enabled,
-    required super.ioDevice,
   });
 
   /// Factory method that creates a BurstProcess instance from a JSON map.
@@ -23,9 +25,10 @@ class BurstProcess extends IProcess {
     return BurstProcess(
       name: json['name'],
       arrivalTime: json['arrival_time'],
-      cpuBurstDuration: List<int>.from(json['cpu_burst_duration']),
+      bursts: (json['bursts'] as List)
+          .map((burst) => Burst.fromJson(burst))
+          .toList(),
       enabled: json['enabled'],
-      ioDevice: json['io_device'],
     );
   }
 
@@ -35,14 +38,13 @@ class BurstProcess extends IProcess {
   Map<String, dynamic> toJson() => {
         'name': name,
         'arrival_time': arrivalTime,
-        'cpu_burst_duration': cpuBurstDuration,
+        'bursts': bursts,
         'enabled': enabled,
-        'io_device': ioDevice,
       };
 
   @override
   String toString() =>
-      "Burst Process: {name: $name, arrivalTime: $arrivalTime, cpuBurstDuration: $cpuBurstDuration, enabled: $enabled, ioDevice: $ioDevice}";
+      "Burst Process: {name: $name, arrivalTime: $arrivalTime, cpuBurstDuration: $bursts, enabled: $enabled}";
 
   /// Overrides the equality operator to compare `Process` instances based on their values.
   @override
@@ -51,9 +53,8 @@ class BurstProcess extends IProcess {
     return other is BurstProcess &&
         other.name == name &&
         other.arrivalTime == arrivalTime &&
-        other.cpuBurstDuration == cpuBurstDuration &&
-        other.enabled == other.enabled &&
-        other.ioDevice == other.ioDevice;
+        DeepCollectionEquality.listEquals(other.bursts, bursts) &&
+        other.enabled == other.enabled;
   }
 
   /// Overrides the `hashCode` to be consistent with the equality operator.
@@ -61,17 +62,15 @@ class BurstProcess extends IProcess {
   int get hashCode =>
       name.hashCode ^
       arrivalTime.hashCode ^
-      cpuBurstDuration.hashCode ^
-      enabled.hashCode ^
-      ioDevice.hashCode;
+      bursts.hashCode ^
+      enabled.hashCode;
 
   @override
   IProcess copy() {
     return BurstProcess(
         name: name,
         arrivalTime: arrivalTime,
-        cpuBurstDuration: List<int>.from(cpuBurstDuration),
-        enabled: enabled,
-        ioDevice: ioDevice);
+        bursts: bursts.map((burst) => burst.copy()).toList(),
+        enabled: enabled);
   }
 }

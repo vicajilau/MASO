@@ -1,7 +1,9 @@
+import '../../../core/deep_copy_mixin.dart';
+
 /// The `IProcess` abstract class represents a generic process with common attributes.
 /// It serves as the base class for different types of processes, such as `RegularProcess`
 /// and `BurstProcess`.
-abstract class IProcess {
+abstract class IProcess with DeepCopy<IProcess> {
   /// The name of the process.
   final String name;
 
@@ -11,8 +13,6 @@ abstract class IProcess {
   /// Whether the process is enabled or not.
   bool enabled;
 
-  /// The I/O device associated with the process.
-  final String ioDevice;
 
   /// The total execution time of the process.
   int executionTime;
@@ -22,7 +22,6 @@ abstract class IProcess {
     required this.name,
     required this.arrivalTime,
     required this.enabled,
-    required this.ioDevice,
     this.executionTime = 0,
   });
 
@@ -36,15 +35,15 @@ abstract class IProcess {
     return other is IProcess &&
         other.name == name &&
         other.arrivalTime == arrivalTime &&
-        other.enabled == other.enabled &&
-        other.ioDevice == other.ioDevice;
+        other.enabled == other.enabled;
   }
 
   /// Overrides the `hashCode` to be consistent with the equality operator.
   @override
   int get hashCode =>
-      name.hashCode ^ arrivalTime.hashCode ^ enabled.hashCode ^ ioDevice.hashCode;
+      name.hashCode ^ arrivalTime.hashCode ^ enabled.hashCode;
 
   /// Creates a deep copy of the object.
+  @override
   IProcess copy();
 }

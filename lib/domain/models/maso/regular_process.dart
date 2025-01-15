@@ -7,6 +7,8 @@ import 'i_process.dart';
 /// describe the process and its characteristics.
 class RegularProcess extends IProcess {
   final int serviceTime;
+  /// The I/O device associated with the process.
+  final String ioDevice;
 
   /// Constructor to initialize the attributes of the RegularProcess.
   RegularProcess({
@@ -14,7 +16,7 @@ class RegularProcess extends IProcess {
     required super.arrivalTime,
     required this.serviceTime,
     required super.enabled,
-    required super.ioDevice,
+    required this.ioDevice,
   });
 
   /// Factory method that creates a RegularProcess instance from a JSON map.
