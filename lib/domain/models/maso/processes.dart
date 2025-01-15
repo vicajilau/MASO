@@ -1,25 +1,8 @@
-
-
+import 'package:maso/domain/models/maso/process_mode.dart';
 import 'package:maso/domain/models/maso/regular_process.dart';
 
 import 'burst_process.dart';
 import 'i_process.dart';
-
-enum ProcessesMode {
-  regular,
-  burst;
-
-  /// Converts a string to a `ProcessesMode` enum.
-  static ProcessesMode fromJson(String value) {
-    switch (value) {
-      case 'regular':
-        return ProcessesMode.regular;
-      case 'burst':
-        return ProcessesMode.burst;
-    }
-    throw ArgumentError("Invalid ProcessesMode value: $value");
-  }
-}
 
 /// The Metadata class represents the metadata of a MASO file, including its name, version, and description.
 class Processes {

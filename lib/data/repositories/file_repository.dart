@@ -5,6 +5,7 @@ import 'package:maso/core/service_locator.dart';
 
 import '../../domain/models/maso/maso_file.dart';
 import '../../domain/models/maso/metadata.dart';
+import '../../domain/models/maso/process_mode.dart';
 import '../../domain/models/maso/processes.dart';
 import '../services/file_service/i_file_service.dart';
 
