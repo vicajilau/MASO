@@ -2,7 +2,7 @@ import 'dart:typed_data';
 
 import 'package:maso/core/service_locator.dart';
 
-
+import '../../core/debug_print.dart';
 import '../../domain/models/maso/maso_file.dart';
 import '../../domain/models/maso/metadata.dart';
 import '../../domain/models/maso/process_mode.dart';
@@ -105,8 +105,8 @@ class FileRepository {
   /// - Returns: A `Future<bool>` indicating whether the file content has changed (`true`) or not (`false`).
   bool hasMasoFileChanged(MasoFile cachedMasoFile) {
     if (cachedMasoFile.filePath == null) return true;
-    // printInDebug("El original es: ${_fileService.originalFile}");
-    // printInDebug("El cached es: $cachedMasoFile");
+    printInDebug("El original es: ${_fileService.originalFile}");
+    printInDebug("El cached es: $cachedMasoFile");
     return _fileService.originalFile != cachedMasoFile;
   }
 }

@@ -1,5 +1,3 @@
-
-
 import 'i_process.dart';
 
 /// The `BurstProcess` class extends the `IProcess` interface,
@@ -45,4 +43,35 @@ class BurstProcess extends IProcess {
   @override
   String toString() =>
       "Burst Process: {name: $name, arrivalTime: $arrivalTime, cpuBurstDuration: $cpuBurstDuration, enabled: $enabled, ioDevice: $ioDevice}";
+
+  /// Overrides the equality operator to compare `Process` instances based on their values.
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is BurstProcess &&
+        other.name == name &&
+        other.arrivalTime == arrivalTime &&
+        other.cpuBurstDuration == cpuBurstDuration &&
+        other.enabled == other.enabled &&
+        other.ioDevice == other.ioDevice;
+  }
+
+  /// Overrides the `hashCode` to be consistent with the equality operator.
+  @override
+  int get hashCode =>
+      name.hashCode ^
+      arrivalTime.hashCode ^
+      cpuBurstDuration.hashCode ^
+      enabled.hashCode ^
+      ioDevice.hashCode;
+
+  @override
+  IProcess copy() {
+    return BurstProcess(
+        name: name,
+        arrivalTime: arrivalTime,
+        cpuBurstDuration: List<int>.from(cpuBurstDuration),
+        enabled: enabled,
+        ioDevice: ioDevice);
+  }
 }

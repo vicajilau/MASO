@@ -1,5 +1,3 @@
-
-
 import 'i_process.dart';
 
 /// The `RegularProcess` class implements the `IProcess` interface,
@@ -45,4 +43,35 @@ class RegularProcess extends IProcess {
   @override
   String toString() =>
       "Regular Process: {name: $name, arrivalTime: $arrivalTime, serviceTime: $serviceTime, enabled: $enabled, ioDevice: $ioDevice}";
+
+  /// Overrides the equality operator to compare `RegularProcess` instances based on their values.
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is RegularProcess &&
+        other.name == name &&
+        other.arrivalTime == arrivalTime &&
+        other.serviceTime == serviceTime &&
+        other.enabled == other.enabled &&
+        other.ioDevice == other.ioDevice;
+  }
+
+  /// Overrides the `hashCode` to be consistent with the equality operator.
+  @override
+  int get hashCode =>
+      name.hashCode ^
+      arrivalTime.hashCode ^
+      serviceTime.hashCode ^
+      enabled.hashCode ^
+      ioDevice.hashCode;
+
+  @override
+  IProcess copy() {
+    return RegularProcess(
+        name: name,
+        arrivalTime: arrivalTime,
+        serviceTime: serviceTime,
+        enabled: enabled,
+        ioDevice: ioDevice);
+  }
 }

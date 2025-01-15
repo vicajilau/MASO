@@ -1,13 +1,14 @@
 import 'package:maso/domain/models/maso/process_mode.dart';
 import 'package:maso/domain/models/maso/regular_process.dart';
 
+import '../../../core/deep_collection_equality.dart';
 import 'burst_process.dart';
 import 'i_process.dart';
 
 /// The Metadata class represents the metadata of a MASO file, including its name, version, and description.
 class Processes {
   /// The name of the MASO file
-  final ProcessesMode mode;
+  ProcessesMode mode;
 
   /// The version of the MASO file
   final List<IProcess> elements;
@@ -48,12 +49,22 @@ class Processes {
     if (identical(this, other)) return true;
     return other is Processes &&
         other.mode == mode &&
-        other.elements == elements;
+        DeepCollectionEquality.listEquals(other.elements, elements);
   }
 
   /// Override the hashCode to be consistent with the equality operator.
   @override
   int get hashCode => mode.hashCode ^ elements.hashCode;
+
+  Processes copyWith({
+    ProcessesMode? mode,
+    List<IProcess>? elements,
+  }) {
+    return Processes(
+        mode: mode ?? this.mode,
+        elements: elements ??
+            this.elements.map((element) => element.copy()).toList());
+  }
 
   @override
   String toString() => "Processes {mode: $mode, elements: $elements}";

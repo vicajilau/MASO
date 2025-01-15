@@ -28,4 +28,23 @@ abstract class IProcess {
 
   /// Converts the `IProcess` instance to a JSON map.
   Map<String, dynamic> toJson();
+
+  /// Overrides the equality operator to compare `IProcess` instances based on their values.
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is IProcess &&
+        other.name == name &&
+        other.arrivalTime == arrivalTime &&
+        other.enabled == other.enabled &&
+        other.ioDevice == other.ioDevice;
+  }
+
+  /// Overrides the `hashCode` to be consistent with the equality operator.
+  @override
+  int get hashCode =>
+      name.hashCode ^ arrivalTime.hashCode ^ enabled.hashCode ^ ioDevice.hashCode;
+
+  /// Creates a deep copy of the object.
+  IProcess copy();
 }

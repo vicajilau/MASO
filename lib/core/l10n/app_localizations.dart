@@ -544,6 +544,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The file does not have a valid .maso extension.'**
   String get invalidExtension;
+
+  /// No description provided for @settingsDialogTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settingsDialogTitle;
+
+  /// No description provided for @settingsDialogWarningTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Warning'**
+  String get settingsDialogWarningTitle;
+
+  /// No description provided for @settingsDialogWarningContent.
+  ///
+  /// In en, this message translates to:
+  /// **'Changing the mode will erase all processes from the maso file. Do you want to proceed?'**
+  String get settingsDialogWarningContent;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @confirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm'**
+  String get confirm;
+
+  /// No description provided for @close.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get close;
+
+  /// No description provided for @settingsDialogDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Select the type of processes you want to configure:'**
+  String get settingsDialogDescription;
+
+  /// No description provided for @processModeRegular.
+  ///
+  /// In en, this message translates to:
+  /// **'Regular'**
+  String get processModeRegular;
+
+  /// No description provided for @processModeBurst.
+  ///
+  /// In en, this message translates to:
+  /// **'Burst'**
+  String get processModeBurst;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -1,6 +1,7 @@
 import 'package:maso/core/constants/maso_metadata.dart';
 import 'package:maso/domain/models/maso/processes.dart';
 
+import '../../../core/deep_collection_equality.dart';
 import '../custom_exceptions/bad_maso_file_exception.dart';
 import 'io_device.dart';
 import 'metadata.dart';
@@ -89,7 +90,7 @@ class MasoFile {
     if (identical(this, other)) return true;
     return other is MasoFile &&
         other.metadata == metadata &&
-        other.ioDevices == ioDevices &&
+        DeepCollectionEquality.listEquals(other.ioDevices, ioDevices) &&
         other.processes == processes;
   }
 
@@ -108,8 +109,13 @@ class MasoFile {
     return MasoFile(
       filePath: filePath ?? this.filePath,
       metadata: metadata ?? this.metadata,
-      ioDevices: ioDevices ?? this.ioDevices,
-      processes: processes ?? this.processes,
+      ioDevices: ioDevices ??
+          this
+              .ioDevices
+              .map((ioDevice) =>
+                  IoDevice(name: ioDevice.name, enabled: ioDevice.enabled))
+              .toList(),
+      processes: processes ?? this.processes.copyWith(),
     );
   }
 

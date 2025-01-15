@@ -190,5 +190,14 @@
   "metadataBadContent": "The file metadata is invalid or corrupted.",
   "processesBadContent": "The process list contains invalid data.",
   "unsupportedVersion": "The file version is not supported by the current application.",
-  "invalidExtension": "The file does not have a valid .maso extension."
+  "invalidExtension": "The file does not have a valid .maso extension.",
+  "settingsDialogTitle": "Settings",
+  "settingsDialogWarningTitle": "Warning",
+  "settingsDialogWarningContent": "Changing the mode will erase all processes from the maso file. Do you want to proceed?",
+  "cancel": "Cancel",
+  "confirm": "Confirm",
+  "close": "Close",
+  "settingsDialogDescription": "Select the type of processes you want to configure:",
+  "processModeRegular": "Regular",
+  "processModeBurst": "Burst"
 }

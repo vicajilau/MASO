@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:maso/core/constants/maso_metadata.dart';
 import 'package:maso/core/context_extension.dart';
 import 'package:maso/core/service_locator.dart';
 import 'package:maso/domain/models/execution_setup.dart';
 import 'package:maso/routes/app_router.dart';
 import 'package:platform_detail/platform_detail.dart';
 
+import '../../core/constants/maso_metadata.dart';
 import '../../core/l10n/app_localizations.dart';
 import '../../domain/models/maso/i_process.dart';
 import '../../domain/models/maso/maso_file.dart';
+import '../../domain/models/maso/process_mode.dart';
 import '../../domain/use_cases/check_file_changes_use_case.dart';
 import '../blocs/file_bloc/file_bloc.dart';
 import '../blocs/file_bloc/file_event.dart';
@@ -18,6 +19,7 @@ import '../blocs/file_bloc/file_state.dart';
 import '../widgets/dialogs/execution_setup_dialog.dart';
 import '../widgets/dialogs/exit_confirmation_dialog.dart';
 import '../widgets/dialogs/process_dialog.dart';
+import '../widgets/dialogs/settings_dialog.dart';
 import '../widgets/maso_file_list_widget.dart';
 import '../widgets/request_file_name_dialog.dart';
 
@@ -101,6 +103,27 @@ class _FileLoadedScreenState extends State<FileLoadedScreen> {
                 ),
                 actions: [
                   IconButton(
+                    icon: const Icon(Icons.settings),
+                    tooltip: 'Settings',
+                    onPressed: () async {
+                      await showDialog<ProcessesMode>(
+                        context: context,
+                        builder: (context) => SettingsDialog(
+                          currentMode: cachedMasoFile.processes.mode,
+                          onModeChanged: (ProcessesMode value) {
+                            if (value != cachedMasoFile.processes.mode) {
+                              cachedMasoFile.processes.elements.clear();
+                              cachedMasoFile.processes.mode = value;
+                              setState(() {
+                                _checkFileChange();
+                              });
+                            }
+                          },
+                        ),
+                      );
+                    },
+                  ),
+                  IconButton(
                       onPressed: () async {
                         final createdProcess = await showDialog<IProcess>(
                           context: context,
@@ -110,7 +133,8 @@ class _FileLoadedScreenState extends State<FileLoadedScreen> {
                         );
                         if (createdProcess != null) {
                           setState(() {
-                            cachedMasoFile.processes.elements.add(createdProcess);
+                            cachedMasoFile.processes.elements
+                                .add(createdProcess);
                             _checkFileChange();
                           });
                         }

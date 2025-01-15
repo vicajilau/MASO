@@ -272,4 +272,31 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get invalidExtension => 'The file does not have a valid .maso extension.';
+
+  @override
+  String get settingsDialogTitle => 'Settings';
+
+  @override
+  String get settingsDialogWarningTitle => 'Warning';
+
+  @override
+  String get settingsDialogWarningContent => 'Changing the mode will erase all processes from the maso file. Do you want to proceed?';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get confirm => 'Confirm';
+
+  @override
+  String get close => 'Close';
+
+  @override
+  String get settingsDialogDescription => 'Select the type of processes you want to configure:';
+
+  @override
+  String get processModeRegular => 'Regular';
+
+  @override
+  String get processModeBurst => 'Burst';
 }
