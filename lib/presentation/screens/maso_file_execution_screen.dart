@@ -250,7 +250,7 @@ class _MasoFileExecutionScreenState extends State<MasoFileExecutionScreen> {
                                   AppLocalizations.of(context)!
                                       .timelineProcessDescription(
                                     process.arrivalTime.toString(),
-                                    process.name,
+                                    process.id,
                                     "10",
                                   ),
                                 ),

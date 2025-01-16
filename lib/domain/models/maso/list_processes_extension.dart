@@ -21,6 +21,6 @@ extension ListProcessesExtension on List<IProcess> {
 
     /// Check if any process in the filtered list matches the [name].
     return filteredList
-        .any((x) => x.name.toLowerCase().trim() == name.toLowerCase().trim());
+        .any((x) => x.id.toLowerCase().trim() == name.toLowerCase().trim());
   }
 }

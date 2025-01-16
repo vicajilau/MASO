@@ -5,7 +5,7 @@ import '../../../core/deep_copy_mixin.dart';
 /// and `BurstProcess`.
 abstract class IProcess with DeepCopy<IProcess> {
   /// The name of the process.
-  final String name;
+  final String id;
 
   /// The arrival time of the process in seconds.
   final int arrivalTime;
@@ -19,7 +19,7 @@ abstract class IProcess with DeepCopy<IProcess> {
 
   /// Constructor for initializing an `IProcess` instance with required attributes.
   IProcess({
-    required this.name,
+    required this.id,
     required this.arrivalTime,
     required this.enabled,
     this.executionTime = 0,
@@ -33,7 +33,7 @@ abstract class IProcess with DeepCopy<IProcess> {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     return other is IProcess &&
-        other.name == name &&
+        other.id == id &&
         other.arrivalTime == arrivalTime &&
         other.enabled == other.enabled;
   }
@@ -41,7 +41,7 @@ abstract class IProcess with DeepCopy<IProcess> {
   /// Overrides the `hashCode` to be consistent with the equality operator.
   @override
   int get hashCode =>
-      name.hashCode ^ arrivalTime.hashCode ^ enabled.hashCode;
+      id.hashCode ^ arrivalTime.hashCode ^ enabled.hashCode;
 
   /// Creates a deep copy of the object.
   @override

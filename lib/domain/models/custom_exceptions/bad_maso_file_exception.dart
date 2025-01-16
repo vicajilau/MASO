@@ -39,8 +39,6 @@ class BadMasoFileException implements Exception {
         return AppLocalizations.of(context)!.unsupportedVersion;
       case BadMasoFileErrorType.invalidExtension:
         return AppLocalizations.of(context)!.invalidExtension;
-      case BadMasoFileErrorType.ioDevicesBadContent:
-        throw UnimplementedError();
     }
   }
 
@@ -61,7 +59,4 @@ enum BadMasoFileErrorType {
 
   /// Indicates that the extension file is not .maso.
   invalidExtension,
-
-  /// Indicates that the I/O devices list has invalid content.
-  ioDevicesBadContent
 }

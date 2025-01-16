@@ -13,7 +13,7 @@ class BurstProcess extends IProcess {
 
   /// Constructor to initialize the attributes of the BurstProcess.
   BurstProcess({
-    required super.name,
+    required super.id,
     required super.arrivalTime,
     required this.bursts,
     required super.enabled,
@@ -23,7 +23,7 @@ class BurstProcess extends IProcess {
   /// This is useful for deserialization when data is read from JSON format.
   factory BurstProcess.fromJson(Map<String, dynamic> json) {
     return BurstProcess(
-      name: json['name'],
+      id: json['id'],
       arrivalTime: json['arrival_time'],
       bursts: (json['bursts'] as List)
           .map((burst) => Burst.fromJson(burst))
@@ -36,7 +36,7 @@ class BurstProcess extends IProcess {
   /// BurstProcess object. This allows serialization of the object.
   @override
   Map<String, dynamic> toJson() => {
-        'name': name,
+        'id': id,
         'arrival_time': arrivalTime,
         'bursts': bursts,
         'enabled': enabled,
@@ -44,14 +44,14 @@ class BurstProcess extends IProcess {
 
   @override
   String toString() =>
-      "Burst Process: {name: $name, arrivalTime: $arrivalTime, cpuBurstDuration: $bursts, enabled: $enabled}";
+      "Burst Process: {id: $id, arrivalTime: $arrivalTime, cpuBurstDuration: $bursts, enabled: $enabled}";
 
   /// Overrides the equality operator to compare `Process` instances based on their values.
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     return other is BurstProcess &&
-        other.name == name &&
+        other.id == id &&
         other.arrivalTime == arrivalTime &&
         DeepCollectionEquality.listEquals(other.bursts, bursts) &&
         other.enabled == other.enabled;
@@ -60,7 +60,7 @@ class BurstProcess extends IProcess {
   /// Overrides the `hashCode` to be consistent with the equality operator.
   @override
   int get hashCode =>
-      name.hashCode ^
+      id.hashCode ^
       arrivalTime.hashCode ^
       bursts.hashCode ^
       enabled.hashCode;
@@ -68,7 +68,7 @@ class BurstProcess extends IProcess {
   @override
   IProcess copy() {
     return BurstProcess(
-        name: name,
+        id: id,
         arrivalTime: arrivalTime,
         bursts: bursts.map((burst) => burst.copy()).toList(),
         enabled: enabled);

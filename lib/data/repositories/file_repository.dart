@@ -51,8 +51,7 @@ class FileRepository {
     final masoFile = MasoFile(
         metadata:
             Metadata(name: name, version: version, description: description),
-        processes: processes,
-        ioDevices: []);
+        processes: processes);
     ServiceLocator.instance.registerMasoFile(masoFile);
     return masoFile;
   }

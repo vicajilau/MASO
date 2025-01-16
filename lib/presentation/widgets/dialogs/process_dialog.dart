@@ -43,7 +43,7 @@ class _ProcessDialogState extends State<ProcessDialog> {
     _arrivalTimeController = TextEditingController();
     _serviceTimeController = TextEditingController();
     if (widget.process != null) {
-      _nameController.text = widget.process!.name;
+      _nameController.text = widget.process!.id;
       _arrivalTimeController.text = widget.process!.arrivalTime.toString();
       if (widget.masoFile.processes is RegularProcess) {
         _serviceTimeController.text =
@@ -123,11 +123,10 @@ class _ProcessDialogState extends State<ProcessDialog> {
     if (_validateInput()) {
       // Create a new or updated process instance.
       final newOrUpdatedProcess = RegularProcess(
-        name: _nameController.text.trim(),
+        id: _nameController.text.trim(),
         arrivalTime: int.parse(_arrivalTimeController.text),
         serviceTime: int.parse(_serviceTimeController.text),
         enabled: _isEnabled,
-        ioDevice: '',
       );
       context.pop(
           newOrUpdatedProcess); // Return the new/updated process to the previous context.

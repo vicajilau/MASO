@@ -29,7 +29,7 @@ class _MasoFileListWidgetState extends State<MasoFileListWidget> {
       builder: (context) => AlertDialog(
         title: Text(AppLocalizations.of(context)!.confirmDeleteTitle),
         content: Text(AppLocalizations.of(context)!
-            .confirmDeleteMessage(process.name)),
+            .confirmDeleteMessage(process.id)),
         actions: [
           TextButton(
             onPressed: () => context.pop(false),
@@ -56,7 +56,7 @@ class _MasoFileListWidgetState extends State<MasoFileListWidget> {
 
   Widget _buildDismissible(IProcess process, int index, Widget child) {
     return Dismissible(
-      key: ValueKey(process.name),
+      key: ValueKey(process.id),
       direction: DismissDirection.horizontal,
       confirmDismiss: (direction) => _confirmDismiss(context, process),
       onDismissed: (direction) {
@@ -82,7 +82,7 @@ class _MasoFileListWidgetState extends State<MasoFileListWidget> {
 
   Widget _buildListTile(IProcess process, int index, String subtitle) {
     return ListTile(
-      title: Text(process.name),
+      title: Text(process.id),
       subtitle: Text(subtitle),
       leading: Switch(
         value: process.enabled,

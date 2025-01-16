@@ -1,7 +1,6 @@
 import 'package:maso/core/constants/maso_metadata.dart';
 import 'package:maso/domain/models/maso/processes.dart';
 
-import '../../../core/deep_collection_equality.dart';
 import '../custom_exceptions/bad_maso_file_exception.dart';
 import 'io_device.dart';
 import 'metadata.dart';
@@ -15,16 +14,12 @@ class MasoFile {
   /// The metadata of the MASO file.
   final Metadata metadata;
 
-  /// The list of I/O devices described in the MASO file.
-  final List<IoDevice> ioDevices;
-
   /// The processes described in the MASO file.
   final Processes processes;
 
   /// Constructor for creating a `MasoFile` instance with metadata, I/O devices, and processes.
   MasoFile({
     required this.metadata,
-    required this.ioDevices,
     required this.processes,
     this.filePath,
   });
@@ -35,9 +30,6 @@ class MasoFile {
     checkIfJsonIsCorrect(json);
     return MasoFile(
       metadata: Metadata.fromJson(json['metadata'] as Map<String, dynamic>),
-      ioDevices: (json['io_devices'] as List<dynamic>)
-          .map((device) => IoDevice.fromJson(device as Map<String, dynamic>))
-          .toList(),
       processes: Processes.fromJson(json['processes'] as Map<String, dynamic>),
       filePath: filePath,
     );
@@ -46,7 +38,6 @@ class MasoFile {
   /// Converts the `MasoFile` instance to a JSON map.
   Map<String, dynamic> toJson() => {
         'metadata': metadata.toJson(),
-        'io_devices': ioDevices.map((device) => device.toJson()).toList(),
         'processes': processes.toJson(),
       };
 
@@ -67,16 +58,6 @@ class MasoFile {
     }
 
     try {
-      // Validate I/O devices
-      final devices = json['io_devices'] as List<dynamic>;
-      for (var device in devices) {
-        IoDevice.fromJson(device as Map<String, dynamic>);
-      }
-    } catch (e) {
-      throw BadMasoFileException(BadMasoFileErrorType.ioDevicesBadContent);
-    }
-
-    try {
       // Validate processes
       Processes.fromJson(json['processes'] as Map<String, dynamic>);
     } catch (e) {
@@ -90,14 +71,12 @@ class MasoFile {
     if (identical(this, other)) return true;
     return other is MasoFile &&
         other.metadata == metadata &&
-        DeepCollectionEquality.listEquals(other.ioDevices, ioDevices) &&
         other.processes == processes;
   }
 
   /// Overrides the `hashCode` to be consistent with the equality operator.
   @override
-  int get hashCode =>
-      metadata.hashCode ^ ioDevices.hashCode ^ processes.hashCode;
+  int get hashCode => metadata.hashCode ^ processes.hashCode;
 
   /// Creates a new `MasoFile` instance with modified values from the current instance.
   MasoFile copyWith({
@@ -109,17 +88,11 @@ class MasoFile {
     return MasoFile(
       filePath: filePath ?? this.filePath,
       metadata: metadata ?? this.metadata,
-      ioDevices: ioDevices ??
-          this
-              .ioDevices
-              .map((ioDevice) =>
-                  IoDevice(name: ioDevice.name, enabled: ioDevice.enabled))
-              .toList(),
       processes: processes ?? this.processes.copyWith(),
     );
   }
 
   @override
   String toString() =>
-      "Maso File {metadata: $metadata, ioDevices: $ioDevices, processes: $processes} with Hash($hashCode).";
+      "Maso File {metadata: $metadata, processes: $processes} with Hash($hashCode).";
 }
