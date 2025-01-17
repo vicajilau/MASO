@@ -1,10 +1,11 @@
 import 'package:maso/core/deep_copy_mixin.dart';
+import 'package:maso/domain/models/maso/burst_type.dart';
 
 /// Represents a burst, which can either be a CPU task or an I/O operation.
 /// Each burst has a type (e.g., 'cpu', 'io') and a duration in time units.
 class Burst with DeepCopy<Burst> {
   /// The type of burst, either 'cpu' or 'io'.
-  final String type;
+  final BurstType type;
 
   /// Duration of the burst in time units.
   final int duration;
@@ -34,7 +35,7 @@ class Burst with DeepCopy<Burst> {
   /// Returns a `Burst` object.
   factory Burst.fromJson(Map<String, dynamic> json) {
     return Burst(
-      type: json['type'],
+      type: BurstType.fromJson(json['type'] as String),
       duration: json['duration'],
     );
   }
