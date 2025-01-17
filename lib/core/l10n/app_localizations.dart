@@ -664,6 +664,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Are you sure you want to delete this burst with duration \"{duration}\"uts.?'**
   String deleteBurstConfirmation(Object duration);
+
+  /// No description provided for @invalidBurstSequenceError.
+  ///
+  /// In en, this message translates to:
+  /// **'The burst sequence must start and end with CPU, and there cannot be two consecutive I/O bursts.'**
+  String get invalidBurstSequenceError;
+
+  /// No description provided for @selectBurstType.
+  ///
+  /// In en, this message translates to:
+  /// **'Select burst type'**
+  String get selectBurstType;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

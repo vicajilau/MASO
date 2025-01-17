@@ -31,6 +31,7 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
   late BurstProcess process;
   String? _idError;
   String? _arrivalTimeError;
+  String? _burstSequenceError;
 
   @override
   void initState() {
@@ -62,6 +63,7 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
     setState(() {
       _idError = null;
       _arrivalTimeError = null;
+      _burstSequenceError = null;
     });
 
     if (id.isEmpty) {
@@ -87,6 +89,31 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
       return false;
     }
 
+    for (final thread in process.threads) {
+      if (!_validateBurstSequence(thread.bursts)) {
+        setState(() {
+          _burstSequenceError =
+              AppLocalizations.of(context)!.invalidBurstSequenceError;
+        });
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  bool _validateBurstSequence(List<Burst> bursts) {
+    if (bursts.isEmpty) return false;
+    if (bursts.first.type != BurstType.cpu ||
+        bursts.last.type != BurstType.cpu) {
+      return false;
+    }
+    for (int i = 0; i < bursts.length - 1; i++) {
+      if (bursts[i].type == BurstType.io &&
+          bursts[i + 1].type == BurstType.io) {
+        return false;
+      }
+    }
     return true;
   }
 
@@ -114,9 +141,26 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
   }
 
   void _addBurst(Thread thread) {
-    setState(() {
-      thread.bursts.add(Burst(type: BurstType.cpu, duration: 0));
-    });
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(AppLocalizations.of(context)!.selectBurstType),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: BurstType.values.map((type) {
+            return ListTile(
+              title: Text(type.name),
+              onTap: () {
+                setState(() {
+                  thread.bursts.add(Burst(type: type, duration: 0));
+                });
+                context.pop();
+              },
+            );
+          }).toList(),
+        ),
+      ),
+    );
   }
 
   void _removeThread(Thread thread) {
@@ -161,7 +205,14 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
               keyboardType: TextInputType.number,
               onChanged: (value) => setState(() => _arrivalTimeError = null),
             ),
-            // Threads List
+            if (_burstSequenceError != null)
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: Text(
+                  _burstSequenceError!,
+                  style: TextStyle(color: Theme.of(context).colorScheme.error),
+                ),
+              ),
             ...process.threads.map((thread) {
               return ExpansionTile(
                 title: Row(
@@ -170,32 +221,7 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
                     Text(thread.id),
                     IconButton(
                       icon: const Icon(Icons.delete, color: Colors.red),
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) => AlertDialog(
-                            title: Text(AppLocalizations.of(context)!
-                                .deleteThreadTitle),
-                            content: Text(AppLocalizations.of(context)!
-                                .deleteThreadConfirmation(thread.id)),
-                            actions: [
-                              TextButton(
-                                onPressed: () => context.pop(),
-                                child: Text(
-                                    AppLocalizations.of(context)!.cancelButton),
-                              ),
-                              ElevatedButton(
-                                onPressed: () {
-                                  _removeThread(thread);
-                                  context.pop();
-                                },
-                                child: Text(AppLocalizations.of(context)!
-                                    .confirmButton),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
+                      onPressed: () => _removeThread(thread),
                     ),
                   ],
                 ),

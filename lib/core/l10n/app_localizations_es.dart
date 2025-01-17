@@ -336,4 +336,10 @@ class AppLocalizationsEs extends AppLocalizations {
   String deleteBurstConfirmation(Object duration) {
     return '¿Está seguro de que desea eliminar esta ráfaga con duración \"$duration\" uts.?';
   }
+
+  @override
+  String get invalidBurstSequenceError => 'La secuencia de ráfagas debe comenzar y terminar con CPU, y no puede haber dos ráfagas de E/S consecutivas.';
+
+  @override
+  String get selectBurstType => 'Selecciona el tipo de ráfaga';
 }

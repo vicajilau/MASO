@@ -336,4 +336,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String deleteBurstConfirmation(Object duration) {
     return 'Are you sure you want to delete this burst with duration \"$duration\"uts.?';
   }
+
+  @override
+  String get invalidBurstSequenceError => 'The burst sequence must start and end with CPU, and there cannot be two consecutive I/O bursts.';
+
+  @override
+  String get selectBurstType => 'Select burst type';
 }

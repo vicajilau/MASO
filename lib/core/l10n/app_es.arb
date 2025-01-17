@@ -213,5 +213,7 @@
   "confirmButton": "Confirmar",
   "arrivalTimeLabelDecorator": "Tiempo de Llegada",
   "deleteBurstTitle": "Borrar Ráfaga",
-  "deleteBurstConfirmation": "¿Está seguro de que desea eliminar esta ráfaga con duración \"{duration}\" uts.?"
+  "deleteBurstConfirmation": "¿Está seguro de que desea eliminar esta ráfaga con duración \"{duration}\" uts.?",
+  "invalidBurstSequenceError": "La secuencia de ráfagas debe comenzar y terminar con CPU, y no puede haber dos ráfagas de E/S consecutivas.",
+  "selectBurstType": "Selecciona el tipo de ráfaga"
 }
