@@ -203,5 +203,9 @@
   "close": "Cerrar",
   "settingsDialogDescription": "Selecciona el tipo de procesos que deseas configurar:",
   "processModeRegular": "Normales",
-  "processModeBurst": "Con ráfagas"
+  "processModeBurst": "Con ráfagas",
+  "processIdLabel": "ID del Proceso",
+  "burstDurationLabel": "Duración del Burst",
+  "addBurstButton": "Agregar Burst",
+  "addThreadButton": "Agregar Hilo"
 }

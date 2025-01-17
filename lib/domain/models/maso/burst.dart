@@ -8,7 +8,7 @@ class Burst with DeepCopy<Burst> {
   final BurstType type;
 
   /// Duration of the burst in time units.
-  final int duration;
+  int duration;
 
   /// Constructor for the Burst class.
   ///

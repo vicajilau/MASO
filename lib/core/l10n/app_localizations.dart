@@ -604,6 +604,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Burst'**
   String get processModeBurst;
+
+  /// No description provided for @processIdLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Process ID'**
+  String get processIdLabel;
+
+  /// No description provided for @burstDurationLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Burst Duration'**
+  String get burstDurationLabel;
+
+  /// No description provided for @addBurstButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Burst'**
+  String get addBurstButton;
+
+  /// No description provided for @addThreadButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Thread'**
+  String get addThreadButton;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

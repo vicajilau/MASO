@@ -203,5 +203,9 @@
   "close": "Close",
   "settingsDialogDescription": "Select the type of processes you want to configure:",
   "processModeRegular": "Regular",
-  "processModeBurst": "Burst"
+  "processModeBurst": "Burst",
+  "processIdLabel": "Process ID",
+  "burstDurationLabel": "Burst Duration",
+  "addBurstButton": "Add Burst",
+  "addThreadButton": "Add Thread"
 }

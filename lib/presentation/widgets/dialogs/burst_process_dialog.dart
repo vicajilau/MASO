@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:maso/domain/models/maso/burst.dart';
 import 'package:maso/domain/models/maso/burst_process.dart';
-import '../../../core/l10n/app_localizations.dart';
-import '../../../domain/models/maso/maso_file.dart';
 
-/// Dialog widget for creating or editing a BurstProcess.
+import '../../../core/l10n/app_localizations.dart';
+import '../../../domain/models/maso/burst_type.dart';
+import '../../../domain/models/maso/maso_file.dart';
+import '../../../domain/models/maso/thread.dart';
+
 class BurstProcessDialog extends StatefulWidget {
   final BurstProcess? process; // Optional process for editing.
   final MasoFile masoFile; // The file containing all processes.
   final int? processPosition; // Optional index for editing a specific process.
 
-  /// Constructor for the dialog.
   const BurstProcessDialog({
     super.key,
     this.process,
@@ -23,7 +25,37 @@ class BurstProcessDialog extends StatefulWidget {
 }
 
 class _BurstProcessDialogState extends State<BurstProcessDialog> {
-  // Define fields and logic specific to BurstProcess.
+  late BurstProcess process;
+
+  @override
+  void initState() {
+    super.initState();
+    process = widget.process ??
+        BurstProcess(
+          id: '',
+          arrivalTime: 0,
+          threads: [],
+          enabled: true,
+        );
+  }
+
+  void _addThread() {
+    setState(() {
+      process.threads.add(
+        Thread(
+          id: 'Thread ${process.threads.length + 1}',
+          bursts: [],
+          enabled: true,
+        ),
+      );
+    });
+  }
+
+  void _addBurst(Thread thread) {
+    setState(() {
+      thread.bursts.add(Burst(type: BurstType.cpu, duration: 0));
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +64,64 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
       content: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
+          spacing: 16,
           children: [
-            // Add widgets specific to BurstProcess (e.g., managing bursts).
+            // Process ID
+            TextFormField(
+              initialValue: process.id,
+              decoration: InputDecoration(
+                labelText: AppLocalizations.of(context)!.processIdLabel,
+              ),
+              onChanged: (value) => process.id = value,
+            ),
+            // Arrival Time
+            TextFormField(
+              initialValue: process.arrivalTime.toString(),
+              decoration: InputDecoration(
+                labelText: AppLocalizations.of(context)!
+                    .arrivalTimeLabel(process.arrivalTime.toString()),
+              ),
+              keyboardType: TextInputType.number,
+              onChanged: (value) =>
+                  process.arrivalTime = int.tryParse(value) ?? 0,
+            ),
+            // Threads List
+            ...process.threads.map((thread) {
+              return ExpansionTile(
+                title: Text(thread.id),
+                children: [
+                  // Bursts within Thread
+                  ...thread.bursts.map((burst) {
+                    return TextFormField(
+                      initialValue: burst.duration.toString(),
+                      decoration: InputDecoration(
+                        labelText:
+                            AppLocalizations.of(context)!.burstDurationLabel,
+                      ),
+                      keyboardType: TextInputType.number,
+                      onChanged: (value) =>
+                          burst.duration = int.tryParse(value) ?? 0,
+                    );
+                  }),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  ElevatedButton.icon(
+                    onPressed: () => _addBurst(thread),
+                    icon: const Icon(Icons.add),
+                    label: Text(AppLocalizations.of(context)!.addBurstButton),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  )
+                ],
+              );
+            }),
+            ElevatedButton.icon(
+              onPressed: _addThread,
+              icon: const Icon(Icons.add),
+              label: Text(AppLocalizations.of(context)!.addThreadButton),
+            ),
           ],
         ),
       ),
@@ -44,7 +132,14 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
         ),
         ElevatedButton(
           onPressed: () {
-            // Validate and submit BurstProcess data.
+            // Save and update process.
+            if (widget.processPosition != null) {
+              widget.masoFile.processes.elements[widget.processPosition!] =
+                  process;
+            } else {
+              widget.masoFile.processes.elements.add(process);
+            }
+            context.pop();
           },
           child: Text(AppLocalizations.of(context)!.saveButton),
         ),

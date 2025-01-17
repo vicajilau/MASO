@@ -302,4 +302,16 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get processModeBurst => 'Con ráfagas';
+
+  @override
+  String get processIdLabel => 'ID del Proceso';
+
+  @override
+  String get burstDurationLabel => 'Duración del Burst';
+
+  @override
+  String get addBurstButton => 'Agregar Burst';
+
+  @override
+  String get addThreadButton => 'Agregar Hilo';
 }

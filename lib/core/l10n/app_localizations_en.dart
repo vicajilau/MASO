@@ -302,4 +302,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get processModeBurst => 'Burst';
+
+  @override
+  String get processIdLabel => 'Process ID';
+
+  @override
+  String get burstDurationLabel => 'Burst Duration';
+
+  @override
+  String get addBurstButton => 'Add Burst';
+
+  @override
+  String get addThreadButton => 'Add Thread';
 }

@@ -5,10 +5,10 @@ import '../../../core/deep_copy_mixin.dart';
 /// and `BurstProcess`.
 abstract class IProcess with DeepCopy<IProcess> {
   /// The name of the process.
-  final String id;
+  String id;
 
   /// The arrival time of the process in seconds.
-  final int arrivalTime;
+  int arrivalTime;
 
   /// Whether the process is enabled or not.
   bool enabled;
