@@ -43,4 +43,18 @@ class Burst with DeepCopy<Burst> {
   Burst copy() {
     return Burst(type: type, duration: duration);
   }
+
+  /// Overrides the equality operator to compare `Burst` instances based on their values.
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is Burst && other.type == type && other.duration == duration;
+  }
+
+  /// Overrides the `hashCode` to be consistent with the equality operator.
+  @override
+  int get hashCode => type.hashCode ^ duration.hashCode;
+
+  @override
+  String toString() => "Burst: {type: $type, duration: $duration}";
 }

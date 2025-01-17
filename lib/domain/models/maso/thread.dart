@@ -1,3 +1,4 @@
+import '../../../core/deep_collection_equality.dart';
 import '../../../core/deep_copy_mixin.dart';
 import 'burst.dart';
 
@@ -63,6 +64,22 @@ class Thread with DeepCopy<Thread> {
         bursts: bursts.map((burst) => burst.copy()).toList(),
         enabled: enabled);
   }
+
+  /// Overrides the equality operator to compare `Thread` instances based on their values.
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is Thread &&
+        other.id == id &&
+        other.enabled == enabled &&
+        DeepCollectionEquality.listEquals(other.bursts, bursts) &&
+        other.enabled == enabled;
+  }
+
+  /// Overrides the `hashCode` to be consistent with the equality operator.
+  @override
+  int get hashCode =>
+      id.hashCode ^ enabled.hashCode ^ bursts.hashCode ^ enabled.hashCode;
 
   @override
   String toString() => "Thread: {id: $id, enabled: $enabled, bursts: $bursts}";

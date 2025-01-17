@@ -44,7 +44,7 @@ class BurstProcess extends IProcess {
 
   @override
   String toString() =>
-      "Burst Process: {id: $id, arrivalTime: $arrivalTime, threads: $threads, enabled: $enabled}";
+      "Burst Process: {id: $id, arrivalTime: $arrivalTime, enabled: $enabled, threads: $threads}";
 
   /// Overrides the equality operator to compare `Process` instances based on their values.
   @override
@@ -54,7 +54,7 @@ class BurstProcess extends IProcess {
         other.id == id &&
         other.arrivalTime == arrivalTime &&
         DeepCollectionEquality.listEquals(other.threads, threads) &&
-        other.enabled == other.enabled;
+        other.enabled == enabled;
   }
 
   /// Overrides the `hashCode` to be consistent with the equality operator.
