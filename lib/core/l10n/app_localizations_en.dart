@@ -328,4 +328,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get arrivalTimeLabelDecorator => 'Arrival Time';
+
+  @override
+  String get deleteBurstTitle => 'Delete Burst';
+
+  @override
+  String deleteBurstConfirmation(Object duration) {
+    return 'Are you sure you want to delete this burst with duration \"$duration\"uts.?';
+  }
 }

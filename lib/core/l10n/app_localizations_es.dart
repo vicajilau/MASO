@@ -328,4 +328,12 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get arrivalTimeLabelDecorator => 'Tiempo de Llegada';
+
+  @override
+  String get deleteBurstTitle => 'Borrar Ráfaga';
+
+  @override
+  String deleteBurstConfirmation(Object duration) {
+    return '¿Está seguro de que desea eliminar esta ráfaga con duración \"$duration\" uts.?';
+  }
 }

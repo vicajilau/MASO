@@ -63,6 +63,12 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
     });
   }
 
+  void _removeBurst(Thread thread, Burst burst) {
+    setState(() {
+      thread.bursts.remove(burst);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -70,7 +76,6 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
       content: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          spacing: 20,
           children: [
             // Process ID
             TextFormField(
@@ -91,12 +96,12 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
               onChanged: (value) =>
                   process.arrivalTime = int.tryParse(value) ?? 0,
             ),
+            const SizedBox(height: 20),
             // Threads List
             ...process.threads.map((thread) {
               return ExpansionTile(
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  spacing: 10,
                   children: [
                     Text(thread.id),
                     IconButton(
@@ -133,15 +138,47 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
                 children: [
                   // Bursts within Thread
                   ...thread.bursts.map((burst) {
-                    return TextFormField(
-                      initialValue: burst.duration.toString(),
-                      decoration: InputDecoration(
-                        labelText:
-                            AppLocalizations.of(context)!.burstDurationLabel,
+                    return ListTile(
+                      title: TextFormField(
+                        initialValue: burst.duration.toString(),
+                        decoration: InputDecoration(
+                          labelText:
+                              AppLocalizations.of(context)!.burstDurationLabel,
+                        ),
+                        keyboardType: TextInputType.number,
+                        onChanged: (value) =>
+                            burst.duration = int.tryParse(value) ?? 0,
                       ),
-                      keyboardType: TextInputType.number,
-                      onChanged: (value) =>
-                          burst.duration = int.tryParse(value) ?? 0,
+                      trailing: IconButton(
+                        icon: const Icon(Icons.delete, color: Colors.red),
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              title: Text(AppLocalizations.of(context)!
+                                  .deleteBurstTitle),
+                              content: Text(AppLocalizations.of(context)!
+                                  .deleteBurstConfirmation(
+                                      burst.duration.toString())),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => context.pop(),
+                                  child: Text(AppLocalizations.of(context)!
+                                      .cancelButton),
+                                ),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    _removeBurst(thread, burst);
+                                    context.pop();
+                                  },
+                                  child: Text(AppLocalizations.of(context)!
+                                      .confirmButton),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
                     );
                   }),
                   const SizedBox(height: 10),

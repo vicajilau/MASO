@@ -211,5 +211,7 @@
   "deleteThreadTitle": "Eliminar Hilo",
   "deleteThreadConfirmation": "¿Estás seguro de que deseas eliminar el hilo \"{threadId}\"?",
   "confirmButton": "Confirmar",
-  "arrivalTimeLabelDecorator": "Tiempo de Llegada"
+  "arrivalTimeLabelDecorator": "Tiempo de Llegada",
+  "deleteBurstTitle": "Borrar Ráfaga",
+  "deleteBurstConfirmation": "¿Está seguro de que desea eliminar esta ráfaga con duración \"{duration}\" uts.?"
 }

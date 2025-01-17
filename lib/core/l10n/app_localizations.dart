@@ -652,6 +652,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Arrival Time'**
   String get arrivalTimeLabelDecorator;
+
+  /// No description provided for @deleteBurstTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Burst'**
+  String get deleteBurstTitle;
+
+  /// No description provided for @deleteBurstConfirmation.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete this burst with duration \"{duration}\"uts.?'**
+  String deleteBurstConfirmation(Object duration);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

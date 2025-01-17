@@ -211,5 +211,7 @@
   "deleteThreadTitle": "Delete Thread",
   "deleteThreadConfirmation": "Are you sure you want to delete the thread \"{threadId}\"?",
   "confirmButton": "Confirm",
-  "arrivalTimeLabelDecorator": "Arrival Time"
+  "arrivalTimeLabelDecorator": "Arrival Time",
+  "deleteBurstTitle": "Delete Burst",
+  "deleteBurstConfirmation": "Are you sure you want to delete this burst with duration \"{duration}\"uts.?"
 }
