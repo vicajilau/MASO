@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:maso/domain/models/maso/burst.dart';
 import 'package:maso/domain/models/maso/burst_process.dart';
+import 'package:maso/domain/models/maso/list_processes_extension.dart';
 
 import '../../../core/l10n/app_localizations.dart';
+import '../../../domain/models/maso/burst.dart';
 import '../../../domain/models/maso/burst_type.dart';
 import '../../../domain/models/maso/maso_file.dart';
 import '../../../domain/models/maso/thread.dart';
 
 class BurstProcessDialog extends StatefulWidget {
-  final BurstProcess? process; // Optional process for editing.
-  final MasoFile masoFile; // The file containing all processes.
-  final int? processPosition; // Optional index for editing a specific process.
+  final BurstProcess? process;
+  final MasoFile masoFile;
+  final int? processPosition;
 
   const BurstProcessDialog({
     super.key,
@@ -25,7 +26,11 @@ class BurstProcessDialog extends StatefulWidget {
 }
 
 class _BurstProcessDialogState extends State<BurstProcessDialog> {
+  late TextEditingController _idController;
+  late TextEditingController _arrivalTimeController;
   late BurstProcess process;
+  String? _idError;
+  String? _arrivalTimeError;
 
   @override
   void initState() {
@@ -37,6 +42,63 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
           threads: [],
           enabled: true,
         );
+
+    _idController = TextEditingController(text: widget.process?.id);
+    _arrivalTimeController =
+        TextEditingController(text: widget.process?.arrivalTime.toString());
+  }
+
+  @override
+  void dispose() {
+    _idController.dispose();
+    _arrivalTimeController.dispose();
+    super.dispose();
+  }
+
+  bool _validateInput() {
+    final id = _idController.text.trim();
+    final arrivalTime = int.tryParse(_arrivalTimeController.text);
+
+    setState(() {
+      _idError = null;
+      _arrivalTimeError = null;
+    });
+
+    if (id.isEmpty) {
+      setState(() {
+        _idError = AppLocalizations.of(context)!.emptyNameError;
+      });
+      return false;
+    }
+
+    if (widget.masoFile.processes.elements
+        .containProcessWithName(id, position: widget.processPosition)) {
+      setState(() {
+        _idError = AppLocalizations.of(context)!.duplicateNameError;
+      });
+      return false;
+    }
+
+    if (arrivalTime == null || arrivalTime < 0) {
+      setState(() {
+        _arrivalTimeError =
+            AppLocalizations.of(context)!.invalidArrivalTimeError;
+      });
+      return false;
+    }
+
+    return true;
+  }
+
+  void _submit() {
+    if (_validateInput()) {
+      context.pop(BurstProcess(
+        id: _idController.text.trim(),
+        arrivalTime: int.parse(_arrivalTimeController.text),
+        threads: process.threads,
+        enabled: process.enabled,
+      ));
+    }
   }
 
   void _addThread() {
@@ -76,27 +138,29 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
       content: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
+          spacing: 16,
           children: [
             // Process ID
             TextFormField(
-              initialValue: process.id,
-              decoration: InputDecoration(
-                labelText: AppLocalizations.of(context)!.processIdLabel,
-              ),
-              onChanged: (value) => process.id = value,
-            ),
+                controller: _idController,
+                decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context)!.processIdLabel,
+                  errorText: _idError,
+                  errorMaxLines: 2,
+                ),
+                onChanged: (value) => setState(() => _idError = null)),
             // Arrival Time
             TextFormField(
-              initialValue: process.arrivalTime.toString(),
+              controller: _arrivalTimeController,
               decoration: InputDecoration(
                 labelText:
                     AppLocalizations.of(context)!.arrivalTimeLabelDecorator,
+                errorText: _arrivalTimeError,
+                errorMaxLines: 2,
               ),
               keyboardType: TextInputType.number,
-              onChanged: (value) =>
-                  process.arrivalTime = int.tryParse(value) ?? 0,
+              onChanged: (value) => setState(() => _arrivalTimeError = null),
             ),
-            const SizedBox(height: 20),
             // Threads List
             ...process.threads.map((thread) {
               return ExpansionTile(
@@ -205,15 +269,7 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
           child: Text(AppLocalizations.of(context)!.cancelButton),
         ),
         ElevatedButton(
-          onPressed: () {
-            if (widget.processPosition != null) {
-              widget.masoFile.processes.elements[widget.processPosition!] =
-                  process;
-            } else {
-              widget.masoFile.processes.elements.add(process);
-            }
-            context.pop();
-          },
+          onPressed: _submit,
           child: Text(AppLocalizations.of(context)!.saveButton),
         ),
       ],
