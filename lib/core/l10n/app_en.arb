@@ -103,9 +103,13 @@
   "@editProcessTitle": {
     "description": "Title of the screen for editing a process."
   },
-  "createProcessTitle": "Create Process",
-  "@createProcessTitle": {
-    "description": "Title of the screen for creating a process."
+  "createRegularProcessTitle": "Create Regular Process",
+  "@createRegularProcessTitle": {
+    "description": "Title of the screen for creating a regular process."
+  },
+  "createBurstProcessTitle": "Create Burst Process",
+  "@createBurstProcessTitle": {
+    "description": "Title of the screen for creating a burst process."
   },
   "processNameLabel": "Process Name",
   "@processNameLabel": {

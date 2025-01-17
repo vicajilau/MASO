@@ -103,9 +103,13 @@
   "@editProcessTitle": {
     "description": "Título de la pantalla para editar un proceso."
   },
-  "createProcessTitle": "Crear Proceso",
-  "@createProcessTitle": {
-    "description": "Título de la pantalla para crear un proceso."
+  "createRegularProcessTitle": "Crear Proceso Regular",
+  "@createRegularProcessTitle": {
+    "description": "Título de la pantalla para crear un proceso regular."
+  },
+  "createBurstProcessTitle": "Crear Proceso con Ráfagas",
+  "@createBurstProcessTitle": {
+    "description": "Título de la pantalla para crear un proceso con Ráfagas."
   },
   "processNameLabel": "Nombre del Proceso",
   "@processNameLabel": {

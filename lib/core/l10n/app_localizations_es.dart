@@ -67,7 +67,10 @@ class AppLocalizationsEs extends AppLocalizations {
   String get editProcessTitle => 'Editar Proceso';
 
   @override
-  String get createProcessTitle => 'Crear Proceso';
+  String get createRegularProcessTitle => 'Crear Proceso Regular';
+
+  @override
+  String get createBurstProcessTitle => 'Crear Proceso con Ráfagas';
 
   @override
   String get processNameLabel => 'Nombre del Proceso';

@@ -179,11 +179,17 @@ abstract class AppLocalizations {
   /// **'Edit Process'**
   String get editProcessTitle;
 
-  /// Title of the screen for creating a process.
+  /// Title of the screen for creating a regular process.
   ///
   /// In en, this message translates to:
-  /// **'Create Process'**
-  String get createProcessTitle;
+  /// **'Create Regular Process'**
+  String get createRegularProcessTitle;
+
+  /// Title of the screen for creating a burst process.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Burst Process'**
+  String get createBurstProcessTitle;
 
   /// Label for the process name input field.
   ///
