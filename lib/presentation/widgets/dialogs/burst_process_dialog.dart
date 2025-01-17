@@ -70,6 +70,7 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
       content: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
+          spacing: 20,
           children: [
             // Process ID
             TextFormField(
@@ -95,6 +96,7 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
               return ExpansionTile(
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  spacing: 10,
                   children: [
                     Text(thread.id),
                     IconButton(
@@ -109,14 +111,14 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
                                 .deleteThreadConfirmation(thread.id)),
                             actions: [
                               TextButton(
-                                onPressed: () => Navigator.pop(context),
+                                onPressed: () => context.pop(),
                                 child: Text(
                                     AppLocalizations.of(context)!.cancelButton),
                               ),
                               ElevatedButton(
                                 onPressed: () {
-                                  Navigator.pop(context);
                                   _removeThread(thread);
+                                  context.pop();
                                 },
                                 child: Text(AppLocalizations.of(context)!
                                     .confirmButton),
@@ -152,7 +154,6 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
                 ],
               );
             }),
-            const SizedBox(height: 10),
             ElevatedButton.icon(
               onPressed: _addThread,
               icon: const Icon(Icons.add),
