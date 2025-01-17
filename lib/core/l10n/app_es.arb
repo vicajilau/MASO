@@ -207,5 +207,9 @@
   "processIdLabel": "ID del Proceso",
   "burstDurationLabel": "Duración del Burst",
   "addBurstButton": "Agregar Burst",
-  "addThreadButton": "Agregar Hilo"
+  "addThreadButton": "Agregar Hilo",
+  "deleteThreadTitle": "Eliminar Hilo",
+  "deleteThreadConfirmation": "¿Estás seguro de que deseas eliminar el hilo \"{threadId}\"?",
+  "confirmButton": "Confirmar",
+  "arrivalTimeLabelDecorator": "Tiempo de Llegada"
 }

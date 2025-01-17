@@ -314,4 +314,18 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get addThreadButton => 'Agregar Hilo';
+
+  @override
+  String get deleteThreadTitle => 'Eliminar Hilo';
+
+  @override
+  String deleteThreadConfirmation(Object threadId) {
+    return '¿Estás seguro de que deseas eliminar el hilo \"$threadId\"?';
+  }
+
+  @override
+  String get confirmButton => 'Confirmar';
+
+  @override
+  String get arrivalTimeLabelDecorator => 'Tiempo de Llegada';
 }

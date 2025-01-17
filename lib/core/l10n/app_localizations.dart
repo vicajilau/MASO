@@ -628,6 +628,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Add Thread'**
   String get addThreadButton;
+
+  /// No description provided for @deleteThreadTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Thread'**
+  String get deleteThreadTitle;
+
+  /// No description provided for @deleteThreadConfirmation.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete the thread \"{threadId}\"?'**
+  String deleteThreadConfirmation(Object threadId);
+
+  /// No description provided for @confirmButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm'**
+  String get confirmButton;
+
+  /// No description provided for @arrivalTimeLabelDecorator.
+  ///
+  /// In en, this message translates to:
+  /// **'Arrival Time'**
+  String get arrivalTimeLabelDecorator;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

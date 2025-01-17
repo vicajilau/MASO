@@ -314,4 +314,18 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get addThreadButton => 'Add Thread';
+
+  @override
+  String get deleteThreadTitle => 'Delete Thread';
+
+  @override
+  String deleteThreadConfirmation(Object threadId) {
+    return 'Are you sure you want to delete the thread \"$threadId\"?';
+  }
+
+  @override
+  String get confirmButton => 'Confirm';
+
+  @override
+  String get arrivalTimeLabelDecorator => 'Arrival Time';
 }

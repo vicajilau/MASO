@@ -207,5 +207,9 @@
   "processIdLabel": "Process ID",
   "burstDurationLabel": "Burst Duration",
   "addBurstButton": "Add Burst",
-  "addThreadButton": "Add Thread"
+  "addThreadButton": "Add Thread",
+  "deleteThreadTitle": "Delete Thread",
+  "deleteThreadConfirmation": "Are you sure you want to delete the thread \"{threadId}\"?",
+  "confirmButton": "Confirm",
+  "arrivalTimeLabelDecorator": "Arrival Time"
 }

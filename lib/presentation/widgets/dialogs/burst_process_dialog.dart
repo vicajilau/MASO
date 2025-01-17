@@ -57,6 +57,12 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
     });
   }
 
+  void _removeThread(Thread thread) {
+    setState(() {
+      process.threads.remove(thread);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -64,7 +70,6 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
       content: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          spacing: 16,
           children: [
             // Process ID
             TextFormField(
@@ -78,8 +83,8 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
             TextFormField(
               initialValue: process.arrivalTime.toString(),
               decoration: InputDecoration(
-                labelText: AppLocalizations.of(context)!
-                    .arrivalTimeLabel(process.arrivalTime.toString()),
+                labelText:
+                    AppLocalizations.of(context)!.arrivalTimeLabelDecorator,
               ),
               keyboardType: TextInputType.number,
               onChanged: (value) =>
@@ -88,7 +93,41 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
             // Threads List
             ...process.threads.map((thread) {
               return ExpansionTile(
-                title: Text(thread.id),
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(thread.id),
+                    IconButton(
+                      icon: const Icon(Icons.delete, color: Colors.red),
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: Text(AppLocalizations.of(context)!
+                                .deleteThreadTitle),
+                            content: Text(AppLocalizations.of(context)!
+                                .deleteThreadConfirmation(thread.id)),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.pop(context),
+                                child: Text(
+                                    AppLocalizations.of(context)!.cancelButton),
+                              ),
+                              ElevatedButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                  _removeThread(thread);
+                                },
+                                child: Text(AppLocalizations.of(context)!
+                                    .confirmButton),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
                 children: [
                   // Bursts within Thread
                   ...thread.bursts.map((burst) {
@@ -103,20 +142,17 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
                           burst.duration = int.tryParse(value) ?? 0,
                     );
                   }),
-                  const SizedBox(
-                    height: 10,
-                  ),
+                  const SizedBox(height: 10),
                   ElevatedButton.icon(
                     onPressed: () => _addBurst(thread),
                     icon: const Icon(Icons.add),
                     label: Text(AppLocalizations.of(context)!.addBurstButton),
                   ),
-                  const SizedBox(
-                    height: 10,
-                  )
+                  const SizedBox(height: 10),
                 ],
               );
             }),
+            const SizedBox(height: 10),
             ElevatedButton.icon(
               onPressed: _addThread,
               icon: const Icon(Icons.add),
@@ -132,7 +168,6 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
         ),
         ElevatedButton(
           onPressed: () {
-            // Save and update process.
             if (widget.processPosition != null) {
               widget.masoFile.processes.elements[widget.processPosition!] =
                   process;
