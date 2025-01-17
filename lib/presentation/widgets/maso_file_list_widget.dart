@@ -138,7 +138,7 @@ class _MasoFileListWidgetState extends State<MasoFileListWidget> {
             _buildListTile(
               process,
               index,
-              AppLocalizations.of(context)!.serviceTimeLabel(process.bursts.toString()),
+              AppLocalizations.of(context)!.serviceTimeLabel(process.threads.toString()),
             ),
           );
         }

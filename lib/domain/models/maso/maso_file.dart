@@ -2,7 +2,6 @@ import 'package:maso/core/constants/maso_metadata.dart';
 import 'package:maso/domain/models/maso/processes.dart';
 
 import '../custom_exceptions/bad_maso_file_exception.dart';
-import 'io_device.dart';
 import 'metadata.dart';
 
 /// The `MasoFile` class represents a MASO file, which consists of metadata, I/O devices,
@@ -82,7 +81,6 @@ class MasoFile {
   MasoFile copyWith({
     String? filePath,
     Metadata? metadata,
-    List<IoDevice>? ioDevices,
     Processes? processes,
   }) {
     return MasoFile(

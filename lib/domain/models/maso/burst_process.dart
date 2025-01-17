@@ -1,5 +1,5 @@
 import 'package:maso/core/deep_collection_equality.dart';
-import 'package:maso/domain/models/maso/burst.dart';
+import 'package:maso/domain/models/maso/thread.dart';
 
 import 'i_process.dart';
 
@@ -9,13 +9,13 @@ import 'i_process.dart';
 /// `arrivalTime`, `cpuBurstDuration`, `enabled`, and `ioDevice`
 /// to describe the process and its behavior during execution.
 class BurstProcess extends IProcess {
-  final List<Burst> bursts;
+  final List<Thread> threads;
 
   /// Constructor to initialize the attributes of the BurstProcess.
   BurstProcess({
     required super.id,
     required super.arrivalTime,
-    required this.bursts,
+    required this.threads,
     required super.enabled,
   });
 
@@ -25,8 +25,8 @@ class BurstProcess extends IProcess {
     return BurstProcess(
       id: json['id'],
       arrivalTime: json['arrival_time'],
-      bursts: (json['bursts'] as List)
-          .map((burst) => Burst.fromJson(burst))
+      threads: (json['threads'] as List)
+          .map((thread) => Thread.fromJson(thread))
           .toList(),
       enabled: json['enabled'],
     );
@@ -38,13 +38,13 @@ class BurstProcess extends IProcess {
   Map<String, dynamic> toJson() => {
         'id': id,
         'arrival_time': arrivalTime,
-        'bursts': bursts,
+        'threads': threads,
         'enabled': enabled,
       };
 
   @override
   String toString() =>
-      "Burst Process: {id: $id, arrivalTime: $arrivalTime, cpuBurstDuration: $bursts, enabled: $enabled}";
+      "Burst Process: {id: $id, arrivalTime: $arrivalTime, threads: $threads, enabled: $enabled}";
 
   /// Overrides the equality operator to compare `Process` instances based on their values.
   @override
@@ -53,24 +53,21 @@ class BurstProcess extends IProcess {
     return other is BurstProcess &&
         other.id == id &&
         other.arrivalTime == arrivalTime &&
-        DeepCollectionEquality.listEquals(other.bursts, bursts) &&
+        DeepCollectionEquality.listEquals(other.threads, threads) &&
         other.enabled == other.enabled;
   }
 
   /// Overrides the `hashCode` to be consistent with the equality operator.
   @override
   int get hashCode =>
-      id.hashCode ^
-      arrivalTime.hashCode ^
-      bursts.hashCode ^
-      enabled.hashCode;
+      id.hashCode ^ arrivalTime.hashCode ^ threads.hashCode ^ enabled.hashCode;
 
   @override
   IProcess copy() {
     return BurstProcess(
         id: id,
         arrivalTime: arrivalTime,
-        bursts: bursts.map((burst) => burst.copy()).toList(),
+        threads: threads.map((thread) => thread.copy()).toList(),
         enabled: enabled);
   }
 }
