@@ -700,6 +700,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Burst {name}'**
   String burstNameLabel(Object name);
+
+  /// No description provided for @burstTypeListLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Burst Type: {type}'**
+  String burstTypeListLabel(Object type);
+
+  /// No description provided for @threadIdLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Thread: {id}'**
+  String threadIdLabel(Object id);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

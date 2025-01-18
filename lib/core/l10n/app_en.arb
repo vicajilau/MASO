@@ -219,5 +219,7 @@
   "burstCpuType": "CPU",
   "burstIoType": "I/O",
   "burstTypeLabel": "Burst type",
-  "burstNameLabel": "Burst {name}"
+  "burstNameLabel": "Burst {name}",
+  "burstTypeListLabel": "Burst Type: {type}",
+  "threadIdLabel": "Thread: {id}"
 }

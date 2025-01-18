@@ -356,4 +356,14 @@ class AppLocalizationsEs extends AppLocalizations {
   String burstNameLabel(Object name) {
     return 'Ráfaga $name';
   }
+
+  @override
+  String burstTypeListLabel(Object type) {
+    return 'Tipo de ráfaga: $type';
+  }
+
+  @override
+  String threadIdLabel(Object id) {
+    return 'Hilo: $id';
+  }
 }

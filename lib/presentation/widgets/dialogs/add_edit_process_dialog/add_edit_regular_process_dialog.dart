@@ -3,17 +3,17 @@ import 'package:go_router/go_router.dart';
 import 'package:maso/domain/models/maso/list_processes_extension.dart';
 import 'package:maso/domain/models/maso/regular_process.dart';
 
-import '../../../core/l10n/app_localizations.dart';
-import '../../../domain/models/maso/maso_file.dart';
+import '../../../../core/l10n/app_localizations.dart';
+import '../../../../domain/models/maso/maso_file.dart';
 
 /// Dialog widget for creating or editing a RegularProcess.
-class RegularProcessDialog extends StatefulWidget {
+class AddEditRegularProcessDialog extends StatefulWidget {
   final RegularProcess? process; // Optional process for editing.
   final MasoFile masoFile; // The file containing all processes.
   final int? processPosition; // Optional index for editing a specific process.
 
   /// Constructor for the dialog.
-  const RegularProcessDialog({
+  const AddEditRegularProcessDialog({
     super.key,
     this.process,
     required this.masoFile,
@@ -21,10 +21,10 @@ class RegularProcessDialog extends StatefulWidget {
   });
 
   @override
-  State<RegularProcessDialog> createState() => _RegularProcessDialogState();
+  State<AddEditRegularProcessDialog> createState() => _AddEditRegularProcessDialogState();
 }
 
-class _RegularProcessDialogState extends State<RegularProcessDialog> {
+class _AddEditRegularProcessDialogState extends State<AddEditRegularProcessDialog> {
   late TextEditingController
       _nameController; // Controller for the name input field.
   late TextEditingController

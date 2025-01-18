@@ -219,5 +219,7 @@
   "burstCpuType": "CPU",
   "burstIoType": "E/S",
   "burstTypeLabel": "Tipo de ráfaga",
-  "burstNameLabel": "Ráfaga {name}"
+  "burstNameLabel": "Ráfaga {name}",
+  "burstTypeListLabel": "Tipo de ráfaga: {type}",
+  "threadIdLabel": "Hilo: {id}"
 }

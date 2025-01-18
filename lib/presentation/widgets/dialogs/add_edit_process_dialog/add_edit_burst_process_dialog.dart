@@ -3,18 +3,18 @@ import 'package:go_router/go_router.dart';
 import 'package:maso/domain/models/maso/burst_process.dart';
 import 'package:maso/domain/models/maso/list_processes_extension.dart';
 
-import '../../../core/l10n/app_localizations.dart';
-import '../../../domain/models/maso/burst.dart';
-import '../../../domain/models/maso/burst_type.dart';
-import '../../../domain/models/maso/maso_file.dart';
-import '../../../domain/models/maso/thread.dart';
+import '../../../../core/l10n/app_localizations.dart';
+import '../../../../domain/models/maso/burst.dart';
+import '../../../../domain/models/maso/burst_type.dart';
+import '../../../../domain/models/maso/maso_file.dart';
+import '../../../../domain/models/maso/thread.dart';
 
-class BurstProcessDialog extends StatefulWidget {
+class AddEditBurstProcessDialog extends StatefulWidget {
   final BurstProcess? process;
   final MasoFile masoFile;
   final int? processPosition;
 
-  const BurstProcessDialog({
+  const AddEditBurstProcessDialog({
     super.key,
     this.process,
     required this.masoFile,
@@ -22,10 +22,10 @@ class BurstProcessDialog extends StatefulWidget {
   });
 
   @override
-  State<BurstProcessDialog> createState() => _BurstProcessDialogState();
+  State<AddEditBurstProcessDialog> createState() => _AddEditBurstProcessDialogState();
 }
 
-class _BurstProcessDialogState extends State<BurstProcessDialog> {
+class _AddEditBurstProcessDialogState extends State<AddEditBurstProcessDialog> {
   late TextEditingController _idController;
   late TextEditingController _arrivalTimeController;
   late BurstProcess cachedProcess;

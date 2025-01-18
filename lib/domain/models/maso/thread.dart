@@ -12,7 +12,7 @@ class Thread with DeepCopy<Thread> {
   final List<Burst> bursts;
 
   /// Indicates whether the thread is active and enabled.
-  final bool enabled;
+  bool enabled;
 
   /// Constructor for the Thread class.
   ///

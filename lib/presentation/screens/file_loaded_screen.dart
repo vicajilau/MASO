@@ -18,9 +18,9 @@ import '../blocs/file_bloc/file_event.dart';
 import '../blocs/file_bloc/file_state.dart';
 import '../widgets/dialogs/execution_setup_dialog.dart';
 import '../widgets/dialogs/exit_confirmation_dialog.dart';
-import '../widgets/dialogs/process_dialog.dart';
+import '../widgets/dialogs/add_edit_process_dialog/add_edit_process_dialog.dart';
+import '../widgets/dialogs/process_list_widget/process_list_widget.dart';
 import '../widgets/dialogs/settings_dialog.dart';
-import '../widgets/maso_file_list_widget.dart';
 import '../widgets/request_file_name_dialog.dart';
 
 class FileLoadedScreen extends StatefulWidget {
@@ -127,7 +127,7 @@ class _FileLoadedScreenState extends State<FileLoadedScreen> {
                       onPressed: () async {
                         final createdProcess = await showDialog<IProcess>(
                           context: context,
-                          builder: (context) => ProcessDialog(
+                          builder: (context) => AddEditProcessDialog(
                             masoFile: cachedMasoFile,
                           ),
                         );
@@ -174,8 +174,8 @@ class _FileLoadedScreenState extends State<FileLoadedScreen> {
                   ),
                 ],
               ),
-              body: MasoFileListWidget(
-                masoFile: cachedMasoFile,
+              body: ProcessListWidget(
+                maso: cachedMasoFile,
                 onFileChange: _checkFileChange,
               ),
             );
