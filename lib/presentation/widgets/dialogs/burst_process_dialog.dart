@@ -289,7 +289,8 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
                                       .deleteBurstTitle),
                                   content: Text(AppLocalizations.of(context)!
                                       .deleteBurstConfirmation(
-                                          burst.duration.toString())),
+                                          burst.duration.toString(),
+                                          _getBurstName(context, burst.type))),
                                   actions: [
                                     TextButton(
                                       onPressed: () => context.pop(),

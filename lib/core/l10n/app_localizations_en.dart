@@ -333,8 +333,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get deleteBurstTitle => 'Delete Burst';
 
   @override
-  String deleteBurstConfirmation(Object duration) {
-    return 'Are you sure you want to delete this burst with duration \"$duration\"uts.?';
+  String deleteBurstConfirmation(Object duration, Object type) {
+    return 'Are you sure you want to delete $type burst with $duration uts duration?';
   }
 
   @override

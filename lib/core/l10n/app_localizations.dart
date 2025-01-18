@@ -662,8 +662,8 @@ abstract class AppLocalizations {
   /// No description provided for @deleteBurstConfirmation.
   ///
   /// In en, this message translates to:
-  /// **'Are you sure you want to delete this burst with duration \"{duration}\"uts.?'**
-  String deleteBurstConfirmation(Object duration);
+  /// **'Are you sure you want to delete {type} burst with {duration} uts duration?'**
+  String deleteBurstConfirmation(Object duration, Object type);
 
   /// No description provided for @invalidBurstSequenceError.
   ///
