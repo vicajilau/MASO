@@ -132,11 +132,8 @@ class _FileLoadedScreenState extends State<FileLoadedScreen> {
                           ),
                         );
                         if (createdProcess != null) {
-                          setState(() {
-                            cachedMasoFile.processes.elements
-                                .add(createdProcess);
-                            _checkFileChange();
-                          });
+                          cachedMasoFile.processes.elements.add(createdProcess);
+                          _checkFileChange();
                         }
                       },
                       icon: const Icon(Icons.add),
