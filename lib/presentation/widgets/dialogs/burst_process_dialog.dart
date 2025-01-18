@@ -340,7 +340,7 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
                   const SizedBox(height: 10),
                   ElevatedButton.icon(
                     onPressed: () => _addBurst(thread),
-                    icon: const Icon(Icons.add),
+                    icon: const Icon(Icons.add, color: Colors.white),
                     label: Text(AppLocalizations.of(context)!.addBurstButton),
                   ),
                   const SizedBox(height: 10),
@@ -349,7 +349,7 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
             }),
             ElevatedButton.icon(
               onPressed: _addThread,
-              icon: const Icon(Icons.add),
+              icon: const Icon(Icons.add, color: Colors.white),
               label: Text(AppLocalizations.of(context)!.addThreadButton),
             ),
           ],
