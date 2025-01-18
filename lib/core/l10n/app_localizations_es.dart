@@ -342,4 +342,18 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get selectBurstType => 'Selecciona el tipo de ráfaga';
+
+  @override
+  String get burstCpuType => 'CPU';
+
+  @override
+  String get burstIoType => 'E/S';
+
+  @override
+  String get burstTypeLabel => 'Tipo de ráfaga';
+
+  @override
+  String burstNameLabel(Object name) {
+    return 'Ráfaga $name';
+  }
 }

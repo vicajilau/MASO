@@ -117,6 +117,15 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
     return true;
   }
 
+  String _getBurstName(BuildContext context, BurstType type) {
+    switch (type) {
+      case BurstType.io:
+        return AppLocalizations.of(context)!.burstIoType;
+      case BurstType.cpu:
+        return AppLocalizations.of(context)!.burstCpuType;
+    }
+  }
+
   void _submit() {
     if (_validateInput()) {
       context.pop(BurstProcess(
@@ -184,26 +193,33 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
           mainAxisSize: MainAxisSize.min,
           spacing: 16,
           children: [
-            // Process ID
-            TextFormField(
-                controller: _idController,
-                decoration: InputDecoration(
-                  labelText: AppLocalizations.of(context)!.processIdLabel,
-                  errorText: _idError,
-                  errorMaxLines: 2,
+            Row(
+              children: [
+                Expanded(
+                  child: TextFormField(
+                    controller: _idController,
+                    decoration: InputDecoration(
+                      labelText: AppLocalizations.of(context)!.processIdLabel,
+                      errorText: _idError,
+                    ),
+                    onChanged: (value) => setState(() => _idError = null),
+                  ),
                 ),
-                onChanged: (value) => setState(() => _idError = null)),
-            // Arrival Time
-            TextFormField(
-              controller: _arrivalTimeController,
-              decoration: InputDecoration(
-                labelText:
-                    AppLocalizations.of(context)!.arrivalTimeLabelDecorator,
-                errorText: _arrivalTimeError,
-                errorMaxLines: 2,
-              ),
-              keyboardType: TextInputType.number,
-              onChanged: (value) => setState(() => _arrivalTimeError = null),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: TextFormField(
+                    controller: _arrivalTimeController,
+                    decoration: InputDecoration(
+                      labelText: AppLocalizations.of(context)!
+                          .arrivalTimeLabelDecorator,
+                      errorText: _arrivalTimeError,
+                    ),
+                    keyboardType: TextInputType.number,
+                    onChanged: (value) =>
+                        setState(() => _arrivalTimeError = null),
+                  ),
+                ),
+              ],
             ),
             if (_burstSequenceError != null)
               Padding(
@@ -226,48 +242,98 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
                   ],
                 ),
                 children: [
-                  // Bursts within Thread
-                  ...thread.bursts.map((burst) {
-                    return ListTile(
-                      title: TextFormField(
-                        initialValue: burst.duration.toString(),
-                        decoration: InputDecoration(
-                          labelText:
-                              AppLocalizations.of(context)!.burstDurationLabel,
-                        ),
-                        keyboardType: TextInputType.number,
-                        onChanged: (value) =>
-                            burst.duration = int.tryParse(value) ?? 0,
-                      ),
-                      trailing: IconButton(
-                        icon: const Icon(Icons.delete, color: Colors.red),
-                        onPressed: () {
-                          showDialog(
-                            context: context,
-                            builder: (context) => AlertDialog(
-                              title: Text(AppLocalizations.of(context)!
-                                  .deleteBurstTitle),
-                              content: Text(AppLocalizations.of(context)!
-                                  .deleteBurstConfirmation(
-                                      burst.duration.toString())),
-                              actions: [
-                                TextButton(
-                                  onPressed: () => context.pop(),
-                                  child: Text(AppLocalizations.of(context)!
-                                      .cancelButton),
+                  ...thread.bursts.asMap().entries.map((entry) {
+                    final index = entry.key + 1;
+                    final burst = entry.value;
+
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 4.0),
+                      child: Card(
+                        child: ExpansionTile(
+                          title: Text(
+                            AppLocalizations.of(context)!.burstNameLabel(index),
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
+                          trailing: IconButton(
+                            icon: const Icon(Icons.delete, color: Colors.red),
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  title: Text(AppLocalizations.of(context)!
+                                      .deleteBurstTitle),
+                                  content: Text(AppLocalizations.of(context)!
+                                      .deleteBurstConfirmation(
+                                          burst.duration.toString())),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () => context.pop(),
+                                      child: Text(AppLocalizations.of(context)!
+                                          .cancelButton),
+                                    ),
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        _removeBurst(thread, burst);
+                                        context.pop();
+                                      },
+                                      child: Text(AppLocalizations.of(context)!
+                                          .confirmButton),
+                                    ),
+                                  ],
                                 ),
-                                ElevatedButton(
-                                  onPressed: () {
-                                    _removeBurst(thread, burst);
-                                    context.pop();
-                                  },
-                                  child: Text(AppLocalizations.of(context)!
-                                      .confirmButton),
-                                ),
-                              ],
+                              );
+                            },
+                          ),
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 16.0, vertical: 8.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          AppLocalizations.of(context)!
+                                              .burstTypeLabel,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyMedium,
+                                        ),
+                                        DropdownButton<BurstType>(
+                                          value: burst.type,
+                                          onChanged: (newType) {
+                                            setState(() {
+                                              burst.type = newType!;
+                                            });
+                                          },
+                                          items: BurstType.values.map((type) {
+                                            return DropdownMenuItem(
+                                              value: type,
+                                              child: Text(
+                                                  _getBurstName(context, type)),
+                                            );
+                                          }).toList(),
+                                        ),
+                                      ]),
+                                  const SizedBox(height: 10),
+                                  TextFormField(
+                                    initialValue: burst.duration.toString(),
+                                    decoration: InputDecoration(
+                                      labelText: AppLocalizations.of(context)!
+                                          .burstDurationLabel,
+                                    ),
+                                    keyboardType: TextInputType.number,
+                                    onChanged: (value) => burst.duration =
+                                        int.tryParse(value) ?? 0,
+                                  ),
+                                ],
+                              ),
                             ),
-                          );
-                        },
+                          ],
+                        ),
                       ),
                     );
                   }),

@@ -342,4 +342,18 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get selectBurstType => 'Select burst type';
+
+  @override
+  String get burstCpuType => 'CPU';
+
+  @override
+  String get burstIoType => 'I/O';
+
+  @override
+  String get burstTypeLabel => 'Burst type';
+
+  @override
+  String burstNameLabel(Object name) {
+    return 'Burst $name';
+  }
 }

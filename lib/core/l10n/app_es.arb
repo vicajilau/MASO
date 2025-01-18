@@ -215,5 +215,9 @@
   "deleteBurstTitle": "Borrar Ráfaga",
   "deleteBurstConfirmation": "¿Está seguro de que desea eliminar esta ráfaga con duración \"{duration}\" uts.?",
   "invalidBurstSequenceError": "La secuencia de ráfagas debe comenzar y terminar con CPU, y no puede haber dos ráfagas de E/S consecutivas.",
-  "selectBurstType": "Selecciona el tipo de ráfaga"
+  "selectBurstType": "Selecciona el tipo de ráfaga",
+  "burstCpuType": "CPU",
+  "burstIoType": "E/S",
+  "burstTypeLabel": "Tipo de ráfaga",
+  "burstNameLabel": "Ráfaga {name}"
 }

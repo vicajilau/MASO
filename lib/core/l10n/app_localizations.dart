@@ -676,6 +676,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Select burst type'**
   String get selectBurstType;
+
+  /// No description provided for @burstCpuType.
+  ///
+  /// In en, this message translates to:
+  /// **'CPU'**
+  String get burstCpuType;
+
+  /// No description provided for @burstIoType.
+  ///
+  /// In en, this message translates to:
+  /// **'I/O'**
+  String get burstIoType;
+
+  /// No description provided for @burstTypeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Burst type'**
+  String get burstTypeLabel;
+
+  /// No description provided for @burstNameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Burst {name}'**
+  String burstNameLabel(Object name);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

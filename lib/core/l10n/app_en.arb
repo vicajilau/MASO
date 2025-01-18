@@ -215,5 +215,9 @@
   "deleteBurstTitle": "Delete Burst",
   "deleteBurstConfirmation": "Are you sure you want to delete this burst with duration \"{duration}\"uts.?",
   "invalidBurstSequenceError": "The burst sequence must start and end with CPU, and there cannot be two consecutive I/O bursts.",
-  "selectBurstType": "Select burst type"
+  "selectBurstType": "Select burst type",
+  "burstCpuType": "CPU",
+  "burstIoType": "I/O",
+  "burstTypeLabel": "Burst type",
+  "burstNameLabel": "Burst {name}"
 }

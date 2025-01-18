@@ -5,7 +5,7 @@ import 'package:maso/domain/models/maso/burst_type.dart';
 /// Each burst has a type (e.g., 'cpu', 'io') and a duration in time units.
 class Burst with DeepCopy<Burst> {
   /// The type of burst, either 'cpu' or 'io'.
-  final BurstType type;
+  BurstType type;
 
   /// Duration of the burst in time units.
   int duration;
