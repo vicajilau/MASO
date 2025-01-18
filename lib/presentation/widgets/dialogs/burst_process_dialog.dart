@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:maso/core/debug_print.dart';
 import 'package:maso/domain/models/maso/burst_process.dart';
 import 'package:maso/domain/models/maso/list_processes_extension.dart';
 
@@ -178,9 +179,11 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
     });
   }
 
-  void _removeBurst(Thread thread, Burst burst) {
+  void _removeBurst(Thread thread, int indexBurst) {
+    printInDebug("Before removed burst $indexBurst on Thread: $thread");
+    thread.bursts.removeAt(indexBurst);
     setState(() {
-      thread.bursts.remove(burst);
+      printInDebug("Removed burst $indexBurst on Thread: $thread");
     });
   }
 
@@ -268,7 +271,6 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
                 ),
                 children: [
                   ...thread.bursts.asMap().entries.map((entry) {
-                    final index = entry.key + 1;
                     final burst = entry.value;
 
                     return Padding(
@@ -276,7 +278,8 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
                       child: Card(
                         child: ExpansionTile(
                           title: Text(
-                            AppLocalizations.of(context)!.burstNameLabel(index),
+                            AppLocalizations.of(context)!
+                                .burstNameLabel(entry.key + 1),
                             style: Theme.of(context).textTheme.bodyMedium,
                           ),
                           trailing: IconButton(
@@ -299,7 +302,7 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
                                     ),
                                     ElevatedButton(
                                       onPressed: () {
-                                        _removeBurst(thread, burst);
+                                        _removeBurst(thread, entry.key);
                                         context.pop();
                                       },
                                       child: Text(AppLocalizations.of(context)!
