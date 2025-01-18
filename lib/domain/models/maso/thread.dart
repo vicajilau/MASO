@@ -72,8 +72,7 @@ class Thread with DeepCopy<Thread> {
     return other is Thread &&
         other.id == id &&
         other.enabled == enabled &&
-        DeepCollectionEquality.listEquals(other.bursts, bursts) &&
-        other.enabled == enabled;
+        DeepCollectionEquality.listEquals(other.bursts, bursts);
   }
 
   /// Overrides the `hashCode` to be consistent with the equality operator.

@@ -24,4 +24,14 @@ enum ProcessesMode {
     }
     throw ArgumentError("Invalid ProcessesMode value: $value");
   }
+
+  @override
+  String toString() {
+    switch (this) {
+      case ProcessesMode.regular:
+        return 'regular';
+      case ProcessesMode.burst:
+        return 'burst';
+    }
+  }
 }

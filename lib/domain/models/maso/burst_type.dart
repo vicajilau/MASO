@@ -20,4 +20,14 @@ enum BurstType {
     }
     throw ArgumentError("Invalid BurstType value: $value");
   }
+
+  @override
+  String toString() {
+    switch (this) {
+      case BurstType.io:
+        return 'io';
+      case BurstType.cpu:
+        return 'cpu';
+    }
+  }
 }

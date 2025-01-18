@@ -39,8 +39,10 @@ class Processes {
 
   /// Converts the Metadata instance to a JSON map.
   Map<String, dynamic> toJson() => {
-        'mode': mode, // Convert the 'mode' field to JSON
-        'elements': elements, // Convert the 'elements' field to JSON
+        'mode': mode.toString(), // Convert the 'mode' field to JSON
+        'elements': elements
+            .map((e) => e.toJson())
+            .toList(), // Convert the 'elements' field to JSON
       };
 
   /// Override the equality operator to compare Metadata instances based on their values.

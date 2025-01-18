@@ -38,8 +38,8 @@ class BurstProcess extends IProcess {
   Map<String, dynamic> toJson() => {
         'id': id,
         'arrival_time': arrivalTime,
-        'threads': threads,
         'enabled': enabled,
+        'threads': threads.map((e) => e.toJson()).toList(),
       };
 
   @override
