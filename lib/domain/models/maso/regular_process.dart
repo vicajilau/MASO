@@ -49,7 +49,7 @@ class RegularProcess extends IProcess {
         other.id == id &&
         other.arrivalTime == arrivalTime &&
         other.serviceTime == serviceTime &&
-        other.enabled == other.enabled;
+        other.enabled == enabled;
   }
 
   /// Overrides the `hashCode` to be consistent with the equality operator.
