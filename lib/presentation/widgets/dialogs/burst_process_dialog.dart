@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:maso/core/debug_print.dart';
 import 'package:maso/domain/models/maso/burst_process.dart';
 import 'package:maso/domain/models/maso/list_processes_extension.dart';
 
@@ -33,6 +32,7 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
   String? _idError;
   String? _arrivalTimeError;
   String? _burstSequenceError;
+  List<List<TextEditingController>> threadControllersBurstList = [];
 
   @override
   void initState() {
@@ -48,12 +48,31 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
     _idController = TextEditingController(text: widget.process?.id);
     _arrivalTimeController =
         TextEditingController(text: widget.process?.arrivalTime.toString());
+    _initializeBurstControllers();
+  }
+
+  void _initializeBurstControllers() {
+    threadControllersBurstList.clear();
+    for (int i = 0; i < cachedProcess.threads.length; i++) {
+      List<TextEditingController> burstControllersList = [];
+      for (int j = 0; j < cachedProcess.threads[i].bursts.length; j++) {
+        final burstController = TextEditingController(
+            text: cachedProcess.threads[i].bursts[j].duration.toString());
+        burstControllersList.add(burstController);
+      }
+      threadControllersBurstList.add(burstControllersList);
+    }
   }
 
   @override
   void dispose() {
     _idController.dispose();
     _arrivalTimeController.dispose();
+    for (var burstControllerList in threadControllersBurstList) {
+      for (var controller in burstControllerList) {
+        controller.dispose();
+      }
+    }
     super.dispose();
   }
 
@@ -147,10 +166,11 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
           enabled: true,
         ),
       );
+      threadControllersBurstList.add([]);
     });
   }
 
-  void _addBurst(Thread thread) {
+  void _addBurst(Thread thread, int threadIndex) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -163,6 +183,8 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
               onTap: () {
                 setState(() {
                   thread.bursts.add(Burst(type: type, duration: 0));
+                  final burstController = TextEditingController();
+                  threadControllersBurstList[threadIndex].add(burstController);
                 });
                 context.pop();
               },
@@ -173,17 +195,19 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
     );
   }
 
-  void _removeThread(Thread thread) {
+  void _removeThread(Thread thread, int threadIndex) {
     setState(() {
       cachedProcess.threads.remove(thread);
+      threadControllersBurstList.removeAt(threadIndex);
     });
   }
 
-  void _removeBurst(Thread thread, int indexBurst) {
-    printInDebug("Before removed burst $indexBurst on Thread: $thread");
-    thread.bursts.removeAt(indexBurst);
+  void _removeBurst(Thread thread, int threadIndex, int burstIndex) {
+    // printInDebug("Before removed burst $burstIndex on Thread: $thread");
+    thread.bursts.removeAt(burstIndex);
+    threadControllersBurstList[threadIndex].removeAt(burstIndex);
     setState(() {
-      printInDebug("Removed burst $indexBurst on Thread: $thread");
+      // printInDebug("Removed burst $burstIndex on Thread: $thread");
     });
   }
 
@@ -232,7 +256,9 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
                   style: TextStyle(color: Theme.of(context).colorScheme.error),
                 ),
               ),
-            ...cachedProcess.threads.map((thread) {
+            ...cachedProcess.threads.asMap().entries.map((threadEntry) {
+              final thread = threadEntry.value;
+              final threadIndex = threadEntry.key;
               return ExpansionTile(
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -256,7 +282,7 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
                               ),
                               ElevatedButton(
                                 onPressed: () {
-                                  _removeThread(thread);
+                                  _removeThread(thread, threadIndex);
                                   context.pop();
                                 },
                                 child: Text(AppLocalizations.of(context)!
@@ -270,8 +296,9 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
                   ],
                 ),
                 children: [
-                  ...thread.bursts.asMap().entries.map((entry) {
-                    final burst = entry.value;
+                  ...thread.bursts.asMap().entries.map((burstEntry) {
+                    final burst = burstEntry.value;
+                    final burstIndex = burstEntry.key;
 
                     return Padding(
                       padding: const EdgeInsets.symmetric(vertical: 4.0),
@@ -279,7 +306,7 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
                         child: ExpansionTile(
                           title: Text(
                             AppLocalizations.of(context)!
-                                .burstNameLabel(entry.key + 1),
+                                .burstNameLabel(burstIndex + 1),
                             style: Theme.of(context).textTheme.bodyMedium,
                           ),
                           trailing: IconButton(
@@ -302,7 +329,8 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
                                     ),
                                     ElevatedButton(
                                       onPressed: () {
-                                        _removeBurst(thread, entry.key);
+                                        _removeBurst(
+                                            thread, threadIndex, burstIndex);
                                         context.pop();
                                       },
                                       child: Text(AppLocalizations.of(context)!
@@ -349,14 +377,20 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
                                       ]),
                                   const SizedBox(height: 10),
                                   TextFormField(
-                                    initialValue: burst.duration.toString(),
+                                    controller:
+                                        threadControllersBurstList[threadIndex]
+                                            [burstIndex],
                                     decoration: InputDecoration(
                                       labelText: AppLocalizations.of(context)!
                                           .burstDurationLabel,
                                     ),
                                     keyboardType: TextInputType.number,
-                                    onChanged: (value) => burst.duration =
-                                        int.tryParse(value) ?? 0,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        burst.duration =
+                                            int.tryParse(value) ?? 0;
+                                      });
+                                    },
                                   ),
                                 ],
                               ),
@@ -368,7 +402,7 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
                   }),
                   const SizedBox(height: 10),
                   ElevatedButton.icon(
-                    onPressed: () => _addBurst(thread),
+                    onPressed: () => _addBurst(thread, threadIndex),
                     icon: const Icon(Icons.add, color: Colors.white),
                     label: Text(AppLocalizations.of(context)!.addBurstButton),
                   ),
