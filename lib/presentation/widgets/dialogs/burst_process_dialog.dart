@@ -237,7 +237,32 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
                     Text(thread.id),
                     IconButton(
                       icon: const Icon(Icons.delete, color: Colors.red),
-                      onPressed: () => _removeThread(thread),
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: Text(AppLocalizations.of(context)!
+                                .deleteThreadTitle),
+                            content: Text(AppLocalizations.of(context)!
+                                .deleteThreadConfirmation(thread.id)),
+                            actions: [
+                              TextButton(
+                                onPressed: () => context.pop(),
+                                child: Text(
+                                    AppLocalizations.of(context)!.cancelButton),
+                              ),
+                              ElevatedButton(
+                                onPressed: () {
+                                  _removeThread(thread);
+                                  context.pop();
+                                },
+                                child: Text(AppLocalizations.of(context)!
+                                    .confirmButton),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
                     ),
                   ],
                 ),
