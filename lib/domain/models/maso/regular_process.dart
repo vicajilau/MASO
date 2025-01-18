@@ -61,7 +61,7 @@ class RegularProcess extends IProcess {
       enabled.hashCode;
 
   @override
-  IProcess copy() {
+  RegularProcess copy() {
     return RegularProcess(
         id: id,
         arrivalTime: arrivalTime,

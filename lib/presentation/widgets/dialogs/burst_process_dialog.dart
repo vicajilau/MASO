@@ -28,7 +28,7 @@ class BurstProcessDialog extends StatefulWidget {
 class _BurstProcessDialogState extends State<BurstProcessDialog> {
   late TextEditingController _idController;
   late TextEditingController _arrivalTimeController;
-  late BurstProcess process;
+  late BurstProcess cachedProcess;
   String? _idError;
   String? _arrivalTimeError;
   String? _burstSequenceError;
@@ -36,7 +36,7 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
   @override
   void initState() {
     super.initState();
-    process = widget.process ??
+    cachedProcess = widget.process?.copy() ??
         BurstProcess(
           id: '',
           arrivalTime: 0,
@@ -89,7 +89,7 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
       return false;
     }
 
-    for (final thread in process.threads) {
+    for (final thread in cachedProcess.threads) {
       if (!_validateBurstSequence(thread.bursts)) {
         setState(() {
           _burstSequenceError =
@@ -131,17 +131,17 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
       context.pop(BurstProcess(
         id: _idController.text.trim(),
         arrivalTime: int.parse(_arrivalTimeController.text),
-        threads: process.threads,
-        enabled: process.enabled,
+        threads: cachedProcess.threads,
+        enabled: cachedProcess.enabled,
       ));
     }
   }
 
   void _addThread() {
     setState(() {
-      process.threads.add(
+      cachedProcess.threads.add(
         Thread(
-          id: 'Thread ${process.threads.length + 1}',
+          id: 'Thread ${cachedProcess.threads.length + 1}',
           bursts: [],
           enabled: true,
         ),
@@ -174,7 +174,7 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
 
   void _removeThread(Thread thread) {
     setState(() {
-      process.threads.remove(thread);
+      cachedProcess.threads.remove(thread);
     });
   }
 
@@ -229,7 +229,7 @@ class _BurstProcessDialogState extends State<BurstProcessDialog> {
                   style: TextStyle(color: Theme.of(context).colorScheme.error),
                 ),
               ),
-            ...process.threads.map((thread) {
+            ...cachedProcess.threads.map((thread) {
               return ExpansionTile(
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -22,20 +22,19 @@ class ProcessDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (masoFile.processes.mode == ProcessesMode.regular) {
-      return RegularProcessDialog(
-        masoFile: masoFile,
-        process: process,
-        processPosition: processPosition,
-      );
-    } else if (masoFile.processes.mode == ProcessesMode.burst) {
-      return BurstProcessDialog(
-        masoFile: masoFile,
-        process: process,
-        processPosition: processPosition,
-      );
-    } else {
-      return const SizedBox.shrink(); // No valid mode, return an empty widget.
+    switch (masoFile.processes.mode) {
+      case ProcessesMode.regular:
+        return RegularProcessDialog(
+          masoFile: masoFile,
+          process: process,
+          processPosition: processPosition,
+        );
+      case ProcessesMode.burst:
+        return BurstProcessDialog(
+          masoFile: masoFile,
+          process: process,
+          processPosition: processPosition,
+        );
     }
   }
 }

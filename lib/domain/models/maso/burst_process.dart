@@ -63,7 +63,7 @@ class BurstProcess extends IProcess {
       id.hashCode ^ arrivalTime.hashCode ^ threads.hashCode ^ enabled.hashCode;
 
   @override
-  IProcess copy() {
+  BurstProcess copy() {
     return BurstProcess(
         id: id,
         arrivalTime: arrivalTime,
