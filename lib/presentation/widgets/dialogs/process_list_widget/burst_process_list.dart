@@ -29,7 +29,7 @@ class _BurstProcessListState extends State<BurstProcessList> {
       itemCount: widget.masoFile.processes.elements.length,
       itemBuilder: (context, index) {
         final process =
-            widget.masoFile.processes.elements[index] as BurstProcess;
+        widget.masoFile.processes.elements[index] as BurstProcess;
 
         return _buildDismissible(
           process,
@@ -44,21 +44,7 @@ class _BurstProcessListState extends State<BurstProcessList> {
                 ),
                 Expanded(
                   child: GestureDetector(
-                    onTap: () async {
-                      final result = await showDialog<BurstProcess>(
-                        context: context,
-                        builder: (context) => AddEditProcessDialog(
-                            process: process,
-                            masoFile: widget.masoFile,
-                            processPosition: index),
-                      );
-                      if (result != null) {
-                        setState(() {
-                          widget.masoFile.processes.elements[index] = result;
-                          widget.onFileChange();
-                        });
-                      }
-                    },
+                    onTap: () => _editProcess(process, index),
                     child: ExpansionTile(
                       title: Text(process.id),
                       subtitle: Text(AppLocalizations.of(context)!
@@ -83,12 +69,32 @@ class _BurstProcessListState extends State<BurstProcessList> {
                     ),
                   ),
                 ),
+                IconButton(
+                  icon: const Icon(Icons.edit),
+                  onPressed: () => _editProcess(process, index),
+                ),
               ],
             ),
           ),
         );
       },
     );
+  }
+
+  void _editProcess(BurstProcess process, int index) async {
+    final result = await showDialog<BurstProcess>(
+      context: context,
+      builder: (context) => AddEditProcessDialog(
+          process: process,
+          masoFile: widget.masoFile,
+          processPosition: index),
+    );
+    if (result != null) {
+      setState(() {
+        widget.masoFile.processes.elements[index] = result;
+        widget.onFileChange();
+      });
+    }
   }
 
   Widget _buildThreadTile(Thread thread) {
@@ -117,23 +123,23 @@ class _BurstProcessListState extends State<BurstProcessList> {
   Future<bool> _confirmDismiss(
       BuildContext context, BurstProcess process) async {
     return await showDialog<bool>(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: Text(AppLocalizations.of(context)!.confirmDeleteTitle),
-            content: Text(
-                AppLocalizations.of(context)!.confirmDeleteMessage(process.id)),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(false),
-                child: Text(AppLocalizations.of(context)!.cancelButton),
-              ),
-              ElevatedButton(
-                onPressed: () => Navigator.of(context).pop(true),
-                child: Text(AppLocalizations.of(context)!.deleteButton),
-              ),
-            ],
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(AppLocalizations.of(context)!.confirmDeleteTitle),
+        content: Text(
+            AppLocalizations.of(context)!.confirmDeleteMessage(process.id)),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: Text(AppLocalizations.of(context)!.cancelButton),
           ),
-        ) ??
+          ElevatedButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: Text(AppLocalizations.of(context)!.deleteButton),
+          ),
+        ],
+      ),
+    ) ??
         false;
   }
 
@@ -159,7 +165,7 @@ class _BurstProcessListState extends State<BurstProcessList> {
       },
       background: _buildDismissBackground(alignment: Alignment.centerLeft),
       secondaryBackground:
-          _buildDismissBackground(alignment: Alignment.centerRight),
+      _buildDismissBackground(alignment: Alignment.centerRight),
       child: child,
     );
   }
