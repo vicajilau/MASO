@@ -23,57 +23,71 @@ class BurstProcessList extends StatefulWidget {
 class _BurstProcessListState extends State<BurstProcessList> {
   @override
   Widget build(BuildContext context) {
-    return ReorderableListView(
+    return ReorderableListView.builder(
+      buildDefaultDragHandles: false,
       onReorder: _onReorder,
-      children:
-          List.generate(widget.masoFile.processes.elements.length, (index) {
+      itemCount: widget.masoFile.processes.elements.length,
+      itemBuilder: (context, index) {
         final process =
             widget.masoFile.processes.elements[index] as BurstProcess;
+
         return _buildDismissible(
           process,
           index,
-          GestureDetector(
-            onTap: () async {
-              final result = await showDialog<BurstProcess>(
-                context: context,
-                builder: (context) => AddEditProcessDialog(
-                    process: process,
-                    masoFile: widget.masoFile,
-                    processPosition: index),
-              );
-              if (result != null) {
-                setState(() {
-                  widget.masoFile.processes.elements[index] = result;
-                  widget.onFileChange();
-                });
-              }
-            },
-            child: ExpansionTile(
-              key: ValueKey(process.id),
-              title: Text(process.id),
-              subtitle: Text(AppLocalizations.of(context)!
-                  .arrivalTimeLabel(process.arrivalTime.toString())),
-              leading: Switch(
-                value: process.enabled,
-                onChanged: (value) {
-                  setState(() {
-                    process.enabled = value;
-                    for (var thread in process.threads) {
-                      thread.enabled = value;
-                    }
-                    widget.onFileChange();
-                  });
-                },
-                activeColor: Colors.green,
-                inactiveThumbColor: Colors.red,
-              ),
-              children: process.threads
-                  .map((thread) => _buildThreadTile(thread))
-                  .toList(),
+          Container(
+            key: ValueKey(process.id),
+            child: Row(
+              children: [
+                ReorderableDragStartListener(
+                  index: index,
+                  child: const Icon(Icons.drag_handle),
+                ),
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () async {
+                      final result = await showDialog<BurstProcess>(
+                        context: context,
+                        builder: (context) => AddEditProcessDialog(
+                            process: process,
+                            masoFile: widget.masoFile,
+                            processPosition: index),
+                      );
+                      if (result != null) {
+                        setState(() {
+                          widget.masoFile.processes.elements[index] = result;
+                          widget.onFileChange();
+                        });
+                      }
+                    },
+                    child: ExpansionTile(
+                      title: Text(process.id),
+                      subtitle: Text(AppLocalizations.of(context)!
+                          .arrivalTimeLabel(process.arrivalTime.toString())),
+                      leading: Switch(
+                        value: process.enabled,
+                        onChanged: (value) {
+                          setState(() {
+                            process.enabled = value;
+                            for (var thread in process.threads) {
+                              thread.enabled = value;
+                            }
+                            widget.onFileChange();
+                          });
+                        },
+                        activeColor: Colors.green,
+                        inactiveThumbColor: Colors.red,
+                      ),
+                      children: process.threads
+                          .map((thread) => _buildThreadTile(thread))
+                          .toList(),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         );
-      }),
+      },
     );
   }
 
