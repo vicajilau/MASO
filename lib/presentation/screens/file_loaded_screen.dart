@@ -16,9 +16,9 @@ import '../../domain/use_cases/check_file_changes_use_case.dart';
 import '../blocs/file_bloc/file_bloc.dart';
 import '../blocs/file_bloc/file_event.dart';
 import '../blocs/file_bloc/file_state.dart';
+import '../widgets/dialogs/add_edit_process_dialog/add_edit_process_dialog.dart';
 import '../widgets/dialogs/execution_setup_dialog.dart';
 import '../widgets/dialogs/exit_confirmation_dialog.dart';
-import '../widgets/dialogs/add_edit_process_dialog/add_edit_process_dialog.dart';
 import '../widgets/dialogs/process_list_widget/process_list_widget.dart';
 import '../widgets/dialogs/settings_dialog.dart';
 import '../widgets/request_file_name_dialog.dart';
@@ -71,115 +71,125 @@ class _FileLoadedScreenState extends State<FileLoadedScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<FileBloc>(
-      create: (_) => widget.fileBloc,
-      child: BlocListener<FileBloc, FileState>(
-        listener: (context, state) {
-          if (state is FileLoaded) {
-            context.presentSnackBar(AppLocalizations.of(context)!
-                .fileSaved(state.masoFile.filePath!));
-            _checkFileChange();
-          }
-          if (state is FileError) {
-            context.presentSnackBar(state.getDescription(context));
-          }
-        },
-        child: Builder(
-          builder: (context) {
-            return Scaffold(
-              appBar: AppBar(
-                title: Text(
-                    "${cachedMasoFile.metadata.name} - ${cachedMasoFile.metadata.description}"),
-                leading: IconButton(
-                  icon: Icon(Icons.arrow_back,
-                      semanticLabel:
-                          AppLocalizations.of(context)!.backSemanticLabel),
-                  onPressed: () async {
-                    final shouldExit = await _confirmExit();
-                    if (shouldExit && context.mounted) {
-                      context.pop();
-                    }
-                  },
-                ),
-                actions: [
-                  IconButton(
-                    icon: const Icon(Icons.settings),
-                    tooltip: 'Settings',
+    // ignore: deprecated_member_use
+    return WillPopScope(
+      onWillPop: () async {
+        final shouldExit = await _confirmExit();
+        return shouldExit;
+      },
+      child: BlocProvider<FileBloc>(
+        create: (_) => widget.fileBloc,
+        child: BlocListener<FileBloc, FileState>(
+          listener: (context, state) {
+            if (state is FileLoaded) {
+              context.presentSnackBar(AppLocalizations.of(context)!
+                  .fileSaved(state.masoFile.filePath!));
+              _checkFileChange();
+            }
+            if (state is FileError) {
+              context.presentSnackBar(state.getDescription(context));
+            }
+          },
+          child: Builder(
+            builder: (context) {
+              return Scaffold(
+                appBar: AppBar(
+                  title: Text(
+                      "${cachedMasoFile.metadata.name} - ${cachedMasoFile.metadata.description}"),
+                  leading: IconButton(
+                    icon: Icon(Icons.arrow_back,
+                        semanticLabel:
+                            AppLocalizations.of(context)!.backSemanticLabel),
                     onPressed: () async {
-                      await showDialog<ProcessesMode>(
-                        context: context,
-                        builder: (context) => SettingsDialog(
-                          currentMode: cachedMasoFile.processes.mode,
-                          onModeChanged: (ProcessesMode value) {
-                            if (value != cachedMasoFile.processes.mode) {
-                              cachedMasoFile.processes.elements.clear();
-                              cachedMasoFile.processes.mode = value;
-                              setState(() {
-                                _checkFileChange();
-                              });
-                            }
-                          },
-                        ),
-                      );
+                      final shouldExit = await _confirmExit();
+                      if (shouldExit && context.mounted) {
+                        context.pop();
+                      }
                     },
                   ),
-                  IconButton(
+                  actions: [
+                    IconButton(
+                      icon: const Icon(Icons.settings),
+                      tooltip: 'Settings',
                       onPressed: () async {
-                        final createdProcess = await showDialog<IProcess>(
+                        await showDialog<ProcessesMode>(
                           context: context,
-                          builder: (context) => AddEditProcessDialog(
-                            masoFile: cachedMasoFile,
+                          builder: (context) => SettingsDialog(
+                            currentMode: cachedMasoFile.processes.mode,
+                            onModeChanged: (ProcessesMode value) {
+                              if (value != cachedMasoFile.processes.mode) {
+                                cachedMasoFile.processes.elements.clear();
+                                cachedMasoFile.processes.mode = value;
+                                setState(() {
+                                  _checkFileChange();
+                                });
+                              }
+                            },
                           ),
                         );
-                        if (createdProcess != null) {
-                          cachedMasoFile.processes.elements.add(createdProcess);
-                          _checkFileChange();
-                        }
                       },
-                      icon: const Icon(Icons.add),
-                      tooltip: AppLocalizations.of(context)!.addTooltip),
-                  // Save Action
-                  IconButton(
-                    icon: const Icon(Icons.save),
-                    tooltip: _hasFileChanged
-                        ? AppLocalizations.of(context)!.saveTooltip
-                        : AppLocalizations.of(context)!.saveDisabledTooltip,
-                    onPressed: _hasFileChanged
-                        ? () async {
-                            await _onSavePressed(context);
+                    ),
+                    IconButton(
+                        onPressed: () async {
+                          final createdProcess = await showDialog<IProcess>(
+                            context: context,
+                            builder: (context) => AddEditProcessDialog(
+                              masoFile: cachedMasoFile,
+                            ),
+                          );
+                          if (createdProcess != null) {
+                            cachedMasoFile.processes.elements
+                                .add(createdProcess);
+                            _checkFileChange();
                           }
-                        : null, // Disable button if file hasn't changed
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.play_arrow),
-                    tooltip: cachedMasoFile.processes.elements.isNotEmpty
-                        ? AppLocalizations.of(context)!.executeTooltip
-                        : AppLocalizations.of(context)!.executeDisabledTooltip,
-                    onPressed: cachedMasoFile.processes.elements.isNotEmpty
-                        ? () async {
-                            final executionSetup =
-                                await showDialog<ExecutionSetup>(
-                              context: context,
-                              builder: (context) => ExecutionSetupDialog(),
-                            );
-                            if (executionSetup != null) {
-                              ServiceLocator.instance
-                                  .registerExecutionSetup(executionSetup);
-                              if (context.mounted) {
-                                context.push(AppRoutes.masoFileExecutionScreen);
+                        },
+                        icon: const Icon(Icons.add),
+                        tooltip: AppLocalizations.of(context)!.addTooltip),
+                    // Save Action
+                    IconButton(
+                      icon: const Icon(Icons.save),
+                      tooltip: _hasFileChanged
+                          ? AppLocalizations.of(context)!.saveTooltip
+                          : AppLocalizations.of(context)!.saveDisabledTooltip,
+                      onPressed: _hasFileChanged
+                          ? () async {
+                              await _onSavePressed(context);
+                            }
+                          : null, // Disable button if file hasn't changed
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.play_arrow),
+                      tooltip: cachedMasoFile.processes.elements.isNotEmpty
+                          ? AppLocalizations.of(context)!.executeTooltip
+                          : AppLocalizations.of(context)!
+                              .executeDisabledTooltip,
+                      onPressed: cachedMasoFile.processes.elements.isNotEmpty
+                          ? () async {
+                              final executionSetup =
+                                  await showDialog<ExecutionSetup>(
+                                context: context,
+                                builder: (context) => ExecutionSetupDialog(),
+                              );
+                              if (executionSetup != null) {
+                                ServiceLocator.instance
+                                    .registerExecutionSetup(executionSetup);
+                                if (context.mounted) {
+                                  context
+                                      .push(AppRoutes.masoFileExecutionScreen);
+                                }
                               }
                             }
-                          }
-                        : null, // Disable button if file hasn't changed
-                  ),
-                ],
-              ),
-              body: ProcessListWidget(
-                maso: cachedMasoFile,
-                onFileChange: _checkFileChange,
-              ),
-            );
-          },
+                          : null, // Disable button if file hasn't changed
+                    ),
+                  ],
+                ),
+                body: ProcessListWidget(
+                  maso: cachedMasoFile,
+                  onFileChange: _checkFileChange,
+                ),
+              );
+            },
+          ),
         ),
       ),
     );
