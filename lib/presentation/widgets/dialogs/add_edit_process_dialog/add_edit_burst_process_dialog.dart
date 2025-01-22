@@ -22,7 +22,8 @@ class AddEditBurstProcessDialog extends StatefulWidget {
   });
 
   @override
-  State<AddEditBurstProcessDialog> createState() => _AddEditBurstProcessDialogState();
+  State<AddEditBurstProcessDialog> createState() =>
+      _AddEditBurstProcessDialogState();
 }
 
 class _AddEditBurstProcessDialogState extends State<AddEditBurstProcessDialog> {
