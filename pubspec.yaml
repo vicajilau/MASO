@@ -51,7 +51,7 @@ dependencies:
       url: https://github.com/MixinNetwork/flutter-plugins
       path: packages/pasteboard
       branch: main
-  pdf: ^3.11.1
+  pdf: ^3.11.2
 
 dev_dependencies:
   flutter_test:
