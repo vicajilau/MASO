@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/constants/settings.dart';
 import '../../../core/l10n/app_localizations.dart';
 import '../../../domain/models/maso/process_mode.dart';
 import '../../../domain/models/settings_maso.dart';
@@ -25,55 +26,34 @@ class _SettingsDialogState extends State<SettingsDialog> {
   @override
   void initState() {
     super.initState();
-    currentSettings = SettingsMaso(
-      processesMode: widget.settings.processesMode,
-      contextSwitchTime: widget.settings.contextSwitchTime,
-      ioChannels: widget.settings.ioChannels,
-      cpuCount: widget.settings.cpuCount,
-    );
+    currentSettings = widget.settings.copy();
   }
 
-  void _updateProcessesMode(ProcessesMode newMode) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(AppLocalizations.of(context)!.settingsDialogWarningTitle),
-        content: Text(AppLocalizations.of(context)!.settingsDialogWarningContent),
-        actions: [
-          TextButton(
-            onPressed: () => context.pop(),
-            child: Text(AppLocalizations.of(context)!.cancel),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              context.pop();
-              setState(() {
-                currentSettings.processesMode = newMode;
-              });
-              widget.onSettingsChanged(currentSettings);
-            },
-            child: Text(AppLocalizations.of(context)!.confirm),
-          ),
-        ],
-      ),
-    );
-  }
-
-  void _updateSetting(String key, int value) {
+  void _updateContextSwitchTime(int newValue) {
     setState(() {
-      switch (key) {
-        case 'contextSwitchTime':
-          currentSettings.contextSwitchTime = value;
-          break;
-        case 'ioChannels':
-          currentSettings.ioChannels = value;
-          break;
-        case 'cpuCount':
-          currentSettings.cpuCount = value;
-          break;
-      }
+      currentSettings.contextSwitchTime = newValue;
     });
-    widget.onSettingsChanged(currentSettings);
+  }
+
+  void _updateIoChannels(int newValue) {
+    setState(() {
+      currentSettings.ioChannels = newValue;
+    });
+  }
+
+  void _updateCpuCount(int newValue) {
+    setState(() {
+      currentSettings.cpuCount = newValue;
+    });
+  }
+
+  void _onConfirm() {
+    if (currentSettings.processesMode != widget.settings.processesMode) {
+      _updateMode();
+    } else {
+      widget.onSettingsChanged(currentSettings);
+      context.pop();
+    }
   }
 
   @override
@@ -83,86 +63,158 @@ class _SettingsDialogState extends State<SettingsDialog> {
       content: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
+          spacing: 16,
           children: [
-            Text(
-              AppLocalizations.of(context)!.settingsDialogDescription,
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
-            ...ProcessesMode.values.map((mode) {
-              return RadioListTile<ProcessesMode>(
-                title: Text(
-                  getProcessModeName(context, mode),
+            Column(
+              spacing: 5,
+              children: [
+                Text(
+                  AppLocalizations.of(context)!.settingsDialogDescription,
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
-                value: mode,
-                groupValue: currentSettings.processesMode,
-                onChanged: (newMode) {
-                  if (newMode != null) {
-                    _updateProcessesMode(newMode);
-                  }
-                },
-              );
-            }),
-            const SizedBox(height: 16),
-            _buildSliderSetting(
-              context,
+
+                /// Dropdown for ProcessesMode
+                DropdownButton<ProcessesMode>(
+                  value: currentSettings.processesMode,
+                  onChanged: (mode) {
+                    if (mode != null) {
+                      setState(() {
+                        currentSettings.processesMode = mode;
+                      });
+                    }
+                  },
+                  items: ProcessesMode.values.map((mode) {
+                    return DropdownMenuItem<ProcessesMode>(
+                      value: mode,
+                      child: Text(_getProcessModeName(context, mode)),
+                    );
+                  }).toList(),
+                ),
+              ],
+            ),
+
+            /// Slider for Context Switch Time
+            _buildSlider(
+              context: context,
               label: AppLocalizations.of(context)!.contextSwitchTime,
-              value: currentSettings.contextSwitchTime,
-              onChanged: (value) => _updateSetting('contextSwitchTime', value),
+              value: currentSettings.contextSwitchTime.toDouble(),
+              min: Settings.minContextSwitchTime.toDouble(),
+              max: Settings.maxContextSwitchTime.toDouble(),
+              divisions:
+                  Settings.maxContextSwitchTime - Settings.minContextSwitchTime,
+              onChanged: (value) => _updateContextSwitchTime(value.toInt()),
             ),
-            _buildSliderSetting(
-              context,
+
+            /// Slider for IO Channels
+            _buildSlider(
+              context: context,
               label: AppLocalizations.of(context)!.ioChannels,
-              value: currentSettings.ioChannels,
-              onChanged: (value) => _updateSetting('ioChannels', value),
+              value: currentSettings.ioChannels.toDouble(),
+              min: Settings.minIoChannels.toDouble(),
+              max: Settings.maxIoChannels.toDouble(),
+              divisions: ((Settings.minIoChannels == 0)
+                          ? Settings.maxIoChannels /
+                              (Settings.minIoChannels + 1)
+                          : Settings.maxIoChannels / Settings.minIoChannels)
+                      .toInt() -
+                  1,
+              onChanged: (value) => _updateIoChannels(value.toInt()),
             ),
-            _buildSliderSetting(
-              context,
+
+            /// Slider for CPU Count
+            _buildSlider(
+              context: context,
               label: AppLocalizations.of(context)!.cpuCount,
-              value: currentSettings.cpuCount,
-              onChanged: (value) => _updateSetting('cpuCount', value),
+              value: currentSettings.cpuCount.toDouble(),
+              min: Settings.minCpuCount.toDouble(),
+              max: Settings.maxCpuCount.toDouble(),
+              divisions: ((Settings.minCpuCount == 0)
+                          ? Settings.maxCpuCount / (Settings.minCpuCount + 1)
+                          : Settings.maxCpuCount / Settings.minCpuCount)
+                      .toInt() -
+                  1,
+              onChanged: (value) => _updateCpuCount(value.toInt()),
             ),
           ],
         ),
       ),
       actions: [
+        /// Close Button
         TextButton(
           onPressed: () => context.pop(),
           child: Text(AppLocalizations.of(context)!.close),
         ),
-      ],
-    );
-  }
 
-  Widget _buildSliderSetting(
-      BuildContext context, {
-        required String label,
-        required int value,
-        double minValue = 0,
-        required ValueChanged<int> onChanged,
-      }) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(label, style: Theme.of(context).textTheme.bodyLarge),
-        Slider(
-          value: value.toDouble(),
-          min: minValue,
-          max: 5,
-          divisions: 5,
-          label: value.toString(),
-          onChanged: (newValue) => onChanged(newValue.round()),
+        /// Confirm Button
+        ElevatedButton(
+          onPressed: _onConfirm,
+          child: Text(AppLocalizations.of(context)!.confirm),
         ),
       ],
     );
   }
 
-  String getProcessModeName(BuildContext context, ProcessesMode mode) {
+  /// Builds a slider with a label
+  Widget _buildSlider({
+    required BuildContext context,
+    required String label,
+    required double value,
+    required double min,
+    required double max,
+    required int divisions,
+    required ValueChanged<double> onChanged,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label,
+          style: Theme.of(context).textTheme.bodyLarge,
+        ),
+        Slider(
+          value: value,
+          min: min,
+          max: max,
+          divisions: divisions,
+          label: value.round().toString(),
+          onChanged: onChanged,
+        ),
+      ],
+    );
+  }
+
+  /// Returns the localized name for the given ProcessesMode
+  String _getProcessModeName(BuildContext context, ProcessesMode mode) {
     switch (mode) {
       case ProcessesMode.regular:
         return AppLocalizations.of(context)!.processModeRegular;
       case ProcessesMode.burst:
         return AppLocalizations.of(context)!.processModeBurst;
     }
+  }
+
+  void _updateMode() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(AppLocalizations.of(context)!.settingsDialogWarningTitle),
+        content:
+            Text(AppLocalizations.of(context)!.settingsDialogWarningContent),
+        actions: [
+          TextButton(
+            onPressed: () => context.pop(context),
+            child: Text(AppLocalizations.of(context)!.cancel),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              context.pop();
+              widget.onSettingsChanged(currentSettings);
+              context.pop();
+            },
+            child: Text(AppLocalizations.of(context)!.confirm),
+          ),
+        ],
+      ),
+    );
   }
 }

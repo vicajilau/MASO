@@ -295,7 +295,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get close => 'Cerrar';
 
   @override
-  String get settingsDialogDescription => 'Selecciona el tipo de procesos que deseas configurar:';
+  String get settingsDialogDescription => 'El tipo de procesos configurado';
 
   @override
   String get processModeRegular => 'Normales';

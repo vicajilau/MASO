@@ -201,7 +201,7 @@
   "cancel": "Cancel",
   "confirm": "Confirm",
   "close": "Close",
-  "settingsDialogDescription": "Select the type of processes you want to configure:",
+  "settingsDialogDescription": "The type of processes configured",
   "processModeRegular": "Regular",
   "processModeBurst": "Burst",
   "processIdLabel": "Process ID",

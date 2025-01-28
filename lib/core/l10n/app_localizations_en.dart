@@ -295,7 +295,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get close => 'Close';
 
   @override
-  String get settingsDialogDescription => 'Select the type of processes you want to configure:';
+  String get settingsDialogDescription => 'The type of processes configured';
 
   @override
   String get processModeRegular => 'Regular';

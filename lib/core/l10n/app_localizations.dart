@@ -590,7 +590,7 @@ abstract class AppLocalizations {
   /// No description provided for @settingsDialogDescription.
   ///
   /// In en, this message translates to:
-  /// **'Select the type of processes you want to configure:'**
+  /// **'The type of processes configured'**
   String get settingsDialogDescription;
 
   /// No description provided for @processModeRegular.
