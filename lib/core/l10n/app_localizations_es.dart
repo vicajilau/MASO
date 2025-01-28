@@ -338,7 +338,9 @@ class AppLocalizationsEs extends AppLocalizations {
   }
 
   @override
-  String get invalidBurstSequenceError => 'La secuencia de ráfagas debe comenzar y terminar con CPU, y no puede haber dos ráfagas de E/S consecutivas.';
+  String invalidBurstSequenceError(Object thread) {
+    return 'La secuencia de ráfagas del hilo ($thread) debe comenzar y terminar con CPU, y no puede haber dos ráfagas de E/S consecutivas.';
+  }
 
   @override
   String get selectBurstType => 'Selecciona el tipo de ráfaga';

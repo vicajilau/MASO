@@ -214,7 +214,7 @@
   "arrivalTimeLabelDecorator": "Arrival Time",
   "deleteBurstTitle": "Delete Burst",
   "deleteBurstConfirmation": "Are you sure you want to delete {type} burst with {duration} ut duration?",
-  "invalidBurstSequenceError": "The burst sequence must start and end with CPU, and there cannot be two consecutive I/O bursts.",
+  "invalidBurstSequenceError": "The burst sequence ({thread}) must start and end with CPU, and there cannot be two consecutive I/O bursts.",
   "selectBurstType": "Select burst type",
   "burstCpuType": "CPU",
   "burstIoType": "I/O",

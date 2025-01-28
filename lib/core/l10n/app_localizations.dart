@@ -668,8 +668,8 @@ abstract class AppLocalizations {
   /// No description provided for @invalidBurstSequenceError.
   ///
   /// In en, this message translates to:
-  /// **'The burst sequence must start and end with CPU, and there cannot be two consecutive I/O bursts.'**
-  String get invalidBurstSequenceError;
+  /// **'The burst sequence ({thread}) must start and end with CPU, and there cannot be two consecutive I/O bursts.'**
+  String invalidBurstSequenceError(Object thread);
 
   /// No description provided for @selectBurstType.
   ///

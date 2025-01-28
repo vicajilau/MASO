@@ -113,8 +113,8 @@ class _AddEditBurstProcessDialogState extends State<AddEditBurstProcessDialog> {
     for (final thread in cachedProcess.threads) {
       if (!_validateBurstSequence(thread.bursts)) {
         setState(() {
-          _burstSequenceError =
-              AppLocalizations.of(context)!.invalidBurstSequenceError;
+          _burstSequenceError = AppLocalizations.of(context)!
+              .invalidBurstSequenceError(thread.id);
         });
         return false;
       }
@@ -171,7 +171,7 @@ class _AddEditBurstProcessDialogState extends State<AddEditBurstProcessDialog> {
           mainAxisSize: MainAxisSize.min,
           children: BurstType.values.map((type) {
             return ListTile(
-              title: Text(type.name),
+              title: Text(type.description(context)),
               onTap: () {
                 setState(() {
                   thread.bursts.add(Burst(type: type, duration: 0));

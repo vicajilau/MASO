@@ -214,7 +214,7 @@
   "arrivalTimeLabelDecorator": "Tiempo de Llegada",
   "deleteBurstTitle": "Borrar Ráfaga",
   "deleteBurstConfirmation": "¿Está seguro de que desea eliminar la ráfaga {type} con una duración de {duration} ut?",
-  "invalidBurstSequenceError": "La secuencia de ráfagas debe comenzar y terminar con CPU, y no puede haber dos ráfagas de E/S consecutivas.",
+  "invalidBurstSequenceError": "La secuencia de ráfagas del hilo ({thread}) debe comenzar y terminar con CPU, y no puede haber dos ráfagas de E/S consecutivas.",
   "selectBurstType": "Selecciona el tipo de ráfaga",
   "burstCpuType": "CPU",
   "burstIoType": "E/S",

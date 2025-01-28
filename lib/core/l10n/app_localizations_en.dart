@@ -338,7 +338,9 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get invalidBurstSequenceError => 'The burst sequence must start and end with CPU, and there cannot be two consecutive I/O bursts.';
+  String invalidBurstSequenceError(Object thread) {
+    return 'The burst sequence ($thread) must start and end with CPU, and there cannot be two consecutive I/O bursts.';
+  }
 
   @override
   String get selectBurstType => 'Select burst type';

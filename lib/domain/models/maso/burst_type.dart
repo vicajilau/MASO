@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../core/l10n/app_localizations.dart';
 
 enum BurstType {
-  io,
-  cpu;
+  cpu,
+  io;
 
   /// Converts a string to a `BurstType` enum.
   ///
@@ -17,10 +17,10 @@ enum BurstType {
   /// - Throws: `ArgumentError` if the input string is invalid.
   static BurstType fromJson(String value) {
     switch (value) {
-      case 'io':
-        return BurstType.io;
       case 'cpu':
         return BurstType.cpu;
+      case 'io':
+        return BurstType.io;
     }
     throw ArgumentError("Invalid BurstType value: $value");
   }
@@ -28,9 +28,9 @@ enum BurstType {
   /// Converts a `BurstType` enum to a string.
   String description(BuildContext context) {
     switch (this) {
-      case BurstType.io:
-        return AppLocalizations.of(context)!.burstCpuType;
       case BurstType.cpu:
+        return AppLocalizations.of(context)!.burstCpuType;
+      case BurstType.io:
         return AppLocalizations.of(context)!.burstIoType;
     }
   }
