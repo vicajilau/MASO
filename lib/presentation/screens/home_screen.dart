@@ -6,6 +6,7 @@ import 'package:maso/core/context_extension.dart';
 import 'package:platform_detail/platform_detail.dart';
 
 import '../../core/constants/maso_metadata.dart';
+import '../../core/file_handler.dart';
 import '../../core/l10n/app_localizations.dart';
 import '../../core/service_locator.dart';
 import '../../domain/models/custom_exceptions/bad_maso_file_exception.dart';
@@ -78,6 +79,9 @@ class _HomeScreenState extends State<HomeScreen> {
         },
         child: Builder(
           builder: (context) {
+            FileHandler.initialize((filePath) {
+              context.read<FileBloc>().add(FileDropped(filePath));
+            });
             return Scaffold(
               appBar: AppBar(
                 title: Text(AppLocalizations.of(context)!.titleAppBar),
