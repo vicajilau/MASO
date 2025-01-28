@@ -138,15 +138,6 @@ class _AddEditBurstProcessDialogState extends State<AddEditBurstProcessDialog> {
     return true;
   }
 
-  String _getBurstName(BuildContext context, BurstType type) {
-    switch (type) {
-      case BurstType.io:
-        return AppLocalizations.of(context)!.burstIoType;
-      case BurstType.cpu:
-        return AppLocalizations.of(context)!.burstCpuType;
-    }
-  }
-
   void _submit() {
     if (_validateInput()) {
       context.pop(BurstProcess(
@@ -321,7 +312,7 @@ class _AddEditBurstProcessDialogState extends State<AddEditBurstProcessDialog> {
                                   content: Text(AppLocalizations.of(context)!
                                       .deleteBurstConfirmation(
                                           burst.duration.toString(),
-                                          _getBurstName(context, burst.type))),
+                                          burst.type.description(context))),
                                   actions: [
                                     TextButton(
                                       onPressed: () => context.pop(),
@@ -348,6 +339,7 @@ class _AddEditBurstProcessDialogState extends State<AddEditBurstProcessDialog> {
                                   horizontal: 16.0, vertical: 8.0),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
+                                spacing: 10,
                                 children: [
                                   Row(
                                       mainAxisAlignment:
@@ -371,12 +363,11 @@ class _AddEditBurstProcessDialogState extends State<AddEditBurstProcessDialog> {
                                             return DropdownMenuItem(
                                               value: type,
                                               child: Text(
-                                                  _getBurstName(context, type)),
+                                                  type.description(context)),
                                             );
                                           }).toList(),
                                         ),
                                       ]),
-                                  const SizedBox(height: 10),
                                   TextFormField(
                                     controller:
                                         threadControllersBurstList[threadIndex]

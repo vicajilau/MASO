@@ -334,7 +334,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String deleteBurstConfirmation(Object duration, Object type) {
-    return '¿Está seguro de que desea eliminar la ráfaga $type con una duración de $duration uts?';
+    return '¿Está seguro de que desea eliminar la ráfaga $type con una duración de $duration ut?';
   }
 
   @override

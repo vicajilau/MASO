@@ -98,7 +98,7 @@ class _BurstProcessListState extends State<BurstProcessList> {
 
   Widget _buildThreadTile(Thread thread) {
     String subtitle = thread.bursts.map((burst) {
-      return '${burst.type.name.toUpperCase()} - ${burst.duration}uts';
+      return '${burst.type.description(context)} - ${burst.duration}ut';
     }).join(', ');
 
     return ListTile(
