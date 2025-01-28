@@ -221,5 +221,8 @@
   "burstTypeLabel": "Tipo de ráfaga",
   "burstNameLabel": "Ráfaga {name}",
   "burstTypeListLabel": "Tipo de ráfaga: {type}",
-  "threadIdLabel": "Hilo: {id}"
+  "threadIdLabel": "Hilo: {id}",
+  "contextSwitchTime": "Tiempo de Cambio de Contexto",
+  "ioChannels": "Canales de E/S",
+  "cpuCount": "Cantidad de CPUs"
 }

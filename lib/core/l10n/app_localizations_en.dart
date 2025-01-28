@@ -368,4 +368,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String threadIdLabel(Object id) {
     return 'Thread: $id';
   }
+
+  @override
+  String get contextSwitchTime => 'Context Switch Time';
+
+  @override
+  String get ioChannels => 'I/O Channels';
+
+  @override
+  String get cpuCount => 'CPU Count';
 }

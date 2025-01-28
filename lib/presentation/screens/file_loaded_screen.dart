@@ -12,6 +12,7 @@ import '../../core/l10n/app_localizations.dart';
 import '../../domain/models/maso/i_process.dart';
 import '../../domain/models/maso/maso_file.dart';
 import '../../domain/models/maso/process_mode.dart';
+import '../../domain/models/settings_maso.dart';
 import '../../domain/use_cases/check_file_changes_use_case.dart';
 import '../blocs/file_bloc/file_bloc.dart';
 import '../blocs/file_bloc/file_event.dart';
@@ -115,11 +116,14 @@ class _FileLoadedScreenState extends State<FileLoadedScreen> {
                         await showDialog<ProcessesMode>(
                           context: context,
                           builder: (context) => SettingsDialog(
-                            currentMode: cachedMasoFile.processes.mode,
-                            onModeChanged: (ProcessesMode value) {
-                              if (value != cachedMasoFile.processes.mode) {
+                            settings: SettingsMaso(
+                                processesMode: cachedMasoFile.processes.mode),
+                            onSettingsChanged: (SettingsMaso settings) {
+                              if (settings.processesMode !=
+                                  cachedMasoFile.processes.mode) {
                                 cachedMasoFile.processes.elements.clear();
-                                cachedMasoFile.processes.mode = value;
+                                cachedMasoFile.processes.mode =
+                                    settings.processesMode;
                                 setState(() {
                                   _checkFileChange();
                                 });

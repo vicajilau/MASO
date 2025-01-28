@@ -221,5 +221,8 @@
   "burstTypeLabel": "Burst type",
   "burstNameLabel": "Burst {name}",
   "burstTypeListLabel": "Burst Type: {type}",
-  "threadIdLabel": "Thread: {id}"
+  "threadIdLabel": "Thread: {id}",
+  "contextSwitchTime": "Context Switch Time",
+  "ioChannels": "I/O Channels",
+  "cpuCount": "CPU Count"
 }

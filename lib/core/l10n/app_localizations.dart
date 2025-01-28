@@ -712,6 +712,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Thread: {id}'**
   String threadIdLabel(Object id);
+
+  /// No description provided for @contextSwitchTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Context Switch Time'**
+  String get contextSwitchTime;
+
+  /// No description provided for @ioChannels.
+  ///
+  /// In en, this message translates to:
+  /// **'I/O Channels'**
+  String get ioChannels;
+
+  /// No description provided for @cpuCount.
+  ///
+  /// In en, this message translates to:
+  /// **'CPU Count'**
+  String get cpuCount;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
