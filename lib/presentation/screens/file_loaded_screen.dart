@@ -113,17 +113,20 @@ class _FileLoadedScreenState extends State<FileLoadedScreen> {
                       icon: const Icon(Icons.settings),
                       tooltip: 'Settings',
                       onPressed: () async {
+                        final settings = await SettingsMaso.loadFromPreferences(
+                            cachedMasoFile.processes.mode);
+                        if (!context.mounted) return;
                         await showDialog<ProcessesMode>(
                           context: context,
                           builder: (context) => SettingsDialog(
-                            settings: SettingsMaso(
-                                processesMode: cachedMasoFile.processes.mode),
-                            onSettingsChanged: (SettingsMaso settings) {
-                              if (settings.processesMode !=
+                            settings: settings,
+                            onSettingsChanged: (SettingsMaso modifiedSettings) {
+                              modifiedSettings.saveToPreferences();
+                              if (modifiedSettings.processesMode !=
                                   cachedMasoFile.processes.mode) {
                                 cachedMasoFile.processes.elements.clear();
                                 cachedMasoFile.processes.mode =
-                                    settings.processesMode;
+                                    modifiedSettings.processesMode;
                                 setState(() {
                                   _checkFileChange();
                                 });

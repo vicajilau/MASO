@@ -34,10 +34,10 @@ class SettingsMaso with DeepCopy<SettingsMaso> {
   });
 
   /// Loads settings from SharedPreferences, falling back to defaults
-  static Future<SettingsMaso> loadFromPreferences() async {
+  static Future<SettingsMaso> loadFromPreferences(ProcessesMode mode) async {
     final prefs = await SharedPreferences.getInstance();
     return SettingsMaso(
-      processesMode: ProcessesMode.regular, // Not persisted, uses default value
+      processesMode: mode,
       contextSwitchTime: prefs.getInt(SettingsKeys.contextSwitchTime) ??
           Settings.defaultContextSwitchTime,
       ioChannels:
