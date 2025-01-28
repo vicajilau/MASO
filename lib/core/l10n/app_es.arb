@@ -103,9 +103,13 @@
   "@editProcessTitle": {
     "description": "Título de la pantalla para editar un proceso."
   },
-  "createProcessTitle": "Crear Proceso",
-  "@createProcessTitle": {
-    "description": "Título de la pantalla para crear un proceso."
+  "createRegularProcessTitle": "Crear Proceso Regular",
+  "@createRegularProcessTitle": {
+    "description": "Título de la pantalla para crear un proceso regular."
+  },
+  "createBurstProcessTitle": "Crear Proceso con Ráfagas",
+  "@createBurstProcessTitle": {
+    "description": "Título de la pantalla para crear un proceso con Ráfagas."
   },
   "processNameLabel": "Nombre del Proceso",
   "@processNameLabel": {
@@ -190,5 +194,32 @@
   "metadataBadContent": "Los metadatos del archivo son inválidos o están corruptos.",
   "processesBadContent": "La lista de procesos contiene datos inválidos.",
   "unsupportedVersion": "La versión del archivo no es compatible con la aplicación actual.",
-  "invalidExtension": "El archivo no tiene una extensión .maso válida."
+  "invalidExtension": "El archivo no tiene una extensión .maso válida.",
+  "settingsDialogTitle": "Configuración",
+  "settingsDialogWarningTitle": "Advertencia",
+  "settingsDialogWarningContent": "Cambiar el modo borrará todos los procesos del archivo maso. ¿Deseas continuar?",
+  "cancel": "Cancelar",
+  "confirm": "Confirmar",
+  "close": "Cerrar",
+  "settingsDialogDescription": "Selecciona el tipo de procesos que deseas configurar:",
+  "processModeRegular": "Normales",
+  "processModeBurst": "Con ráfagas",
+  "processIdLabel": "ID del Proceso",
+  "burstDurationLabel": "Duración del Burst",
+  "addBurstButton": "Agregar Burst",
+  "addThreadButton": "Agregar Hilo",
+  "deleteThreadTitle": "Eliminar Hilo",
+  "deleteThreadConfirmation": "¿Estás seguro de que deseas eliminar el hilo \"{threadId}\"?",
+  "confirmButton": "Confirmar",
+  "arrivalTimeLabelDecorator": "Tiempo de Llegada",
+  "deleteBurstTitle": "Borrar Ráfaga",
+  "deleteBurstConfirmation": "¿Está seguro de que desea eliminar la ráfaga {type} con una duración de {duration} ut?",
+  "invalidBurstSequenceError": "La secuencia de ráfagas del hilo ({thread}) debe comenzar y terminar con CPU, y no puede haber dos ráfagas de E/S consecutivas.",
+  "selectBurstType": "Selecciona el tipo de ráfaga",
+  "burstCpuType": "CPU",
+  "burstIoType": "E/S",
+  "burstTypeLabel": "Tipo de ráfaga",
+  "burstNameLabel": "Ráfaga {name}",
+  "burstTypeListLabel": "Tipo de ráfaga: {type}",
+  "threadIdLabel": "Hilo: {id}"
 }

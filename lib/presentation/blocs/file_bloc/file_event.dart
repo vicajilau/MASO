@@ -2,7 +2,7 @@ import 'dart:typed_data';
 
 import 'package:maso/domain/models/export_formats.dart';
 
-import '../../../domain/models/maso_file.dart';
+import '../../../domain/models/maso/maso_file.dart';
 
 /// Abstract class representing the base event for file operations.
 abstract class FileEvent {}
@@ -27,7 +27,8 @@ class ExportedFileSaveRequested extends FileEvent {
   final String dialogTitle;
   final String fileName;
   final ExportFormats fileFormat;
-  ExportedFileSaveRequested(this.bytes, this.dialogTitle, this.fileName, this.fileFormat);
+  ExportedFileSaveRequested(
+      this.bytes, this.dialogTitle, this.fileName, this.fileFormat);
 }
 
 /// Event triggered when a file is requested to be picked.

@@ -13,12 +13,12 @@ import 'package:pdf/widgets.dart' as pw;
 import 'package:platform_detail/platform_detail.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 
-import '../../../domain/models/process.dart';
 import '../../core/constants/maso_metadata.dart';
 import '../../core/l10n/app_localizations.dart';
 import '../../core/service_locator.dart';
 import '../../data/services/execution_time_calculator_service.dart';
-import '../../domain/models/maso_file.dart';
+import '../../domain/models/maso/i_process.dart';
+import '../../domain/models/maso/maso_file.dart';
 import '../blocs/file_bloc/file_bloc.dart';
 import '../blocs/file_bloc/file_event.dart';
 import '../blocs/file_bloc/file_state.dart';
@@ -33,7 +33,7 @@ class MasoFileExecutionScreen extends StatefulWidget {
 }
 
 class _MasoFileExecutionScreenState extends State<MasoFileExecutionScreen> {
-  late List<Process> _processes;
+  late List<IProcess> _processes;
   final GlobalKey _repaintKey = GlobalKey(); // Key for capturing the content
 
   @override
@@ -44,7 +44,7 @@ class _MasoFileExecutionScreenState extends State<MasoFileExecutionScreen> {
     final masoFile = ServiceLocator.instance.getIt<MasoFile>();
 
     // Load processes from the MASO file
-    _processes = masoFile.processes;
+    _processes = masoFile.processes.elements;
 
     // Start the execution of the processes immediately
     executeProcesses();
@@ -250,8 +250,8 @@ class _MasoFileExecutionScreenState extends State<MasoFileExecutionScreen> {
                                   AppLocalizations.of(context)!
                                       .timelineProcessDescription(
                                     process.arrivalTime.toString(),
-                                    process.name,
-                                    process.serviceTime.toString(),
+                                    process.id,
+                                    "10",
                                   ),
                                 ),
                               ),
@@ -260,9 +260,7 @@ class _MasoFileExecutionScreenState extends State<MasoFileExecutionScreen> {
                                 child: Text(
                                   AppLocalizations.of(context)!
                                       .executionTimeDescription(
-                                    process.executionTime?.toString() ??
-                                        AppLocalizations.of(context)!
-                                            .executionTimeUnavailable,
+                                    process.executionTime.toString(),
                                   ),
                                 ),
                               ),

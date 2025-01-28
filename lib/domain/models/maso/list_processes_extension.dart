@@ -1,6 +1,6 @@
-import 'package:maso/domain/models/process.dart';
+import 'i_process.dart';
 
-extension ListProcessesExtension on List<Process> {
+extension ListProcessesExtension on List<IProcess> {
   /// Checks if a process with the specified [name] exists in the list,
   /// optionally ignoring the process at the given [position].
   ///
@@ -12,13 +12,15 @@ extension ListProcessesExtension on List<Process> {
     /// Create a filtered list excluding the element at the given [position], if valid.
     final filteredList = position != null && position >= 0 && position < length
         ? asMap()
-        .entries
-        .where((entry) => entry.key != position) // Exclude the specified index.
-        .map((entry) => entry.value) // Extract the process values.
-        .toList() // Convert back to a list.
+            .entries
+            .where((entry) =>
+                entry.key != position) // Exclude the specified index.
+            .map((entry) => entry.value) // Extract the process values.
+            .toList() // Convert back to a list.
         : this; // Use the original list if [position] is invalid or not provided.
 
     /// Check if any process in the filtered list matches the [name].
-    return filteredList.any((x) => x.name.toLowerCase().trim() == name.toLowerCase().trim());
+    return filteredList
+        .any((x) => x.id.toLowerCase().trim() == name.toLowerCase().trim());
   }
 }

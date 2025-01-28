@@ -67,7 +67,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get editProcessTitle => 'Edit Process';
 
   @override
-  String get createProcessTitle => 'Create Process';
+  String get createRegularProcessTitle => 'Create Regular Process';
+
+  @override
+  String get createBurstProcessTitle => 'Create Burst Process';
 
   @override
   String get processNameLabel => 'Process Name';
@@ -272,4 +275,97 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get invalidExtension => 'The file does not have a valid .maso extension.';
+
+  @override
+  String get settingsDialogTitle => 'Settings';
+
+  @override
+  String get settingsDialogWarningTitle => 'Warning';
+
+  @override
+  String get settingsDialogWarningContent => 'Changing the mode will erase all processes from the maso file. Do you want to proceed?';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get confirm => 'Confirm';
+
+  @override
+  String get close => 'Close';
+
+  @override
+  String get settingsDialogDescription => 'Select the type of processes you want to configure:';
+
+  @override
+  String get processModeRegular => 'Regular';
+
+  @override
+  String get processModeBurst => 'Burst';
+
+  @override
+  String get processIdLabel => 'Process ID';
+
+  @override
+  String get burstDurationLabel => 'Burst Duration';
+
+  @override
+  String get addBurstButton => 'Add Burst';
+
+  @override
+  String get addThreadButton => 'Add Thread';
+
+  @override
+  String get deleteThreadTitle => 'Delete Thread';
+
+  @override
+  String deleteThreadConfirmation(Object threadId) {
+    return 'Are you sure you want to delete the thread \"$threadId\"?';
+  }
+
+  @override
+  String get confirmButton => 'Confirm';
+
+  @override
+  String get arrivalTimeLabelDecorator => 'Arrival Time';
+
+  @override
+  String get deleteBurstTitle => 'Delete Burst';
+
+  @override
+  String deleteBurstConfirmation(Object duration, Object type) {
+    return 'Are you sure you want to delete $type burst with $duration ut duration?';
+  }
+
+  @override
+  String invalidBurstSequenceError(Object thread) {
+    return 'The burst sequence ($thread) must start and end with CPU, and there cannot be two consecutive I/O bursts.';
+  }
+
+  @override
+  String get selectBurstType => 'Select burst type';
+
+  @override
+  String get burstCpuType => 'CPU';
+
+  @override
+  String get burstIoType => 'I/O';
+
+  @override
+  String get burstTypeLabel => 'Burst type';
+
+  @override
+  String burstNameLabel(Object name) {
+    return 'Burst $name';
+  }
+
+  @override
+  String burstTypeListLabel(Object type) {
+    return 'Burst Type: $type';
+  }
+
+  @override
+  String threadIdLabel(Object id) {
+    return 'Thread: $id';
+  }
 }

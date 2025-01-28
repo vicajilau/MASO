@@ -1,29 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:maso/domain/models/list_processes_extension.dart';
-import 'package:maso/domain/models/process.dart';
+import 'package:maso/domain/models/maso/list_processes_extension.dart';
+import 'package:maso/domain/models/maso/regular_process.dart';
 
-import '../../../core/l10n/app_localizations.dart';
+import '../../../../core/l10n/app_localizations.dart';
+import '../../../../domain/models/maso/maso_file.dart';
 
-/// A dialog widget for creating or editing a process.
-class ProcessDialog extends StatefulWidget {
-  final Process? process; // The process being edited (if any).
-  final List<Process> existingProcesses; // List of already existing processes.
-  final int? processPosition; // Position of the process in the existing list.
+/// Dialog widget for creating or editing a RegularProcess.
+class AddEditRegularProcessDialog extends StatefulWidget {
+  final RegularProcess? process; // Optional process for editing.
+  final MasoFile masoFile; // The file containing all processes.
+  final int? processPosition; // Optional index for editing a specific process.
 
-  /// Constructor to initialize the dialog with necessary parameters.
-  const ProcessDialog(
-      {super.key,
-      this.process,
-      required this.existingProcesses,
-      this.processPosition});
+  /// Constructor for the dialog.
+  const AddEditRegularProcessDialog({
+    super.key,
+    this.process,
+    required this.masoFile,
+    this.processPosition,
+  });
 
   @override
-  State<ProcessDialog> createState() => _ProcessDialogState();
+  State<AddEditRegularProcessDialog> createState() => _AddEditRegularProcessDialogState();
 }
 
-/// State class for ProcessDialog.
-class _ProcessDialogState extends State<ProcessDialog> {
+class _AddEditRegularProcessDialogState extends State<AddEditRegularProcessDialog> {
   late TextEditingController
       _nameController; // Controller for the name input field.
   late TextEditingController
@@ -44,7 +45,7 @@ class _ProcessDialogState extends State<ProcessDialog> {
     _arrivalTimeController = TextEditingController();
     _serviceTimeController = TextEditingController();
     if (widget.process != null) {
-      _nameController.text = widget.process!.name;
+      _nameController.text = widget.process!.id;
       _arrivalTimeController.text = widget.process!.arrivalTime.toString();
       _serviceTimeController.text = widget.process!.serviceTime.toString();
       _isEnabled = widget.process!.enabled;
@@ -87,7 +88,7 @@ class _ProcessDialogState extends State<ProcessDialog> {
     }
 
     // Check for duplicate process names.
-    if (widget.existingProcesses
+    if (widget.masoFile.processes.elements
         .containProcessWithName(name, position: widget.processPosition)) {
       setState(() {
         _nameError = AppLocalizations.of(context)!
@@ -121,8 +122,8 @@ class _ProcessDialogState extends State<ProcessDialog> {
   void _submit() {
     if (_validateInput()) {
       // Create a new or updated process instance.
-      final newOrUpdatedProcess = Process(
-        name: _nameController.text.trim(),
+      final newOrUpdatedProcess = RegularProcess(
+        id: _nameController.text.trim(),
         arrivalTime: int.parse(_arrivalTimeController.text),
         serviceTime: int.parse(_serviceTimeController.text),
         enabled: _isEnabled,
@@ -136,7 +137,7 @@ class _ProcessDialogState extends State<ProcessDialog> {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Text(AppLocalizations.of(context)!
-          .createProcessTitle), // Title of the dialog.
+          .createRegularProcessTitle), // Title of the dialog.
       content: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,

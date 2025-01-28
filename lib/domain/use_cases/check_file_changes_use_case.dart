@@ -1,13 +1,13 @@
-import 'package:maso/domain/models/maso_file.dart';
-
 import '../../data/repositories/file_repository.dart';
+import '../models/maso/maso_file.dart';
 
 /// Use case for checking if a MasoFile has changed.
 class CheckFileChangesUseCase {
   final FileRepository _fileRepository;
 
   /// Constructor that receives the repository as a dependency.
-  CheckFileChangesUseCase({required FileRepository fileRepository}) : _fileRepository = fileRepository;
+  CheckFileChangesUseCase({required FileRepository fileRepository})
+      : _fileRepository = fileRepository;
 
   /// Executes the business logic to check if the file has changed.
   ///

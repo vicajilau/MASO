@@ -103,9 +103,13 @@
   "@editProcessTitle": {
     "description": "Title of the screen for editing a process."
   },
-  "createProcessTitle": "Create Process",
-  "@createProcessTitle": {
-    "description": "Title of the screen for creating a process."
+  "createRegularProcessTitle": "Create Regular Process",
+  "@createRegularProcessTitle": {
+    "description": "Title of the screen for creating a regular process."
+  },
+  "createBurstProcessTitle": "Create Burst Process",
+  "@createBurstProcessTitle": {
+    "description": "Title of the screen for creating a burst process."
   },
   "processNameLabel": "Process Name",
   "@processNameLabel": {
@@ -190,5 +194,32 @@
   "metadataBadContent": "The file metadata is invalid or corrupted.",
   "processesBadContent": "The process list contains invalid data.",
   "unsupportedVersion": "The file version is not supported by the current application.",
-  "invalidExtension": "The file does not have a valid .maso extension."
+  "invalidExtension": "The file does not have a valid .maso extension.",
+  "settingsDialogTitle": "Settings",
+  "settingsDialogWarningTitle": "Warning",
+  "settingsDialogWarningContent": "Changing the mode will erase all processes from the maso file. Do you want to proceed?",
+  "cancel": "Cancel",
+  "confirm": "Confirm",
+  "close": "Close",
+  "settingsDialogDescription": "Select the type of processes you want to configure:",
+  "processModeRegular": "Regular",
+  "processModeBurst": "Burst",
+  "processIdLabel": "Process ID",
+  "burstDurationLabel": "Burst Duration",
+  "addBurstButton": "Add Burst",
+  "addThreadButton": "Add Thread",
+  "deleteThreadTitle": "Delete Thread",
+  "deleteThreadConfirmation": "Are you sure you want to delete the thread \"{threadId}\"?",
+  "confirmButton": "Confirm",
+  "arrivalTimeLabelDecorator": "Arrival Time",
+  "deleteBurstTitle": "Delete Burst",
+  "deleteBurstConfirmation": "Are you sure you want to delete {type} burst with {duration} ut duration?",
+  "invalidBurstSequenceError": "The burst sequence ({thread}) must start and end with CPU, and there cannot be two consecutive I/O bursts.",
+  "selectBurstType": "Select burst type",
+  "burstCpuType": "CPU",
+  "burstIoType": "I/O",
+  "burstTypeLabel": "Burst type",
+  "burstNameLabel": "Burst {name}",
+  "burstTypeListLabel": "Burst Type: {type}",
+  "threadIdLabel": "Thread: {id}"
 }

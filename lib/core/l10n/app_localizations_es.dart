@@ -67,7 +67,10 @@ class AppLocalizationsEs extends AppLocalizations {
   String get editProcessTitle => 'Editar Proceso';
 
   @override
-  String get createProcessTitle => 'Crear Proceso';
+  String get createRegularProcessTitle => 'Crear Proceso Regular';
+
+  @override
+  String get createBurstProcessTitle => 'Crear Proceso con Ráfagas';
 
   @override
   String get processNameLabel => 'Nombre del Proceso';
@@ -272,4 +275,97 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get invalidExtension => 'El archivo no tiene una extensión .maso válida.';
+
+  @override
+  String get settingsDialogTitle => 'Configuración';
+
+  @override
+  String get settingsDialogWarningTitle => 'Advertencia';
+
+  @override
+  String get settingsDialogWarningContent => 'Cambiar el modo borrará todos los procesos del archivo maso. ¿Deseas continuar?';
+
+  @override
+  String get cancel => 'Cancelar';
+
+  @override
+  String get confirm => 'Confirmar';
+
+  @override
+  String get close => 'Cerrar';
+
+  @override
+  String get settingsDialogDescription => 'Selecciona el tipo de procesos que deseas configurar:';
+
+  @override
+  String get processModeRegular => 'Normales';
+
+  @override
+  String get processModeBurst => 'Con ráfagas';
+
+  @override
+  String get processIdLabel => 'ID del Proceso';
+
+  @override
+  String get burstDurationLabel => 'Duración del Burst';
+
+  @override
+  String get addBurstButton => 'Agregar Burst';
+
+  @override
+  String get addThreadButton => 'Agregar Hilo';
+
+  @override
+  String get deleteThreadTitle => 'Eliminar Hilo';
+
+  @override
+  String deleteThreadConfirmation(Object threadId) {
+    return '¿Estás seguro de que deseas eliminar el hilo \"$threadId\"?';
+  }
+
+  @override
+  String get confirmButton => 'Confirmar';
+
+  @override
+  String get arrivalTimeLabelDecorator => 'Tiempo de Llegada';
+
+  @override
+  String get deleteBurstTitle => 'Borrar Ráfaga';
+
+  @override
+  String deleteBurstConfirmation(Object duration, Object type) {
+    return '¿Está seguro de que desea eliminar la ráfaga $type con una duración de $duration ut?';
+  }
+
+  @override
+  String invalidBurstSequenceError(Object thread) {
+    return 'La secuencia de ráfagas del hilo ($thread) debe comenzar y terminar con CPU, y no puede haber dos ráfagas de E/S consecutivas.';
+  }
+
+  @override
+  String get selectBurstType => 'Selecciona el tipo de ráfaga';
+
+  @override
+  String get burstCpuType => 'CPU';
+
+  @override
+  String get burstIoType => 'E/S';
+
+  @override
+  String get burstTypeLabel => 'Tipo de ráfaga';
+
+  @override
+  String burstNameLabel(Object name) {
+    return 'Ráfaga $name';
+  }
+
+  @override
+  String burstTypeListLabel(Object type) {
+    return 'Tipo de ráfaga: $type';
+  }
+
+  @override
+  String threadIdLabel(Object id) {
+    return 'Hilo: $id';
+  }
 }

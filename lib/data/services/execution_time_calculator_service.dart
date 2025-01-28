@@ -1,6 +1,5 @@
-import 'package:maso/domain/models/process.dart';
-
 import '../../domain/models/execution_setup.dart';
+import '../../domain/models/maso/i_process.dart';
 import '../../domain/models/scheduling_algorithm.dart';
 
 /// A class responsible for calculating the execution time of processes based on the selected scheduling algorithm.
@@ -19,7 +18,7 @@ class ExecutionTimeCalculatorService {
   /// [processes] List of processes whose execution times need to be calculated.
   ///
   /// Returns a new list of processes with their `executionTime` calculated based on the algorithm.
-  List<Process> calculateExecutionTimes(List<Process> processes) {
+  List<IProcess> calculateExecutionTimes(List<IProcess> processes) {
     // Depending on the selected algorithm, calculate the execution time.
     final filteredProcesses =
         processes.where((process) => process.enabled).toList();
@@ -48,7 +47,7 @@ class ExecutionTimeCalculatorService {
   /// [processes] List of processes to be processed.
   ///
   /// Returns the list of processes with the execution time calculated according to FCFS.
-  List<Process> _calculateFirstComeFirstServed(List<Process> processes) {
+  List<IProcess> _calculateFirstComeFirstServed(List<IProcess> processes) {
     // Sort processes by their arrival time (the first process to arrive should be processed first)
     processes.sort((a, b) => a.arrivalTime.compareTo(b.arrivalTime));
 
@@ -60,10 +59,10 @@ class ExecutionTimeCalculatorService {
       }
 
       // Calculate the execution time: it is the current time + the service time of the process
-      process.executionTime = currentTime + process.serviceTime;
+      process.executionTime = 0;
 
       // Update the current time to the point when this process finishes
-      currentTime = process.executionTime!;
+      currentTime = process.executionTime;
     }
 
     return processes;
@@ -74,7 +73,7 @@ class ExecutionTimeCalculatorService {
   /// [processes] List of processes to be processed.
   ///
   /// Returns the list of processes with the execution time calculated according to SJF.
-  List<Process> _calculateShortestJobFirst(List<Process> processes) {
+  List<IProcess> _calculateShortestJobFirst(List<IProcess> processes) {
     // Logic for Shortest Job First algorithm
     return processes;
   }
@@ -84,7 +83,7 @@ class ExecutionTimeCalculatorService {
   /// [processes] List of processes to be processed.
   ///
   /// Returns the list of processes with the execution time calculated according to SRTF.
-  List<Process> _calculateShortestRemainingTimeFirst(List<Process> processes) {
+  List<IProcess> _calculateShortestRemainingTimeFirst(List<IProcess> processes) {
     // Logic for Shortest Remaining Time First algorithm
     return processes;
   }
@@ -94,7 +93,7 @@ class ExecutionTimeCalculatorService {
   /// [processes] List of processes to be processed.
   ///
   /// Returns the list of processes with the execution time calculated according to Round Robin.
-  List<Process> _calculateRoundRobin(List<Process> processes) {
+  List<IProcess> _calculateRoundRobin(List<IProcess> processes) {
     // Logic for Round Robin algorithm
     return processes;
   }
@@ -104,7 +103,7 @@ class ExecutionTimeCalculatorService {
   /// [processes] List of processes to be processed.
   ///
   /// Returns the list of processes with the execution time calculated according to the Priority Based algorithm.
-  List<Process> _calculatePriorityBased(List<Process> processes) {
+  List<IProcess> _calculatePriorityBased(List<IProcess> processes) {
     // Logic for Priority Based algorithm
     return processes;
   }
@@ -114,7 +113,7 @@ class ExecutionTimeCalculatorService {
   /// [processes] List of processes to be processed.
   ///
   /// Returns the list of processes with the execution time calculated according to Multiple Priority Queues.
-  List<Process> _calculateMultiplePriorityQueues(List<Process> processes) {
+  List<IProcess> _calculateMultiplePriorityQueues(List<IProcess> processes) {
     // Logic for Multiple Priority Queues algorithm
     return processes;
   }
@@ -124,8 +123,8 @@ class ExecutionTimeCalculatorService {
   /// [processes] List of processes to be processed.
   ///
   /// Returns the list of processes with the execution time calculated according to Multiple Priority Queues with Feedback.
-  List<Process> _calculateMultiplePriorityQueuesWithFeedback(
-      List<Process> processes) {
+  List<IProcess> _calculateMultiplePriorityQueuesWithFeedback(
+      List<IProcess> processes) {
     // Logic for Multiple Priority Queues with Feedback algorithm
     return processes;
   }
@@ -135,7 +134,7 @@ class ExecutionTimeCalculatorService {
   /// [processes] List of processes to be processed.
   ///
   /// Returns the list of processes with the execution time calculated according to Time Limit.
-  List<Process> _calculateTimeLimit(List<Process> processes) {
+  List<IProcess> _calculateTimeLimit(List<IProcess> processes) {
     // Logic for Time Limit algorithm
     return processes;
   }

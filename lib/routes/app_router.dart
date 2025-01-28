@@ -3,7 +3,7 @@ import 'package:maso/presentation/screens/file_loaded_screen.dart';
 import 'package:maso/presentation/screens/maso_file_execution_screen.dart';
 
 import '../core/service_locator.dart';
-import '../domain/models/maso_file.dart';
+import '../domain/models/maso/maso_file.dart';
 import '../domain/use_cases/check_file_changes_use_case.dart';
 import '../presentation/blocs/file_bloc/file_bloc.dart';
 import '../presentation/screens/home_screen.dart';

@@ -2,8 +2,11 @@ import 'dart:typed_data';
 
 import 'package:maso/core/service_locator.dart';
 
-import '../../domain/models/maso_file.dart';
-import '../../domain/models/metadata.dart';
+import '../../core/debug_print.dart';
+import '../../domain/models/maso/maso_file.dart';
+import '../../domain/models/maso/metadata.dart';
+import '../../domain/models/maso/process_mode.dart';
+import '../../domain/models/maso/processes.dart';
 import '../services/file_service/i_file_service.dart';
 
 /// The `FileRepository` class manages file-related operations such as loading, saving,
@@ -44,10 +47,11 @@ class FileRepository {
       {required String name,
       required String version,
       required String description}) async {
+    final processes = Processes(mode: ProcessesMode.regular, elements: []);
     final masoFile = MasoFile(
         metadata:
             Metadata(name: name, version: version, description: description),
-        processes: []);
+        processes: processes);
     ServiceLocator.instance.registerMasoFile(masoFile);
     return masoFile;
   }
@@ -100,8 +104,8 @@ class FileRepository {
   /// - Returns: A `Future<bool>` indicating whether the file content has changed (`true`) or not (`false`).
   bool hasMasoFileChanged(MasoFile cachedMasoFile) {
     if (cachedMasoFile.filePath == null) return true;
-    // printInDebug("El original es: ${_fileService.originalFile}");
-    // printInDebug("El cached es: $cachedMasoFile");
+    printInDebug("El original es: ${_fileService.originalFile}");
+    printInDebug("El cached es: $cachedMasoFile");
     return _fileService.originalFile != cachedMasoFile;
   }
 }

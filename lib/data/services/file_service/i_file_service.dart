@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 
-import 'package:maso/domain/models/maso_file.dart';
+import '../../../domain/models/maso/maso_file.dart';
 
 /// Interface for file handling services, defining methods for reading,
 /// saving, and exporting `.maso` files across different platforms.

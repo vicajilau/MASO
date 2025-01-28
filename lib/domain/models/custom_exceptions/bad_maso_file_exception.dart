@@ -58,5 +58,5 @@ enum BadMasoFileErrorType {
   unsupportedVersion,
 
   /// Indicates that the extension file is not .maso.
-  invalidExtension
+  invalidExtension,
 }

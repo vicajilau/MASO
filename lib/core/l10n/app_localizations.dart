@@ -179,11 +179,17 @@ abstract class AppLocalizations {
   /// **'Edit Process'**
   String get editProcessTitle;
 
-  /// Title of the screen for creating a process.
+  /// Title of the screen for creating a regular process.
   ///
   /// In en, this message translates to:
-  /// **'Create Process'**
-  String get createProcessTitle;
+  /// **'Create Regular Process'**
+  String get createRegularProcessTitle;
+
+  /// Title of the screen for creating a burst process.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Burst Process'**
+  String get createBurstProcessTitle;
 
   /// Label for the process name input field.
   ///
@@ -544,6 +550,168 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The file does not have a valid .maso extension.'**
   String get invalidExtension;
+
+  /// No description provided for @settingsDialogTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settingsDialogTitle;
+
+  /// No description provided for @settingsDialogWarningTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Warning'**
+  String get settingsDialogWarningTitle;
+
+  /// No description provided for @settingsDialogWarningContent.
+  ///
+  /// In en, this message translates to:
+  /// **'Changing the mode will erase all processes from the maso file. Do you want to proceed?'**
+  String get settingsDialogWarningContent;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @confirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm'**
+  String get confirm;
+
+  /// No description provided for @close.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get close;
+
+  /// No description provided for @settingsDialogDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Select the type of processes you want to configure:'**
+  String get settingsDialogDescription;
+
+  /// No description provided for @processModeRegular.
+  ///
+  /// In en, this message translates to:
+  /// **'Regular'**
+  String get processModeRegular;
+
+  /// No description provided for @processModeBurst.
+  ///
+  /// In en, this message translates to:
+  /// **'Burst'**
+  String get processModeBurst;
+
+  /// No description provided for @processIdLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Process ID'**
+  String get processIdLabel;
+
+  /// No description provided for @burstDurationLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Burst Duration'**
+  String get burstDurationLabel;
+
+  /// No description provided for @addBurstButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Burst'**
+  String get addBurstButton;
+
+  /// No description provided for @addThreadButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Thread'**
+  String get addThreadButton;
+
+  /// No description provided for @deleteThreadTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Thread'**
+  String get deleteThreadTitle;
+
+  /// No description provided for @deleteThreadConfirmation.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete the thread \"{threadId}\"?'**
+  String deleteThreadConfirmation(Object threadId);
+
+  /// No description provided for @confirmButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm'**
+  String get confirmButton;
+
+  /// No description provided for @arrivalTimeLabelDecorator.
+  ///
+  /// In en, this message translates to:
+  /// **'Arrival Time'**
+  String get arrivalTimeLabelDecorator;
+
+  /// No description provided for @deleteBurstTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Burst'**
+  String get deleteBurstTitle;
+
+  /// No description provided for @deleteBurstConfirmation.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete {type} burst with {duration} ut duration?'**
+  String deleteBurstConfirmation(Object duration, Object type);
+
+  /// No description provided for @invalidBurstSequenceError.
+  ///
+  /// In en, this message translates to:
+  /// **'The burst sequence ({thread}) must start and end with CPU, and there cannot be two consecutive I/O bursts.'**
+  String invalidBurstSequenceError(Object thread);
+
+  /// No description provided for @selectBurstType.
+  ///
+  /// In en, this message translates to:
+  /// **'Select burst type'**
+  String get selectBurstType;
+
+  /// No description provided for @burstCpuType.
+  ///
+  /// In en, this message translates to:
+  /// **'CPU'**
+  String get burstCpuType;
+
+  /// No description provided for @burstIoType.
+  ///
+  /// In en, this message translates to:
+  /// **'I/O'**
+  String get burstIoType;
+
+  /// No description provided for @burstTypeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Burst type'**
+  String get burstTypeLabel;
+
+  /// No description provided for @burstNameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Burst {name}'**
+  String burstNameLabel(Object name);
+
+  /// No description provided for @burstTypeListLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Burst Type: {type}'**
+  String burstTypeListLabel(Object type);
+
+  /// No description provided for @threadIdLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Thread: {id}'**
+  String threadIdLabel(Object id);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
