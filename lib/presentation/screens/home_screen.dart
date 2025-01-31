@@ -79,9 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
         },
         child: Builder(
           builder: (context) {
-            FileHandler.initialize((filePath) {
-              context.read<FileBloc>().add(FileDropped(filePath));
-            });
+            checkDeepLink(context);
             return Scaffold(
               appBar: AppBar(
                 title: Text(AppLocalizations.of(context)!.titleAppBar),
@@ -146,5 +144,18 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
+  }
+
+  void checkDeepLink(BuildContext c) {
+    if (PlatformDetail.isAndroid) {
+      final filePath = FileHandler.getPendingFile();
+      if (filePath != null) {
+        c.read<FileBloc>().add(FileDropped(filePath));
+      }
+    } else if (PlatformDetail.isIOS) {
+      FileHandler.initialize((filePath) {
+        c.read<FileBloc>().add(FileDropped(filePath));
+      });
+    }
   }
 }
