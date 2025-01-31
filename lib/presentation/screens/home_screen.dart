@@ -79,9 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
         },
         child: Builder(
           builder: (context) {
-            FileHandler.initialize((filePath) {
-              context.read<FileBloc>().add(FileDropped(filePath));
-            });
+            checkDeepLink(context);
             return Scaffold(
               appBar: AppBar(
                 title: Text(AppLocalizations.of(context)!.titleAppBar),
@@ -146,5 +144,12 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
+  }
+
+  /// Check if there is a deep link and handle it
+  void checkDeepLink(BuildContext c) {
+    FileHandler.initialize((filePath) {
+      c.read<FileBloc>().add(FileDropped(filePath));
+    });
   }
 }

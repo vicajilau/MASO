@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:maso/core/debug_print.dart';
 import 'package:maso/presentation/screens/file_loaded_screen.dart';
 import 'package:maso/presentation/screens/maso_file_execution_screen.dart';
 
@@ -34,4 +35,15 @@ final GoRouter appRouter = GoRouter(
       builder: (context, state) => const MasoFileExecutionScreen(),
     ),
   ],
+  redirect: (context, state) {
+    final uri = state.uri.toString();
+    printInDebug("Redirección detectada: $uri");
+
+    // If the path is a `content://` scheme, ignore it and return to Home
+    if (uri.startsWith("content://")) {
+      return AppRoutes.home;
+    }
+
+    return null; // Keep regular flow
+  },
 );
