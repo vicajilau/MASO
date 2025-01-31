@@ -146,16 +146,10 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  /// Check if there is a deep link and handle it
   void checkDeepLink(BuildContext c) {
-    if (PlatformDetail.isAndroid) {
-      final filePath = FileHandler.getPendingFile();
-      if (filePath != null) {
-        c.read<FileBloc>().add(FileDropped(filePath));
-      }
-    } else if (PlatformDetail.isIOS) {
-      FileHandler.initialize((filePath) {
-        c.read<FileBloc>().add(FileDropped(filePath));
-      });
-    }
+    FileHandler.initialize((filePath) {
+      c.read<FileBloc>().add(FileDropped(filePath));
+    });
   }
 }
