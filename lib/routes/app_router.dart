@@ -37,7 +37,7 @@ final GoRouter appRouter = GoRouter(
   ],
   redirect: (context, state) {
     final uri = state.uri.toString();
-    printInDebug("Redirección detectada: $uri");
+    printInDebug("Detected redirection: $uri");
 
     // If the path is a `content://` scheme, ignore it and return to Home
     if (uri.startsWith("content://")) {
