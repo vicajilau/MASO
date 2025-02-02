@@ -15,7 +15,6 @@ class AppDelegate: FlutterAppDelegate {
     
     override func application(_ sender: NSApplication, openFile filename: String) -> Bool {
         sendToFlutter(filename)
-        
         return true
     }
     
@@ -32,4 +31,7 @@ class AppDelegate: FlutterAppDelegate {
         }
     }
     
+    override func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool {
+        return true
+    }
 }
