@@ -6,10 +6,6 @@ class AppDelegate: FlutterAppDelegate {
     override func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
         return true
     }
-
-    override func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool {
-      return true
-    }
     
     override func application(_ application: NSApplication, open urls: [URL]) {
         for url in urls {
@@ -27,16 +23,6 @@ class AppDelegate: FlutterAppDelegate {
         for url in filenames {
             sendToFlutter(url)
         }
-    }
-    
-    override func application(_ sender: Any, openFileWithoutUI filename: String) -> Bool {
-        sendToFlutter(filename)
-        return true
-    }
-    
-    override func application(_ sender: NSApplication, openTempFile filename: String) -> Bool {
-        sendToFlutter(filename)
-        return true
     }
     
     func sendToFlutter(_ filename: String) {
