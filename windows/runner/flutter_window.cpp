@@ -3,6 +3,8 @@
 #include <optional>
 
 #include "flutter/generated_plugin_registrant.h"
+#include <flutter/method_channel.h>
+#include <flutter/standard_method_codec.h>
 
 FlutterWindow::FlutterWindow(const flutter::DartProject& project)
     : project_(project) {}
@@ -68,4 +70,19 @@ FlutterWindow::MessageHandler(HWND hwnd, UINT const message,
   }
 
   return Win32Window::MessageHandler(hwnd, message, wparam, lparam);
+}
+
+void FlutterWindow::SendFileOpenEvent(const std::string& file_path) {
+    if (!flutter_controller_ || !flutter_controller_->engine()) {
+        return;  // Do not send anything if the engine is not ready
+    }
+
+    auto channel = std::make_shared<flutter::MethodChannel<flutter::EncodableValue>>(
+            flutter_controller_->engine()->messenger(),
+                    "maso.file",
+                    &flutter::StandardMethodCodec::GetInstance()
+    );
+
+    // Send the path to the Flutter channel
+    channel->InvokeMethod("openFile", std::make_unique<flutter::EncodableValue>(file_path));
 }

@@ -1,6 +1,8 @@
 #include <flutter/dart_project.h>
 #include <flutter/flutter_view_controller.h>
 #include <windows.h>
+#include <vector>
+#include <string>
 
 #include "flutter_window.h"
 #include "utils.h"
@@ -19,8 +21,13 @@ int APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prev,
 
   flutter::DartProject project(L"data");
 
-  std::vector<std::string> command_line_arguments =
-      GetCommandLineArguments();
+  std::vector<std::string> command_line_arguments = GetCommandLineArguments();
+
+  // Save the first argument in a temporary variable before doing move()
+  std::string file_path;
+  if (!command_line_arguments.empty()) {
+    file_path = command_line_arguments[0];  // We copy the path because the object is modified afterwards
+  }
 
   project.set_dart_entrypoint_arguments(std::move(command_line_arguments));
 
@@ -32,6 +39,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prev,
   }
   window.SetQuitOnClose(true);
 
+  // Check if there is a deep link to the path
+  if (!file_path.empty()) {
+    window.SendFileOpenEvent(file_path);
+  }
   ::MSG msg;
   while (::GetMessage(&msg, nullptr, 0, 0)) {
     ::TranslateMessage(&msg);
