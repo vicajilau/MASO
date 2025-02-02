@@ -28,5 +28,48 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+    <key>CFBundleDocumentTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleTypeExtensions</key>
+            <array>
+                <string>maso</string>
+            </array>
+            <key>CFBundleTypeName</key>
+            <string>MASO File</string>
+            <key>CFBundleTypeRole</key>
+            <string>Editor</string>
+            <key>LSHandlerRank</key>
+            <string>Owner</string>
+            <key>LSItemContentTypes</key>
+            <array>
+                <string>com.example.maso</string>
+            </array>
+        </dict>
+    </array>
+
+    <key>UTExportedTypeDeclarations</key>
+    <array>
+        <dict>
+            <key>UTTypeDescription</key>
+            <string>MASO File</string>
+            <key>UTTypeIdentifier</key>
+            <string>com.example.maso</string>
+            <key>UTTypeTagSpecification</key>
+            <dict>
+                <key>public.filename-extension</key>
+                <array>
+                    <string>maso</string>
+                </array>
+                <key>public.mime-type</key>
+                <string>application/maso</string>
+            </dict>
+            <key>UTTypeConformsTo</key>
+            <array>
+                <string>public.data</string>
+            </array>
+        </dict>
+    </array>
+
 </dict>
 </plist>
