@@ -60,6 +60,19 @@ static void my_application_activate(GApplication* application) {
   fl_register_plugins(FL_PLUGIN_REGISTRY(view));
 
   gtk_widget_grab_focus(GTK_WIDGET(view));
+
+  // Get Flutter engine to communicate with Dart.
+  FlEngine* engine = fl_view_get_engine(view);
+  FlBinaryMessenger* messenger = fl_engine_get_binary_messenger(engine);
+
+  // Create the MethodChannel
+  g_autoptr(FlMethodChannel) channel = fl_method_channel_new(messenger, "maso.file", FL_METHOD_CODEC(fl_standard_method_codec_new()));
+
+  // Send file argument if exists
+  if (self->dart_entrypoint_arguments && self->dart_entrypoint_arguments[0] != nullptr) {
+    g_autoptr(FlValue) file_path = fl_value_new_string(self->dart_entrypoint_arguments[0]);
+    fl_method_channel_invoke_method(channel, "openFile", file_path, nullptr, nullptr, nullptr);
+  }
 }
 
 // Implements GApplication::local_command_line.
