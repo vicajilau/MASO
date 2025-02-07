@@ -7,6 +7,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:maso/domain/models/custom_exceptions/bad_maso_file_exception.dart';
 import 'package:platform_detail/platform_detail.dart';
 
+import '../../../domain/models/custom_exceptions/bad_maso_file_error_type.dart';
 import '../../../domain/models/maso/maso_file.dart';
 import 'i_file_service.dart';
 

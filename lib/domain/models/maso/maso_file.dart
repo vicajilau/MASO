@@ -1,6 +1,7 @@
 import 'package:maso/core/constants/maso_metadata.dart';
 import 'package:maso/domain/models/maso/processes.dart';
 
+import '../custom_exceptions/bad_maso_file_error_type.dart';
 import '../custom_exceptions/bad_maso_file_exception.dart';
 import 'metadata.dart';
 

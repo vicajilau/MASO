@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:maso/domain/models/maso/list_processes_extension.dart';
+import 'package:maso/domain/models/custom_exceptions/validate_maso_state.dart';
 import 'package:maso/domain/models/maso/regular_process.dart';
 
 import '../../../../core/l10n/app_localizations.dart';
 import '../../../../domain/models/maso/maso_file.dart';
+import '../../../../domain/use_cases/validate_maso_regular_processes_use_case.dart';
 
 /// Dialog widget for creating or editing a RegularProcess.
 class AddEditRegularProcessDialog extends StatefulWidget {
@@ -21,10 +22,12 @@ class AddEditRegularProcessDialog extends StatefulWidget {
   });
 
   @override
-  State<AddEditRegularProcessDialog> createState() => _AddEditRegularProcessDialogState();
+  State<AddEditRegularProcessDialog> createState() =>
+      _AddEditRegularProcessDialogState();
 }
 
-class _AddEditRegularProcessDialogState extends State<AddEditRegularProcessDialog> {
+class _AddEditRegularProcessDialogState
+    extends State<AddEditRegularProcessDialog> {
   late TextEditingController
       _nameController; // Controller for the name input field.
   late TextEditingController
@@ -65,12 +68,6 @@ class _AddEditRegularProcessDialogState extends State<AddEditRegularProcessDialo
 
   /// Validate the input fields.
   bool _validateInput() {
-    final name = _nameController.text.trim(); // Get trimmed name input.
-    final arrivalTime = int.tryParse(
-        _arrivalTimeController.text); // Parse arrival time to an integer.
-    final serviceTime = int.tryParse(
-        _serviceTimeController.text); // Parse service time to an integer.
-
     // Reset error messages.
     setState(() {
       _nameError = null;
@@ -78,44 +75,26 @@ class _AddEditRegularProcessDialogState extends State<AddEditRegularProcessDialo
       _serviceTimeError = null;
     });
 
-    // Validate name input.
-    if (name.isEmpty) {
-      setState(() {
-        _nameError = AppLocalizations.of(context)!
-            .emptyNameError; // Set error for empty name.
-      });
-      return false;
-    }
+    final validateInput = ValidateMasoProcessUseCase.validateInput(
+        _nameController.text,
+        _arrivalTimeController.text,
+        _serviceTimeController.text,
+        widget.processPosition,
+        widget.masoFile);
 
-    // Check for duplicate process names.
-    if (widget.masoFile.processes.elements
-        .containProcessWithName(name, position: widget.processPosition)) {
-      setState(() {
-        _nameError = AppLocalizations.of(context)!
-            .duplicateNameError; // Set error for duplicate name.
-      });
-      return false;
+    switch (validateInput) {
+      case null:
+        return true; // Everything went well
+      case RegularProcessError.emptyName:
+        _nameError = validateInput.getDescriptionError(context);
+      case RegularProcessError.duplicatedName:
+        _nameError = validateInput.getDescriptionError(context);
+      case RegularProcessError.invalidArrivalTime:
+        _arrivalTimeError = validateInput.getDescriptionError(context);
+      case RegularProcessError.invalidTimeDifference:
+        _serviceTimeError = validateInput.getDescriptionError(context);
     }
-
-    // Validate arrival time input.
-    if (arrivalTime == null || arrivalTime < 0) {
-      setState(() {
-        _arrivalTimeError = AppLocalizations.of(context)!
-            .invalidArrivalTimeError; // Set error for invalid arrival time.
-      });
-      return false;
-    }
-
-    // Validate service time input.
-    if (serviceTime == null || serviceTime <= arrivalTime) {
-      setState(() {
-        _serviceTimeError = AppLocalizations.of(context)!
-            .invalidTimeDifferenceError; // Set error for invalid service time.
-      });
-      return false;
-    }
-
-    return true; // Input is valid.
+    return false;
   }
 
   /// Submit the form if input is valid.
