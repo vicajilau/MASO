@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:maso/domain/models/custom_exceptions/regular_process_error.dart';
 import 'package:maso/domain/models/maso/regular_process.dart';
 
 import '../../../../core/l10n/app_localizations.dart';
+import '../../../../domain/models/custom_exceptions/regular_process_error_type.dart';
 import '../../../../domain/models/maso/maso_file.dart';
 import '../../../../domain/use_cases/validate_maso_regular_processes_use_case.dart';
 
@@ -82,16 +82,16 @@ class _AddEditRegularProcessDialogState
         widget.processPosition,
         widget.masoFile);
 
-    switch (validateInput) {
-      case null:
-        return true; // Everything went well
-      case RegularProcessError.emptyName:
+    if (validateInput.success) return true;
+
+    switch (validateInput.errorType) {
+      case RegularProcessErrorType.emptyName:
         _nameError = validateInput.getDescriptionError(context);
-      case RegularProcessError.duplicatedName:
+      case RegularProcessErrorType.duplicatedName:
         _nameError = validateInput.getDescriptionError(context);
-      case RegularProcessError.invalidArrivalTime:
+      case RegularProcessErrorType.invalidArrivalTime:
         _arrivalTimeError = validateInput.getDescriptionError(context);
-      case RegularProcessError.invalidTimeDifference:
+      case RegularProcessErrorType.invalidTimeDifference:
         _serviceTimeError = validateInput.getDescriptionError(context);
     }
     return false;

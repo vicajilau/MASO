@@ -37,7 +37,7 @@ class MasoFile {
               regularProcess.serviceTime.toString(),
               i,
               this);
-          if (result != null) {
+          if (!result.success) {
             throw BadMasoFileException(regularProcessError: result);
           }
         }

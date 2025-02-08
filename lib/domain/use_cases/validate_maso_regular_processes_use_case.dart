@@ -1,4 +1,5 @@
 import 'package:maso/domain/models/custom_exceptions/regular_process_error.dart';
+import 'package:maso/domain/models/custom_exceptions/regular_process_error_type.dart';
 import 'package:maso/domain/models/maso/list_processes_extension.dart';
 import 'package:maso/domain/models/maso/maso_file.dart';
 
@@ -19,7 +20,8 @@ class ValidateMasoProcessUseCase {
 
     // Validate name input.
     if (name.isEmpty) {
-      return BurstProcessError(errorType: BurstProcessErrorType.emptyName);
+      return BurstProcessError(
+          errorType: BurstProcessErrorType.emptyName, param1: processPosition);
     }
 
     // Check for duplicate process names.
@@ -71,7 +73,7 @@ class ValidateMasoProcessUseCase {
   }
 
   /// Validate the input fields.
-  static RegularProcessError? validateRegularProcess(
+  static RegularProcessError validateRegularProcess(
       String nameString,
       String arrivalTimeString,
       String serviceTimeString,
@@ -83,25 +85,30 @@ class ValidateMasoProcessUseCase {
 
     // Validate name input.
     if (name.isEmpty) {
-      return RegularProcessError.emptyName;
+      return RegularProcessError(
+          errorType: RegularProcessErrorType.emptyName,
+          param1: processPosition);
     }
 
     // Check for duplicate process names.
     if (masoFile.processes.elements
         .containProcessWithName(name, position: processPosition)) {
-      return RegularProcessError.duplicatedName;
+      return RegularProcessError(
+          errorType: RegularProcessErrorType.duplicatedName);
     }
 
     // Validate arrival time input.
     if (arrivalTime == null || arrivalTime < 0) {
-      return RegularProcessError.invalidArrivalTime;
+      return RegularProcessError(
+          errorType: RegularProcessErrorType.invalidArrivalTime);
     }
 
     // Validate service time input.
     if (serviceTime == null || serviceTime <= arrivalTime) {
-      return RegularProcessError.invalidTimeDifference;
+      return RegularProcessError(
+          errorType: RegularProcessErrorType.invalidTimeDifference);
     }
 
-    return null; // Input is valid.
+    return RegularProcessError.success(); // Input is valid.
   }
 }

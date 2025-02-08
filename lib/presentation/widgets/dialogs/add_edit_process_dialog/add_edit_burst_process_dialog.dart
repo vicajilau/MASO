@@ -93,21 +93,21 @@ class _AddEditBurstProcessDialogState extends State<AddEditBurstProcessDialog> {
     if (validateInput.success) return true;
     switch (validateInput.errorType) {
       case BurstProcessErrorType.emptyName:
-        _idError = validateInput.getDescriptionError(context);
+        _idError = validateInput.getDescriptionForInputError(context);
       case BurstProcessErrorType.duplicatedName:
-        _idError = validateInput.getDescriptionError(context);
+        _idError = validateInput.getDescriptionForInputError(context);
       case BurstProcessErrorType.invalidArrivalTime:
-        _arrivalTimeError = validateInput.getDescriptionError(context);
+        _arrivalTimeError = validateInput.getDescriptionForInputError(context);
       case BurstProcessErrorType.emptyBurst:
-        _burstSequenceError = validateInput.getDescriptionError(context);
+        _burstSequenceError = validateInput.getDescriptionForInputError(context);
       case BurstProcessErrorType.emptyThread:
-        _burstSequenceError = validateInput.getDescriptionError(context);
+        _burstSequenceError = validateInput.getDescriptionForInputError(context);
       case BurstProcessErrorType.startAndEndCpuSequence:
-        _burstSequenceError = validateInput.getDescriptionError(context);
+        _burstSequenceError = validateInput.getDescriptionForInputError(context);
       case BurstProcessErrorType.invalidBurstSequence:
-        _burstSequenceError = validateInput.getDescriptionError(context);
+        _burstSequenceError = validateInput.getDescriptionForInputError(context);
       case BurstProcessErrorType.invalidBurstDuration:
-        _burstSequenceError = validateInput.getDescriptionError(context);
+        _burstSequenceError = validateInput.getDescriptionForInputError(context);
     }
 
     return false;

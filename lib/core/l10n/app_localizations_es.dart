@@ -379,18 +379,22 @@ class AppLocalizationsEs extends AppLocalizations {
   String get cpuCount => 'Cantidad de CPUs';
 
   @override
-  String get emptyNameProcessBadContent => 'Hay un proceso sin nombre';
+  String emptyNameProcessBadContent(Object index) {
+    return 'El proceso con el índice ($index necesita un nombre (id))';
+  }
 
   @override
   String get duplicatedNameProcessBadContent => 'Hay dos o más procesos con el mismo nombre';
 
   @override
   String invalidArrivalTimeBadContent(Object process) {
-    return 'El campo arrivalTime del proceso ($process) es nulo o menor a 0';
+    return 'El preceso ($process) tiene la propiedad arrivalTime a null o <= 0';
   }
 
   @override
-  String get invalidTimeDifferenceBadContent => 'Hay uno o varios procesos con la propiedad serviceTime nula o menor o igual al arrivalTime';
+  String invalidTimeDifferenceBadContent(Object process) {
+    return 'El proceso ($process) tiene la propiedad serviceTime a null o <= al arrivalTime';
+  }
 
   @override
   String emptyThreadError(Object process) {

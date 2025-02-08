@@ -734,8 +734,8 @@ abstract class AppLocalizations {
   /// No description provided for @emptyNameProcessBadContent.
   ///
   /// In en, this message translates to:
-  /// **'There is a process without a name'**
-  String get emptyNameProcessBadContent;
+  /// **'The process with index ({index}) needs a name (id)'**
+  String emptyNameProcessBadContent(Object index);
 
   /// No description provided for @duplicatedNameProcessBadContent.
   ///
@@ -746,14 +746,14 @@ abstract class AppLocalizations {
   /// No description provided for @invalidArrivalTimeBadContent.
   ///
   /// In en, this message translates to:
-  /// **'The arrivalTime of the process ({process}) is null or less than 0'**
+  /// **'The process ({process}) has the property arrivalTime set to null or <= 0'**
   String invalidArrivalTimeBadContent(Object process);
 
   /// No description provided for @invalidTimeDifferenceBadContent.
   ///
   /// In en, this message translates to:
-  /// **'There are one or more processes where serviceTime is null or less than or equal to arrivalTime'**
-  String get invalidTimeDifferenceBadContent;
+  /// **'The process ({process}) has the property serviceTime set to null or <= arrivalTime'**
+  String invalidTimeDifferenceBadContent(Object process);
 
   /// No description provided for @emptyThreadError.
   ///

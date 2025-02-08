@@ -20,7 +20,7 @@ class BurstProcessError {
   BurstProcessError.success()
       : this(success: true, errorType: BurstProcessErrorType.emptyName);
 
-  String getDescriptionError(BuildContext context) {
+  String getDescriptionForInputError(BuildContext context) {
     switch (errorType) {
       case BurstProcessErrorType.emptyName:
         return AppLocalizations.of(context)!.emptyNameError;
@@ -43,10 +43,10 @@ class BurstProcessError {
     }
   }
 
-  String getDescriptionBadContent(BuildContext context) {
+  String getDescriptionForFileError(BuildContext context) {
     switch (errorType) {
       case BurstProcessErrorType.emptyName:
-        return AppLocalizations.of(context)!.emptyNameProcessBadContent;
+        return AppLocalizations.of(context)!.emptyNameProcessBadContent(param1!);
       case BurstProcessErrorType.duplicatedName:
         return AppLocalizations.of(context)!.duplicatedNameProcessBadContent;
       case BurstProcessErrorType.invalidArrivalTime:

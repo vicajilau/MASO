@@ -1,36 +1,49 @@
 import 'package:flutter/material.dart';
+import 'package:maso/domain/models/custom_exceptions/regular_process_error_type.dart';
 
 import '../../../core/l10n/app_localizations.dart';
 
-enum RegularProcessError {
-  emptyName,
-  duplicatedName,
-  invalidArrivalTime,
-  invalidTimeDifference;
+class RegularProcessError {
+  final RegularProcessErrorType errorType;
+  final Object? param1;
+  final Object? param2;
+  final Object? param3;
+  final bool success;
+
+  RegularProcessError(
+      {required this.errorType,
+        this.param1,
+        this.param2,
+        this.param3,
+        this.success = false});
+
+  RegularProcessError.success()
+      : this(success: true, errorType: RegularProcessErrorType.emptyName);
+
 
   String getDescriptionError(BuildContext context) {
-    switch (this) {
-      case RegularProcessError.emptyName:
+    switch (errorType) {
+      case RegularProcessErrorType.emptyName:
         return AppLocalizations.of(context)!.emptyNameError;
-      case RegularProcessError.duplicatedName:
+      case RegularProcessErrorType.duplicatedName:
         return AppLocalizations.of(context)!.duplicateNameError;
-      case RegularProcessError.invalidArrivalTime:
+      case RegularProcessErrorType.invalidArrivalTime:
         return AppLocalizations.of(context)!.invalidArrivalTimeError;
-      case RegularProcessError.invalidTimeDifference:
+      case RegularProcessErrorType.invalidTimeDifference:
         return AppLocalizations.of(context)!.invalidTimeDifferenceError;
     }
   }
 
   String getDescriptionBadContent(BuildContext context) {
-    switch (this) {
-      case RegularProcessError.emptyName:
-        return AppLocalizations.of(context)!.emptyNameProcessBadContent;
-      case RegularProcessError.duplicatedName:
+    switch (errorType) {
+      case RegularProcessErrorType.emptyName:
+        return AppLocalizations.of(context)!.emptyNameProcessBadContent(param1!);
+      case RegularProcessErrorType.duplicatedName:
         return AppLocalizations.of(context)!.duplicatedNameProcessBadContent;
-      case RegularProcessError.invalidArrivalTime:
-        return AppLocalizations.of(context)!.invalidArrivalTimeBadContent("paco");
-      case RegularProcessError.invalidTimeDifference:
-        return AppLocalizations.of(context)!.invalidTimeDifferenceBadContent;
+      case RegularProcessErrorType.invalidArrivalTime:
+        return AppLocalizations.of(context)!.invalidArrivalTimeBadContent(param1!);
+      case RegularProcessErrorType.invalidTimeDifference:
+        return AppLocalizations.of(context)!.invalidTimeDifferenceBadContent(param1!);
     }
   }
 }

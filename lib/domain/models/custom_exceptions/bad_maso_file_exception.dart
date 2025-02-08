@@ -42,7 +42,7 @@ class BadMasoFileException implements Exception {
     if (regularProcessError != null) {
       return regularProcessError!.getDescriptionBadContent(context);
     } else if (burstProcessError != null) {
-      return burstProcessError!.getDescriptionBadContent(context);
+      return burstProcessError!.getDescriptionForFileError(context);
     }
 
     switch (type) {
