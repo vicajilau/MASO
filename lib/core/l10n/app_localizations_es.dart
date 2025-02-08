@@ -377,4 +377,16 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get cpuCount => 'Cantidad de CPUs';
+
+  @override
+  String get emptyNameProcessBadContent => 'Hay un proceso sin nombre';
+
+  @override
+  String get duplicatedNameProcessBadContent => 'Hay dos o más procesos con el mismo nombre';
+
+  @override
+  String get invalidArrivalTimeBadContent => 'El arrivalTime de algún proceso es nulo o menor a 0';
+
+  @override
+  String get invalidTimeDifferenceBadContent => 'Hay uno o varios procesos con la propiedad serviceTime nula o menor o igual al arrivalTime';
 }

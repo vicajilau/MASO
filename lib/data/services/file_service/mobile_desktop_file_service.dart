@@ -28,7 +28,7 @@ class FileService implements IFileService {
   @override
   Future<MasoFile> readMasoFile(String filePath) async {
     if (!filePath.endsWith('.maso')) {
-      throw BadMasoFileException(BadMasoFileErrorType.invalidExtension);
+      throw BadMasoFileException(type: BadMasoFileErrorType.invalidExtension);
     }
     // Create a File object for the provided file path
     final file = File(filePath);

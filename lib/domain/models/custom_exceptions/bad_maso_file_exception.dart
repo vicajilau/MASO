@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:maso/domain/models/custom_exceptions/validate_maso_state.dart';
 
 import '../../../core/l10n/app_localizations.dart';
 import 'bad_maso_file_error_type.dart';
@@ -6,10 +7,11 @@ import 'bad_maso_file_error_type.dart';
 /// Exception class for errors related to MASO file processing.
 class BadMasoFileException implements Exception {
   /// The specific type of error that occurred.
-  final BadMasoFileErrorType type;
+  final BadMasoFileErrorType? type;
+  final RegularProcessError? regularProcessError;
 
   /// Creates a new `BadMasoFileException` with the given error type.
-  BadMasoFileException(this.type);
+  BadMasoFileException({this.type, this.regularProcessError});
 
   /// Returns a localized description of the error based on the current app language.
   ///
@@ -31,6 +33,10 @@ class BadMasoFileException implements Exception {
   /// - `unsupportedVersion`: The file version is not supported by the current app.
   /// - `invalidExtension`: The file does not have a valid `.maso` extension.
   String description(BuildContext context) {
+    if (regularProcessError != null) {
+      return regularProcessError!.getDescriptionBadContent(context);
+    }
+
     switch (type) {
       case BadMasoFileErrorType.metadataBadContent:
         return AppLocalizations.of(context)!.metadataBadContent;
@@ -40,6 +46,8 @@ class BadMasoFileException implements Exception {
         return AppLocalizations.of(context)!.unsupportedVersion;
       case BadMasoFileErrorType.invalidExtension:
         return AppLocalizations.of(context)!.invalidExtension;
+      case null:
+        throw UnimplementedError();
     }
   }
 

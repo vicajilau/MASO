@@ -20,4 +20,17 @@ enum RegularProcessError {
         return AppLocalizations.of(context)!.invalidTimeDifferenceError;
     }
   }
+
+  String getDescriptionBadContent(BuildContext context) {
+    switch (this) {
+      case RegularProcessError.emptyName:
+        return AppLocalizations.of(context)!.emptyNameProcessBadContent;
+      case RegularProcessError.duplicatedName:
+        return AppLocalizations.of(context)!.duplicatedNameProcessBadContent;
+      case RegularProcessError.invalidArrivalTime:
+        return AppLocalizations.of(context)!.invalidArrivalTimeBadContent;
+      case RegularProcessError.invalidTimeDifference:
+        return AppLocalizations.of(context)!.invalidTimeDifferenceBadContent;
+    }
+  }
 }

@@ -3,7 +3,6 @@ import 'package:maso/domain/models/maso/list_processes_extension.dart';
 import 'package:maso/domain/models/maso/maso_file.dart';
 
 class ValidateMasoProcessUseCase {
-
   /// Validate the input fields.
   static RegularProcessError? validateInput(
       String nameString,

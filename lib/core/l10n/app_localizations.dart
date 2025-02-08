@@ -730,6 +730,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'CPU Count'**
   String get cpuCount;
+
+  /// No description provided for @emptyNameProcessBadContent.
+  ///
+  /// In en, this message translates to:
+  /// **'There is a process without a name'**
+  String get emptyNameProcessBadContent;
+
+  /// No description provided for @duplicatedNameProcessBadContent.
+  ///
+  /// In en, this message translates to:
+  /// **'There are two or more processes with the same name'**
+  String get duplicatedNameProcessBadContent;
+
+  /// No description provided for @invalidArrivalTimeBadContent.
+  ///
+  /// In en, this message translates to:
+  /// **'The arrivalTime of a process is null or less than 0'**
+  String get invalidArrivalTimeBadContent;
+
+  /// No description provided for @invalidTimeDifferenceBadContent.
+  ///
+  /// In en, this message translates to:
+  /// **'There are one or more processes where serviceTime is null or less than or equal to arrivalTime'**
+  String get invalidTimeDifferenceBadContent;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

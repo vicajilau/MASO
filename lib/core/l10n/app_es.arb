@@ -224,5 +224,9 @@
   "threadIdLabel": "Hilo: {id}",
   "contextSwitchTime": "Tiempo de Cambio de Contexto",
   "ioChannels": "Canales de E/S",
-  "cpuCount": "Cantidad de CPUs"
+  "cpuCount": "Cantidad de CPUs",
+  "emptyNameProcessBadContent": "Hay un proceso sin nombre",
+  "duplicatedNameProcessBadContent": "Hay dos o más procesos con el mismo nombre",
+  "invalidArrivalTimeBadContent": "El arrivalTime de algún proceso es nulo o menor a 0",
+  "invalidTimeDifferenceBadContent": "Hay uno o varios procesos con la propiedad serviceTime nula o menor o igual al arrivalTime"
 }

@@ -224,5 +224,9 @@
   "threadIdLabel": "Thread: {id}",
   "contextSwitchTime": "Context Switch Time",
   "ioChannels": "I/O Channels",
-  "cpuCount": "CPU Count"
+  "cpuCount": "CPU Count",
+  "emptyNameProcessBadContent": "There is a process without a name",
+  "duplicatedNameProcessBadContent": "There are two or more processes with the same name",
+  "invalidArrivalTimeBadContent": "The arrivalTime of a process is null or less than 0",
+  "invalidTimeDifferenceBadContent": "There are one or more processes where serviceTime is null or less than or equal to arrivalTime"
 }

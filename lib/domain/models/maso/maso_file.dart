@@ -1,6 +1,9 @@
 import 'package:maso/core/constants/maso_metadata.dart';
+import 'package:maso/domain/models/maso/process_mode.dart';
 import 'package:maso/domain/models/maso/processes.dart';
+import 'package:maso/domain/models/maso/regular_process.dart';
 
+import '../../use_cases/validate_maso_regular_processes_use_case.dart';
 import '../custom_exceptions/bad_maso_file_error_type.dart';
 import '../custom_exceptions/bad_maso_file_exception.dart';
 import 'metadata.dart';
@@ -22,7 +25,21 @@ class MasoFile {
     required this.metadata,
     required this.processes,
     this.filePath,
-  });
+  }) {
+    switch (processes.mode) {
+      case ProcessesMode.regular:
+        for (int i = 0; i< processes.elements.length; i++) {
+          final process = processes.elements[i] as RegularProcess;
+          final result = ValidateMasoProcessUseCase.validateInput(process.id, process.arrivalTime.toString(), process.serviceTime.toString(), i, this);
+          if (result != null) {
+            throw BadMasoFileException(regularProcessError: result);
+          }
+        }
+      case ProcessesMode.burst:
+        // TODO: Handle this case.
+        throw UnimplementedError();
+    }
+  }
 
   /// Factory constructor to create a `MasoFile` instance from a JSON map.
   factory MasoFile.fromJson(Map<String, dynamic> json, String? filePath) {
@@ -48,20 +65,20 @@ class MasoFile {
       final metadata =
           Metadata.fromJson(json['metadata'] as Map<String, dynamic>);
       if (!MasoMetadata.isSupportedVersion(metadata.version)) {
-        throw BadMasoFileException(BadMasoFileErrorType.unsupportedVersion);
+        throw BadMasoFileException(type: BadMasoFileErrorType.unsupportedVersion);
       }
     } catch (e) {
       if (e is BadMasoFileException) {
         rethrow;
       }
-      throw BadMasoFileException(BadMasoFileErrorType.metadataBadContent);
+      throw BadMasoFileException(type: BadMasoFileErrorType.metadataBadContent);
     }
 
     try {
       // Validate processes
       Processes.fromJson(json['processes'] as Map<String, dynamic>);
     } catch (e) {
-      throw BadMasoFileException(BadMasoFileErrorType.processesBadContent);
+      throw BadMasoFileException(type: BadMasoFileErrorType.processesBadContent);
     }
   }
 

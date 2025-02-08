@@ -13,7 +13,6 @@ abstract class IProcess with DeepCopy<IProcess> {
   /// Whether the process is enabled or not.
   bool enabled;
 
-
   /// The total execution time of the process.
   int executionTime;
 
@@ -40,8 +39,7 @@ abstract class IProcess with DeepCopy<IProcess> {
 
   /// Overrides the `hashCode` to be consistent with the equality operator.
   @override
-  int get hashCode =>
-      id.hashCode ^ arrivalTime.hashCode ^ enabled.hashCode;
+  int get hashCode => id.hashCode ^ arrivalTime.hashCode ^ enabled.hashCode;
 
   /// Creates a deep copy of the object.
   @override
