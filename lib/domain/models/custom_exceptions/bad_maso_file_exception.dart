@@ -40,7 +40,7 @@ class BadMasoFileException implements Exception {
   /// - `invalidExtension`: The file does not have a valid `.maso` extension.
   String description(BuildContext context) {
     if (regularProcessError != null) {
-      return regularProcessError!.getDescriptionBadContent(context);
+      return regularProcessError!.getDescriptionForFileError(context);
     } else if (burstProcessError != null) {
       return burstProcessError!.getDescriptionForFileError(context);
     }

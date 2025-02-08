@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:maso/domain/models/custom_exceptions/burst_process_error_type.dart';
+import 'package:maso/domain/models/custom_exceptions/process_error.dart';
 
 import '../../../core/l10n/app_localizations.dart';
 
-class BurstProcessError {
+class BurstProcessError implements ProcessError {
   final BurstProcessErrorType errorType;
   final Object? param1;
   final Object? param2;
   final Object? param3;
+  @override
   final bool success;
 
   BurstProcessError(
@@ -20,6 +22,7 @@ class BurstProcessError {
   BurstProcessError.success()
       : this(success: true, errorType: BurstProcessErrorType.emptyName);
 
+  @override
   String getDescriptionForInputError(BuildContext context) {
     switch (errorType) {
       case BurstProcessErrorType.emptyName:
@@ -43,10 +46,12 @@ class BurstProcessError {
     }
   }
 
+  @override
   String getDescriptionForFileError(BuildContext context) {
     switch (errorType) {
       case BurstProcessErrorType.emptyName:
-        return AppLocalizations.of(context)!.emptyNameProcessBadContent(param1!);
+        return AppLocalizations.of(context)!
+            .emptyNameProcessBadContent(param1!);
       case BurstProcessErrorType.duplicatedName:
         return AppLocalizations.of(context)!.duplicatedNameProcessBadContent;
       case BurstProcessErrorType.invalidArrivalTime:

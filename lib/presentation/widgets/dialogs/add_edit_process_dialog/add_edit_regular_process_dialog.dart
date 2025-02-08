@@ -86,13 +86,13 @@ class _AddEditRegularProcessDialogState
 
     switch (validateInput.errorType) {
       case RegularProcessErrorType.emptyName:
-        _nameError = validateInput.getDescriptionError(context);
+        _nameError = validateInput.getDescriptionForInputError(context);
       case RegularProcessErrorType.duplicatedName:
-        _nameError = validateInput.getDescriptionError(context);
+        _nameError = validateInput.getDescriptionForInputError(context);
       case RegularProcessErrorType.invalidArrivalTime:
-        _arrivalTimeError = validateInput.getDescriptionError(context);
+        _arrivalTimeError = validateInput.getDescriptionForInputError(context);
       case RegularProcessErrorType.invalidTimeDifference:
-        _serviceTimeError = validateInput.getDescriptionError(context);
+        _serviceTimeError = validateInput.getDescriptionForInputError(context);
     }
     return false;
   }
