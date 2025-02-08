@@ -28,7 +28,7 @@ enum RegularProcessError {
       case RegularProcessError.duplicatedName:
         return AppLocalizations.of(context)!.duplicatedNameProcessBadContent;
       case RegularProcessError.invalidArrivalTime:
-        return AppLocalizations.of(context)!.invalidArrivalTimeBadContent;
+        return AppLocalizations.of(context)!.invalidArrivalTimeBadContent("paco");
       case RegularProcessError.invalidTimeDifference:
         return AppLocalizations.of(context)!.invalidTimeDifferenceBadContent;
     }

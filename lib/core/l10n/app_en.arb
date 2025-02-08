@@ -227,6 +227,14 @@
   "cpuCount": "CPU Count",
   "emptyNameProcessBadContent": "There is a process without a name",
   "duplicatedNameProcessBadContent": "There are two or more processes with the same name",
-  "invalidArrivalTimeBadContent": "The arrivalTime of a process is null or less than 0",
-  "invalidTimeDifferenceBadContent": "There are one or more processes where serviceTime is null or less than or equal to arrivalTime"
+  "invalidArrivalTimeBadContent": "The arrivalTime of the process ({process}) is null or less than 0",
+  "invalidTimeDifferenceBadContent": "There are one or more processes where serviceTime is null or less than or equal to arrivalTime",
+  "emptyThreadError": "Process ({process}) has no associated threads",
+  "emptyBurstError": "Thread ({thread}) of the process ({process}) has no associated bursts",
+  "startAndEndCpuSequenceError": "The burst sequence of thread ({thread}) must start and end with a CPU burst.",
+  "invalidBurstSequenceError": "The burst sequence of thread ({thread}) cannot contain two consecutive I/O bursts.",
+  "startAndEndCpuSequenceBadContent": "The burst sequence of thread ({thread}) in process ({process}) must start and end with a CPU burst.",
+  "invalidBurstSequenceBadContent": "The burst sequence of thread ({thread}) in process ({process}) cannot contain two consecutive I/O bursts.",
+  "invalidBurstDuration": "The burst ({burst}) of thread ({thread}) in process ({process}) cannot contain is null or <= 0.",
+  "unknownError": "Unknown error"
 }

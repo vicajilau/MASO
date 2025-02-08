@@ -1,4 +1,5 @@
 import 'package:maso/core/constants/maso_metadata.dart';
+import 'package:maso/domain/models/maso/burst_process.dart';
 import 'package:maso/domain/models/maso/process_mode.dart';
 import 'package:maso/domain/models/maso/processes.dart';
 import 'package:maso/domain/models/maso/regular_process.dart';
@@ -28,16 +29,31 @@ class MasoFile {
   }) {
     switch (processes.mode) {
       case ProcessesMode.regular:
-        for (int i = 0; i< processes.elements.length; i++) {
-          final process = processes.elements[i] as RegularProcess;
-          final result = ValidateMasoProcessUseCase.validateInput(process.id, process.arrivalTime.toString(), process.serviceTime.toString(), i, this);
+        for (int i = 0; i < processes.elements.length; i++) {
+          final regularProcess = processes.elements[i] as RegularProcess;
+          final result = ValidateMasoProcessUseCase.validateRegularProcess(
+              regularProcess.id,
+              regularProcess.arrivalTime.toString(),
+              regularProcess.serviceTime.toString(),
+              i,
+              this);
           if (result != null) {
             throw BadMasoFileException(regularProcessError: result);
           }
         }
       case ProcessesMode.burst:
-        // TODO: Handle this case.
-        throw UnimplementedError();
+        for (int i = 0; i < processes.elements.length; i++) {
+          final burstProcess = processes.elements[i] as BurstProcess;
+          final result = ValidateMasoProcessUseCase.validateBurstProcess(
+              processNameString: burstProcess.id,
+              arrivalTimeString: burstProcess.arrivalTime.toString(),
+              processPosition: i,
+              masoFile: this,
+              cachedProcess: burstProcess);
+          if (!result.success) {
+            throw BadMasoFileException(burstProcessError: result);
+          }
+        }
     }
   }
 
@@ -65,7 +81,8 @@ class MasoFile {
       final metadata =
           Metadata.fromJson(json['metadata'] as Map<String, dynamic>);
       if (!MasoMetadata.isSupportedVersion(metadata.version)) {
-        throw BadMasoFileException(type: BadMasoFileErrorType.unsupportedVersion);
+        throw BadMasoFileException(
+            type: BadMasoFileErrorType.unsupportedVersion);
       }
     } catch (e) {
       if (e is BadMasoFileException) {
@@ -78,7 +95,8 @@ class MasoFile {
       // Validate processes
       Processes.fromJson(json['processes'] as Map<String, dynamic>);
     } catch (e) {
-      throw BadMasoFileException(type: BadMasoFileErrorType.processesBadContent);
+      throw BadMasoFileException(
+          type: BadMasoFileErrorType.processesBadContent);
     }
   }
 

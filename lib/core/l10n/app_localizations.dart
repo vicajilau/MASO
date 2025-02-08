@@ -668,7 +668,7 @@ abstract class AppLocalizations {
   /// No description provided for @invalidBurstSequenceError.
   ///
   /// In en, this message translates to:
-  /// **'The burst sequence ({thread}) must start and end with CPU, and there cannot be two consecutive I/O bursts.'**
+  /// **'The burst sequence of thread ({thread}) cannot contain two consecutive I/O bursts.'**
   String invalidBurstSequenceError(Object thread);
 
   /// No description provided for @selectBurstType.
@@ -746,14 +746,56 @@ abstract class AppLocalizations {
   /// No description provided for @invalidArrivalTimeBadContent.
   ///
   /// In en, this message translates to:
-  /// **'The arrivalTime of a process is null or less than 0'**
-  String get invalidArrivalTimeBadContent;
+  /// **'The arrivalTime of the process ({process}) is null or less than 0'**
+  String invalidArrivalTimeBadContent(Object process);
 
   /// No description provided for @invalidTimeDifferenceBadContent.
   ///
   /// In en, this message translates to:
   /// **'There are one or more processes where serviceTime is null or less than or equal to arrivalTime'**
   String get invalidTimeDifferenceBadContent;
+
+  /// No description provided for @emptyThreadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Process ({process}) has no associated threads'**
+  String emptyThreadError(Object process);
+
+  /// No description provided for @emptyBurstError.
+  ///
+  /// In en, this message translates to:
+  /// **'Thread ({thread}) of the process ({process}) has no associated bursts'**
+  String emptyBurstError(Object process, Object thread);
+
+  /// No description provided for @startAndEndCpuSequenceError.
+  ///
+  /// In en, this message translates to:
+  /// **'The burst sequence of thread ({thread}) must start and end with a CPU burst.'**
+  String startAndEndCpuSequenceError(Object thread);
+
+  /// No description provided for @startAndEndCpuSequenceBadContent.
+  ///
+  /// In en, this message translates to:
+  /// **'The burst sequence of thread ({thread}) in process ({process}) must start and end with a CPU burst.'**
+  String startAndEndCpuSequenceBadContent(Object process, Object thread);
+
+  /// No description provided for @invalidBurstSequenceBadContent.
+  ///
+  /// In en, this message translates to:
+  /// **'The burst sequence of thread ({thread}) in process ({process}) cannot contain two consecutive I/O bursts.'**
+  String invalidBurstSequenceBadContent(Object process, Object thread);
+
+  /// No description provided for @invalidBurstDuration.
+  ///
+  /// In en, this message translates to:
+  /// **'The burst ({burst}) of thread ({thread}) in process ({process}) cannot contain is null or <= 0.'**
+  String invalidBurstDuration(Object burst, Object process, Object thread);
+
+  /// No description provided for @unknownError.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown error'**
+  String get unknownError;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

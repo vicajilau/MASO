@@ -339,7 +339,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String invalidBurstSequenceError(Object thread) {
-    return 'La secuencia de ráfagas del hilo ($thread) debe comenzar y terminar con CPU, y no puede haber dos ráfagas de E/S consecutivas.';
+    return 'La secuencia de ráfagas del hilo ($thread) no puede contener dos ráfagas de E/S consecutivas.';
   }
 
   @override
@@ -385,8 +385,43 @@ class AppLocalizationsEs extends AppLocalizations {
   String get duplicatedNameProcessBadContent => 'Hay dos o más procesos con el mismo nombre';
 
   @override
-  String get invalidArrivalTimeBadContent => 'El arrivalTime de algún proceso es nulo o menor a 0';
+  String invalidArrivalTimeBadContent(Object process) {
+    return 'El campo arrivalTime del proceso ($process) es nulo o menor a 0';
+  }
 
   @override
   String get invalidTimeDifferenceBadContent => 'Hay uno o varios procesos con la propiedad serviceTime nula o menor o igual al arrivalTime';
+
+  @override
+  String emptyThreadError(Object process) {
+    return 'El proceso ($process) no tiene hilos asociados';
+  }
+
+  @override
+  String emptyBurstError(Object process, Object thread) {
+    return 'El hilo ($thread) del proceso ($process) no tiene ráfagas asociadas';
+  }
+
+  @override
+  String startAndEndCpuSequenceError(Object thread) {
+    return 'La secuencia de ráfagas del hilo ($thread) debe comenzar y terminar con CPU';
+  }
+
+  @override
+  String startAndEndCpuSequenceBadContent(Object process, Object thread) {
+    return 'La secuencia de ráfagas del hilo ($thread) en el proceso ($process) debe comenzar y terminar con CPU.';
+  }
+
+  @override
+  String invalidBurstSequenceBadContent(Object process, Object thread) {
+    return 'La secuencia de ráfagas del hilo ($thread) en el proceso ($process) no puede contener dos ráfagas de E/S consecutivas.';
+  }
+
+  @override
+  String invalidBurstDuration(Object burst, Object process, Object thread) {
+    return 'La ráfaga ($burst) del hilo ($thread) en el proceso ($process) es nulo o <= 0';
+  }
+
+  @override
+  String get unknownError => 'Error desconocido';
 }

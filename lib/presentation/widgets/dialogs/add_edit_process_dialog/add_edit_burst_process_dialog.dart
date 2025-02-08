@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:maso/domain/models/custom_exceptions/burst_process_error_type.dart';
 import 'package:maso/domain/models/maso/burst_process.dart';
-import 'package:maso/domain/models/maso/list_processes_extension.dart';
 
 import '../../../../core/l10n/app_localizations.dart';
 import '../../../../domain/models/maso/burst.dart';
 import '../../../../domain/models/maso/burst_type.dart';
 import '../../../../domain/models/maso/maso_file.dart';
 import '../../../../domain/models/maso/thread.dart';
+import '../../../../domain/use_cases/validate_maso_regular_processes_use_case.dart';
 
 class AddEditBurstProcessDialog extends StatefulWidget {
   final BurstProcess? process;
@@ -78,64 +79,38 @@ class _AddEditBurstProcessDialogState extends State<AddEditBurstProcessDialog> {
   }
 
   bool _validateInput() {
-    final id = _idController.text.trim();
-    final arrivalTime = int.tryParse(_arrivalTimeController.text);
-
     setState(() {
       _idError = null;
       _arrivalTimeError = null;
       _burstSequenceError = null;
     });
-
-    if (id.isEmpty) {
-      setState(() {
-        _idError = AppLocalizations.of(context)!.emptyNameError;
-      });
-      return false;
+    final validateInput = ValidateMasoProcessUseCase.validateBurstProcess(
+        processNameString: _idController.text,
+        arrivalTimeString: _arrivalTimeController.text,
+        processPosition: widget.processPosition,
+        masoFile: widget.masoFile,
+        cachedProcess: cachedProcess);
+    if (validateInput.success) return true;
+    switch (validateInput.errorType) {
+      case BurstProcessErrorType.emptyName:
+        _idError = validateInput.getDescriptionError(context);
+      case BurstProcessErrorType.duplicatedName:
+        _idError = validateInput.getDescriptionError(context);
+      case BurstProcessErrorType.invalidArrivalTime:
+        _arrivalTimeError = validateInput.getDescriptionError(context);
+      case BurstProcessErrorType.emptyBurst:
+        _burstSequenceError = validateInput.getDescriptionError(context);
+      case BurstProcessErrorType.emptyThread:
+        _burstSequenceError = validateInput.getDescriptionError(context);
+      case BurstProcessErrorType.startAndEndCpuSequence:
+        _burstSequenceError = validateInput.getDescriptionError(context);
+      case BurstProcessErrorType.invalidBurstSequence:
+        _burstSequenceError = validateInput.getDescriptionError(context);
+      case BurstProcessErrorType.invalidBurstDuration:
+        _burstSequenceError = validateInput.getDescriptionError(context);
     }
 
-    if (widget.masoFile.processes.elements
-        .containProcessWithName(id, position: widget.processPosition)) {
-      setState(() {
-        _idError = AppLocalizations.of(context)!.duplicateNameError;
-      });
-      return false;
-    }
-
-    if (arrivalTime == null || arrivalTime < 0) {
-      setState(() {
-        _arrivalTimeError =
-            AppLocalizations.of(context)!.invalidArrivalTimeError;
-      });
-      return false;
-    }
-
-    for (final thread in cachedProcess.threads) {
-      if (!_validateBurstSequence(thread.bursts)) {
-        setState(() {
-          _burstSequenceError = AppLocalizations.of(context)!
-              .invalidBurstSequenceError(thread.id);
-        });
-        return false;
-      }
-    }
-
-    return true;
-  }
-
-  bool _validateBurstSequence(List<Burst> bursts) {
-    if (bursts.isEmpty) return false;
-    if (bursts.first.type != BurstType.cpu ||
-        bursts.last.type != BurstType.cpu) {
-      return false;
-    }
-    for (int i = 0; i < bursts.length - 1; i++) {
-      if (bursts[i].type == BurstType.io &&
-          bursts[i + 1].type == BurstType.io) {
-        return false;
-      }
-    }
-    return true;
+    return false;
   }
 
   void _submit() {

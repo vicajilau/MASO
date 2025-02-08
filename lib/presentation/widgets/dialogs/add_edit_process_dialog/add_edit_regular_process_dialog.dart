@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:maso/domain/models/custom_exceptions/validate_maso_state.dart';
+import 'package:maso/domain/models/custom_exceptions/regular_process_error.dart';
 import 'package:maso/domain/models/maso/regular_process.dart';
 
 import '../../../../core/l10n/app_localizations.dart';
@@ -75,7 +75,7 @@ class _AddEditRegularProcessDialogState
       _serviceTimeError = null;
     });
 
-    final validateInput = ValidateMasoProcessUseCase.validateInput(
+    final validateInput = ValidateMasoProcessUseCase.validateRegularProcess(
         _nameController.text,
         _arrivalTimeController.text,
         _serviceTimeController.text,

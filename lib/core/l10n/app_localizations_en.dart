@@ -339,7 +339,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String invalidBurstSequenceError(Object thread) {
-    return 'The burst sequence ($thread) must start and end with CPU, and there cannot be two consecutive I/O bursts.';
+    return 'The burst sequence of thread ($thread) cannot contain two consecutive I/O bursts.';
   }
 
   @override
@@ -385,8 +385,43 @@ class AppLocalizationsEn extends AppLocalizations {
   String get duplicatedNameProcessBadContent => 'There are two or more processes with the same name';
 
   @override
-  String get invalidArrivalTimeBadContent => 'The arrivalTime of a process is null or less than 0';
+  String invalidArrivalTimeBadContent(Object process) {
+    return 'The arrivalTime of the process ($process) is null or less than 0';
+  }
 
   @override
   String get invalidTimeDifferenceBadContent => 'There are one or more processes where serviceTime is null or less than or equal to arrivalTime';
+
+  @override
+  String emptyThreadError(Object process) {
+    return 'Process ($process) has no associated threads';
+  }
+
+  @override
+  String emptyBurstError(Object process, Object thread) {
+    return 'Thread ($thread) of the process ($process) has no associated bursts';
+  }
+
+  @override
+  String startAndEndCpuSequenceError(Object thread) {
+    return 'The burst sequence of thread ($thread) must start and end with a CPU burst.';
+  }
+
+  @override
+  String startAndEndCpuSequenceBadContent(Object process, Object thread) {
+    return 'The burst sequence of thread ($thread) in process ($process) must start and end with a CPU burst.';
+  }
+
+  @override
+  String invalidBurstSequenceBadContent(Object process, Object thread) {
+    return 'The burst sequence of thread ($thread) in process ($process) cannot contain two consecutive I/O bursts.';
+  }
+
+  @override
+  String invalidBurstDuration(Object burst, Object process, Object thread) {
+    return 'The burst ($burst) of thread ($thread) in process ($process) cannot contain is null or <= 0.';
+  }
+
+  @override
+  String get unknownError => 'Unknown error';
 }

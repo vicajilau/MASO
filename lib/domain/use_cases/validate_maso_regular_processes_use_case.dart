@@ -1,10 +1,77 @@
-import 'package:maso/domain/models/custom_exceptions/validate_maso_state.dart';
+import 'package:maso/domain/models/custom_exceptions/regular_process_error.dart';
 import 'package:maso/domain/models/maso/list_processes_extension.dart';
 import 'package:maso/domain/models/maso/maso_file.dart';
 
+import '../models/custom_exceptions/burst_process_error.dart';
+import '../models/custom_exceptions/burst_process_error_type.dart';
+import '../models/maso/burst_process.dart';
+import '../models/maso/burst_type.dart';
+
 class ValidateMasoProcessUseCase {
+  static BurstProcessError validateBurstProcess(
+      {required String processNameString,
+      required String arrivalTimeString,
+      required int? processPosition,
+      required MasoFile masoFile,
+      required BurstProcess cachedProcess}) {
+    final name = processNameString.trim();
+    final arrivalTime = int.tryParse(arrivalTimeString);
+
+    // Validate name input.
+    if (name.isEmpty) {
+      return BurstProcessError(errorType: BurstProcessErrorType.emptyName);
+    }
+
+    // Check for duplicate process names.
+    if (masoFile.processes.elements
+        .containProcessWithName(name, position: processPosition)) {
+      return BurstProcessError(errorType: BurstProcessErrorType.duplicatedName);
+    }
+
+    // Validate arrival time input.
+    if (arrivalTime == null || arrivalTime < 0) {
+      return BurstProcessError(
+          errorType: BurstProcessErrorType.invalidArrivalTime, param1: name);
+    }
+
+    for (final thread in cachedProcess.threads) {
+      if (thread.id.isEmpty) {
+        return BurstProcessError(
+            errorType: BurstProcessErrorType.emptyThread, param1: name);
+      }
+      final bursts = thread.bursts;
+      if (bursts.isEmpty) {
+        return BurstProcessError(
+            errorType: BurstProcessErrorType.emptyThread, param1: name);
+      } else if (bursts.first.type != BurstType.cpu ||
+          bursts.last.type != BurstType.cpu) {
+        return BurstProcessError(
+            errorType: BurstProcessErrorType.startAndEndCpuSequence,
+            param1: processNameString,
+            param2: thread.id);
+      }
+      for (int i = 0; i < bursts.length - 1; i++) {
+        if (bursts[i].type == BurstType.io &&
+            bursts[i + 1].type == BurstType.io) {
+          return BurstProcessError(
+              errorType: BurstProcessErrorType.invalidBurstSequence,
+              param1: processNameString,
+              param2: thread.id);
+        } else if (bursts[i].duration <= 0) {
+          return BurstProcessError(
+              errorType: BurstProcessErrorType.invalidBurstDuration,
+              param1: i.toString(),
+              param2: name,
+              param3: thread.id);
+        }
+      }
+    }
+
+    return BurstProcessError.success();
+  }
+
   /// Validate the input fields.
-  static RegularProcessError? validateInput(
+  static RegularProcessError? validateRegularProcess(
       String nameString,
       String arrivalTimeString,
       String serviceTimeString,

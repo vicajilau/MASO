@@ -1,17 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:maso/domain/models/custom_exceptions/validate_maso_state.dart';
+import 'package:maso/domain/models/custom_exceptions/regular_process_error.dart';
 
 import '../../../core/l10n/app_localizations.dart';
 import 'bad_maso_file_error_type.dart';
+import 'burst_process_error.dart';
 
 /// Exception class for errors related to MASO file processing.
 class BadMasoFileException implements Exception {
   /// The specific type of error that occurred.
   final BadMasoFileErrorType? type;
   final RegularProcessError? regularProcessError;
+  final BurstProcessError? burstProcessError;
 
   /// Creates a new `BadMasoFileException` with the given error type.
-  BadMasoFileException({this.type, this.regularProcessError});
+  BadMasoFileException(
+      {this.type, this.regularProcessError, this.burstProcessError})
+      : assert(type != null ||
+            regularProcessError != null ||
+            burstProcessError != null);
 
   /// Returns a localized description of the error based on the current app language.
   ///
@@ -35,6 +41,8 @@ class BadMasoFileException implements Exception {
   String description(BuildContext context) {
     if (regularProcessError != null) {
       return regularProcessError!.getDescriptionBadContent(context);
+    } else if (burstProcessError != null) {
+      return burstProcessError!.getDescriptionBadContent(context);
     }
 
     switch (type) {

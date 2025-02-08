@@ -227,6 +227,14 @@
   "cpuCount": "Cantidad de CPUs",
   "emptyNameProcessBadContent": "Hay un proceso sin nombre",
   "duplicatedNameProcessBadContent": "Hay dos o más procesos con el mismo nombre",
-  "invalidArrivalTimeBadContent": "El arrivalTime de algún proceso es nulo o menor a 0",
-  "invalidTimeDifferenceBadContent": "Hay uno o varios procesos con la propiedad serviceTime nula o menor o igual al arrivalTime"
+  "invalidArrivalTimeBadContent": "El campo arrivalTime del proceso ({process}) es nulo o menor a 0",
+  "invalidTimeDifferenceBadContent": "Hay uno o varios procesos con la propiedad serviceTime nula o menor o igual al arrivalTime",
+  "emptyThreadError": "El proceso ({process}) no tiene hilos asociados",
+  "emptyBurstError": "El hilo ({thread}) del proceso ({process}) no tiene ráfagas asociadas",
+  "startAndEndCpuSequenceError": "La secuencia de ráfagas del hilo ({thread}) debe comenzar y terminar con CPU",
+  "invalidBurstSequenceError": "La secuencia de ráfagas del hilo ({thread}) no puede contener dos ráfagas de E/S consecutivas.",
+  "startAndEndCpuSequenceBadContent": "La secuencia de ráfagas del hilo ({thread}) en el proceso ({process}) debe comenzar y terminar con CPU.",
+  "invalidBurstSequenceBadContent": "La secuencia de ráfagas del hilo ({thread}) en el proceso ({process}) no puede contener dos ráfagas de E/S consecutivas.",
+  "invalidBurstDuration": "La ráfaga ({burst}) del hilo ({thread}) en el proceso ({process}) es nulo o <= 0",
+  "unknownError": "Error desconocido"
 }
