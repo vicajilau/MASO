@@ -174,10 +174,10 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "36425c79d4652e24d2e8e2eecfc646bee9b0d737"
+      resolved-ref: a74f8925719df2762c56e23d37b68f7a0bccce42
       url: "https://github.com/vicajilau/flutter_file_picker"
     source: git
-    version: "8.1.7"
+    version: "8.3.1"
   fixnum:
     dependency: transitive
     description:
