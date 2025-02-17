@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+// ignore_for_file: deprecated_member_use
 import 'dart:html' as html;
 import 'dart:typed_data';
 
@@ -11,7 +12,6 @@ import 'i_file_service.dart';
 /// The `FileService` class provides functionalities for managing `.maso` files.
 /// This includes reading, decoding, saving, and picking `.maso` files across platforms.
 class FileService implements IFileService {
-
   /// Keep an original copy of the Maso document in order to detect changes in the Maso document.
   @override
   MasoFile? originalFile;
