@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 // ignore_for_file: deprecated_member_use
-import 'dart:html' as html;
+import 'dart:html';
 import 'dart:typed_data';
 
 import 'package:file_picker/file_picker.dart';
@@ -76,19 +76,19 @@ class FileService implements IFileService {
       Uint8List bytes, String dialogTitle, String fileName) async {
     // Open a save dialog for the user to select a file path
     // Create a new Blob containing the bytes
-    final blob = html.Blob([bytes]);
+    final blob = Blob([bytes]);
 
     // Generate a URL for the Blob, allowing it to be downloaded
-    final url = html.Url.createObjectUrlFromBlob(blob);
+    final url = Url.createObjectUrlFromBlob(blob);
 
     // Create an anchor element for triggering the download
-    html.AnchorElement(href: url)
+    AnchorElement(href: url)
       ..target = 'blank' // Open the file in a new tab (if supported)
       ..download = fileName // Set the file name for the download
       ..click(); // Simulate a click to start the download
 
     // Release the Blob URL to free up memory after the download
-    html.Url.revokeObjectUrl(url); // Cleans up the URL to release memory.
+    Url.revokeObjectUrl(url); // Cleans up the URL to release memory.
   }
 
   /// Initiates the download of a `.maso` file by creating a blob from the provided content.
@@ -100,19 +100,19 @@ class FileService implements IFileService {
     final bytes = utf8.encode(content);
 
     // Create a new Blob containing the bytes
-    final blob = html.Blob([bytes]);
+    final blob = Blob([bytes]);
 
     // Generate a URL for the Blob, allowing it to be downloaded
-    final url = html.Url.createObjectUrlFromBlob(blob);
+    final url = Url.createObjectUrlFromBlob(blob);
 
     // Create an anchor element for triggering the download
-    html.AnchorElement(href: url)
+    AnchorElement(href: url)
       ..target = 'blank' // Open the file in a new tab (if supported)
       ..download = filename // Set the file name for the download
       ..click(); // Simulate a click to start the download
 
     // Release the Blob URL to free up memory after the download
-    html.Url.revokeObjectUrl(url); // Cleans up the URL to release memory.
+    Url.revokeObjectUrl(url); // Cleans up the URL to release memory.
   }
 
   /// Opens a file picker dialog for the user to select a `.maso` file.
@@ -146,11 +146,11 @@ class FileService implements IFileService {
   Future<Uint8List> readBlobFile(String blobUrl) async {
     try {
       // Fetch the Blob from the URL
-      final response = await html.window.fetch(blobUrl);
+      final response = await window.fetch(blobUrl);
       final blob = await response.blob();
 
       // Create a FileReader to read the Blob's content
-      final reader = html.FileReader();
+      final reader = FileReader();
       final completer = Completer<Uint8List>();
 
       // Set up a listener for when the reading is complete
