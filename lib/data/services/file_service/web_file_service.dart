@@ -157,15 +157,13 @@ class FileService implements IFileService {
 
       // Set up a listener for when the reading is complete
       reader.onLoadEnd.listen((event) {
-        ByteBuffer? byteBuffer = (reader.result as JSArrayBuffer?)?.toDart;
-        completer.complete(byteBuffer?.asUint8List());
+        if (reader.error != null) {
+          completer.completeError('Error reading the blob: ${reader.error}');
+        } else {
+          ByteBuffer? byteBuffer = (reader.result as JSArrayBuffer?)?.toDart;
+          completer.complete(byteBuffer?.asUint8List());
+        }
       });
-
-      /*
-      reader.onError.listen((event) {
-        completer.completeError('Error reading the blob');
-      });
-      */
 
       // Read the Blob as an ArrayBuffer
       reader.readAsArrayBuffer(blob);
