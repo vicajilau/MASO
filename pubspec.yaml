@@ -46,7 +46,7 @@ dependencies:
   pasteboard: ^0.4.0
   pdf: ^3.11.3
   flutter_launcher_icons: ^0.14.3
-  shared_preferences: ^2.5.2
+  shared_preferences: ^2.5.3
   web: ^1.1.0
 
 dev_dependencies:
