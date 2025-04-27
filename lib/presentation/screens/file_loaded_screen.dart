@@ -164,35 +164,35 @@ class _FileLoadedScreenState extends State<FileLoadedScreen> {
                             }
                           : null, // Disable button if file hasn't changed
                     ),
-                    IconButton(
-                      icon: const Icon(Icons.play_arrow),
-                      tooltip: cachedMasoFile.processes.elements.isNotEmpty
-                          ? AppLocalizations.of(context)!.executeTooltip
-                          : AppLocalizations.of(context)!
-                              .executeDisabledTooltip,
-                      onPressed: cachedMasoFile.processes.elements.isNotEmpty
-                          ? () async {
-                              final executionSetup =
-                                  await showDialog<ExecutionSetup>(
-                                context: context,
-                                builder: (context) => ExecutionSetupDialog(),
-                              );
-                              if (executionSetup != null) {
-                                ServiceLocator.instance
-                                    .registerExecutionSetup(executionSetup);
-                                if (context.mounted) {
-                                  context
-                                      .push(AppRoutes.masoFileExecutionScreen);
-                                }
-                              }
-                            }
-                          : null, // Disable button if file hasn't changed
-                    ),
                   ],
                 ),
                 body: ProcessListWidget(
                   maso: cachedMasoFile,
                   onFileChange: _checkFileChange,
+                ),
+                floatingActionButton: FloatingActionButton(
+                  tooltip: cachedMasoFile.processes.elements.isNotEmpty
+                      ? AppLocalizations.of(context)!.executeTooltip
+                      : AppLocalizations.of(context)!
+                      .executeDisabledTooltip,
+                  onPressed: cachedMasoFile.processes.elements.isNotEmpty
+                      ? () async {
+                    final executionSetup =
+                    await showDialog<ExecutionSetup>(
+                      context: context,
+                      builder: (context) => ExecutionSetupDialog(),
+                    );
+                    if (executionSetup != null) {
+                      ServiceLocator.instance
+                          .registerExecutionSetup(executionSetup);
+                      if (context.mounted) {
+                        context
+                            .push(AppRoutes.masoFileExecutionScreen);
+                      }
+                    }
+                  }
+                      : null,
+                  child: const Icon(Icons.play_arrow), // Disable button if file hasn't changed
                 ),
               );
             },
