@@ -10,6 +10,7 @@ import '../../core/file_handler.dart';
 import '../../core/l10n/app_localizations.dart';
 import '../../core/service_locator.dart';
 import '../../domain/models/custom_exceptions/bad_maso_file_exception.dart';
+import '../../domain/models/settings_maso.dart';
 import '../../routes/app_router.dart';
 import '../blocs/file_bloc/file_bloc.dart';
 import '../blocs/file_bloc/file_event.dart';
@@ -54,10 +55,13 @@ class _HomeScreenState extends State<HomeScreen> {
             context.presentSnackBar(AppLocalizations.of(context)!.fileLoaded(
                 state.masoFile.filePath ??
                     "${state.masoFile.metadata.name}${MasoMetadata.format}"));
+            final settings = await SettingsMaso.loadFromPreferences(
+                state.masoFile.processes.mode);
+            ServiceLocator.instance.registerSettings(settings);
+            if (!context.mounted) return;
             final _ = await context.push(AppRoutes.fileLoadedScreen);
-            if (context.mounted) {
-              context.read<FileBloc>().add(MasoFileReset());
-            }
+            if (!context.mounted) return;
+            context.read<FileBloc>().add(MasoFileReset());
           }
           if (state is FileError && context.mounted) {
             if (state.error is BadMasoFileException) {

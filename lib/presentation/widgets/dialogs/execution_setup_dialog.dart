@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:maso/domain/models/scheduling_algorithm.dart';
+import 'package:maso/domain/models/settings_maso.dart';
 
 import '../../../core/l10n/app_localizations.dart';
 import '../../../core/service_locator.dart';
@@ -84,7 +85,9 @@ class _ExecutionSetupDialogState extends State<ExecutionSetupDialog> {
         ),
         ElevatedButton(
           onPressed: () {
-            context.pop(ExecutionSetup(algorithm: _selectedAlgorithm));
+            context.pop(ExecutionSetup(
+                algorithm: _selectedAlgorithm,
+                settings: ServiceLocator.instance.getIt<SettingsMaso>()));
           },
           child: Text(AppLocalizations.of(context)!.acceptButton),
         ),

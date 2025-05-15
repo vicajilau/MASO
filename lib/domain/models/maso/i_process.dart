@@ -13,15 +13,11 @@ abstract class IProcess with DeepCopy<IProcess> {
   /// Whether the process is enabled or not.
   bool enabled;
 
-  /// The total execution time of the process.
-  int executionTime;
-
   /// Constructor for initializing an `IProcess` instance with required attributes.
   IProcess({
     required this.id,
     required this.arrivalTime,
     required this.enabled,
-    this.executionTime = 0,
   });
 
   /// Converts the `IProcess` instance to a JSON map.

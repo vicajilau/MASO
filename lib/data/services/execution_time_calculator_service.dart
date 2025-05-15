@@ -1,4 +1,8 @@
+import 'package:maso/domain/models/hardware_state.dart';
+import 'package:maso/domain/models/machine.dart';
+
 import '../../domain/models/execution_setup.dart';
+import '../../domain/models/hardware_component.dart';
 import '../../domain/models/maso/i_process.dart';
 import '../../domain/models/scheduling_algorithm.dart';
 
@@ -18,7 +22,7 @@ class ExecutionTimeCalculatorService {
   /// [processes] List of processes whose execution times need to be calculated.
   ///
   /// Returns a new list of processes with their `executionTime` calculated based on the algorithm.
-  List<IProcess> calculateExecutionTimes(List<IProcess> processes) {
+  Machine calculateExecutionTimes(List<IProcess> processes) {
     // Depending on the selected algorithm, calculate the execution time.
     final filteredProcesses =
         processes.where((process) => process.enabled).toList();
@@ -47,25 +51,25 @@ class ExecutionTimeCalculatorService {
   /// [processes] List of processes to be processed.
   ///
   /// Returns the list of processes with the execution time calculated according to FCFS.
-  List<IProcess> _calculateFirstComeFirstServed(List<IProcess> processes) {
+  Machine _calculateFirstComeFirstServed(List<IProcess> processes) {
     // Sort processes by their arrival time (the first process to arrive should be processed first)
     processes.sort((a, b) => a.arrivalTime.compareTo(b.arrivalTime));
+    final filteredProcesses =
+        processes.where((process) => process.enabled).toList();
 
-    int currentTime = 0; // Start from time 0
-    for (var process in processes) {
-      // If the process arrives after the current time, the CPU waits until it arrives
-      if (process.arrivalTime > currentTime) {
-        currentTime = process.arrivalTime;
-      }
+    final numberOfCPUs = executionSetup.settings.cpuCount;
+    final List<List<HardwareComponent>> cpus =
+        List.generate(numberOfCPUs, (index) => []);
+    int currentCPU = 0;
 
-      // Calculate the execution time: it is the current time + the service time of the process
-      process.executionTime = 0;
-
-      // Update the current time to the point when this process finishes
-      currentTime = process.executionTime;
+    for (var process in filteredProcesses) {
+      cpus[currentCPU].add(HardwareComponent(HardwareState.busy, process));
+      currentCPU = (currentCPU + 1) % numberOfCPUs;
     }
 
-    return processes;
+    final machine = Machine(cpus: cpus, ioChannels: []);
+    print("La machine calculada es: $machine");
+    return machine;
   }
 
   /// Calculates the execution time for the "Shortest Job First" (SJF) algorithm.
@@ -73,9 +77,10 @@ class ExecutionTimeCalculatorService {
   /// [processes] List of processes to be processed.
   ///
   /// Returns the list of processes with the execution time calculated according to SJF.
-  List<IProcess> _calculateShortestJobFirst(List<IProcess> processes) {
+  Machine _calculateShortestJobFirst(List<IProcess> processes) {
     // Logic for Shortest Job First algorithm
-    return processes;
+    final machine = Machine(cpus: [], ioChannels: []);
+    return machine;
   }
 
   /// Calculates the execution time for the "Shortest Remaining Time First" (SRTF) algorithm.
@@ -83,9 +88,10 @@ class ExecutionTimeCalculatorService {
   /// [processes] List of processes to be processed.
   ///
   /// Returns the list of processes with the execution time calculated according to SRTF.
-  List<IProcess> _calculateShortestRemainingTimeFirst(List<IProcess> processes) {
+  Machine _calculateShortestRemainingTimeFirst(List<IProcess> processes) {
     // Logic for Shortest Remaining Time First algorithm
-    return processes;
+    final machine = Machine(cpus: [], ioChannels: []);
+    return machine;
   }
 
   /// Calculates the execution time for the "Round Robin" (RR) algorithm.
@@ -93,9 +99,10 @@ class ExecutionTimeCalculatorService {
   /// [processes] List of processes to be processed.
   ///
   /// Returns the list of processes with the execution time calculated according to Round Robin.
-  List<IProcess> _calculateRoundRobin(List<IProcess> processes) {
+  Machine _calculateRoundRobin(List<IProcess> processes) {
     // Logic for Round Robin algorithm
-    return processes;
+    final machine = Machine(cpus: [], ioChannels: []);
+    return machine;
   }
 
   /// Calculates the execution time for the "Priority Based" scheduling algorithm.
@@ -103,9 +110,10 @@ class ExecutionTimeCalculatorService {
   /// [processes] List of processes to be processed.
   ///
   /// Returns the list of processes with the execution time calculated according to the Priority Based algorithm.
-  List<IProcess> _calculatePriorityBased(List<IProcess> processes) {
+  Machine _calculatePriorityBased(List<IProcess> processes) {
     // Logic for Priority Based algorithm
-    return processes;
+    final machine = Machine(cpus: [], ioChannels: []);
+    return machine;
   }
 
   /// Calculates the execution time for the "Multiple Priority Queues" scheduling algorithm.
@@ -113,9 +121,10 @@ class ExecutionTimeCalculatorService {
   /// [processes] List of processes to be processed.
   ///
   /// Returns the list of processes with the execution time calculated according to Multiple Priority Queues.
-  List<IProcess> _calculateMultiplePriorityQueues(List<IProcess> processes) {
+  Machine _calculateMultiplePriorityQueues(List<IProcess> processes) {
     // Logic for Multiple Priority Queues algorithm
-    return processes;
+    final machine = Machine(cpus: [], ioChannels: []);
+    return machine;
   }
 
   /// Calculates the execution time for the "Multiple Priority Queues with Feedback" scheduling algorithm.
@@ -123,10 +132,11 @@ class ExecutionTimeCalculatorService {
   /// [processes] List of processes to be processed.
   ///
   /// Returns the list of processes with the execution time calculated according to Multiple Priority Queues with Feedback.
-  List<IProcess> _calculateMultiplePriorityQueuesWithFeedback(
+  Machine _calculateMultiplePriorityQueuesWithFeedback(
       List<IProcess> processes) {
     // Logic for Multiple Priority Queues with Feedback algorithm
-    return processes;
+    final machine = Machine(cpus: [], ioChannels: []);
+    return machine;
   }
 
   /// Calculates the execution time for the "Time Limit" scheduling algorithm.
@@ -134,8 +144,9 @@ class ExecutionTimeCalculatorService {
   /// [processes] List of processes to be processed.
   ///
   /// Returns the list of processes with the execution time calculated according to Time Limit.
-  List<IProcess> _calculateTimeLimit(List<IProcess> processes) {
+  Machine _calculateTimeLimit(List<IProcess> processes) {
     // Logic for Time Limit algorithm
-    return processes;
+    final machine = Machine(cpus: [], ioChannels: []);
+    return machine;
   }
 }

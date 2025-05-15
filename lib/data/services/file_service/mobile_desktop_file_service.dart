@@ -59,19 +59,15 @@ class FileService implements IFileService {
     final bytes = utf8.encode(jsonString);
 
     // Open a save dialog for the user to select a file path
-    final path = await FilePicker.platform.saveFile(
+    final pathSaved = await FilePicker.platform.saveFile(
         dialogTitle: dialogTitle,
         fileName: fileName,
         initialDirectory: masoFile.filePath,
         bytes: bytes);
 
-    if (path == null) return null;
+    if (pathSaved == null) return null;
 
-    // If a path is selected and the platform is desktop, write the file
-    if (PlatformDetail.isDesktop) {
-      masoFile.filePath = path;
-      await _writeMasoFile(masoFile);
-    }
+    masoFile.filePath = pathSaved;
     originalFile = masoFile.copyWith();
     return masoFile;
   }
@@ -98,21 +94,6 @@ class FileService implements IFileService {
     if (path != null && PlatformDetail.isDesktop) {
       await _writeExportedFile(bytes, path);
     }
-  }
-
-  /// Writes a `MasoFile` object to its file path.
-  ///
-  /// This is a helper method used internally to perform the actual file writing
-  /// after a file path has been determined.
-  Future<void> _writeMasoFile(MasoFile masoFile) async {
-    // Create a File object for the provided file path
-    final file = File(masoFile.filePath!);
-
-    // Convert the MasoFile object to JSON string format
-    final content = jsonEncode(masoFile.toJson());
-
-    // Write the content to the file
-    await file.writeAsString(content);
   }
 
   /// Writes a `Uint8List` object to its file path.

@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/constants/settings.dart';
 import '../../../core/l10n/app_localizations.dart';
+import '../../../core/service_locator.dart';
 import '../../../domain/models/maso/process_mode.dart';
 import '../../../domain/models/settings_maso.dart';
 
@@ -208,6 +209,7 @@ class _SettingsDialogState extends State<SettingsDialog> {
           ElevatedButton(
             onPressed: () {
               context.pop();
+              ServiceLocator.instance.registerSettings(currentSettings);
               widget.onSettingsChanged(currentSettings);
               context.pop();
             },

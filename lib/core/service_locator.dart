@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:maso/data/services/execution_time_calculator_service.dart';
 import 'package:maso/domain/models/execution_setup.dart';
+import 'package:maso/domain/models/settings_maso.dart';
 
 import '../data/repositories/file_repository.dart';
 import '../data/services/file_service/mobile_desktop_file_service.dart'
@@ -43,6 +44,14 @@ class ServiceLocator {
       getIt.unregister<MasoFile>();
     }
     getIt.registerLazySingleton<MasoFile>(() => masoFile);
+  }
+
+  // Function to register or update SettingsMaso in GetIt
+  void registerSettings(SettingsMaso settings) {
+    if (getIt.isRegistered<SettingsMaso>()) {
+      getIt.unregister<SettingsMaso>();
+    }
+    getIt.registerLazySingleton<SettingsMaso>(() => settings);
   }
 
   // Function to register or update ExecutionSetup in GetIt

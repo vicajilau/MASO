@@ -53,11 +53,19 @@ class FileService implements IFileService {
   @override
   Future<MasoFile?> saveMasoFile(
       MasoFile masoFile, String dialogTitle, String fileName) async {
-    // Convert the MasoFile object to JSON string and encode it to bytes
     String jsonString = jsonEncode(masoFile.toJson());
+    final bytes = utf8.encode(jsonString);
 
     // Open a save dialog for the user to select a file path
-    downloadMasoFile(dialogTitle, jsonString);
+    final pathSaved = await FilePicker.platform.saveFile(
+        dialogTitle: dialogTitle,
+        fileName: fileName,
+        initialDirectory: masoFile.filePath,
+        bytes: bytes);
+
+    if (pathSaved == null) return null;
+
+    masoFile.filePath = pathSaved;
     originalFile = masoFile.copyWith();
     return masoFile;
   }
@@ -86,31 +94,6 @@ class FileService implements IFileService {
       ..href = url
       ..target = 'blank' // Open the file in a new tab (if supported)
       ..download = fileName // Set the file name for the download
-      ..click(); // Simulate a click to start the download
-
-    // Release the Blob URL to free up memory after the download
-    URL.revokeObjectURL(url); // Cleans up the URL to release memory.
-  }
-
-  /// Initiates the download of a `.maso` file by creating a blob from the provided content.
-  ///
-  /// - [filename]: The name of the file to be downloaded.
-  /// - [content]: The content of the file as a string, which will be encoded to bytes.
-  void downloadMasoFile(String filename, String content) {
-    // Encode the string content to bytes for blob creation
-    final bytes = utf8.encode(content);
-
-    // Create a new Blob containing the bytes
-    final blob = Blob([bytes.toJS].toJS);
-
-    // Generate a URL for the Blob, allowing it to be downloaded
-    final url = URL.createObjectURL(blob);
-
-    // Create an anchor element for triggering the download
-    HTMLAnchorElement()
-      ..href = url
-      ..target = 'blank' // Open the file in a new tab (if supported)
-      ..download = filename // Set the file name for the download
       ..click(); // Simulate a click to start the download
 
     // Release the Blob URL to free up memory after the download

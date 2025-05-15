@@ -7,17 +7,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:maso/core/context_extension.dart';
 import 'package:maso/domain/models/export_formats.dart';
+import 'package:maso/presentation/widgets/gantt_chart.dart';
 import 'package:pasteboard/pasteboard.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:platform_detail/platform_detail.dart';
-import 'package:timeline_tile/timeline_tile.dart';
 
 import '../../core/constants/maso_metadata.dart';
 import '../../core/l10n/app_localizations.dart';
 import '../../core/service_locator.dart';
 import '../../data/services/execution_time_calculator_service.dart';
-import '../../domain/models/maso/i_process.dart';
+import '../../domain/models/machine.dart';
 import '../../domain/models/maso/maso_file.dart';
 import '../blocs/file_bloc/file_bloc.dart';
 import '../blocs/file_bloc/file_event.dart';
@@ -33,19 +33,12 @@ class MasoFileExecutionScreen extends StatefulWidget {
 }
 
 class _MasoFileExecutionScreenState extends State<MasoFileExecutionScreen> {
-  late List<IProcess> _processes;
+  late Machine _machine;
   final GlobalKey _repaintKey = GlobalKey(); // Key for capturing the content
 
   @override
   void initState() {
     super.initState();
-
-    // Load the ExecutionSetup and the MasoFile from the ServiceLocator
-    final masoFile = ServiceLocator.instance.getIt<MasoFile>();
-
-    // Load processes from the MASO file
-    _processes = masoFile.processes.elements;
-
     // Start the execution of the processes immediately
     executeProcesses();
   }
@@ -53,8 +46,12 @@ class _MasoFileExecutionScreenState extends State<MasoFileExecutionScreen> {
   void executeProcesses() {
     final executionTimeCalculator =
         ServiceLocator.instance.getIt<ExecutionTimeCalculatorService>();
+    // Load the ExecutionSetup and the MasoFile from the ServiceLocator
+    final masoFile = ServiceLocator.instance.getIt<MasoFile>();
 
-    _processes = executionTimeCalculator.calculateExecutionTimes(_processes);
+    // Load _machine from the MASO file
+    _machine = executionTimeCalculator
+        .calculateExecutionTimes(masoFile.processes.elements);
 
     setState(() {});
   }
@@ -230,44 +227,8 @@ class _MasoFileExecutionScreenState extends State<MasoFileExecutionScreen> {
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
                     children: [
-                      Expanded(
-                        child: ListView.builder(
-                          itemCount: _processes.length,
-                          itemBuilder: (context, index) {
-                            final process = _processes[index];
-                            return TimelineTile(
-                              alignment: TimelineAlign.center,
-                              isFirst: index == 0,
-                              isLast: index == _processes.length - 1,
-                              indicatorStyle: const IndicatorStyle(
-                                color: Colors.blue,
-                                width: 20,
-                                padding: EdgeInsets.all(8),
-                              ),
-                              endChild: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  AppLocalizations.of(context)!
-                                      .timelineProcessDescription(
-                                    process.arrivalTime.toString(),
-                                    process.id,
-                                    "10",
-                                  ),
-                                ),
-                              ),
-                              startChild: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  AppLocalizations.of(context)!
-                                      .executionTimeDescription(
-                                    process.executionTime.toString(),
-                                  ),
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                      ),
+                      for (var cpu in _machine.cpus)
+                        GanttChart(cpuExecution: cpu)
                     ],
                   ),
                 ),
