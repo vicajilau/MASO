@@ -1,3 +1,4 @@
+import 'package:maso/core/debug_print.dart';
 import 'package:maso/domain/models/hardware_state.dart';
 import 'package:maso/domain/models/machine.dart';
 
@@ -68,7 +69,7 @@ class ExecutionTimeCalculatorService {
     }
 
     final machine = Machine(cpus: cpus, ioChannels: []);
-    print("La machine calculada es: $machine");
+    printInDebug("La machine calculada es: $machine");
     return machine;
   }
 
