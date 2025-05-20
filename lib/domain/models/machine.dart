@@ -19,14 +19,14 @@ class Machine {
         .asMap()
         .entries
         .map((e) =>
-            "CPU ${e.key + 1}: ${e.value.map((c) => c.toString()).join(', ')}")
+            "\t- CPU ${e.key + 1}: ${e.value.map((c) => c.toString()).join(', ')}")
         .join('\n');
     final ioStr = ioChannels
         .asMap()
         .entries
         .map((e) =>
-            "I/O Channel ${e.key + 1}: ${e.value.map((c) => c.toString()).join(', ')}")
+            "\t- I/O Channel ${e.key + 1}: ${e.value.map((c) => c.toString()).join(', ')}")
         .join('\n');
-    return "Machine Structure:\n\nCPUs:\n$cpuStr\n\nI/O Channels:\n$ioStr";
+    return "Machine Structure:\n* CPUs:\n$cpuStr\n* I/O Channels:\n$ioStr";
   }
 }
