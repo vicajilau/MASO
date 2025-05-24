@@ -108,7 +108,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get confirmExitTitle => 'Confirm Exit';
 
   @override
-  String get confirmExitMessage => 'Are you sure you want to leave without saving?';
+  String get confirmExitMessage =>
+      'Are you sure you want to leave without saving?';
 
   @override
   String get exitButton => 'Exit';
@@ -138,16 +139,20 @@ class AppLocalizationsEn extends AppLocalizations {
   String get duplicateNameError => 'A process with this name already exists.';
 
   @override
-  String get invalidArrivalTimeError => 'Arrival time must be a positive integer.';
+  String get invalidArrivalTimeError =>
+      'Arrival time must be a positive integer.';
 
   @override
-  String get invalidServiceTimeError => 'Service time must be a positive integer.';
+  String get invalidServiceTimeError =>
+      'Service time must be a positive integer.';
 
   @override
-  String get invalidTimeDifferenceError => 'Service time must be greater than arrival time.';
+  String get invalidTimeDifferenceError =>
+      'Service time must be greater than arrival time.';
 
   @override
-  String get timeDifferenceTooSmallError => 'Service time must be at least 1 unit greater than arrival time.';
+  String get timeDifferenceTooSmallError =>
+      'Service time must be at least 1 unit greater than arrival time.';
 
   @override
   String get requestFileNameTitle => 'Enter the MASO file name';
@@ -168,7 +173,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get fileNameRequiredError => 'The file name is required.';
 
   @override
-  String get fileDescriptionRequiredError => 'The file description is required.';
+  String get fileDescriptionRequiredError =>
+      'The file description is required.';
 
   @override
   String get executionSetupTitle => 'Execution Setup';
@@ -187,7 +193,8 @@ class AppLocalizationsEn extends AppLocalizations {
         'roundRobin': 'Round Robin',
         'priorityBased': 'Priority Based',
         'multiplePriorityQueues': 'Multiple Priority Queues',
-        'multiplePriorityQueuesWithFeedback': 'Multiple Priority Queues with Feedback',
+        'multiplePriorityQueuesWithFeedback':
+            'Multiple Priority Queues with Feedback',
         'timeLimit': 'Time Limit',
         'other': 'Unknown',
       },
@@ -246,7 +253,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get exportTooltip => 'Export execution timeline';
 
   @override
-  String timelineProcessDescription(Object arrivalTime, Object processName, Object serviceTime) {
+  String timelineProcessDescription(
+      Object arrivalTime, Object processName, Object serviceTime) {
     return '$processName (Arrival: $arrivalTime, Service: $serviceTime)';
   }
 
@@ -271,10 +279,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get processesBadContent => 'The process list contains invalid data.';
 
   @override
-  String get unsupportedVersion => 'The file version is not supported by the current application.';
+  String get unsupportedVersion =>
+      'The file version is not supported by the current application.';
 
   @override
-  String get invalidExtension => 'The file does not have a valid .maso extension.';
+  String get invalidExtension =>
+      'The file does not have a valid .maso extension.';
 
   @override
   String get settingsDialogTitle => 'Settings';
@@ -283,7 +293,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsDialogWarningTitle => 'Warning';
 
   @override
-  String get settingsDialogWarningContent => 'Changing the mode will erase all processes from the maso file. Do you want to proceed?';
+  String get settingsDialogWarningContent =>
+      'Changing the mode will erase all processes from the maso file. Do you want to proceed?';
 
   @override
   String get cancel => 'Cancel';
@@ -384,7 +395,8 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get duplicatedNameProcessBadContent => 'There are two or more processes with the same name';
+  String get duplicatedNameProcessBadContent =>
+      'There are two or more processes with the same name';
 
   @override
   String invalidArrivalTimeBadContent(Object process) {

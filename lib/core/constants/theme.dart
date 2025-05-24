@@ -59,11 +59,6 @@ class AppTheme {
         ),
       ),
     ),
-    cardTheme: const CardTheme(
-      color: surfaceColor,
-      elevation: 2.0,
-      margin: EdgeInsets.all(8.0),
-    ),
   );
 
   // Define el tema oscuro (opcional)
@@ -108,11 +103,6 @@ class AppTheme {
           borderRadius: BorderRadius.all(Radius.circular(8.0)),
         ),
       ),
-    ),
-    cardTheme: const CardTheme(
-      color: Color(0xFF1E1E1E),
-      elevation: 2.0,
-      margin: EdgeInsets.all(8.0),
     ),
   );
 }

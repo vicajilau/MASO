@@ -36,7 +36,8 @@ class AppLocalizationsEs extends AppLocalizations {
   String get dropFileHere => 'Arrastra un archivo .maso aquí';
 
   @override
-  String get errorInvalidFile => 'Error: archivo no válido. Debe ser un archivo .maso.';
+  String get errorInvalidFile =>
+      'Error: archivo no válido. Debe ser un archivo .maso.';
 
   @override
   String errorLoadingFile(String error) {
@@ -138,16 +139,20 @@ class AppLocalizationsEs extends AppLocalizations {
   String get duplicateNameError => 'Ya existe un proceso con este nombre.';
 
   @override
-  String get invalidArrivalTimeError => 'El tiempo de llegada debe ser un número entero positivo.';
+  String get invalidArrivalTimeError =>
+      'El tiempo de llegada debe ser un número entero positivo.';
 
   @override
-  String get invalidServiceTimeError => 'El tiempo de servicio debe ser un número entero positivo.';
+  String get invalidServiceTimeError =>
+      'El tiempo de servicio debe ser un número entero positivo.';
 
   @override
-  String get invalidTimeDifferenceError => 'El tiempo de servicio debe ser mayor que el tiempo de llegada.';
+  String get invalidTimeDifferenceError =>
+      'El tiempo de servicio debe ser mayor que el tiempo de llegada.';
 
   @override
-  String get timeDifferenceTooSmallError => 'El tiempo de servicio debe ser al menos 1 unidad mayor que el tiempo de llegada.';
+  String get timeDifferenceTooSmallError =>
+      'El tiempo de servicio debe ser al menos 1 unidad mayor que el tiempo de llegada.';
 
   @override
   String get requestFileNameTitle => 'Introduce el nombre del archivo MASO';
@@ -162,13 +167,15 @@ class AppLocalizationsEs extends AppLocalizations {
   String get errorTitle => 'Error';
 
   @override
-  String get emptyFileNameMessage => 'El nombre del fichero no puede estar vacío.';
+  String get emptyFileNameMessage =>
+      'El nombre del fichero no puede estar vacío.';
 
   @override
   String get fileNameRequiredError => 'El nombre del archivo es obligatorio.';
 
   @override
-  String get fileDescriptionRequiredError => 'La descripción del archivo es obligatoria.';
+  String get fileDescriptionRequiredError =>
+      'La descripción del archivo es obligatoria.';
 
   @override
   String get executionSetupTitle => 'Configuración de Ejecución';
@@ -187,7 +194,8 @@ class AppLocalizationsEs extends AppLocalizations {
         'roundRobin': 'Round Robin',
         'priorityBased': 'Basado en Prioridad',
         'multiplePriorityQueues': 'Colas de Prioridad Múltiples',
-        'multiplePriorityQueuesWithFeedback': 'Colas de Prioridad Múltiples con Retroalimentación',
+        'multiplePriorityQueuesWithFeedback':
+            'Colas de Prioridad Múltiples con Retroalimentación',
         'timeLimit': 'Límite de Tiempo',
         'other': 'Desconocido',
       },
@@ -246,7 +254,8 @@ class AppLocalizationsEs extends AppLocalizations {
   String get exportTooltip => 'Exportar línea de tiempo de ejecución';
 
   @override
-  String timelineProcessDescription(Object arrivalTime, Object processName, Object serviceTime) {
+  String timelineProcessDescription(
+      Object arrivalTime, Object processName, Object serviceTime) {
     return '$processName (Llegada: $arrivalTime, Servicio: $serviceTime)';
   }
 
@@ -265,16 +274,20 @@ class AppLocalizationsEs extends AppLocalizations {
   String get pdfExported => 'PDF exportado';
 
   @override
-  String get metadataBadContent => 'Los metadatos del archivo son inválidos o están corruptos.';
+  String get metadataBadContent =>
+      'Los metadatos del archivo son inválidos o están corruptos.';
 
   @override
-  String get processesBadContent => 'La lista de procesos contiene datos inválidos.';
+  String get processesBadContent =>
+      'La lista de procesos contiene datos inválidos.';
 
   @override
-  String get unsupportedVersion => 'La versión del archivo no es compatible con la aplicación actual.';
+  String get unsupportedVersion =>
+      'La versión del archivo no es compatible con la aplicación actual.';
 
   @override
-  String get invalidExtension => 'El archivo no tiene una extensión .maso válida.';
+  String get invalidExtension =>
+      'El archivo no tiene una extensión .maso válida.';
 
   @override
   String get settingsDialogTitle => 'Configuración';
@@ -283,7 +296,8 @@ class AppLocalizationsEs extends AppLocalizations {
   String get settingsDialogWarningTitle => 'Advertencia';
 
   @override
-  String get settingsDialogWarningContent => 'Cambiar el modo borrará todos los procesos del archivo maso. ¿Deseas continuar?';
+  String get settingsDialogWarningContent =>
+      'Cambiar el modo borrará todos los procesos del archivo maso. ¿Deseas continuar?';
 
   @override
   String get cancel => 'Cancelar';
@@ -384,7 +398,8 @@ class AppLocalizationsEs extends AppLocalizations {
   }
 
   @override
-  String get duplicatedNameProcessBadContent => 'Hay dos o más procesos con el mismo nombre';
+  String get duplicatedNameProcessBadContent =>
+      'Hay dos o más procesos con el mismo nombre';
 
   @override
   String invalidArrivalTimeBadContent(Object process) {
