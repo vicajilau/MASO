@@ -1,13 +1,13 @@
-import 'hardware_component.dart';
+import 'package:maso/domain/models/core_processor.dart';
 
 /// Represents a machine composed of multiple CPUs and I/O channels,
 /// where each CPU and I/O channel is a list of `HardwareComponent` objects.
 class Machine {
   /// List of CPU cores, where each core is represented as a list of `HardwareComponent`.
-  final List<List<HardwareComponent>> cpus;
+  final List<CoreProcessor> cpus;
 
   /// List of I/O channels, where each channel is represented as a list of `HardwareComponent`.
-  final List<List<HardwareComponent>> ioChannels;
+  final List<CoreProcessor> ioChannels;
 
   /// Constructs a `Machine` with the given CPUs and I/O channels.
   Machine({required this.cpus, required this.ioChannels});
@@ -19,13 +19,13 @@ class Machine {
         .asMap()
         .entries
         .map((e) =>
-            "\t- CPU ${e.key + 1}: ${e.value.map((c) => c.toString()).join(', ')}")
+            "\t- CPU ${e.key + 1}: ${e.value.core.map((c) => c.toString()).join(', ')}")
         .join('\n');
     final ioStr = ioChannels
         .asMap()
         .entries
         .map((e) =>
-            "\t- I/O Channel ${e.key + 1}: ${e.value.map((c) => c.toString()).join(', ')}")
+            "\t- I/O Channel ${e.key + 1}: ${e.value.core.map((c) => c.toString()).join(', ')}")
         .join('\n');
     return "Machine Structure:\n* CPUs:\n$cpuStr\n* I/O Channels:\n$ioStr";
   }

@@ -1,4 +1,5 @@
 import 'package:maso/core/debug_print.dart';
+import 'package:maso/domain/models/core_processor.dart';
 import 'package:maso/domain/models/hardware_state.dart';
 import 'package:maso/domain/models/machine.dart';
 
@@ -59,12 +60,12 @@ class ExecutionTimeCalculatorService {
         processes.where((process) => process.enabled).toList();
 
     final numberOfCPUs = executionSetup.settings.cpuCount;
-    final List<List<HardwareComponent>> cpus =
-        List.generate(numberOfCPUs, (index) => []);
+    List<CoreProcessor> cpus =
+        List.generate(numberOfCPUs, (index) => CoreProcessor.empty());
     int currentCPU = 0;
 
     for (var process in filteredProcesses) {
-      cpus[currentCPU].add(HardwareComponent(HardwareState.busy, process));
+      cpus[currentCPU].core.add(HardwareComponent(HardwareState.busy, process));
       currentCPU = (currentCPU + 1) % numberOfCPUs;
     }
 

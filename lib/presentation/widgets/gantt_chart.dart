@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:maso/core/extensions/string_extension.dart';
+import 'package:maso/domain/models/core_processor.dart';
 import 'package:maso/domain/models/maso/regular_process.dart';
 
 import '../../core/extensions/color_extension.dart';
-import '../../domain/models/hardware_component.dart';
 
 class GanttChart extends StatelessWidget {
-  final List<HardwareComponent> cpuExecution;
+  final CoreProcessor cpuExecution;
   const GanttChart({super.key, required this.cpuExecution});
 
   @override
   Widget build(BuildContext context) {
-    List<RegularProcess> regularProcesses = cpuExecution
+    List<RegularProcess> regularProcesses = cpuExecution.core
         .map((hardwareComponent) => hardwareComponent.process as RegularProcess)
         .toList();
     return Row(
@@ -30,7 +30,7 @@ class GanttChart extends StatelessWidget {
           },
           children: [
             TableRow(
-              children: cpuExecution.map((hardwareComponent) {
+              children: cpuExecution.core.map((hardwareComponent) {
                 return buildCell(
                     hardwareComponent.process?.id ??
                         hardwareComponent.state.name.capitalize(),
