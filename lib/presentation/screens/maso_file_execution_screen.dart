@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:maso/core/context_extension.dart';
 import 'package:maso/domain/models/export_formats.dart';
-import 'package:maso/presentation/widgets/gantt_chart.dart';
+import 'package:maso/presentation/widgets/regular_gantt_chart.dart';
 import 'package:pasteboard/pasteboard.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -22,6 +22,7 @@ import '../../domain/models/maso/maso_file.dart';
 import '../blocs/file_bloc/file_bloc.dart';
 import '../blocs/file_bloc/file_event.dart';
 import '../blocs/file_bloc/file_state.dart';
+import '../widgets/burst_gantt_chart.dart';
 import '../widgets/request_file_name_dialog.dart';
 
 class MasoFileExecutionScreen extends StatefulWidget {
@@ -228,7 +229,9 @@ class _MasoFileExecutionScreenState extends State<MasoFileExecutionScreen> {
                   child: Column(
                     children: [
                       for (var cpu in _machine.cpus)
-                        GanttChart(cpuExecution: cpu)
+                        (cpu.isRegularProcessInside())
+                            ? RegularGanttChart(cpuExecution: cpu)
+                            : BurstGanttChart(cpuExecution: cpu)
                     ],
                   ),
                 ),

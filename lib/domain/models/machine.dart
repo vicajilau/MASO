@@ -12,6 +12,12 @@ class Machine {
   /// Constructs a `Machine` with the given CPUs and I/O channels.
   Machine({required this.cpus, required this.ioChannels});
 
+  bool isRegularProcessInside() =>
+      cpus.isNotEmpty && cpus.first.isRegularProcessInside();
+
+  bool isBurstProcessInside() =>
+      cpus.isNotEmpty && cpus.first.isBurstProcessInside();
+
   /// Returns a string representation of the Machine object, similar to Java's `toString` method.
   @override
   String toString() {

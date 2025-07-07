@@ -5,9 +5,9 @@ import 'package:maso/domain/models/maso/regular_process.dart';
 
 import '../../core/extensions/color_extension.dart';
 
-class GanttChart extends StatelessWidget {
+class RegularGanttChart extends StatelessWidget {
   final CoreProcessor cpuExecution;
-  const GanttChart({super.key, required this.cpuExecution});
+  const RegularGanttChart({super.key, required this.cpuExecution});
 
   @override
   Widget build(BuildContext context) {
