@@ -1,57 +1,120 @@
 import 'package:flutter/material.dart';
-import 'package:maso/core/extensions/string_extension.dart';
 import 'package:maso/domain/models/core_processor.dart';
+import 'package:maso/domain/models/hardware_state.dart';
 import 'package:maso/domain/models/maso/regular_process.dart';
 
-import '../../core/extensions/color_extension.dart';
-
+/// Widget that renders a Gantt chart with time labels representing CPU usage over time.
 class RegularGanttChart extends StatelessWidget {
   final CoreProcessor cpuExecution;
+
   const RegularGanttChart({super.key, required this.cpuExecution});
 
   @override
   Widget build(BuildContext context) {
-    List<RegularProcess> regularProcesses = cpuExecution.core
-        .map((hardwareComponent) => hardwareComponent.process as RegularProcess)
-        .toList();
-    return Row(
+    final components = cpuExecution.core;
+
+    /// Step 1: Build the list of time units
+    final timeUnits = <_GanttBlock>[];
+    int currentTime = 0;
+
+    for (var component in components) {
+      final process = component.process;
+      final duration = (process as RegularProcess).serviceTime;
+
+      timeUnits.add(_GanttBlock(
+        label: process.id,
+        state: component.state,
+        startTime: currentTime,
+        duration: duration,
+      ));
+
+      currentTime += duration;
+    }
+
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          "Uso del procesador",
+        const Text(
+          "Processor Usage Timeline",
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
-        SizedBox(height: 10),
-        Table(
-          border: TableBorder.all(),
-          columnWidths: {
-            for (var entry in regularProcesses.asMap().entries)
-              entry.key: FlexColumnWidth(entry.value.serviceTime.toDouble()),
-          },
-          children: [
-            TableRow(
-              children: cpuExecution.core.map((hardwareComponent) {
-                return buildCell(
-                    hardwareComponent.process?.id ??
-                        hardwareComponent.state.name.capitalize(),
-                    ColorExtension.random);
-              }).toList(),
-            )
-          ],
+        const SizedBox(height: 12),
+
+        /// Time label row
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: List.generate(currentTime, (i) {
+              return Container(
+                width: 40,
+                alignment: Alignment.center,
+                child: Text(
+                  "$i",
+                ),
+              );
+            }),
+          ),
+        ),
+        const SizedBox(height: 6),
+
+        /// Gantt blocks
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: timeUnits.map((block) {
+              return _buildCell(block.label, block.state, block.duration);
+            }).toList(),
+          ),
         ),
       ],
     );
   }
 
-  Widget buildCell(String text, Color color) {
+  /// Builds a single block (cell) of the Gantt chart.
+  Widget _buildCell(String text, HardwareState state, int timeUnits) {
+    final baseColor = _colorForState(state);
+
     return Container(
+      width: 40.0 * timeUnits,
       height: 50,
       alignment: Alignment.center,
-      color: color.withValues(alpha: 0.3),
+      margin: const EdgeInsets.only(right: 2),
+      decoration: BoxDecoration(
+        color: baseColor.withValues(alpha: 0.3),
+        border: Border.all(color: baseColor),
+        borderRadius: BorderRadius.circular(4),
+      ),
       child: Text(
         text,
-        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+        style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
       ),
     );
   }
+
+  /// Returns a color based on the hardware state.
+  Color _colorForState(HardwareState state) {
+    switch (state) {
+      case HardwareState.busy:
+        return Colors.green;
+      case HardwareState.free:
+        return Colors.grey;
+      case HardwareState.switchingContext:
+        return Colors.orange;
+    }
+  }
+}
+
+/// Helper class to store information for each block in the Gantt chart.
+class _GanttBlock {
+  final String label;
+  final HardwareState state;
+  final int startTime;
+  final int duration;
+
+  _GanttBlock({
+    required this.label,
+    required this.state,
+    required this.startTime,
+    required this.duration,
+  });
 }
