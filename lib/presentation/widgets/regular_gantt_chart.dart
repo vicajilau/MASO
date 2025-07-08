@@ -1,34 +1,44 @@
 import 'package:flutter/material.dart';
-import 'package:maso/domain/models/core_processor.dart';
 import 'package:maso/domain/models/hardware_state.dart';
 import 'package:maso/domain/models/maso/regular_process.dart';
 
-/// Widget that renders a Gantt chart with time labels representing CPU usage over time.
-class RegularGanttChart extends StatelessWidget {
-  final CoreProcessor cpuExecution;
+import '../../domain/models/machine.dart';
 
-  const RegularGanttChart({super.key, required this.cpuExecution});
+/// Widget that renders a Gantt chart with time labels and multiple CPU rows.
+class RegularGanttChart extends StatelessWidget {
+  final Machine machine;
+
+  const RegularGanttChart({super.key, required this.machine});
 
   @override
   Widget build(BuildContext context) {
-    final components = cpuExecution.core;
+    // Step 1: Calculate total time across all CPUs (max timeline)
+    int globalTime = 0;
+    final cpuBlocks = <List<_GanttBlock>>[];
 
-    /// Step 1: Build the list of time units
-    final timeUnits = <_GanttBlock>[];
-    int currentTime = 0;
+    for (var cpu in machine.cpus) {
+      final blocks = <_GanttBlock>[];
+      int currentTime = 0;
 
-    for (var component in components) {
-      final process = component.process as RegularProcess;
-      final duration = process.serviceTime;
+      for (var component in cpu.core) {
+        final process = component.process as RegularProcess;
+        final duration = process.serviceTime;
 
-      timeUnits.add(_GanttBlock(
-        label: process.id,
-        state: component.state,
-        startTime: currentTime,
-        duration: duration,
-      ));
+        blocks.add(_GanttBlock(
+          label: process.id,
+          state: component.state,
+          startTime: currentTime,
+          duration: duration,
+        ));
 
-      currentTime += duration;
+        currentTime += duration;
+      }
+
+      if (currentTime > globalTime) {
+        globalTime = currentTime;
+      }
+
+      cpuBlocks.add(blocks);
     }
 
     return Column(
@@ -46,38 +56,24 @@ class RegularGanttChart extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              /// Time label row
+              /// Time header row
               Row(
-                children: List.generate(currentTime + 1, (i) {
-                  return Container(
-                    width: 40,
-                    alignment: Alignment.center,
-                    child: Text("$i"),
-                  );
-                }),
+                children: [
+                  const SizedBox(width: 60), // for CPU label spacing
+                  ...List.generate(globalTime + 1, (i) {
+                    return Container(
+                      width: 40,
+                      alignment: Alignment.center,
+                      child: Text("$i"),
+                    );
+                  }),
+                ],
               ),
               const SizedBox(height: 6),
 
-              /// Gantt blocks with arrows
-              Row(
-                children: [
-                  for (int i = 0; i < timeUnits.length; i++) ...[
-                    _buildCell(
-                      timeUnits[i].label,
-                      timeUnits[i].state,
-                      timeUnits[i].duration,
-                    ),
-                    if (i < timeUnits.length - 1)
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 4),
-                        child: Text(
-                          "↑↓",
-                          style: TextStyle(fontSize: 16),
-                        ),
-                      ),
-                  ]
-                ],
-              ),
+              /// Each CPU row
+              for (int cpuIndex = 0; cpuIndex < cpuBlocks.length; cpuIndex++)
+                _buildCpuRow(cpuBlocks[cpuIndex], cpuIndex + 1),
             ],
           ),
         ),
@@ -85,7 +81,50 @@ class RegularGanttChart extends StatelessWidget {
     );
   }
 
-  /// Builds a single block (cell) of the Gantt chart.
+  /// Builds a row for a single CPU with its blocks and label
+  Widget _buildCpuRow(List<_GanttBlock> blocks, int cpuNumber) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          // CPU label
+          Container(
+            width: 60,
+            alignment: Alignment.centerLeft,
+            padding: const EdgeInsets.only(right: 8),
+            child: Text(
+              "CPU $cpuNumber",
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+              ),
+            ),
+          ),
+
+          // Blocks with arrows
+          Row(
+            children: [
+              for (int i = 0; i < blocks.length; i++) ...[
+                _buildCell(
+                  blocks[i].label,
+                  blocks[i].state,
+                  blocks[i].duration,
+                ),
+                if (i < blocks.length - 1)
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 4),
+                    child: Text("↑↓", style: TextStyle(fontSize: 16)),
+                  ),
+              ]
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// Builds a single process/state block.
   Widget _buildCell(String text, HardwareState state, int timeUnits) {
     final baseColor = _colorForState(state);
 
@@ -106,7 +145,7 @@ class RegularGanttChart extends StatelessWidget {
     );
   }
 
-  /// Returns a color based on the hardware state.
+  /// Maps each HardwareState to a color.
   Color _colorForState(HardwareState state) {
     switch (state) {
       case HardwareState.busy:
@@ -119,7 +158,7 @@ class RegularGanttChart extends StatelessWidget {
   }
 }
 
-/// Helper class to store information for each block in the Gantt chart.
+/// Internal model to represent each block in the Gantt chart.
 class _GanttBlock {
   final String label;
   final HardwareState state;

@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:maso/core/extensions/string_extension.dart';
-import 'package:maso/domain/models/core_processor.dart';
+import 'package:maso/domain/models/machine.dart';
 import 'package:maso/domain/models/maso/burst_process.dart';
 
 import '../../core/extensions/color_extension.dart';
 
 class BurstGanttChart extends StatelessWidget {
-  final CoreProcessor cpuExecution;
-  const BurstGanttChart({super.key, required this.cpuExecution});
+  final Machine machine;
+  const BurstGanttChart({super.key, required this.machine});
 
   @override
   Widget build(BuildContext context) {
-    List<BurstProcess> burstProcesses = cpuExecution.core
+    List<BurstProcess> burstProcesses = machine.cpus.first.core
         .map((hardwareComponent) => hardwareComponent.process as BurstProcess)
         .toList();
     return Row(
@@ -30,7 +30,7 @@ class BurstGanttChart extends StatelessWidget {
           },
           children: [
             TableRow(
-              children: cpuExecution.core.map((hardwareComponent) {
+              children: machine.cpus.first.core.map((hardwareComponent) {
                 return buildCell(
                     hardwareComponent.process?.id ??
                         hardwareComponent.state.name.capitalize(),

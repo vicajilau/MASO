@@ -228,10 +228,10 @@ class _MasoFileExecutionScreenState extends State<MasoFileExecutionScreen> {
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
                     children: [
-                      for (var cpu in _machine.cpus)
-                        (cpu.isRegularProcessInside())
-                            ? RegularGanttChart(cpuExecution: cpu)
-                            : BurstGanttChart(cpuExecution: cpu)
+                        (_machine.cpus.first.isRegularProcessInside())
+                            ? RegularGanttChart(
+                                machine: _machine)
+                            : BurstGanttChart(machine: _machine),
                     ],
                   ),
                 ),
