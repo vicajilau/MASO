@@ -18,8 +18,8 @@ class RegularGanttChart extends StatelessWidget {
     int currentTime = 0;
 
     for (var component in components) {
-      final process = component.process;
-      final duration = (process as RegularProcess).serviceTime;
+      final process = component.process as RegularProcess;
+      final duration = process.serviceTime;
 
       timeUnits.add(_GanttBlock(
         label: process.id,
@@ -40,30 +40,45 @@ class RegularGanttChart extends StatelessWidget {
         ),
         const SizedBox(height: 12),
 
-        /// Time label row
+        /// Unified scrollable area
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
-          child: Row(
-            children: List.generate(currentTime, (i) {
-              return Container(
-                width: 40,
-                alignment: Alignment.center,
-                child: Text(
-                  "$i",
-                ),
-              );
-            }),
-          ),
-        ),
-        const SizedBox(height: 6),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              /// Time label row
+              Row(
+                children: List.generate(currentTime + 1, (i) {
+                  return Container(
+                    width: 40,
+                    alignment: Alignment.center,
+                    child: Text("$i"),
+                  );
+                }),
+              ),
+              const SizedBox(height: 6),
 
-        /// Gantt blocks
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            children: timeUnits.map((block) {
-              return _buildCell(block.label, block.state, block.duration);
-            }).toList(),
+              /// Gantt blocks with arrows
+              Row(
+                children: [
+                  for (int i = 0; i < timeUnits.length; i++) ...[
+                    _buildCell(
+                      timeUnits[i].label,
+                      timeUnits[i].state,
+                      timeUnits[i].duration,
+                    ),
+                    if (i < timeUnits.length - 1)
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 4),
+                        child: Text(
+                          "↑↓",
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ),
+                  ]
+                ],
+              ),
+            ],
           ),
         ),
       ],
