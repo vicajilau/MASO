@@ -173,26 +173,28 @@ class _FileLoadedScreenState extends State<FileLoadedScreen> {
                 floatingActionButton: FloatingActionButton(
                   tooltip: cachedMasoFile.processes.elements.isNotEmpty
                       ? AppLocalizations.of(context)!.executeTooltip
-                      : AppLocalizations.of(context)!
-                      .executeDisabledTooltip,
+                      : AppLocalizations.of(context)!.executeDisabledTooltip,
                   onPressed: cachedMasoFile.processes.elements.isNotEmpty
                       ? () async {
-                    final executionSetup =
-                    await showDialog<ExecutionSetup>(
-                      context: context,
-                      builder: (context) => ExecutionSetupDialog(),
-                    );
-                    if (executionSetup != null) {
-                      ServiceLocator.instance
-                          .registerExecutionSetup(executionSetup);
-                      if (context.mounted) {
-                        context
-                            .push(AppRoutes.masoFileExecutionScreen);
-                      }
-                    }
-                  }
+                          final executionSetup =
+                              await showDialog<ExecutionSetup>(
+                            context: context,
+                            builder: (context) => ExecutionSetupDialog(),
+                          );
+                          if (executionSetup != null) {
+                            ServiceLocator.instance
+                                .registerExecutionSetup(executionSetup);
+                            executionSetup.settings =
+                                await SettingsMaso.loadFromPreferences(
+                                    cachedMasoFile.processes.mode);
+                            if (context.mounted) {
+                              context.push(AppRoutes.masoFileExecutionScreen);
+                            }
+                          }
+                        }
                       : null,
-                  child: const Icon(Icons.play_arrow), // Disable button if file hasn't changed
+                  child: const Icon(Icons
+                      .play_arrow), // Disable button if file hasn't changed
                 ),
               );
             },
