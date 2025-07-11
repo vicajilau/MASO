@@ -104,7 +104,6 @@ class RegularGanttChart extends StatelessWidget {
             height: 60,
             child: Stack(
               children: [
-                // Bloques
                 Positioned.fill(
                   child: Align(
                     alignment: Alignment.centerLeft,
@@ -122,8 +121,6 @@ class RegularGanttChart extends StatelessWidget {
                     ),
                   ),
                 ),
-
-                // Flechas
                 Positioned.fill(
                   child: LayoutBuilder(
                     builder: (context, constraints) {
@@ -149,7 +146,7 @@ class RegularGanttChart extends StatelessWidget {
                       }
 
                       arrows.add(Positioned(
-                        left: currentOffset - 16, // Asegura que no se corte
+                        left: currentOffset - 16,
                         top: 2,
                         child: const Icon(Icons.arrow_upward, size: 16),
                       ));
