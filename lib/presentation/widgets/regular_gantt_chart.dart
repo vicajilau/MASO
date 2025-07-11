@@ -63,7 +63,7 @@ class RegularGanttChart extends StatelessWidget {
                   ...List.generate(globalTime + 1, (i) {
                     return Container(
                       width: 40,
-                      alignment: Alignment.center,
+                      alignment: Alignment.centerLeft,
                       child: Text("$i"),
                     );
                   }),
