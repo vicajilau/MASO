@@ -2,6 +2,7 @@ import 'package:maso/core/debug_print.dart';
 import 'package:maso/domain/models/core_processor.dart';
 import 'package:maso/domain/models/hardware_state.dart';
 import 'package:maso/domain/models/machine.dart';
+import 'package:maso/domain/models/maso/regular_process.dart';
 
 import '../../domain/models/execution_setup.dart';
 import '../../domain/models/hardware_component.dart';
@@ -54,18 +55,60 @@ class ExecutionTimeCalculatorService {
   ///
   /// Returns the list of processes with the execution time calculated according to FCFS.
   Machine _calculateFirstComeFirstServed(List<IProcess> processes) {
-    // Sort processes by their arrival time (the first process to arrive should be processed first)
-    processes.sort((a, b) => a.arrivalTime.compareTo(b.arrivalTime));
-    final filteredProcesses =
-        processes.where((process) => process.enabled).toList();
+    // Filtrar procesos habilitados y ordenarlos por tiempo de llegada
+    final filteredProcesses = processes
+        .where((process) => process.enabled)
+        .toList()
+      ..sort((a, b) => a.arrivalTime.compareTo(b.arrivalTime));
 
     final numberOfCPUs = executionSetup.settings.cpuCount;
-    List<CoreProcessor> cpus =
-        List.generate(numberOfCPUs, (index) => CoreProcessor.empty());
+    final contextSwitchTime = executionSetup.settings.contextSwitchTime;
+
+    // Inicializar CPUs vacías
+    List<CoreProcessor> cpus = List.generate(
+      numberOfCPUs,
+      (_) => CoreProcessor.empty(),
+    );
+
+    // Llevar el tiempo actual por CPU
+    List<int> cpuTimes = List.filled(numberOfCPUs, 0);
     int currentCPU = 0;
 
-    for (var process in filteredProcesses) {
-      cpus[currentCPU].core.add(HardwareComponent(HardwareState.busy, process));
+    for (var i = 0; i < filteredProcesses.length; i++) {
+      final process = filteredProcesses[i];
+      final core = cpus[currentCPU].core;
+
+      final startTime = cpuTimes[currentCPU] < process.arrivalTime
+          ? process.arrivalTime
+          : cpuTimes[currentCPU];
+
+      IProcess processCopied = process.copy();
+      processCopied.arrivalTime = startTime;
+
+      core.add(HardwareComponent(HardwareState.busy, processCopied));
+
+      cpuTimes[currentCPU] =
+          startTime + (process as RegularProcess).serviceTime;
+
+      final willThisCPUBeUsedAgain =
+          i + numberOfCPUs < filteredProcesses.length;
+
+      if (contextSwitchTime > 0 && willThisCPUBeUsedAgain) {
+        final switchProcess = RegularProcess(
+          id: "SC",
+          arrivalTime: cpuTimes[currentCPU],
+          serviceTime: contextSwitchTime,
+          enabled: true,
+        );
+
+        core.add(HardwareComponent(
+          HardwareState.switchingContext,
+          switchProcess,
+        ));
+
+        cpuTimes[currentCPU] += contextSwitchTime;
+      }
+
       currentCPU = (currentCPU + 1) % numberOfCPUs;
     }
 

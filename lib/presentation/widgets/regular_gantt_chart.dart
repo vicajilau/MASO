@@ -83,41 +83,83 @@ class RegularGanttChart extends StatelessWidget {
 
   /// Builds a row for a single CPU with its blocks and label
   Widget _buildCpuRow(List<_GanttBlock> blocks, int cpuNumber) {
+    final totalTime = blocks.fold(0, (acc, b) => acc + b.duration);
+
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // CPU label
           Container(
             width: 60,
             alignment: Alignment.centerLeft,
             padding: const EdgeInsets.only(right: 8),
             child: Text(
               "CPU $cpuNumber",
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 14,
-              ),
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
             ),
           ),
-
-          // Blocks with arrows
-          Row(
-            children: [
-              for (int i = 0; i < blocks.length; i++) ...[
-                _buildCell(
-                  blocks[i].label,
-                  blocks[i].state,
-                  blocks[i].duration,
-                ),
-                if (i < blocks.length - 1)
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 4),
-                    child: Text("↑↓", style: TextStyle(fontSize: 16)),
+          SizedBox(
+            width: 40.0 * totalTime,
+            height: 60,
+            child: Stack(
+              children: [
+                // Bloques
+                Positioned.fill(
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: SizedBox(
+                      width: 40.0 * totalTime,
+                      child: Row(
+                        children: blocks
+                            .map((block) => _buildCell(
+                                  block.label,
+                                  block.state,
+                                  block.duration,
+                                ))
+                            .toList(),
+                      ),
+                    ),
                   ),
-              ]
-            ],
+                ),
+
+                // Flechas
+                Positioned.fill(
+                  child: LayoutBuilder(
+                    builder: (context, constraints) {
+                      double currentOffset = 0;
+                      final arrows = <Widget>[];
+
+                      arrows.add(Positioned(
+                        left: 4,
+                        top: 2,
+                        child: const Icon(Icons.arrow_downward, size: 16),
+                      ));
+
+                      for (int i = 0; i < blocks.length; i++) {
+                        currentOffset += blocks[i].duration * 40;
+
+                        if (i < blocks.length - 1) {
+                          arrows.add(Positioned(
+                            left: currentOffset - 8,
+                            top: 2,
+                            child: const Icon(Icons.import_export, size: 16),
+                          ));
+                        }
+                      }
+
+                      arrows.add(Positioned(
+                        left: currentOffset - 16, // Asegura que no se corte
+                        top: 2,
+                        child: const Icon(Icons.arrow_upward, size: 16),
+                      ));
+
+                      return Stack(children: arrows);
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),
@@ -132,7 +174,6 @@ class RegularGanttChart extends StatelessWidget {
       width: 40.0 * timeUnits,
       height: 50,
       alignment: Alignment.center,
-      margin: const EdgeInsets.only(right: 2),
       decoration: BoxDecoration(
         color: baseColor.withValues(alpha: 0.3),
         border: Border.all(color: baseColor),
