@@ -7,6 +7,7 @@ import '../../domain/models/machine.dart';
 /// Widget that renders a Gantt chart with time labels and multiple CPU rows.
 class RegularGanttChart extends StatelessWidget {
   final Machine machine;
+  final double cellSpacing = 5.0;
 
   const RegularGanttChart({super.key, required this.machine});
 
@@ -83,7 +84,7 @@ class RegularGanttChart extends StatelessWidget {
 
   /// Builds a row for a single CPU with its blocks and label
   Widget _buildCpuRow(List<_GanttBlock> blocks, int cpuNumber) {
-    final totalTime = blocks.fold(0, (acc, b) => acc + b.duration);
+    const double cellWidth = 40.0;
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
@@ -100,7 +101,8 @@ class RegularGanttChart extends StatelessWidget {
             ),
           ),
           SizedBox(
-            width: 40.0 * totalTime,
+            width: blocks.fold(
+                0.0, (sum, b) => sum! + cellWidth * b.duration + cellSpacing),
             height: 60,
             child: Stack(
               children: [
@@ -108,7 +110,10 @@ class RegularGanttChart extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: SizedBox(
-                      width: 40.0 * totalTime,
+                      width: blocks.fold(
+                        0.0,
+                        (sum, b) => sum! + cellWidth * b.duration + cellSpacing,
+                      ),
                       child: Row(
                         children: blocks
                             .map((block) => _buildCell(
@@ -134,7 +139,7 @@ class RegularGanttChart extends StatelessWidget {
                       ));
 
                       for (int i = 0; i < blocks.length; i++) {
-                        currentOffset += blocks[i].duration * 40;
+                        currentOffset += blocks[i].duration * 40 + cellSpacing;
 
                         if (i < blocks.length - 1) {
                           arrows.add(Positioned(
@@ -164,21 +169,25 @@ class RegularGanttChart extends StatelessWidget {
   }
 
   /// Builds a single process/state block.
-  Widget _buildCell(String text, HardwareState state, int timeUnits) {
+  Widget _buildCell(String text, HardwareState state, int timeUnits,
+      {double spacingRight = 5.0}) {
     final baseColor = _colorForState(state);
 
-    return Container(
-      width: 40.0 * timeUnits,
-      height: 50,
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        color: baseColor.withValues(alpha: 0.3),
-        border: Border.all(color: baseColor),
-        borderRadius: BorderRadius.circular(4),
-      ),
-      child: Text(
-        text,
-        style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+    return Padding(
+      padding: EdgeInsets.only(right: spacingRight),
+      child: Container(
+        width: 40.0 * timeUnits,
+        height: 50,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: baseColor.withValues(alpha: 0.3),
+          border: Border.all(color: baseColor),
+          borderRadius: BorderRadius.circular(4),
+        ),
+        child: Text(
+          text,
+          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+        ),
       ),
     );
   }
