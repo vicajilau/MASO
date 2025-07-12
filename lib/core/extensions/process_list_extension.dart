@@ -1,6 +1,28 @@
-import 'i_process.dart';
+import 'package:maso/domain/models/maso/burst_process.dart';
+import 'package:maso/domain/models/maso/i_process.dart';
+import 'package:maso/domain/models/maso/process_mode.dart';
+import 'package:maso/domain/models/maso/regular_process.dart';
 
-extension ListProcessesExtension on List<IProcess> {
+extension ProcessListExtension on List<IProcess> {
+  /// Returns the mode of the process list based on its content.
+  /// Throws an error if the list is empty or contains unknown types.
+  ProcessesMode getMode() {
+    if (isEmpty) {
+      throw StateError('Process list is empty');
+    }
+
+    final first = this.first;
+
+    if (first is RegularProcess) {
+      return ProcessesMode.regular;
+    } else if (first is BurstProcess) {
+      return ProcessesMode.burst;
+    } else {
+      throw UnimplementedError(
+          'Unrecognized process type: ${first.runtimeType}');
+    }
+  }
+
   /// Checks if a process with the specified [name] exists in the list,
   /// optionally ignoring the process at the given [position].
   ///

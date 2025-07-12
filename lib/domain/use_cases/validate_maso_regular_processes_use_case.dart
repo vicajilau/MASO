@@ -1,6 +1,6 @@
+import 'package:maso/core/extensions/process_list_extension.dart';
 import 'package:maso/domain/models/custom_exceptions/regular_process_error.dart';
 import 'package:maso/domain/models/custom_exceptions/regular_process_error_type.dart';
-import 'package:maso/domain/models/maso/list_processes_extension.dart';
 import 'package:maso/domain/models/maso/maso_file.dart';
 
 import '../models/custom_exceptions/burst_process_error.dart';
@@ -106,7 +106,8 @@ class ValidateMasoProcessUseCase {
     // Validate service time input.
     if (serviceTime == null || serviceTime <= arrivalTime) {
       return RegularProcessError(
-          errorType: RegularProcessErrorType.invalidTimeDifference, param1: name);
+          errorType: RegularProcessErrorType.invalidTimeDifference,
+          param1: name);
     }
 
     return RegularProcessError.success(); // Input is valid.
