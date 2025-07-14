@@ -1,8 +1,6 @@
-import 'package:maso/core/extensions/process_list_extension.dart';
 import 'package:maso/data/services/execution_time/base_execution_time_service.dart';
 import 'package:maso/data/services/execution_time/fifo_execution_time_service.dart';
 import 'package:maso/domain/models/machine.dart';
-import 'package:maso/domain/models/maso/process_mode.dart';
 
 import '../../core/debug_print.dart';
 import '../../domain/models/execution_setup.dart';
@@ -49,13 +47,7 @@ class ExecutionTimeCalculatorService {
         executor = FifoExecutionTimeService(filteredProcesses, executionSetup);
     }
 
-    final Machine machine;
-    switch (processes.getMode()) {
-      case ProcessesMode.regular:
-        machine = executor.calculateMachineWithRegularProcesses();
-      case ProcessesMode.burst:
-        machine = executor.calculateMachineWithBurstProcesses();
-    }
+    final Machine machine = executor.calculateMachine();
     printInDebug("La machine calculada es: $machine");
     return machine;
   }

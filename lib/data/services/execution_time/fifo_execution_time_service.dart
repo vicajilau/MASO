@@ -3,7 +3,6 @@ import 'package:maso/domain/models/machine.dart';
 import 'package:maso/domain/models/maso/i_process.dart';
 
 import '../../../domain/models/core_processor.dart';
-import '../../../domain/models/execution_setup.dart';
 import '../../../domain/models/hardware_component.dart';
 import '../../../domain/models/hardware_state.dart';
 import '../../../domain/models/maso/regular_process.dart';
@@ -14,15 +13,9 @@ import '../../../domain/models/maso/regular_process.dart';
 /// supporting only regular (non-burst) processes.
 /// It assigns processes to CPUs in order of arrival, cycling through CPUs,
 /// and handles idle times and context switches if configured.
-class FifoExecutionTimeService implements BaseExecutionTimeService {
-  @override
-  List<IProcess> processes;
-
-  @override
-  final ExecutionSetup executionSetup;
-
+class FifoExecutionTimeService extends BaseExecutionTimeService {
   /// Constructs a FIFO execution time service with the provided process list and setup.
-  FifoExecutionTimeService(this.processes, this.executionSetup);
+  FifoExecutionTimeService(super.processes, super.executionSetup);
 
   /// Calculates the execution machine for regular processes using FIFO scheduling.
   ///
