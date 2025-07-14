@@ -1,3 +1,4 @@
+import 'package:maso/core/constants/execution_time_constants.dart';
 import 'package:maso/data/services/execution_time/base_execution_time_service.dart';
 import 'package:maso/domain/models/machine.dart';
 import 'package:maso/domain/models/maso/i_process.dart';
@@ -58,7 +59,7 @@ class FifoExecutionTimeService extends BaseExecutionTimeService {
       // Add a 'free' block if there is idle time
       if (startTime > currentCpuTime) {
         final idleProcess = RegularProcess(
-          id: "FREE",
+          id: ExecutionTimeConstants.freeProcessId,
           arrivalTime: currentCpuTime,
           serviceTime: startTime - currentCpuTime,
           enabled: true,
@@ -83,7 +84,7 @@ class FifoExecutionTimeService extends BaseExecutionTimeService {
 
       if (contextSwitchTime > 0 && willThisCPUBeUsedAgain) {
         final switchProcess = RegularProcess(
-          id: "SC",
+          id: ExecutionTimeConstants.switchContextProcessId,
           arrivalTime: cpuTimes[currentCPU],
           serviceTime: contextSwitchTime,
           enabled: true,
