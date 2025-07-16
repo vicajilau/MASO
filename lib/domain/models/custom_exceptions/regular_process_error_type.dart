@@ -2,5 +2,5 @@ enum RegularProcessErrorType {
   emptyName,
   duplicatedName,
   invalidArrivalTime,
-  invalidTimeDifference;
+  invalidServiceTime;
 }

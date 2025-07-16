@@ -91,7 +91,7 @@ class _AddEditRegularProcessDialogState
         _nameError = validateInput.getDescriptionForInputError(context);
       case RegularProcessErrorType.invalidArrivalTime:
         _arrivalTimeError = validateInput.getDescriptionForInputError(context);
-      case RegularProcessErrorType.invalidTimeDifference:
+      case RegularProcessErrorType.invalidServiceTime:
         _serviceTimeError = validateInput.getDescriptionForInputError(context);
     }
     return false;

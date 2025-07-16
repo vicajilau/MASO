@@ -403,12 +403,12 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String invalidArrivalTimeBadContent(Object process) {
-    return 'El preceso ($process) tiene la propiedad arrivalTime a null o <= 0';
+    return 'El preceso ($process) tiene la propiedad arrival_time a null o <= 0';
   }
 
   @override
-  String invalidTimeDifferenceBadContent(Object process) {
-    return 'El proceso ($process) tiene la propiedad serviceTime a null o <= al arrivalTime';
+  String invalidServiceTimeBadContent(Object process) {
+    return 'El preceso ($process) tiene la propiedad service_time a null o <= 0';
   }
 
   @override

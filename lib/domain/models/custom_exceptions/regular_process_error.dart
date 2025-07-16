@@ -31,8 +31,8 @@ class RegularProcessError implements ProcessError {
         return AppLocalizations.of(context)!.duplicateNameError;
       case RegularProcessErrorType.invalidArrivalTime:
         return AppLocalizations.of(context)!.invalidArrivalTimeError;
-      case RegularProcessErrorType.invalidTimeDifference:
-        return AppLocalizations.of(context)!.invalidTimeDifferenceError;
+      case RegularProcessErrorType.invalidServiceTime:
+        return AppLocalizations.of(context)!.invalidServiceTimeError;
     }
   }
 
@@ -47,9 +47,9 @@ class RegularProcessError implements ProcessError {
       case RegularProcessErrorType.invalidArrivalTime:
         return AppLocalizations.of(context)!
             .invalidArrivalTimeBadContent(param1!);
-      case RegularProcessErrorType.invalidTimeDifference:
+      case RegularProcessErrorType.invalidServiceTime:
         return AppLocalizations.of(context)!
-            .invalidTimeDifferenceBadContent(param1!);
+            .invalidServiceTimeBadContent(param1!);
     }
   }
 }

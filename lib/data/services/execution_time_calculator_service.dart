@@ -7,6 +7,7 @@ import '../../core/debug_print.dart';
 import '../../domain/models/execution_setup.dart';
 import '../../domain/models/maso/i_process.dart';
 import '../../domain/models/scheduling_algorithm.dart';
+import 'execution_time/srtf_execution_time_service.dart';
 
 /// A class responsible for calculating the execution time of processes based on the selected scheduling algorithm.
 /// This class uses the `ExecutionSetup` to determine the algorithm to apply.
@@ -35,7 +36,7 @@ class ExecutionTimeCalculatorService {
       case SchedulingAlgorithm.shortestJobFirst:
         executor = SjfExecutionTimeService(filteredProcesses, executionSetup);
       case SchedulingAlgorithm.shortestRemainingTimeFirst:
-        executor = FifoExecutionTimeService(filteredProcesses, executionSetup);
+        executor = SrtfExecutionTimeService(filteredProcesses, executionSetup);
       case SchedulingAlgorithm.roundRobin:
         executor = FifoExecutionTimeService(filteredProcesses, executionSetup);
       case SchedulingAlgorithm.priorityBased:

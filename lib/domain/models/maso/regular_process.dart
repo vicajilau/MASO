@@ -6,7 +6,7 @@ import 'i_process.dart';
 /// `arrivalTime`, `serviceTime` and `enabled` to
 /// describe the process and its characteristics.
 class RegularProcess extends IProcess {
-  final int serviceTime;
+  int serviceTime;
 
   /// Constructor to initialize the attributes of the RegularProcess.
   RegularProcess({

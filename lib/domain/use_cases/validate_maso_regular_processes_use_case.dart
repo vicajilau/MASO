@@ -104,10 +104,9 @@ class ValidateMasoProcessUseCase {
     }
 
     // Validate service time input.
-    if (serviceTime == null || serviceTime <= arrivalTime) {
+    if (serviceTime == null || serviceTime < 1) {
       return RegularProcessError(
-          errorType: RegularProcessErrorType.invalidTimeDifference,
-          param1: name);
+          errorType: RegularProcessErrorType.invalidServiceTime, param1: name);
     }
 
     return RegularProcessError.success(); // Input is valid.

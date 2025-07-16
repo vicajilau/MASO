@@ -400,12 +400,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String invalidArrivalTimeBadContent(Object process) {
-    return 'The process ($process) has the property arrivalTime set to null or <= 0';
+    return 'The process ($process) has the property arrival_time set to null or <= 0';
   }
 
   @override
-  String invalidTimeDifferenceBadContent(Object process) {
-    return 'The process ($process) has the property serviceTime set to null or <= arrivalTime';
+  String invalidServiceTimeBadContent(Object process) {
+    return 'The process ($process) has the property service_time set to null or <= 0';
   }
 
   @override

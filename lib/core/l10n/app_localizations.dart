@@ -750,14 +750,14 @@ abstract class AppLocalizations {
   /// No description provided for @invalidArrivalTimeBadContent.
   ///
   /// In en, this message translates to:
-  /// **'The process ({process}) has the property arrivalTime set to null or <= 0'**
+  /// **'The process ({process}) has the property arrival_time set to null or <= 0'**
   String invalidArrivalTimeBadContent(Object process);
 
-  /// No description provided for @invalidTimeDifferenceBadContent.
+  /// No description provided for @invalidServiceTimeBadContent.
   ///
   /// In en, this message translates to:
-  /// **'The process ({process}) has the property serviceTime set to null or <= arrivalTime'**
-  String invalidTimeDifferenceBadContent(Object process);
+  /// **'The process ({process}) has the property service_time set to null or <= 0'**
+  String invalidServiceTimeBadContent(Object process);
 
   /// No description provided for @emptyThreadError.
   ///
