@@ -735,6 +735,12 @@ abstract class AppLocalizations {
   /// **'CPU Count'**
   String get cpuCount;
 
+  /// No description provided for @quantum.
+  ///
+  /// In en, this message translates to:
+  /// **'Quantum'**
+  String get quantum;
+
   /// No description provided for @emptyNameProcessBadContent.
   ///
   /// In en, this message translates to:

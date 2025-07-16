@@ -1,5 +1,6 @@
 import 'package:maso/data/services/execution_time/base_execution_time_service.dart';
 import 'package:maso/data/services/execution_time/fifo_execution_time_service.dart';
+import 'package:maso/data/services/execution_time/round_robin_execution_time_service.dart';
 import 'package:maso/data/services/execution_time/sjf_execution_time_service.dart';
 import 'package:maso/domain/models/machine.dart';
 
@@ -38,7 +39,7 @@ class ExecutionTimeCalculatorService {
       case SchedulingAlgorithm.shortestRemainingTimeFirst:
         executor = SrtfExecutionTimeService(filteredProcesses, executionSetup);
       case SchedulingAlgorithm.roundRobin:
-        executor = FifoExecutionTimeService(filteredProcesses, executionSetup);
+        executor = RoundRobinExecutionTimeService(filteredProcesses, executionSetup);
       case SchedulingAlgorithm.priorityBased:
         executor = FifoExecutionTimeService(filteredProcesses, executionSetup);
       case SchedulingAlgorithm.multiplePriorityQueues:

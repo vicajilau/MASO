@@ -390,6 +390,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get cpuCount => 'CPU Count';
 
   @override
+  String get quantum => 'Quantum';
+
+  @override
   String emptyNameProcessBadContent(Object index) {
     return 'The process with index ($index) needs a name (id)';
   }

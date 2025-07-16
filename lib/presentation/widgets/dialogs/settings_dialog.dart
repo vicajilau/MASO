@@ -48,6 +48,12 @@ class _SettingsDialogState extends State<SettingsDialog> {
     });
   }
 
+  void _updateQuantumCount(int newValue) {
+    setState(() {
+      currentSettings.quantum = newValue;
+    });
+  }
+
   void _onConfirm() {
     if (currentSettings.processesMode != widget.settings.processesMode) {
       _updateMode();
@@ -135,6 +141,21 @@ class _SettingsDialogState extends State<SettingsDialog> {
                       .toInt() -
                   1,
               onChanged: (value) => _updateCpuCount(value.toInt()),
+            ),
+
+            /// Slider for Quantum Count
+            _buildSlider(
+              context: context,
+              label: AppLocalizations.of(context)!.quantum,
+              value: currentSettings.quantum.toDouble(),
+              min: Settings.minQuantum.toDouble(),
+              max: Settings.maxQuantum.toDouble(),
+              divisions: ((Settings.minQuantum == 0)
+                  ? Settings.maxQuantum / (Settings.minQuantum + 1)
+                  : Settings.maxQuantum / Settings.minQuantum)
+                  .toInt() -
+                  1,
+              onChanged: (value) => _updateQuantumCount(value.toInt()),
             ),
           ],
         ),

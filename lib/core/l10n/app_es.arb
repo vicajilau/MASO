@@ -225,6 +225,7 @@
   "contextSwitchTime": "Tiempo de Cambio de Contexto",
   "ioChannels": "Canales de E/S",
   "cpuCount": "Cantidad de CPUs",
+  "quantum": "Quantum",
   "emptyNameProcessBadContent": "El proceso con el índice ({index} necesita un nombre (id))",
   "duplicatedNameProcessBadContent": "Hay dos o más procesos con el mismo nombre",
   "invalidArrivalTimeBadContent": "El preceso ({process}) tiene la propiedad arrival_time a null o <= 0",

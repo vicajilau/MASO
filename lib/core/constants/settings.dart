@@ -26,4 +26,13 @@ class Settings {
 
   /// Minimum allowable number of CPUs.
   static const int minCpuCount = 1;
+
+  /// Minimum allowable quantum.
+  static const int defaultQuantum = 1;
+
+  /// Minimum allowable number of Quantum.
+  static const int minQuantum = 1;
+
+  /// Maximum allowable number of Quantum.
+  static const int maxQuantum = 5;
 }

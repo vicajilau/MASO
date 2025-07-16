@@ -9,6 +9,7 @@ class SettingsKeys {
   static const String contextSwitchTime = 'contextSwitchTime';
   static const String ioChannels = 'ioChannels';
   static const String cpuCount = 'cpuCount';
+  static const String quantum = 'quantum';
 }
 
 /// Class to manage MASO settings, including persistence and default values
@@ -25,12 +26,16 @@ class SettingsMaso with DeepCopy<SettingsMaso> {
   /// Number of CPUs, persisted
   int cpuCount;
 
+  /// Quantum for Round Robin, persisted
+  int quantum;
+
   /// Constructor with default values
   SettingsMaso({
     this.processesMode = ProcessesMode.regular,
     this.contextSwitchTime = Settings.defaultContextSwitchTime,
     this.ioChannels = Settings.defaultIoChannels,
     this.cpuCount = Settings.defaultCpuCount,
+    this.quantum = Settings.defaultQuantum,
   });
 
   /// Loads settings from SharedPreferences, falling back to defaults
@@ -43,6 +48,7 @@ class SettingsMaso with DeepCopy<SettingsMaso> {
       ioChannels:
           prefs.getInt(SettingsKeys.ioChannels) ?? Settings.defaultIoChannels,
       cpuCount: prefs.getInt(SettingsKeys.cpuCount) ?? Settings.defaultCpuCount,
+      quantum: prefs.getInt(SettingsKeys.quantum) ?? Settings.defaultQuantum,
     );
   }
 
@@ -52,6 +58,7 @@ class SettingsMaso with DeepCopy<SettingsMaso> {
     await prefs.setInt(SettingsKeys.contextSwitchTime, contextSwitchTime);
     await prefs.setInt(SettingsKeys.ioChannels, ioChannels);
     await prefs.setInt(SettingsKeys.cpuCount, cpuCount);
+    await prefs.setInt(SettingsKeys.quantum, quantum);
   }
 
   /// Creates a deep copy of the settings
@@ -62,6 +69,7 @@ class SettingsMaso with DeepCopy<SettingsMaso> {
       contextSwitchTime: contextSwitchTime,
       ioChannels: ioChannels,
       cpuCount: cpuCount,
+      quantum: quantum,
     );
   }
 }
