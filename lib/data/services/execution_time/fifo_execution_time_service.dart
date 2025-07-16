@@ -27,9 +27,7 @@ class FifoExecutionTimeService extends BaseExecutionTimeService {
   /// - Context switch time is handled if defined in the setup.
   @override
   Machine calculateMachineWithRegularProcesses() {
-    final filteredProcesses = processes
-        .where((process) => process.enabled)
-        .toList()
+    final filteredProcesses = processes.whereType<RegularProcess>().toList()
       ..sort((a, b) => a.arrivalTime.compareTo(b.arrivalTime));
 
     final numberOfCPUs = executionSetup.settings.cpuCount;
@@ -75,8 +73,7 @@ class FifoExecutionTimeService extends BaseExecutionTimeService {
       // Add the process as a busy component
       core.add(HardwareComponent(HardwareState.busy, processCopied));
 
-      cpuTimes[currentCPU] =
-          startTime + (process as RegularProcess).serviceTime;
+      cpuTimes[currentCPU] = startTime + process.serviceTime;
 
       // Add context switch if this CPU will be reused
       final willThisCPUBeUsedAgain =
