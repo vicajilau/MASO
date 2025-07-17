@@ -7,40 +7,47 @@ import '../../../domain/models/hardware_component.dart';
 import '../../../domain/models/hardware_state.dart';
 import '../../../domain/models/maso/regular_process.dart';
 
-/// Execution time service for the Multiple Priority Queues scheduling algorithm.
+/// Execution time service implementing the Multiple Priority Queues scheduling algorithm.
 ///
-/// This algorithm organizes processes into multiple priority queues
-/// and executes higher-priority queues first, using FIFO within each queue.
-/// It supports only regular (non-burst) processes.
+/// This algorithm organizes processes into multiple priority queues,
+/// where each queue corresponds to a priority level.
+/// Processes in higher priority queues (lower numeric value) are executed first,
+/// and within each queue processes are scheduled in FIFO order.
+/// Processes are assigned to CPUs in a round-robin fashion.
+/// Idle times and context switches are handled appropriately.
+/// Supports only regular (non-burst) processes.
 class MultiplePriorityQueuesExecutionTimeService
     extends BaseExecutionTimeService {
-  /// Constructs the service with the provided process list and execution setup.
+  /// Constructs the service with the provided list of processes and execution setup.
   MultiplePriorityQueuesExecutionTimeService(
       super.processes, super.executionSetup);
 
-  /// Calculates the execution machine for regular processes using multiple priority queues.
+  /// Calculates the machine execution timeline for regular processes using
+  /// the Multiple Priority Queues scheduling algorithm.
   ///
-  /// - Processes are grouped by `priority`.
-  /// - Each queue is sorted by `arrivalTime`.
-  /// - Queues are executed in order from highest to lowest priority (lower value = higher priority).
-  /// - Processes are distributed to CPUs round-robin, handling idle and context switching.
+  /// - Processes are grouped by their `priority` value.
+  /// - Each queue is sorted by `arrivalTime` ascending.
+  /// - Queues are processed from highest priority (lowest number) to lowest.
+  /// - Processes are assigned to CPUs in round-robin order.
+  /// - Idle times and context switch times are added as needed.
+  /// - Returns a `Machine` object representing the schedule.
   @override
   Machine calculateMachineWithRegularProcesses() {
     final allProcesses = processes.whereType<RegularProcess>().toList();
     final numberOfCPUs = executionSetup.settings.cpuCount;
     final contextSwitchTime = executionSetup.settings.contextSwitchTime;
 
-    // Agrupar procesos por prioridad
+    // Group processes by priority level
     final Map<int, List<RegularProcess>> priorityQueues = {};
     for (var process in allProcesses) {
       if (!process.enabled) continue;
       priorityQueues.putIfAbsent(process.priority, () => []).add(process);
     }
 
-    // Ordenar claves de prioridad ascendente (prioridad más alta primero)
+    // Sort priorities ascending (higher priority first)
     final sortedPriorities = priorityQueues.keys.toList()..sort();
 
-    // Inicializar CPUs vacías
+    // Initialize empty CPU cores
     final List<CoreProcessor> cpus = List.generate(
       numberOfCPUs,
       (_) => CoreProcessor.empty(),
@@ -48,6 +55,7 @@ class MultiplePriorityQueuesExecutionTimeService
     final List<int> cpuTimes = List.filled(numberOfCPUs, 0);
     int currentCPU = 0;
 
+    // Process each priority queue in order
     for (final priority in sortedPriorities) {
       final queue = priorityQueues[priority]!
         ..sort((a, b) => a.arrivalTime.compareTo(b.arrivalTime));
@@ -57,11 +65,12 @@ class MultiplePriorityQueuesExecutionTimeService
         final core = cpus[currentCPU].core;
         final currentCpuTime = cpuTimes[currentCPU];
 
+        // Determine the actual start time for the process on this CPU
         final startTime = currentCpuTime < process.arrivalTime
             ? process.arrivalTime
             : currentCpuTime;
 
-        // Insertar tiempo ocioso si hace falta
+        // Add idle time if CPU is free before this process starts
         if (startTime > currentCpuTime) {
           final idleProcess = RegularProcess(
             id: ExecutionTimeConstants.freeProcessId,
@@ -72,14 +81,18 @@ class MultiplePriorityQueuesExecutionTimeService
           core.add(HardwareComponent(HardwareState.free, idleProcess));
         }
 
-        // Copiar proceso y ajustar arrivalTime
+        // Copy the process and adjust its arrival time for scheduling
         final processCopied = process.copy();
         processCopied.arrivalTime = startTime;
 
+        // Add the process as a busy component in the CPU core timeline
         core.add(HardwareComponent(HardwareState.busy, processCopied));
         cpuTimes[currentCPU] = startTime + process.serviceTime;
 
-        // Añadir cambio de contexto si se reutilizará esta CPU
+        // Determine if a context switch should be added after this process
+        // Conditions:
+        // - There are more processes in the current queue after this one, OR
+        // - There are lower priority queues to process afterward
         final willBeUsedAgain = i + numberOfCPUs < queue.length ||
             sortedPriorities.indexOf(priority) < sortedPriorities.length - 1;
 
@@ -95,6 +108,7 @@ class MultiplePriorityQueuesExecutionTimeService
           cpuTimes[currentCPU] += contextSwitchTime;
         }
 
+        // Move to the next CPU for round-robin assignment
         currentCPU = (currentCPU + 1) % numberOfCPUs;
       }
     }
@@ -102,7 +116,7 @@ class MultiplePriorityQueuesExecutionTimeService
     return Machine(cpus: cpus, ioChannels: []);
   }
 
-  /// Burst processes are not supported for this algorithm.
+  /// Burst processes are not supported in this scheduling algorithm.
   @override
   Machine calculateMachineWithBurstProcesses() {
     throw UnimplementedError();
