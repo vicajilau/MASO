@@ -7,6 +7,7 @@ import 'i_process.dart';
 /// describe the process and its characteristics.
 class RegularProcess extends IProcess {
   int serviceTime;
+  int priority;
 
   /// Constructor to initialize the attributes of the RegularProcess.
   RegularProcess({
@@ -14,6 +15,7 @@ class RegularProcess extends IProcess {
     required super.arrivalTime,
     required this.serviceTime,
     required super.enabled,
+    this.priority = 0,
   });
 
   /// Factory method that creates a RegularProcess instance from a JSON map.
@@ -24,6 +26,7 @@ class RegularProcess extends IProcess {
       arrivalTime: json['arrival_time'],
       serviceTime: json['service_time'],
       enabled: json['enabled'],
+      priority: json['priority'] ?? 0,
     );
   }
 
@@ -35,6 +38,7 @@ class RegularProcess extends IProcess {
         'arrival_time': arrivalTime,
         'service_time': serviceTime,
         'enabled': enabled,
+        'priority': priority,
       };
 
   @override
@@ -49,7 +53,8 @@ class RegularProcess extends IProcess {
         other.id == id &&
         other.arrivalTime == arrivalTime &&
         other.serviceTime == serviceTime &&
-        other.enabled == enabled;
+        other.enabled == enabled &&
+        other.priority == priority;
   }
 
   /// Overrides the `hashCode` to be consistent with the equality operator.
@@ -58,7 +63,8 @@ class RegularProcess extends IProcess {
       id.hashCode ^
       arrivalTime.hashCode ^
       serviceTime.hashCode ^
-      enabled.hashCode;
+      enabled.hashCode ^
+      priority.hashCode;
 
   @override
   RegularProcess copy() {
@@ -66,6 +72,7 @@ class RegularProcess extends IProcess {
         id: id,
         arrivalTime: arrivalTime,
         serviceTime: serviceTime,
-        enabled: enabled);
+        enabled: enabled,
+        priority: priority);
   }
 }

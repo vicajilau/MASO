@@ -1,5 +1,7 @@
 import 'package:maso/data/services/execution_time/base_execution_time_service.dart';
 import 'package:maso/data/services/execution_time/fifo_execution_time_service.dart';
+import 'package:maso/data/services/execution_time/multiple_priority_queues_with_feedback_execution_time_service.dart';
+import 'package:maso/data/services/execution_time/priority_execution_time_service.dart';
 import 'package:maso/data/services/execution_time/round_robin_execution_time_service.dart';
 import 'package:maso/data/services/execution_time/sjf_execution_time_service.dart';
 import 'package:maso/domain/models/machine.dart';
@@ -8,6 +10,7 @@ import '../../core/debug_print.dart';
 import '../../domain/models/execution_setup.dart';
 import '../../domain/models/maso/i_process.dart';
 import '../../domain/models/scheduling_algorithm.dart';
+import 'execution_time/multiple_priority_queues_execution_time_service.dart';
 import 'execution_time/srtf_execution_time_service.dart';
 
 /// A class responsible for calculating the execution time of processes based on the selected scheduling algorithm.
@@ -39,13 +42,17 @@ class ExecutionTimeCalculatorService {
       case SchedulingAlgorithm.shortestRemainingTimeFirst:
         executor = SrtfExecutionTimeService(filteredProcesses, executionSetup);
       case SchedulingAlgorithm.roundRobin:
-        executor = RoundRobinExecutionTimeService(filteredProcesses, executionSetup);
+        executor =
+            RoundRobinExecutionTimeService(filteredProcesses, executionSetup);
       case SchedulingAlgorithm.priorityBased:
-        executor = FifoExecutionTimeService(filteredProcesses, executionSetup);
+        executor =
+            PriorityExecutionTimeService(filteredProcesses, executionSetup);
       case SchedulingAlgorithm.multiplePriorityQueues:
-        executor = FifoExecutionTimeService(filteredProcesses, executionSetup);
+        executor = MultiplePriorityQueuesExecutionTimeService(
+            filteredProcesses, executionSetup);
       case SchedulingAlgorithm.multiplePriorityQueuesWithFeedback:
-        executor = FifoExecutionTimeService(filteredProcesses, executionSetup);
+        executor = MultiplePriorityQueuesWithFeedbackExecutionTimeService(
+            filteredProcesses, executionSetup);
       case SchedulingAlgorithm.timeLimit:
         executor = FifoExecutionTimeService(filteredProcesses, executionSetup);
     }

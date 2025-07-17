@@ -27,7 +27,7 @@ class Settings {
   /// Minimum allowable number of CPUs.
   static const int minCpuCount = 1;
 
-  /// Minimum allowable quantum.
+  /// Default number of quantum.
   static const int defaultQuantum = 1;
 
   /// Minimum allowable number of Quantum.
@@ -35,4 +35,7 @@ class Settings {
 
   /// Maximum allowable number of Quantum.
   static const int maxQuantum = 5;
+
+  /// Default array of queueQuanta per queue in multi-level feedback queue.
+  static const List<int> defaultQueueQuanta = [];
 }

@@ -10,6 +10,7 @@ class SettingsKeys {
   static const String ioChannels = 'ioChannels';
   static const String cpuCount = 'cpuCount';
   static const String quantum = 'quantum';
+  static const String queueQuanta = 'queueQuanta';
 }
 
 /// Class to manage MASO settings, including persistence and default values
@@ -29,6 +30,9 @@ class SettingsMaso with DeepCopy<SettingsMaso> {
   /// Quantum for Round Robin, persisted
   int quantum;
 
+  /// List of queueQuanta per queue in multi-level feedback queue
+  List<int> queueQuanta;
+
   /// Constructor with default values
   SettingsMaso({
     this.processesMode = ProcessesMode.regular,
@@ -36,11 +40,13 @@ class SettingsMaso with DeepCopy<SettingsMaso> {
     this.ioChannels = Settings.defaultIoChannels,
     this.cpuCount = Settings.defaultCpuCount,
     this.quantum = Settings.defaultQuantum,
+    this.queueQuanta = Settings.defaultQueueQuanta,
   });
 
   /// Loads settings from SharedPreferences, falling back to defaults
   static Future<SettingsMaso> loadFromPreferences(ProcessesMode mode) async {
     final prefs = await SharedPreferences.getInstance();
+    final listStr = prefs.getStringList(SettingsKeys.queueQuanta);
     return SettingsMaso(
       processesMode: mode,
       contextSwitchTime: prefs.getInt(SettingsKeys.contextSwitchTime) ??
@@ -49,6 +55,8 @@ class SettingsMaso with DeepCopy<SettingsMaso> {
           prefs.getInt(SettingsKeys.ioChannels) ?? Settings.defaultIoChannels,
       cpuCount: prefs.getInt(SettingsKeys.cpuCount) ?? Settings.defaultCpuCount,
       quantum: prefs.getInt(SettingsKeys.quantum) ?? Settings.defaultQuantum,
+      queueQuanta:
+          listStr?.map(int.parse).toList() ?? Settings.defaultQueueQuanta,
     );
   }
 
@@ -59,6 +67,10 @@ class SettingsMaso with DeepCopy<SettingsMaso> {
     await prefs.setInt(SettingsKeys.ioChannels, ioChannels);
     await prefs.setInt(SettingsKeys.cpuCount, cpuCount);
     await prefs.setInt(SettingsKeys.quantum, quantum);
+    await prefs.setStringList(
+      SettingsKeys.queueQuanta,
+      queueQuanta.map((e) => e.toString()).toList(),
+    );
   }
 
   /// Creates a deep copy of the settings
