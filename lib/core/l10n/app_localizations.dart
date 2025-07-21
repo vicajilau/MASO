@@ -735,17 +735,29 @@ abstract class AppLocalizations {
   /// **'CPU Count'**
   String get cpuCount;
 
-  /// No description provided for @quantum.
+  /// No description provided for @quantumLabel.
   ///
   /// In en, this message translates to:
   /// **'Quantum'**
-  String get quantum;
+  String get quantumLabel;
 
   /// No description provided for @invalidQuantumError.
   ///
   /// In en, this message translates to:
   /// **'Please enter a valid quantum (greater than 0).'**
   String get invalidQuantumError;
+
+  /// No description provided for @queueQuantaLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Quanta List'**
+  String get queueQuantaLabel;
+
+  /// No description provided for @invalidQueueQuantaError.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter valid quantum values (greater than 0) separated with commas.'**
+  String get invalidQueueQuantaError;
 
   /// No description provided for @emptyNameProcessBadContent.
   ///

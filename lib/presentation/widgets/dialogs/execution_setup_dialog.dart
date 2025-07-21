@@ -19,6 +19,7 @@ class _ExecutionSetupDialogState extends State<ExecutionSetupDialog> {
   SchedulingAlgorithm _selectedAlgorithm =
       SchedulingAlgorithm.firstComeFirstServed;
   final TextEditingController _quantumController = TextEditingController();
+  final TextEditingController _queueQuantaController = TextEditingController();
 
   @override
   void initState() {
@@ -31,6 +32,10 @@ class _ExecutionSetupDialogState extends State<ExecutionSetupDialog> {
       if (_selectedAlgorithm == SchedulingAlgorithm.roundRobin) {
         final previousQuantum = _previousES!.settings.quantum;
         _quantumController.text = previousQuantum.toString();
+      } else if (_selectedAlgorithm ==
+          SchedulingAlgorithm.multiplePriorityQueuesWithFeedback) {
+        final previousQueueQuanta = _previousES!.settings.queueQuanta;
+        _queueQuantaController.text = previousQueueQuanta.toString();
       }
     }
   }
@@ -38,6 +43,7 @@ class _ExecutionSetupDialogState extends State<ExecutionSetupDialog> {
   @override
   void dispose() {
     _quantumController.dispose();
+    _queueQuantaController.dispose();
     super.dispose();
   }
 
@@ -85,7 +91,17 @@ class _ExecutionSetupDialogState extends State<ExecutionSetupDialog> {
                 controller: _quantumController,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
-                  labelText: AppLocalizations.of(context)!.quantum,
+                  labelText: AppLocalizations.of(context)!.quantumLabel,
+                  border: const OutlineInputBorder(),
+                ),
+              ),
+            if (_selectedAlgorithm ==
+                SchedulingAlgorithm.multiplePriorityQueuesWithFeedback)
+              TextFormField(
+                controller: _queueQuantaController,
+                keyboardType: TextInputType.text,
+                decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context)!.queueQuantaLabel,
                   border: const OutlineInputBorder(),
                 ),
               ),
@@ -113,9 +129,29 @@ class _ExecutionSetupDialogState extends State<ExecutionSetupDialog> {
                 return;
               }
               settings.quantum = parsed;
-              await settings.saveToPreferences();
-              ServiceLocator.instance.registerSettings(settings);
+            } else if (_selectedAlgorithm ==
+                SchedulingAlgorithm.multiplePriorityQueuesWithFeedback) {
+              final parsed = _queueQuantaController.text
+                  .split(',')
+                  .map((e) => int.tryParse(e.trim()))
+                  .toList();
+
+              // Check if there is any null or <= 0 value
+              final isInvalid = parsed.any((e) => e == null || e <= 0);
+              if (isInvalid) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                        AppLocalizations.of(context)!.invalidQueueQuantaError),
+                  ),
+                );
+                return;
+              }
+
+              settings.queueQuanta = parsed.cast<int>();
             }
+            await settings.saveToPreferences();
+            ServiceLocator.instance.registerSettings(settings);
 
             if (!context.mounted) return;
             context.pop(ExecutionSetup(

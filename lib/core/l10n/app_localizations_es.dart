@@ -393,11 +393,18 @@ class AppLocalizationsEs extends AppLocalizations {
   String get cpuCount => 'Cantidad de CPUs';
 
   @override
-  String get quantum => 'Quantum';
+  String get quantumLabel => 'Quantum';
 
   @override
   String get invalidQuantumError =>
       'Por favor, ingresa un valor de quantum válido (mayor que 0).';
+
+  @override
+  String get queueQuantaLabel => 'Lista de Quantums';
+
+  @override
+  String get invalidQueueQuantaError =>
+      'Por favor, ingresa valores de quantum válidos (mayores que 0) separados con comas.';
 
   @override
   String emptyNameProcessBadContent(Object index) {
