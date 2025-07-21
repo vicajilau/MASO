@@ -228,6 +228,8 @@
   "invalidQuantumError": "Please enter a valid quantum (greater than 0).",
   "queueQuantaLabel": "Quanta List",
   "invalidQueueQuantaError": "Please enter valid quantum values (greater than 0) separated with commas.",
+  "timeLimitLabel": "Time Limit",
+  "invalidTimeLimitError": "Please enter a valid time limit (greater than 0).",
   "emptyNameProcessBadContent": "The process with index ({index}) needs a name (id)",
   "duplicatedNameProcessBadContent": "There are two or more processes with the same name",
   "invalidArrivalTimeBadContent": "The process ({process}) has the property arrival_time set to null or <= 0",

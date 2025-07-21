@@ -4,6 +4,7 @@ import 'package:maso/data/services/execution_time/multiple_priority_queues_with_
 import 'package:maso/data/services/execution_time/priority_execution_time_service.dart';
 import 'package:maso/data/services/execution_time/round_robin_execution_time_service.dart';
 import 'package:maso/data/services/execution_time/sjf_execution_time_service.dart';
+import 'package:maso/data/services/execution_time/time_limit_execution_time_service.dart';
 import 'package:maso/domain/models/machine.dart';
 
 import '../../core/debug_print.dart';
@@ -54,7 +55,7 @@ class ExecutionTimeCalculatorService {
         executor = MultiplePriorityQueuesWithFeedbackExecutionTimeService(
             filteredProcesses, executionSetup);
       case SchedulingAlgorithm.timeLimit:
-        executor = FifoExecutionTimeService(filteredProcesses, executionSetup);
+        executor = TimeLimitExecutionTimeService(filteredProcesses, executionSetup);
     }
 
     final Machine machine = executor.calculateMachine();

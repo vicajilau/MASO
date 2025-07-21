@@ -33,9 +33,9 @@ class Settings {
   /// Minimum allowable number of Quantum.
   static const int minQuantum = 1;
 
-  /// Maximum allowable number of Quantum.
-  static const int maxQuantum = 5;
-
   /// Default array of queueQuanta per queue in multi-level feedback queue.
   static const List<int> defaultQueueQuanta = [];
+
+  static const int defaultTimeLimit = 1;
+  static const int minTimeLimit = 1;
 }

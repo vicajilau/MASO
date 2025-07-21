@@ -753,6 +753,18 @@ abstract class AppLocalizations {
   /// **'Please enter valid quantum values (greater than 0) separated with commas.'**
   String get invalidQueueQuantaError;
 
+  /// No description provided for @timeLimitLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Time Limit'**
+  String get timeLimitLabel;
+
+  /// No description provided for @invalidTimeLimitError.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid time limit (greater than 0).'**
+  String get invalidTimeLimitError;
+
   /// No description provided for @emptyNameProcessBadContent.
   ///
   /// In en, this message translates to:

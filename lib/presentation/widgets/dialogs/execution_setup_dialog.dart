@@ -20,6 +20,7 @@ class _ExecutionSetupDialogState extends State<ExecutionSetupDialog> {
       SchedulingAlgorithm.firstComeFirstServed;
   final TextEditingController _quantumController = TextEditingController();
   final TextEditingController _queueQuantaController = TextEditingController();
+  final TextEditingController _timeLimitController = TextEditingController();
 
   @override
   void initState() {
@@ -30,6 +31,7 @@ class _ExecutionSetupDialogState extends State<ExecutionSetupDialog> {
       _quantumController.text = _previousES!.settings.quantum.toString();
       _queueQuantaController.text =
           _previousES!.settings.queueQuanta.toString();
+      _timeLimitController.text = _previousES!.settings.timeLimit.toString();
     }
   }
 
@@ -37,6 +39,7 @@ class _ExecutionSetupDialogState extends State<ExecutionSetupDialog> {
   void dispose() {
     _quantumController.dispose();
     _queueQuantaController.dispose();
+    _timeLimitController.dispose();
     super.dispose();
   }
 
@@ -98,6 +101,15 @@ class _ExecutionSetupDialogState extends State<ExecutionSetupDialog> {
                   border: const OutlineInputBorder(),
                 ),
               ),
+            if (_selectedAlgorithm == SchedulingAlgorithm.timeLimit)
+              TextFormField(
+                controller: _timeLimitController,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context)!.timeLimitLabel,
+                  border: const OutlineInputBorder(),
+                ),
+              ),
           ],
         ),
       ),
@@ -144,6 +156,18 @@ class _ExecutionSetupDialogState extends State<ExecutionSetupDialog> {
               }
 
               settings.queueQuanta = parsed.cast<int>();
+            } else if (_selectedAlgorithm == SchedulingAlgorithm.timeLimit) {
+              final parsed = int.tryParse(_timeLimitController.text);
+              if (parsed == null || parsed <= 0) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                        AppLocalizations.of(context)!.invalidTimeLimitError),
+                  ),
+                );
+                return;
+              }
+              settings.timeLimit = parsed;
             }
             await settings.saveToPreferences();
             ServiceLocator.instance.registerSettings(settings);

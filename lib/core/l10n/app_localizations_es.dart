@@ -404,6 +404,13 @@ class AppLocalizationsEs extends AppLocalizations {
       'Por favor, ingresa valores de quantum válidos (mayores que 0) separados con comas.';
 
   @override
+  String get timeLimitLabel => 'Límite de tiempo';
+
+  @override
+  String get invalidTimeLimitError =>
+      'Por favor, ingresa una duración máxima por turno válida (mayor que 0).';
+
+  @override
   String emptyNameProcessBadContent(Object index) {
     return 'El proceso con el índice ($index necesita un nombre (id))';
   }

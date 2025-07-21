@@ -11,6 +11,7 @@ class SettingsKeys {
   static const String cpuCount = 'cpuCount';
   static const String quantum = 'quantum';
   static const String queueQuanta = 'queueQuanta';
+  static const String timeLimit = 'timeLimit';
 }
 
 /// Class to manage MASO settings, including persistence and default values
@@ -33,15 +34,18 @@ class SettingsMaso with DeepCopy<SettingsMaso> {
   /// List of queueQuanta per queue in multi-level feedback queue
   List<int> queueQuanta;
 
+  /// Time limit for Time Limit
+  int timeLimit;
+
   /// Constructor with default values
-  SettingsMaso({
-    this.processesMode = ProcessesMode.regular,
-    this.contextSwitchTime = Settings.defaultContextSwitchTime,
-    this.ioChannels = Settings.defaultIoChannels,
-    this.cpuCount = Settings.defaultCpuCount,
-    this.quantum = Settings.defaultQuantum,
-    this.queueQuanta = Settings.defaultQueueQuanta,
-  });
+  SettingsMaso(
+      {this.processesMode = ProcessesMode.regular,
+      this.contextSwitchTime = Settings.defaultContextSwitchTime,
+      this.ioChannels = Settings.defaultIoChannels,
+      this.cpuCount = Settings.defaultCpuCount,
+      this.quantum = Settings.defaultQuantum,
+      this.queueQuanta = Settings.defaultQueueQuanta,
+      this.timeLimit = Settings.defaultTimeLimit});
 
   /// Loads settings from SharedPreferences, falling back to defaults
   static Future<SettingsMaso> loadFromPreferences(ProcessesMode mode) async {
@@ -57,6 +61,8 @@ class SettingsMaso with DeepCopy<SettingsMaso> {
       quantum: prefs.getInt(SettingsKeys.quantum) ?? Settings.defaultQuantum,
       queueQuanta:
           listStr?.map(int.parse).toList() ?? Settings.defaultQueueQuanta,
+      timeLimit:
+          prefs.getInt(SettingsKeys.timeLimit) ?? Settings.defaultTimeLimit,
     );
   }
 
@@ -71,6 +77,7 @@ class SettingsMaso with DeepCopy<SettingsMaso> {
       SettingsKeys.queueQuanta,
       queueQuanta.map((e) => e.toString()).toList(),
     );
+    await prefs.setInt(SettingsKeys.timeLimit, timeLimit);
   }
 
   /// Creates a deep copy of the settings
@@ -82,6 +89,7 @@ class SettingsMaso with DeepCopy<SettingsMaso> {
       ioChannels: ioChannels,
       cpuCount: cpuCount,
       quantum: quantum,
+      timeLimit: timeLimit,
     );
   }
 }
