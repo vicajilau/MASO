@@ -741,6 +741,12 @@ abstract class AppLocalizations {
   /// **'Quantum'**
   String get quantum;
 
+  /// No description provided for @invalidQuantumError.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid quantum (greater than 0).'**
+  String get invalidQuantumError;
+
   /// No description provided for @emptyNameProcessBadContent.
   ///
   /// In en, this message translates to:

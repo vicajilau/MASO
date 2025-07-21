@@ -15,30 +15,37 @@ class ExecutionSetupDialog extends StatefulWidget {
 }
 
 class _ExecutionSetupDialogState extends State<ExecutionSetupDialog> {
-  // The previous ExecutionSetup instance if available (can be null)
   ExecutionSetup? _previousES;
-
-  // The selected scheduling algorithm, defaulting to 'firstComeFirstServed'
   SchedulingAlgorithm _selectedAlgorithm =
       SchedulingAlgorithm.firstComeFirstServed;
+  final TextEditingController _quantumController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-
-    // Check if ExecutionSetup is registered in the service locator before accessing it
     if (ServiceLocator.instance.getIt.isRegistered<ExecutionSetup>()) {
-      // Assign the previous ExecutionSetup and update the selected algorithm
       _previousES = ServiceLocator.instance.getIt<ExecutionSetup>();
       _selectedAlgorithm = _previousES!.algorithm;
+
+      // If there was already a quantum, fill it in
+      if (_selectedAlgorithm == SchedulingAlgorithm.roundRobin) {
+        final previousQuantum = _previousES!.settings.quantum;
+        _quantumController.text = previousQuantum.toString();
+      }
     }
+  }
+
+  @override
+  void dispose() {
+    _quantumController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     // Get the screen width (you can also adjust the multiplier based on your design)
     double screenWidth = MediaQuery.of(context).size.width;
-    double maxWidth = screenWidth * 0.5; // 50% of the screen width as max width
+    double maxWidth = screenWidth * 0.5;
 
     return AlertDialog(
       title: Text(AppLocalizations.of(context)!.executionSetupTitle),
@@ -54,27 +61,34 @@ class _ExecutionSetupDialogState extends State<ExecutionSetupDialog> {
                   _selectedAlgorithm = newValue!;
                 });
               },
-              items: SchedulingAlgorithm.values
-                  .map((algorithm) => DropdownMenuItem<SchedulingAlgorithm>(
-                        value: algorithm,
-                        child: ConstrainedBox(
-                          // Limit width dynamically
-                          constraints:
-                              BoxConstraints(maxWidth: maxWidth), // Adapt width
-                          child: Text(
-                            AppLocalizations.of(context)!
-                                .algorithmLabel(algorithm.name),
-                            overflow: TextOverflow
-                                .ellipsis, // Handle overflow with ellipsis
-                          ),
-                        ),
-                      ))
-                  .toList(),
+              items: SchedulingAlgorithm.values.map((algorithm) {
+                return DropdownMenuItem<SchedulingAlgorithm>(
+                  value: algorithm,
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(maxWidth: maxWidth),
+                    child: Text(
+                      AppLocalizations.of(context)!
+                          .algorithmLabel(algorithm.name),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                );
+              }).toList(),
               decoration: InputDecoration(
                 labelText: AppLocalizations.of(context)!.selectAlgorithmLabel,
                 border: OutlineInputBorder(),
               ),
             ),
+            const SizedBox(height: 16),
+            if (_selectedAlgorithm == SchedulingAlgorithm.roundRobin)
+              TextFormField(
+                controller: _quantumController,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context)!.quantum,
+                  border: const OutlineInputBorder(),
+                ),
+              ),
           ],
         ),
       ),
@@ -84,10 +98,30 @@ class _ExecutionSetupDialogState extends State<ExecutionSetupDialog> {
           child: Text(AppLocalizations.of(context)!.cancelButton),
         ),
         ElevatedButton(
-          onPressed: () {
+          onPressed: () async {
+            final settings = ServiceLocator.instance.getIt<SettingsMaso>();
+
+            if (_selectedAlgorithm == SchedulingAlgorithm.roundRobin) {
+              final parsed = int.tryParse(_quantumController.text);
+              if (parsed == null || parsed <= 0) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content:
+                        Text(AppLocalizations.of(context)!.invalidQuantumError),
+                  ),
+                );
+                return;
+              }
+              settings.quantum = parsed;
+              await settings.saveToPreferences();
+              ServiceLocator.instance.registerSettings(settings);
+            }
+
+            if (!context.mounted) return;
             context.pop(ExecutionSetup(
-                algorithm: _selectedAlgorithm,
-                settings: ServiceLocator.instance.getIt<SettingsMaso>()));
+              algorithm: _selectedAlgorithm,
+              settings: settings,
+            ));
           },
           child: Text(AppLocalizations.of(context)!.acceptButton),
         ),

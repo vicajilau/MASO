@@ -396,6 +396,10 @@ class AppLocalizationsEs extends AppLocalizations {
   String get quantum => 'Quantum';
 
   @override
+  String get invalidQuantumError =>
+      'Por favor, ingresa un valor de quantum válido (mayor que 0).';
+
+  @override
   String emptyNameProcessBadContent(Object index) {
     return 'El proceso con el índice ($index necesita un nombre (id))';
   }
