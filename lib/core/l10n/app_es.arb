@@ -173,7 +173,6 @@
   "saveTooltip": "Guardar el archivo",
   "saveDisabledTooltip": "No hay cambios para guardar",
   "executeTooltip": "Ejecutar el proceso",
-  "executeDisabledTooltip": "Agrega procesos para ejecutar",
   "addTooltip": "Agregar un nuevo proceso",
   "backSemanticLabel": "Botón de volver",
   "createFileTooltip": "Crear un nuevo archivo MASO",

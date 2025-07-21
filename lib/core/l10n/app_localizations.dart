@@ -422,12 +422,6 @@ abstract class AppLocalizations {
   /// **'Execute the process'**
   String get executeTooltip;
 
-  /// No description provided for @executeDisabledTooltip.
-  ///
-  /// In en, this message translates to:
-  /// **'Add processes to execute'**
-  String get executeDisabledTooltip;
-
   /// No description provided for @addTooltip.
   ///
   /// In en, this message translates to:

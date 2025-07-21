@@ -213,9 +213,6 @@ class AppLocalizationsEs extends AppLocalizations {
   String get executeTooltip => 'Ejecutar el proceso';
 
   @override
-  String get executeDisabledTooltip => 'Agrega procesos para ejecutar';
-
-  @override
   String get addTooltip => 'Agregar un nuevo proceso';
 
   @override

@@ -170,12 +170,11 @@ class _FileLoadedScreenState extends State<FileLoadedScreen> {
                   maso: cachedMasoFile,
                   onFileChange: _checkFileChange,
                 ),
-                floatingActionButton: FloatingActionButton(
-                  tooltip: cachedMasoFile.processes.elements.isNotEmpty
-                      ? AppLocalizations.of(context)!.executeTooltip
-                      : AppLocalizations.of(context)!.executeDisabledTooltip,
-                  onPressed: cachedMasoFile.processes.elements.isNotEmpty
-                      ? () async {
+                floatingActionButton: cachedMasoFile
+                        .processes.elements.isNotEmpty
+                    ? FloatingActionButton(
+                        tooltip: AppLocalizations.of(context)!.executeTooltip,
+                        onPressed: () async {
                           final executionSetup =
                               await showDialog<ExecutionSetup>(
                             context: context,
@@ -191,11 +190,11 @@ class _FileLoadedScreenState extends State<FileLoadedScreen> {
                               context.push(AppRoutes.masoFileExecutionScreen);
                             }
                           }
-                        }
-                      : null,
-                  child: const Icon(Icons
-                      .play_arrow), // Disable button if file hasn't changed
-                ),
+                        },
+                        child: const Icon(Icons
+                            .play_arrow), // Disable button if file hasn't changed
+                      )
+                    : null,
               );
             },
           ),
