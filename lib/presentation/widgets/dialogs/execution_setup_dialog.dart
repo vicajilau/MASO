@@ -27,16 +27,9 @@ class _ExecutionSetupDialogState extends State<ExecutionSetupDialog> {
     if (ServiceLocator.instance.getIt.isRegistered<ExecutionSetup>()) {
       _previousES = ServiceLocator.instance.getIt<ExecutionSetup>();
       _selectedAlgorithm = _previousES!.algorithm;
-
-      // If there was already a quantum, fill it in
-      if (_selectedAlgorithm == SchedulingAlgorithm.roundRobin) {
-        final previousQuantum = _previousES!.settings.quantum;
-        _quantumController.text = previousQuantum.toString();
-      } else if (_selectedAlgorithm ==
-          SchedulingAlgorithm.multiplePriorityQueuesWithFeedback) {
-        final previousQueueQuanta = _previousES!.settings.queueQuanta;
-        _queueQuantaController.text = previousQueueQuanta.toString();
-      }
+      _quantumController.text = _previousES!.settings.quantum.toString();
+      _queueQuantaController.text =
+          _previousES!.settings.queueQuanta.toString();
     }
   }
 
@@ -132,6 +125,8 @@ class _ExecutionSetupDialogState extends State<ExecutionSetupDialog> {
             } else if (_selectedAlgorithm ==
                 SchedulingAlgorithm.multiplePriorityQueuesWithFeedback) {
               final parsed = _queueQuantaController.text
+                  .replaceAll('[', '')
+                  .replaceAll(']', '')
                   .split(',')
                   .map((e) => int.tryParse(e.trim()))
                   .toList();
