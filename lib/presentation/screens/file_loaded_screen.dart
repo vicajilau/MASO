@@ -191,8 +191,7 @@ class _FileLoadedScreenState extends State<FileLoadedScreen> {
                             }
                           }
                         },
-                        child: const Icon(Icons
-                            .play_arrow), // Disable button if file hasn't changed
+                        child: const Icon(Icons.play_arrow),
                       )
                     : null,
               );
