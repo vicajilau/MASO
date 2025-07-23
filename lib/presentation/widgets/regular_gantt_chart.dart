@@ -89,12 +89,11 @@ class RegularGanttChart extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
             width: 60,
             alignment: Alignment.centerLeft,
-            padding: const EdgeInsets.only(right: 8),
             child: Text(
               "CPU $cpuNumber",
               style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
@@ -172,6 +171,7 @@ class RegularGanttChart extends StatelessWidget {
   Widget _buildCell(String text, HardwareState state, int timeUnits,
       {double spacingRight = 5.0}) {
     final baseColor = _colorForState(state);
+    final isFree = state == HardwareState.free;
 
     return Padding(
       padding: EdgeInsets.only(right: spacingRight),
@@ -180,14 +180,17 @@ class RegularGanttChart extends StatelessWidget {
         height: 50,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: baseColor.withValues(alpha: 0.3),
-          border: Border.all(color: baseColor),
+          color: isFree ? null : baseColor.withValues(alpha: 0.3),
+          border: isFree ? null : Border.all(color: baseColor),
           borderRadius: BorderRadius.circular(4),
         ),
-        child: Text(
-          text,
-          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-        ),
+        child: isFree
+            ? null
+            : Text(
+                text,
+                style:
+                    const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+              ),
       ),
     );
   }
@@ -198,7 +201,7 @@ class RegularGanttChart extends StatelessWidget {
       case HardwareState.busy:
         return Colors.green;
       case HardwareState.free:
-        return Colors.grey;
+        return Colors.transparent;
       case HardwareState.switchingContext:
         return Colors.orange;
     }
