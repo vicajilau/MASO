@@ -121,6 +121,21 @@ class RoundRobinExecutionTimeService extends BaseExecutionTimeService {
           state.executionRemaining = executionTime;
           state.executedQuantum = executionTime;
         }
+
+        // If CPU is idle and queue is empty, mark as FREE
+        if (state.executing == null &&
+            queue.isEmpty &&
+            state.contextSwitchRemaining == 0) {
+          core.add(HardwareComponent(
+            HardwareState.free,
+            RegularProcess(
+              id: ExecutionTimeConstants.freeProcessId,
+              arrivalTime: time,
+              serviceTime: 1,
+              enabled: true,
+            ),
+          ));
+        }
       }
       time++;
     }
