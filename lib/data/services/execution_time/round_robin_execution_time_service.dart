@@ -1,5 +1,4 @@
 import 'package:maso/core/constants/execution_time_constants.dart';
-import 'package:maso/core/debug_print.dart';
 import 'package:maso/data/services/execution_time/base_execution_time_service.dart';
 import 'package:maso/domain/models/machine.dart';
 
@@ -55,8 +54,6 @@ class RoundRobinExecutionTimeService extends BaseExecutionTimeService {
       });
       if (arrivals.isNotEmpty) {
         queue.addAll(arrivals);
-        printInDebug(
-            '[t=$time] ➕ Llegan procesos: ${arrivals.map((e) => e.id)}');
       }
 
       // Run logic for each CPU
@@ -67,9 +64,6 @@ class RoundRobinExecutionTimeService extends BaseExecutionTimeService {
         // If CPU is in context switch, reduce its duration
         if (state.contextSwitchRemaining > 0) {
           state.contextSwitchRemaining--;
-          if (state.contextSwitchRemaining == 0) {
-            printInDebug('[t=$time] 🛑 CPU $cpu finaliza cambio de contexto');
-          }
           continue;
         }
 
@@ -85,11 +79,6 @@ class RoundRobinExecutionTimeService extends BaseExecutionTimeService {
               requeued.remainingTime = remaining;
               requeued.arrivalTime = time;
               queue.add(requeued);
-              printInDebug(
-                  '[t=$time] 🔁 Proceso ${requeued.id} reencolado con $remaining ut restantes');
-            } else {
-              printInDebug(
-                  '[t=$time] ✅ Proceso ${finished.id} completado en CPU $cpu');
             }
 
             // Register execution completion
@@ -111,8 +100,6 @@ class RoundRobinExecutionTimeService extends BaseExecutionTimeService {
               core.add(HardwareComponent(
                   HardwareState.switchingContext, switchProcess));
               state.contextSwitchRemaining = contextSwitchTime;
-              printInDebug(
-                  '[t=$time] 🔄 Context switch en CPU $cpu durante $contextSwitchTime ut');
             }
           }
           continue;
@@ -133,17 +120,9 @@ class RoundRobinExecutionTimeService extends BaseExecutionTimeService {
           state.executing = process;
           state.executionRemaining = executionTime;
           state.executedQuantum = executionTime;
-
-          printInDebug(
-              '[t=$time] ⚙️ CPU $cpu ejecuta ${process.id} durante $executionTime ut');
         }
       }
-
       time++;
-    }
-
-    for (int i = 0; i < numberOfCPUs; i++) {
-      printInDebug('🧠 CPU $i finalizó en t=$time');
     }
 
     return Machine(cpus: cpus, ioChannels: []);
