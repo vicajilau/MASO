@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:maso/domain/models/hardware_state.dart';
 import 'package:maso/domain/models/maso/regular_process.dart';
 
+import '../../core/color_manager.dart';
 import '../../domain/models/machine.dart';
 
 /// Widget that renders a Gantt chart with time labels and multiple CPU rows.
 class RegularGanttChart extends StatelessWidget {
   final Machine machine;
   final double cellSpacing = 5.0;
+  final colorManager = ColorManager();
 
-  const RegularGanttChart({super.key, required this.machine});
+  RegularGanttChart({super.key, required this.machine});
 
   @override
   Widget build(BuildContext context) {
@@ -170,7 +172,7 @@ class RegularGanttChart extends StatelessWidget {
   /// Builds a single process/state block.
   Widget _buildCell(String text, HardwareState state, int timeUnits,
       {double spacingRight = 5.0}) {
-    final baseColor = _colorForState(state);
+    final baseColor = _colorForState(state, text);
     final isFree = state == HardwareState.free;
 
     return Padding(
@@ -196,10 +198,10 @@ class RegularGanttChart extends StatelessWidget {
   }
 
   /// Maps each HardwareState to a color.
-  Color _colorForState(HardwareState state) {
+  Color _colorForState(HardwareState state, String text) {
     switch (state) {
       case HardwareState.busy:
-        return Colors.green;
+        return colorManager.getColorForProcess(text);
       case HardwareState.free:
         return Colors.transparent;
       case HardwareState.switchingContext:
