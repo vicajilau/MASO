@@ -8,6 +8,7 @@ import 'i_process.dart';
 class RegularProcess extends IProcess {
   int serviceTime;
   int priority;
+  int remainingTime;
 
   /// Constructor to initialize the attributes of the RegularProcess.
   RegularProcess({
@@ -16,7 +17,8 @@ class RegularProcess extends IProcess {
     required this.serviceTime,
     required super.enabled,
     this.priority = 0,
-  });
+    int? remainingTime,
+  }) : remainingTime = remainingTime ?? serviceTime;
 
   /// Factory method that creates a RegularProcess instance from a JSON map.
   /// This is useful for deserialization when data is read from JSON format.
@@ -43,7 +45,7 @@ class RegularProcess extends IProcess {
 
   @override
   String toString() =>
-      "Regular Process: {id: $id, arrivalTime: $arrivalTime, serviceTime: $serviceTime, enabled: $enabled}";
+      "Regular Process: {id: $id, arrivalTime: $arrivalTime, serviceTime: $serviceTime, enabled: $enabled, priority: $priority, remainingTime: $remainingTime}";
 
   /// Overrides the equality operator to compare `RegularProcess` instances based on their values.
   @override
@@ -54,7 +56,8 @@ class RegularProcess extends IProcess {
         other.arrivalTime == arrivalTime &&
         other.serviceTime == serviceTime &&
         other.enabled == enabled &&
-        other.priority == priority;
+        other.priority == priority &&
+        other.remainingTime == remainingTime;
   }
 
   /// Overrides the `hashCode` to be consistent with the equality operator.
@@ -64,7 +67,8 @@ class RegularProcess extends IProcess {
       arrivalTime.hashCode ^
       serviceTime.hashCode ^
       enabled.hashCode ^
-      priority.hashCode;
+      priority.hashCode ^
+      remainingTime.hashCode;
 
   @override
   RegularProcess copy() {
@@ -73,6 +77,7 @@ class RegularProcess extends IProcess {
         arrivalTime: arrivalTime,
         serviceTime: serviceTime,
         enabled: enabled,
-        priority: priority);
+        priority: priority,
+        remainingTime: remainingTime);
   }
 }

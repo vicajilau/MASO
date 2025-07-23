@@ -45,27 +45,30 @@ class RoundRobinExecutionTimeService extends BaseExecutionTimeService {
     final queue = <RegularProcess>[];
     final pending = List<RegularProcess>.from(filtered);
 
-    int globalTime = 0;
-
     // Main scheduling loop
     while (queue.isNotEmpty || pending.isNotEmpty) {
-      // Enqueue processes that have arrived by global time
+      bool anyExecuted = false;
+      final requeue = <RegularProcess>[];
+
+      final minTime = cpuTimes.reduce((a, b) => a < b ? a : b);
+
+      final nextArrivals = <RegularProcess>[];
       pending.removeWhere((p) {
-        if (p.arrivalTime <= globalTime) {
-          queue.add(p.copy());
+        if (p.arrivalTime <= minTime) {
+          nextArrivals.add(p.copy());
           return true;
         }
         return false;
       });
 
-      bool anyExecuted = false;
+      // Primero añadimos los procesos recién llegados antes de procesar CPUs
+      queue.addAll(nextArrivals);
 
       for (int cpu = 0; cpu < numberOfCPUs; cpu++) {
         final core = cpus[cpu].core;
 
-        // Skip if no process is ready
+        // Si cola vacía, CPU idle si espera procesos pendientes
         if (queue.isEmpty) {
-          // Insert idle time if CPU is waiting for the next process
           if (pending.isNotEmpty && cpuTimes[cpu] < pending.first.arrivalTime) {
             final idleTime = pending.first.arrivalTime - cpuTimes[cpu];
             final idleProcess = RegularProcess(
@@ -74,41 +77,31 @@ class RoundRobinExecutionTimeService extends BaseExecutionTimeService {
               serviceTime: idleTime,
               enabled: true,
             );
-
             core.add(HardwareComponent(HardwareState.free, idleProcess));
             cpuTimes[cpu] += idleTime;
-            globalTime = cpuTimes.reduce((a, b) => a < b ? a : b);
           }
-
           continue;
         }
 
-        // Get the next process in the ready queue
         final process = queue.removeAt(0);
-
-        // Determine how much time to execute (up to quantum)
         final executionTime =
-            process.serviceTime > quantum ? quantum : process.serviceTime;
+            process.remainingTime > quantum ? quantum : process.remainingTime;
 
-        // Create the execution slice for this process
         final adjustedProcess = process.copy();
         adjustedProcess.arrivalTime = cpuTimes[cpu];
         adjustedProcess.serviceTime = executionTime;
 
         core.add(HardwareComponent(HardwareState.busy, adjustedProcess));
         cpuTimes[cpu] += executionTime;
-        globalTime = cpuTimes.reduce((a, b) => a < b ? a : b);
 
-        // If the process still has remaining time, requeue it
-        final remainingTime = process.serviceTime - executionTime;
+        final remainingTime = process.remainingTime - executionTime;
         if (remainingTime > 0) {
           final remaining = process.copy();
-          remaining.serviceTime = remainingTime;
+          remaining.remainingTime = remainingTime;
           remaining.arrivalTime = cpuTimes[cpu];
-          queue.add(remaining);
+          requeue.add(remaining); // Añadimos para reinsertar después
         }
 
-        // Add context switch if configured
         if (contextSwitchTime > 0) {
           final switchProcess = RegularProcess(
             id: ExecutionTimeConstants.switchContextProcessId,
@@ -116,22 +109,24 @@ class RoundRobinExecutionTimeService extends BaseExecutionTimeService {
             serviceTime: contextSwitchTime,
             enabled: true,
           );
-
-          core.add(HardwareComponent(
-            HardwareState.switchingContext,
-            switchProcess,
-          ));
-
+          core.add(
+              HardwareComponent(HardwareState.switchingContext, switchProcess));
           cpuTimes[cpu] += contextSwitchTime;
-          globalTime = cpuTimes.reduce((a, b) => a < b ? a : b);
         }
 
         anyExecuted = true;
       }
 
-      // If no process executed and there are still pending ones, fast-forward time
+      // Finalmente añadimos los procesos interrumpidos al final de la cola
+      queue.addAll(requeue);
+
       if (!anyExecuted && pending.isNotEmpty) {
-        globalTime = pending.first.arrivalTime;
+        final nextArrival = pending.first.arrivalTime;
+        for (int i = 0; i < cpuTimes.length; i++) {
+          if (cpuTimes[i] < nextArrival) {
+            cpuTimes[i] = nextArrival;
+          }
+        }
       }
     }
 
