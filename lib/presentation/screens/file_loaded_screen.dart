@@ -122,6 +122,8 @@ class _FileLoadedScreenState extends State<FileLoadedScreen> {
                             settings: settings,
                             onSettingsChanged: (SettingsMaso modifiedSettings) {
                               modifiedSettings.saveToPreferences();
+                              ServiceLocator.instance
+                                  .registerSettings(modifiedSettings);
                               if (modifiedSettings.processesMode !=
                                   cachedMasoFile.processes.mode) {
                                 cachedMasoFile.processes.elements.clear();
