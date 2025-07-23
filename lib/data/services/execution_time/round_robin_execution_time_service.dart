@@ -1,8 +1,10 @@
 import 'package:maso/core/constants/execution_time_constants.dart';
+import 'package:maso/core/debug_print.dart';
 import 'package:maso/data/services/execution_time/base_execution_time_service.dart';
 import 'package:maso/domain/models/machine.dart';
 
 import '../../../domain/models/core_processor.dart';
+import '../../../domain/models/cpu_state.dart';
 import '../../../domain/models/hardware_component.dart';
 import '../../../domain/models/hardware_state.dart';
 import '../../../domain/models/maso/regular_process.dart';
@@ -24,7 +26,6 @@ class RoundRobinExecutionTimeService extends BaseExecutionTimeService {
   /// - Idle time is inserted if no processes are ready and a CPU is idle.
   @override
   Machine calculateMachineWithRegularProcesses() {
-    // Filter and sort incoming processes by arrival time
     final filtered = processes.whereType<RegularProcess>().toList()
       ..sort((a, b) => a.arrivalTime.compareTo(b.arrivalTime));
 
@@ -32,102 +33,117 @@ class RoundRobinExecutionTimeService extends BaseExecutionTimeService {
     final contextSwitchTime = executionSetup.settings.contextSwitchTime;
     final quantum = executionSetup.settings.quantum;
 
-    // Create one CoreProcessor per CPU
-    List<CoreProcessor> cpus = List.generate(
-      numberOfCPUs,
-      (_) => CoreProcessor.empty(),
-    );
+    final cpus = List.generate(numberOfCPUs, (_) => CoreProcessor.empty());
+    final cpuStates = List.generate(numberOfCPUs, (_) => CPUState());
 
-    // Tracks current time for each CPU
-    List<int> cpuTimes = List.filled(numberOfCPUs, 0);
-
-    // Ready queue and list of processes not yet arrived
-    final queue = <RegularProcess>[];
     final pending = List<RegularProcess>.from(filtered);
+    final queue = <RegularProcess>[];
 
-    // Main scheduling loop
-    while (queue.isNotEmpty || pending.isNotEmpty) {
-      bool anyExecuted = false;
-      final requeue = <RegularProcess>[];
+    int time = 0;
 
-      final minTime = cpuTimes.reduce((a, b) => a < b ? a : b);
-
-      final nextArrivals = <RegularProcess>[];
+    while (pending.isNotEmpty ||
+        queue.isNotEmpty ||
+        cpuStates.any((c) => !c.idle)) {
+      // Adding processes that arrive at this instant
+      final arrivals = <RegularProcess>[];
       pending.removeWhere((p) {
-        if (p.arrivalTime <= minTime) {
-          nextArrivals.add(p.copy());
+        if (p.arrivalTime == time) {
+          arrivals.add(p.copy());
           return true;
         }
         return false;
       });
+      if (arrivals.isNotEmpty) {
+        queue.addAll(arrivals);
+        printInDebug(
+            '[t=$time] ➕ Llegan procesos: ${arrivals.map((e) => e.id)}');
+      }
 
-      // Primero añadimos los procesos recién llegados antes de procesar CPUs
-      queue.addAll(nextArrivals);
-
+      // Run logic for each CPU
       for (int cpu = 0; cpu < numberOfCPUs; cpu++) {
         final core = cpus[cpu].core;
+        final state = cpuStates[cpu];
 
-        // Si cola vacía, CPU idle si espera procesos pendientes
-        if (queue.isEmpty) {
-          if (pending.isNotEmpty && cpuTimes[cpu] < pending.first.arrivalTime) {
-            final idleTime = pending.first.arrivalTime - cpuTimes[cpu];
-            final idleProcess = RegularProcess(
-              id: ExecutionTimeConstants.freeProcessId,
-              arrivalTime: cpuTimes[cpu],
-              serviceTime: idleTime,
-              enabled: true,
-            );
-            core.add(HardwareComponent(HardwareState.free, idleProcess));
-            cpuTimes[cpu] += idleTime;
+        // If CPU is in context switch, reduce its duration
+        if (state.contextSwitchRemaining > 0) {
+          state.contextSwitchRemaining--;
+          if (state.contextSwitchRemaining == 0) {
+            printInDebug('[t=$time] 🛑 CPU $cpu finaliza cambio de contexto');
           }
           continue;
         }
 
-        final process = queue.removeAt(0);
-        final executionTime =
-            process.remainingTime > quantum ? quantum : process.remainingTime;
+        // If CPU is busy, reduce execution time
+        if (state.executing != null) {
+          state.executionRemaining--;
+          if (state.executionRemaining == 0) {
+            final finished = state.executing! as RegularProcess;
+            final remaining = finished.remainingTime - state.executedQuantum;
 
-        final adjustedProcess = process.copy();
-        adjustedProcess.arrivalTime = cpuTimes[cpu];
-        adjustedProcess.serviceTime = executionTime;
+            if (remaining > 0) {
+              final requeued = finished.copy();
+              requeued.remainingTime = remaining;
+              requeued.arrivalTime = time;
+              queue.add(requeued);
+              printInDebug(
+                  '[t=$time] 🔁 Proceso ${requeued.id} reencolado con $remaining ut restantes');
+            } else {
+              printInDebug(
+                  '[t=$time] ✅ Proceso ${finished.id} completado en CPU $cpu');
+            }
 
-        core.add(HardwareComponent(HardwareState.busy, adjustedProcess));
-        cpuTimes[cpu] += executionTime;
+            // Register execution completion
+            final completed = finished.copy();
+            completed.serviceTime = state.executedQuantum;
+            completed.arrivalTime = time - state.executedQuantum;
+            core.add(HardwareComponent(HardwareState.busy, completed));
 
-        final remainingTime = process.remainingTime - executionTime;
-        if (remainingTime > 0) {
-          final remaining = process.copy();
-          remaining.remainingTime = remainingTime;
-          remaining.arrivalTime = cpuTimes[cpu];
-          requeue.add(remaining); // Añadimos para reinsertar después
-        }
+            state.executing = null;
+            state.executedQuantum = 0;
 
-        if (contextSwitchTime > 0) {
-          final switchProcess = RegularProcess(
-            id: ExecutionTimeConstants.switchContextProcessId,
-            arrivalTime: cpuTimes[cpu],
-            serviceTime: contextSwitchTime,
-            enabled: true,
-          );
-          core.add(
-              HardwareComponent(HardwareState.switchingContext, switchProcess));
-          cpuTimes[cpu] += contextSwitchTime;
-        }
-
-        anyExecuted = true;
-      }
-
-      // Finalmente añadimos los procesos interrumpidos al final de la cola
-      queue.addAll(requeue);
-
-      if (!anyExecuted && pending.isNotEmpty) {
-        final nextArrival = pending.first.arrivalTime;
-        for (int i = 0; i < cpuTimes.length; i++) {
-          if (cpuTimes[i] < nextArrival) {
-            cpuTimes[i] = nextArrival;
+            if (contextSwitchTime > 0) {
+              final switchProcess = RegularProcess(
+                id: ExecutionTimeConstants.switchContextProcessId,
+                arrivalTime: time,
+                serviceTime: contextSwitchTime,
+                enabled: true,
+              );
+              core.add(HardwareComponent(
+                  HardwareState.switchingContext, switchProcess));
+              state.contextSwitchRemaining = contextSwitchTime;
+              printInDebug(
+                  '[t=$time] 🔄 Context switch en CPU $cpu durante $contextSwitchTime ut');
+            }
           }
+          continue;
+        }
+
+        // If CPU is idle and queue is not empty, assign a new process
+        if (state.executing == null &&
+            queue.isNotEmpty &&
+            state.contextSwitchRemaining == 0) {
+          final process = queue.removeAt(0);
+          final executionTime =
+              process.remainingTime > quantum ? quantum : process.remainingTime;
+
+          final toExecute = process.copy();
+          toExecute.serviceTime = executionTime;
+          toExecute.arrivalTime = time;
+
+          state.executing = process;
+          state.executionRemaining = executionTime;
+          state.executedQuantum = executionTime;
+
+          printInDebug(
+              '[t=$time] ⚙️ CPU $cpu ejecuta ${process.id} durante $executionTime ut');
         }
       }
+
+      time++;
+    }
+
+    for (int i = 0; i < numberOfCPUs; i++) {
+      printInDebug('🧠 CPU $i finalizó en t=$time');
     }
 
     return Machine(cpus: cpus, ioChannels: []);
