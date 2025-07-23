@@ -130,32 +130,41 @@ class RegularGanttChart extends StatelessWidget {
                 Positioned.fill(
                   child: LayoutBuilder(
                     builder: (context, constraints) {
-                      double currentOffset = 0;
                       final arrows = <Widget>[];
-
-                      arrows.add(Positioned(
-                        left: 4,
-                        top: 2,
-                        child: const Icon(Icons.arrow_downward, size: 16),
-                      ));
+                      // Variables to calculate the offset of each block
+                      double currentOffset = 0;
+                      const double cellWidth = 40.0;
 
                       for (int i = 0; i < blocks.length; i++) {
-                        currentOffset += blocks[i].duration * 40 + cellSpacing;
+                        final block = blocks[i];
+                        final processId = block.label;
+                        final isProcessBlock =
+                            block.state == HardwareState.busy;
 
-                        if (i < blocks.length - 1) {
+                        /// Arrow down: if it's a process and this is its first appearance in the list of blocks
+                        if (isProcessBlock &&
+                            block.startTime ==
+                                _getArrivalTimeOfProcess(processId, blocks)) {
                           arrows.add(Positioned(
-                            left: currentOffset - 8,
+                            left: currentOffset + 4,
                             top: 2,
-                            child: const Icon(Icons.import_export, size: 16),
+                            child: const Icon(Icons.arrow_downward, size: 16),
+                          ));
+                        }
+
+                        currentOffset +=
+                            block.duration * cellWidth + cellSpacing;
+
+                        /// Up arrow: if it's a process and this is its last appearance in the list of blocks
+                        if (isProcessBlock &&
+                            !_isProcessScheduledLater(processId, i, blocks)) {
+                          arrows.add(Positioned(
+                            left: currentOffset - 16,
+                            top: 2,
+                            child: const Icon(Icons.arrow_upward, size: 16),
                           ));
                         }
                       }
-
-                      arrows.add(Positioned(
-                        left: currentOffset - 16,
-                        top: 2,
-                        child: const Icon(Icons.arrow_upward, size: 16),
-                      ));
 
                       return Stack(children: arrows);
                     },
@@ -167,6 +176,27 @@ class RegularGanttChart extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  /// Returns the arrivalTime (startTime) of the first block of that process.
+  int _getArrivalTimeOfProcess(String processId, List<_GanttBlock> blocks) {
+    for (var block in blocks) {
+      if (block.label == processId) {
+        return block.startTime;
+      }
+    }
+    return -1; // Not found
+  }
+
+  /// Check if a process appears later in the list of blocks.
+  bool _isProcessScheduledLater(
+      String processId, int currentIndex, List<_GanttBlock> blocks) {
+    for (int i = currentIndex + 1; i < blocks.length; i++) {
+      if (blocks[i].label == processId) {
+        return true; // There is a process scheduled later
+      }
+    }
+    return false; // There is no process scheduled later
   }
 
   /// Builds a single process/state block.
