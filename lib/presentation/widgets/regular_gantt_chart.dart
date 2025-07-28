@@ -74,30 +74,6 @@ class RegularGanttChart extends StatelessWidget {
                 ],
               ),
 
-              /// Time units background row (colored)
-              Row(
-                children: [
-                  SizedBox(width: regularPadding), // for CPU label spacing
-                  ...List.generate(globalTime, (i) {
-                    return Container(
-                      width: 40,
-                      height: 20,
-                      decoration: BoxDecoration(
-                        color: i % 2 == 0 ? Colors.grey[200] : Colors.grey[300],
-                        border:
-                            Border.all(color: Colors.grey[400]!, width: 0.5),
-                      ),
-                      alignment: Alignment.center,
-                      child: Text(
-                        "${i}-${i + 1}",
-                        style: TextStyle(fontSize: 10, color: Colors.grey[600]),
-                      ),
-                    );
-                  }),
-                ],
-              ),
-              const SizedBox(height: 6),
-
               /// Each CPU row
               for (int cpuIndex = 0; cpuIndex < cpuBlocks.length; cpuIndex++)
                 _buildCpuRow(cpuBlocks[cpuIndex], cpuIndex + 1, globalTime),
@@ -117,6 +93,7 @@ class RegularGanttChart extends StatelessWidget {
         children: [
           /// Arrow row
           _buildArrowRow(blocks, globalTime),
+          const SizedBox(height: 4),
 
           /// CPU label + blocks
           Row(
@@ -137,7 +114,7 @@ class RegularGanttChart extends StatelessWidget {
                 child: Stack(
                   children: blocks
                       .map((block) => Positioned(
-                            left: block.startTime * 40.0,
+                            left: block.startTime * 40.0 + 20,
                             child: _buildCell(
                               block.label,
                               block.state,
@@ -192,7 +169,6 @@ class RegularGanttChart extends StatelessWidget {
                     ? Icon(arrowList.first.icon,
                         size: 18, color: arrowList.first.color)
                     : Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
                         children: arrowList
                             .map((arrow) =>
                                 Icon(arrow.icon, size: 14, color: arrow.color))
