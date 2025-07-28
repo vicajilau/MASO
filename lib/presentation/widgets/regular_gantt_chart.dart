@@ -106,6 +106,7 @@ class RegularGanttChart extends StatelessWidget {
                 0.0, (sum, b) => sum! + cellWidth * b.duration + cellSpacing),
             height: 60,
             child: Stack(
+              clipBehavior: Clip.none,
               children: [
                 Positioned.fill(
                   child: Align(
@@ -127,48 +128,47 @@ class RegularGanttChart extends StatelessWidget {
                     ),
                   ),
                 ),
-                Positioned.fill(
-                  child: LayoutBuilder(
-                    builder: (context, constraints) {
-                      final arrows = <Widget>[];
-                      // Variables to calculate the offset of each block
-                      double currentOffset = 0;
-                      const double cellWidth = 40.0;
+                LayoutBuilder(
+                  builder: (context, constraints) {
+                    final arrows = <Widget>[];
+                    // Variables to calculate the offset of each block
+                    double currentOffset = 0;
+                    const double cellWidth = 40.0;
 
-                      for (int i = 0; i < blocks.length; i++) {
-                        final block = blocks[i];
-                        final processId = block.label;
-                        final isProcessBlock =
-                            block.state == HardwareState.busy;
+                    for (int i = 0; i < blocks.length; i++) {
+                      final block = blocks[i];
+                      final processId = block.label;
+                      final isProcessBlock = block.state == HardwareState.busy;
 
-                        /// Arrow down: if it's a process and this is its first appearance in the list of blocks
-                        if (isProcessBlock &&
-                            block.startTime ==
-                                _getArrivalTimeOfProcess(processId, blocks)) {
-                          arrows.add(Positioned(
-                            left: currentOffset + 4,
-                            top: 2,
-                            child: const Icon(Icons.arrow_downward, size: 16),
-                          ));
-                        }
-
-                        currentOffset +=
-                            block.duration * cellWidth + cellSpacing;
-
-                        /// Up arrow: if it's a process and this is its last appearance in the list of blocks
-                        if (isProcessBlock &&
-                            !_isProcessScheduledLater(processId, i, blocks)) {
-                          arrows.add(Positioned(
-                            left: currentOffset - 16,
-                            top: 2,
-                            child: const Icon(Icons.arrow_upward, size: 16),
-                          ));
-                        }
+                      /// Arrow down: if it's a process and this is its first appearance in the list of blocks
+                      if (isProcessBlock &&
+                          block.startTime ==
+                              _getArrivalTimeOfProcess(processId, blocks)) {
+                        final position = (i == 0)
+                            ? currentOffset - cellSpacing + (cellSpacing / 2)
+                            : currentOffset - cellSpacing - (cellSpacing / 2);
+                        arrows.add(Positioned(
+                          left: position,
+                          top: 2,
+                          child: const Icon(Icons.arrow_downward, size: 16),
+                        ));
                       }
 
-                      return Stack(children: arrows);
-                    },
-                  ),
+                      currentOffset += block.duration * cellWidth + cellSpacing;
+
+                      /// Up arrow: if it's a process and this is its last appearance in the list of blocks
+                      if (isProcessBlock &&
+                          !_isProcessScheduledLater(processId, i, blocks)) {
+                        arrows.add(Positioned(
+                          left: currentOffset - 14,
+                          top: 2,
+                          child: const Icon(Icons.arrow_upward, size: 16),
+                        ));
+                      }
+                    }
+
+                    return Stack(children: arrows);
+                  },
                 ),
               ],
             ),
