@@ -73,6 +73,29 @@ class RegularGanttChart extends StatelessWidget {
                   }),
                 ],
               ),
+
+              /// Time units background row (colored)
+              Row(
+                children: [
+                  SizedBox(width: regularPadding), // for CPU label spacing
+                  ...List.generate(globalTime, (i) {
+                    return Container(
+                      width: 40,
+                      height: 20,
+                      decoration: BoxDecoration(
+                        color: i % 2 == 0 ? Colors.grey[200] : Colors.grey[300],
+                        border:
+                            Border.all(color: Colors.grey[400]!, width: 0.5),
+                      ),
+                      alignment: Alignment.center,
+                      child: Text(
+                        "${i}-${i + 1}",
+                        style: TextStyle(fontSize: 10, color: Colors.grey[600]),
+                      ),
+                    );
+                  }),
+                ],
+              ),
               const SizedBox(height: 6),
 
               /// Each CPU row
@@ -87,13 +110,6 @@ class RegularGanttChart extends StatelessWidget {
 
   /// Builds a row for a single CPU with its blocks and label
   Widget _buildCpuRow(List<_GanttBlock> blocks, int cpuNumber, int globalTime) {
-    const double cellWidth = 40.0;
-
-    final totalWidth = blocks.fold(
-      0.0,
-      (sum, b) => sum + cellWidth * b.duration + cellSpacing,
-    );
-
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
       child: Column(
@@ -116,14 +132,18 @@ class RegularGanttChart extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                width: totalWidth,
+                width: globalTime * 40.0,
                 height: regularPadding,
-                child: Row(
+                child: Stack(
                   children: blocks
-                      .map((block) => _buildCell(
-                            block.label,
-                            block.state,
-                            block.duration,
+                      .map((block) => Positioned(
+                            left: block.startTime * 40.0,
+                            child: _buildCell(
+                              block.label,
+                              block.state,
+                              block.duration,
+                              spacingRight: 0.0,
+                            ),
                           ))
                       .toList(),
                 ),
@@ -197,29 +217,25 @@ class RegularGanttChart extends StatelessWidget {
 
   /// Builds a single process/state block.
   Widget _buildCell(String text, HardwareState state, int timeUnits,
-      {double spacingRight = 5.0}) {
+      {double spacingRight = 0.0}) {
     final baseColor = _colorForState(state, text);
     final isFree = state == HardwareState.free;
 
-    return Padding(
-      padding: EdgeInsets.only(right: spacingRight),
-      child: Container(
-        width: 40.0 * timeUnits,
-        height: 50,
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          color: isFree ? null : baseColor.withValues(alpha: 0.3),
-          border: isFree ? null : Border.all(color: baseColor),
-          borderRadius: BorderRadius.circular(4),
-        ),
-        child: isFree
-            ? null
-            : Text(
-                text,
-                style:
-                    const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-              ),
+    return Container(
+      width: 40.0 * timeUnits,
+      height: 50,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color: isFree ? null : baseColor.withValues(alpha: 0.3),
+        border: isFree ? null : Border.all(color: baseColor),
+        borderRadius: BorderRadius.circular(4),
       ),
+      child: isFree
+          ? null
+          : Text(
+              text,
+              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+            ),
     );
   }
 
