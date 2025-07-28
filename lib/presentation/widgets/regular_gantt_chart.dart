@@ -9,6 +9,7 @@ import '../../domain/models/machine.dart';
 class RegularGanttChart extends StatelessWidget {
   final Machine machine;
   final double cellSpacing = 5.0;
+  final regularPadding = 60.0;
   final colorManager = ColorManager();
 
   RegularGanttChart({super.key, required this.machine});
@@ -62,7 +63,7 @@ class RegularGanttChart extends StatelessWidget {
               /// Time header row
               Row(
                 children: [
-                  const SizedBox(width: 60), // for CPU label spacing
+                  SizedBox(width: regularPadding), // for CPU label spacing
                   ...List.generate(globalTime + 1, (i) {
                     return Container(
                       width: 40,
@@ -76,7 +77,7 @@ class RegularGanttChart extends StatelessWidget {
 
               /// Each CPU row
               for (int cpuIndex = 0; cpuIndex < cpuBlocks.length; cpuIndex++)
-                _buildCpuRow(cpuBlocks[cpuIndex], cpuIndex + 1),
+                _buildCpuRow(cpuBlocks[cpuIndex], cpuIndex + 1, globalTime),
             ],
           ),
         ),
@@ -85,95 +86,93 @@ class RegularGanttChart extends StatelessWidget {
   }
 
   /// Builds a row for a single CPU with its blocks and label
-  Widget _buildCpuRow(List<_GanttBlock> blocks, int cpuNumber) {
+  Widget _buildCpuRow(List<_GanttBlock> blocks, int cpuNumber, int globalTime) {
     const double cellWidth = 40.0;
+
+    final totalWidth = blocks.fold(
+      0.0,
+      (sum, b) => sum + cellWidth * b.duration + cellSpacing,
+    );
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            width: 60,
-            alignment: Alignment.centerLeft,
-            child: Text(
-              "CPU $cpuNumber",
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
-            ),
-          ),
-          SizedBox(
-            width: blocks.fold(
-                0.0, (sum, b) => sum! + cellWidth * b.duration + cellSpacing),
-            height: 60,
-            child: Stack(
-              clipBehavior: Clip.none,
-              children: [
-                Positioned.fill(
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: SizedBox(
-                      width: blocks.fold(
-                        0.0,
-                        (sum, b) => sum! + cellWidth * b.duration + cellSpacing,
-                      ),
-                      child: Row(
-                        children: blocks
-                            .map((block) => _buildCell(
-                                  block.label,
-                                  block.state,
-                                  block.duration,
-                                ))
-                            .toList(),
-                      ),
-                    ),
-                  ),
+          /// Arrow row
+          _buildArrowRow(blocks, globalTime),
+
+          /// CPU label + blocks
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                width: regularPadding,
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "CPU $cpuNumber",
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 14),
                 ),
-                LayoutBuilder(
-                  builder: (context, constraints) {
-                    final arrows = <Widget>[];
-                    // Variables to calculate the offset of each block
-                    double currentOffset = 0;
-                    const double cellWidth = 40.0;
-
-                    for (int i = 0; i < blocks.length; i++) {
-                      final block = blocks[i];
-                      final processId = block.label;
-                      final isProcessBlock = block.state == HardwareState.busy;
-
-                      /// Arrow down: if it's a process and this is its first appearance in the list of blocks
-                      if (isProcessBlock &&
-                          block.startTime ==
-                              _getArrivalTimeOfProcess(processId, blocks)) {
-                        final position = (i == 0)
-                            ? currentOffset - cellSpacing + (cellSpacing / 2)
-                            : currentOffset - cellSpacing - (cellSpacing / 2);
-                        arrows.add(Positioned(
-                          left: position,
-                          top: 2,
-                          child: const Icon(Icons.arrow_downward, size: 16),
-                        ));
-                      }
-
-                      currentOffset += block.duration * cellWidth + cellSpacing;
-
-                      /// Up arrow: if it's a process and this is its last appearance in the list of blocks
-                      if (isProcessBlock &&
-                          !_isProcessScheduledLater(processId, i, blocks)) {
-                        arrows.add(Positioned(
-                          left: currentOffset - 14,
-                          top: 2,
-                          child: const Icon(Icons.arrow_upward, size: 16),
-                        ));
-                      }
-                    }
-
-                    return Stack(children: arrows);
-                  },
+              ),
+              SizedBox(
+                width: totalWidth,
+                height: regularPadding,
+                child: Row(
+                  children: blocks
+                      .map((block) => _buildCell(
+                            block.label,
+                            block.state,
+                            block.duration,
+                          ))
+                      .toList(),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ],
+      ),
+    );
+  }
+
+  /// Builds a row of arrows indicating when a process starts and ends
+  Widget _buildArrowRow(List<_GanttBlock> blocks, int globalTime) {
+    final Map<int, _ArrowInfo> arrows = {};
+
+    for (int i = 0; i < blocks.length; i++) {
+      final block = blocks[i];
+      final processId = block.label;
+      final isProcessBlock = block.state == HardwareState.busy;
+      final color = _colorForState(block.state, block.label);
+
+      if (!isProcessBlock) continue;
+
+      // Add down arrow to the start of the process
+      if (block.startTime == _getArrivalTimeOfProcess(processId, blocks)) {
+        arrows[block.startTime] = _ArrowInfo(Icons.arrow_downward, color);
+      }
+
+      // Add up arrow to the end of the process
+      if (!_isProcessScheduledLater(processId, i, blocks)) {
+        final endTime = block.startTime + block.duration;
+        arrows[endTime] = _ArrowInfo(Icons.arrow_upward, color);
+      }
+    }
+
+    return Padding(
+      padding: EdgeInsets.only(left: regularPadding),
+      child: Row(
+        children: List.generate(globalTime + 1, (i) {
+          final arrow = arrows[i];
+          return Container(
+            width: 40,
+            height: 20,
+            alignment: Alignment.centerLeft,
+            child: arrow != null
+                ? Icon(arrow.icon, size: 20, color: arrow.color)
+                : null,
+          );
+        }),
       ),
     );
   }
@@ -253,4 +252,11 @@ class _GanttBlock {
     required this.startTime,
     required this.duration,
   });
+}
+
+class _ArrowInfo {
+  final IconData icon;
+  final Color color;
+
+  _ArrowInfo(this.icon, this.color);
 }
