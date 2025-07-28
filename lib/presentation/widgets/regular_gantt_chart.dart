@@ -67,7 +67,7 @@ class RegularGanttChart extends StatelessWidget {
                   ...List.generate(globalTime + 1, (i) {
                     return Container(
                       width: 40,
-                      alignment: Alignment.centerLeft,
+                      alignment: Alignment.center,
                       child: Text("$i"),
                     );
                   }),
@@ -167,7 +167,7 @@ class RegularGanttChart extends StatelessWidget {
           return Container(
             width: 40,
             height: 20,
-            alignment: Alignment.centerLeft,
+            alignment: Alignment.center,
             child: arrow != null
                 ? Icon(arrow.icon, size: 20, color: arrow.color)
                 : null,
