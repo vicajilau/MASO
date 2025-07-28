@@ -137,7 +137,7 @@ class RegularGanttChart extends StatelessWidget {
 
   /// Builds a row of arrows indicating when a process starts and ends
   Widget _buildArrowRow(List<_GanttBlock> blocks, int globalTime) {
-    final Map<int, _ArrowInfo> arrows = {};
+    final Map<int, List<_ArrowInfo>> arrows = {};
 
     for (int i = 0; i < blocks.length; i++) {
       final block = blocks[i];
@@ -149,27 +149,35 @@ class RegularGanttChart extends StatelessWidget {
 
       // Add down arrow to the start of the process
       if (block.startTime == _getArrivalTimeOfProcess(processId, blocks)) {
-        arrows[block.startTime] = _ArrowInfo(Icons.arrow_downward, color);
+        arrows.putIfAbsent(block.startTime, () => []);
+        arrows[block.startTime]!.add(_ArrowInfo(Icons.arrow_downward, color));
       }
 
-      // Add up arrow to the end of the process
-      if (!_isProcessScheduledLater(processId, i, blocks)) {
-        final endTime = block.startTime + block.duration;
-        arrows[endTime] = _ArrowInfo(Icons.arrow_upward, color);
-      }
+      // Add up arrow to the end of every process execution
+      final endTime = block.startTime + block.duration;
+      arrows.putIfAbsent(endTime, () => []);
+      arrows[endTime]!.add(_ArrowInfo(Icons.arrow_upward, color));
     }
 
     return Padding(
       padding: EdgeInsets.only(left: regularPadding),
       child: Row(
         children: List.generate(globalTime + 1, (i) {
-          final arrow = arrows[i];
+          final arrowList = arrows[i];
           return Container(
             width: 40,
-            height: 20,
             alignment: Alignment.center,
-            child: arrow != null
-                ? Icon(arrow.icon, size: 20, color: arrow.color)
+            child: arrowList != null && arrowList.isNotEmpty
+                ? arrowList.length == 1
+                    ? Icon(arrowList.first.icon,
+                        size: 18, color: arrowList.first.color)
+                    : Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: arrowList
+                            .map((arrow) =>
+                                Icon(arrow.icon, size: 14, color: arrow.color))
+                            .toList(),
+                      )
                 : null,
           );
         }),
@@ -185,17 +193,6 @@ class RegularGanttChart extends StatelessWidget {
       }
     }
     return -1; // Not found
-  }
-
-  /// Check if a process appears later in the list of blocks.
-  bool _isProcessScheduledLater(
-      String processId, int currentIndex, List<_GanttBlock> blocks) {
-    for (int i = currentIndex + 1; i < blocks.length; i++) {
-      if (blocks[i].label == processId) {
-        return true; // There is a process scheduled later
-      }
-    }
-    return false; // There is no process scheduled later
   }
 
   /// Builds a single process/state block.
