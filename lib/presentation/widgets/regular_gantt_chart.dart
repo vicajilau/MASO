@@ -167,8 +167,9 @@ class RegularGanttChart extends StatelessWidget {
             child: arrowList != null && arrowList.isNotEmpty
                 ? arrowList.length == 1
                     ? Icon(arrowList.first.icon,
-                        size: 18, color: arrowList.first.color)
-                    : Column(
+                        size: 15, color: arrowList.first.color)
+                    : Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: arrowList
                             .map((arrow) =>
                                 Icon(arrow.icon, size: 15, color: arrow.color))
