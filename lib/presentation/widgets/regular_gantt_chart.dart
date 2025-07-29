@@ -171,7 +171,7 @@ class RegularGanttChart extends StatelessWidget {
                     : Column(
                         children: arrowList
                             .map((arrow) =>
-                                Icon(arrow.icon, size: 14, color: arrow.color))
+                                Icon(arrow.icon, size: 15, color: arrow.color))
                             .toList(),
                       )
                 : null,
