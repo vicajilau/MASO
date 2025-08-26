@@ -1,9 +1,10 @@
-<div align="center">
+<p align="center">
   <img src="https://github.com/vicajilau/MASO/raw/main/MASO.png" width="250" height="250" alt="MASO Logo"/>
-</div>
-
-# MASO
-![CI Status](https://github.com/vicajilau/maso/actions/workflows/flutter_workflow.yml/badge.svg)
+</p>
+<p align="center">
+  <img src="https://github.com/vicajilau/maso/actions/workflows/flutter_workflow.yml/badge.svg" alt="CI Status">
+  <img src="https://github.com/vicajilau/maso/actions/workflows/deploy_web.yml/badge.svg" alt="Web CD Status">
+</p>
 
 ¡Bienvenido a MASO! El simulador Multiplataforma para el Aprendizaje de Sistemas Operativos. Este es un simulador diseñado para ayudarte en el aprendizaje de la planificación de procesos en sistemas operativos. MASO te brinda una experiencia interactiva para comprender los conceptos clave de la planificación de procesos de una manera práctica y efectiva.
 
