@@ -55,7 +55,7 @@ class _RegularProcessListState extends State<RegularProcessList> {
             widget.onFileChange();
           });
         },
-        activeColor: Colors.green,
+        activeThumbColor: Colors.green,
         inactiveThumbColor: Colors.red,
       ),
       onTap: () async {

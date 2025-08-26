@@ -61,7 +61,7 @@ class _BurstProcessListState extends State<BurstProcessList> {
                             widget.onFileChange();
                           });
                         },
-                        activeColor: Colors.green,
+                        activeThumbColor: Colors.green,
                         inactiveThumbColor: Colors.red,
                       ),
                       children: process.threads
@@ -113,7 +113,7 @@ class _BurstProcessListState extends State<BurstProcessList> {
             widget.onFileChange();
           });
         },
-        activeColor: Colors.green,
+        activeThumbColor: Colors.green,
         inactiveThumbColor: Colors.red,
       ),
     );

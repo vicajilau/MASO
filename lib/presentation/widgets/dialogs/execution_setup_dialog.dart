@@ -57,7 +57,7 @@ class _ExecutionSetupDialogState extends State<ExecutionSetupDialog> {
           mainAxisSize: MainAxisSize.min,
           children: [
             DropdownButtonFormField<SchedulingAlgorithm>(
-              value: _selectedAlgorithm,
+              initialValue: _selectedAlgorithm,
               onChanged: (SchedulingAlgorithm? newValue) {
                 setState(() {
                   _selectedAlgorithm = newValue!;
