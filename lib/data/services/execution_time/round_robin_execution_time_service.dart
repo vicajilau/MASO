@@ -42,96 +42,102 @@ class RoundRobinExecutionTimeService extends BaseExecutionTimeService {
     List<int> cpuTimes = List.filled(numberOfCPUs, 0);
 
     // Ready queue and list of processes not yet arrived
-    final queue = <RegularProcess>[];
-    final pending = List<RegularProcess>.from(filtered);
+    final readyQueue = <RegularProcess>[];
+    final arrivingProcesses = List<RegularProcess>.from(filtered);
 
     int globalTime = 0;
 
     // Main scheduling loop
-    while (queue.isNotEmpty || pending.isNotEmpty) {
-      // Enqueue processes that have arrived by global time
-      pending.removeWhere((p) {
-        if (p.arrivalTime <= globalTime) {
-          queue.add(p.copy());
-          return true;
-        }
-        return false;
-      });
-
-      bool anyExecuted = false;
-
-      for (int cpu = 0; cpu < numberOfCPUs; cpu++) {
-        final core = cpus[cpu].core;
-
-        // Skip if no process is ready
-        if (queue.isEmpty) {
-          // Insert idle time if CPU is waiting for the next process
-          if (pending.isNotEmpty && cpuTimes[cpu] < pending.first.arrivalTime) {
-            final idleTime = pending.first.arrivalTime - cpuTimes[cpu];
-            final idleProcess = RegularProcess(
-              id: ExecutionTimeConstants.freeProcessId,
-              arrivalTime: cpuTimes[cpu],
-              serviceTime: idleTime,
-              enabled: true,
-            );
-
-            core.add(HardwareComponent(HardwareState.free, idleProcess));
-            cpuTimes[cpu] += idleTime;
-            globalTime = cpuTimes.reduce((a, b) => a < b ? a : b);
-          }
-
-          continue;
-        }
-
-        // Get the next process in the ready queue
-        final process = queue.removeAt(0);
-
-        // Determine how much time to execute (up to quantum)
-        final executionTime =
-            process.serviceTime > quantum ? quantum : process.serviceTime;
-
-        // Create the execution slice for this process
-        final adjustedProcess = process.copy();
-        adjustedProcess.arrivalTime = cpuTimes[cpu];
-        adjustedProcess.serviceTime = executionTime;
-
-        core.add(HardwareComponent(HardwareState.busy, adjustedProcess));
-        cpuTimes[cpu] += executionTime;
-        globalTime = cpuTimes.reduce((a, b) => a < b ? a : b);
-
-        // If the process still has remaining time, requeue it
-        final remainingTime = process.serviceTime - executionTime;
-        if (remainingTime > 0) {
-          final remaining = process.copy();
-          remaining.serviceTime = remainingTime;
-          remaining.arrivalTime = cpuTimes[cpu];
-          queue.add(remaining);
-        }
-
-        // Add context switch if configured
-        if (contextSwitchTime > 0) {
-          final switchProcess = RegularProcess(
-            id: ExecutionTimeConstants.switchContextProcessId,
-            arrivalTime: cpuTimes[cpu],
-            serviceTime: contextSwitchTime,
-            enabled: true,
-          );
-
-          core.add(HardwareComponent(
-            HardwareState.switchingContext,
-            switchProcess,
-          ));
-
-          cpuTimes[cpu] += contextSwitchTime;
-          globalTime = cpuTimes.reduce((a, b) => a < b ? a : b);
-        }
-
-        anyExecuted = true;
+    while (readyQueue.isNotEmpty || arrivingProcesses.isNotEmpty) {
+      // If no process is ready, advance time to next arrival and add that process
+      if (readyQueue.isEmpty && arrivingProcesses.isNotEmpty) {
+        globalTime = arrivingProcesses.first.arrivalTime;
+        readyQueue.add(arrivingProcesses.removeAt(0));
       }
 
-      // If no process executed and there are still pending ones, fast-forward time
-      if (!anyExecuted && pending.isNotEmpty) {
-        globalTime = pending.first.arrivalTime;
+      // If no processes at all, break
+      if (readyQueue.isEmpty) {
+        break;
+      }
+
+      // For single CPU case, use CPU 0. For multiple CPUs, select the one free earliest
+      int selectedCPU = 0;
+      if (numberOfCPUs > 1) {
+        for (int i = 1; i < numberOfCPUs; i++) {
+          if (cpuTimes[i] < cpuTimes[selectedCPU]) {
+            selectedCPU = i;
+          }
+        }
+      }
+
+      final core = cpus[selectedCPU].core;
+      final cpuTime = cpuTimes[selectedCPU];
+
+      // If CPU is behind global time, add idle time
+      if (cpuTime < globalTime) {
+        final idleTime = globalTime - cpuTime;
+        final idleProcess = RegularProcess(
+          id: ExecutionTimeConstants.freeProcessId,
+          arrivalTime: cpuTime,
+          serviceTime: idleTime,
+          enabled: true,
+        );
+        core.add(HardwareComponent(HardwareState.free, idleProcess));
+        cpuTimes[selectedCPU] = globalTime;
+      }
+
+      // Get the first process from the ready queue (FIFO)
+      final process = readyQueue.removeAt(0);
+
+      // Determine execution time (up to quantum)
+      final executionTime =
+          process.serviceTime > quantum ? quantum : process.serviceTime;
+
+      // Create execution slice
+      final runningProcess = process.copy();
+      runningProcess.arrivalTime = cpuTimes[selectedCPU];
+      runningProcess.serviceTime = executionTime;
+
+      core.add(HardwareComponent(HardwareState.busy, runningProcess));
+      cpuTimes[selectedCPU] += executionTime;
+
+      // Update global time to the end of this execution
+      globalTime = cpuTimes[selectedCPU];
+
+      // IMPORTANT: Add any processes that arrived during this execution BEFORE
+      // adding the current process back to the queue (if it has remaining time)
+      while (arrivingProcesses.isNotEmpty &&
+          arrivingProcesses.first.arrivalTime <= globalTime) {
+        final arrivingProcess = arrivingProcesses.removeAt(0);
+        readyQueue.add(arrivingProcess);
+        // Debug: print('t=$globalTime: Process ${arrivingProcess.id} arrives during execution');
+      }
+
+      // If process has remaining time, add it back to the END of the ready queue
+      final remainingTime = process.serviceTime - executionTime;
+      if (remainingTime > 0) {
+        final remainingProcess = process.copy();
+        remainingProcess.serviceTime = remainingTime;
+        readyQueue.add(remainingProcess); // Add to the END of the queue
+      }
+
+      // Add context switch if configured and there are more processes to execute
+      if (contextSwitchTime > 0 &&
+          (readyQueue.isNotEmpty || arrivingProcesses.isNotEmpty)) {
+        final switchProcess = RegularProcess(
+          id: ExecutionTimeConstants.switchContextProcessId,
+          arrivalTime: cpuTimes[selectedCPU],
+          serviceTime: contextSwitchTime,
+          enabled: true,
+        );
+
+        core.add(HardwareComponent(
+          HardwareState.switchingContext,
+          switchProcess,
+        ));
+
+        cpuTimes[selectedCPU] += contextSwitchTime;
+        globalTime = cpuTimes[selectedCPU];
       }
     }
 

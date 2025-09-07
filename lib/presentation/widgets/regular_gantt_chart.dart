@@ -109,7 +109,7 @@ class RegularGanttChart extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                width: globalTime * 40.0,
+                width: globalTime * 40.0 + 40,
                 height: regularPadding,
                 child: Stack(
                   children: blocks
