@@ -1,13 +1,13 @@
 ## Diagramas de estado
 
-En esta sección se presentan los diagramas de estado que definen el comportamiento de los procesos dentro del simulador MASO, en función del algoritmo de planificación seleccionado. Cada algoritmo se describe como un autómata de estados finito en el que las transiciones dependen de eventos como: llegada de procesos/hilos, inicio y finalización de ráfagas (CPU / I/O), preempción, expiración de quantum y cambios de contexto.
+En esta sección se presentan los diagramas de estado que definen el comportamiento de los procesos dentro del simulador MASO, en función del algoritmo de planificación seleccionado. Cada algoritmo se describe como un autómata de estados finito en el que las transiciones dependen de eventos como: llegada de procesos/hilos, inicio y finalización de ráfagas (CPU / I/O), interrupción, expiración de quantum y cambios de contexto.
 
 Se incluyen:
 
 - Estados comunes: Ready (listo), Running (ejecutando), Waiting (bloqueado en I/O), ContextSwitch (cambio de contexto), Idle (CPU libre), Finished (finalizado).
-- Eventos: arrival (llegada de proceso/hilo), start_cpu, finish_cpu, start_io, finish_io, preempt, quantum_expire, context_switch_start, context_switch_end.
+- Eventos: arrival (llegada de proceso/hilo), start_cpu, finish_cpu, start_io, finish_io, interrupción, quantum_expire, context_switch_start, context_switch_end.
 
-Nota: los algoritmos implementados en MASO cubren variantes no preemptivas (FIFO, SJF, Priority, Multiple Priority Queues, MPQ con feedback - por slices) y preemptivas (SRTF, Round Robin, Time Limit). Para procesos tipo "burst" (con hilos y ráfagas CPU/I/O) se emplean colas separadas para CPU e I/O y estados equivalentes por hilo.
+Nota: los algoritmos implementados en MASO cubren variantes no interrumpibles (FIFO, SJF, Priority, Multiple Priority Queues, MPQ con feedback - por slices) y que permiten la interrupción (SRTF, Round Robin, Time Limit). Para procesos tipo "burst" (con hilos y ráfagas CPU/I/O) se emplean colas separadas para CPU e I/O y estados equivalentes por hilo.
 
 ### Interfaz (inputs / outputs / criterios)
 
@@ -32,7 +32,7 @@ Esta subsección define de forma concisa la interfaz del servicio de planificaci
 - start_cpu: el planificador asigna la ráfaga CPU a una CPU -> Ready -> Running.
 - finish_cpu: la ráfaga CPU termina -> Running -> Waiting (si sigue con I/O) o -> Finished.
 - start_io / finish_io: analógico para ráfagas I/O -> Waiting -> Running(io) -> Ready/Finished.
-- preempt: (SRTF, RR con quantum, TimeLimit) evento que desplaza la ejecución actual -> Running -> Ready (posible ContextSwitch en medio).
+- interrupción: (SRTF, RR con quantum, TimeLimit) evento que desplaza la ejecución actual -> Running -> Ready (posible ContextSwitch en medio).
 - quantum_expire / time_limit_expire: el slice se acaba -> Running -> Ready (o democión en MPQ Feedback).
 - context_switch_start / context_switch_end: periodo de cambio de contexto -> Running -> ContextSwitch -> Running (otro proceso) o Idle.
 
@@ -48,7 +48,7 @@ En multi-CPU cada CPU sigue un autómata equivalente; la diferencia está en la 
 
 ### 1) FIFO (First-In, First-Out)
 
-Descripción corta: no preemptivo. Procesos ordenados por llegada; para procesos regulares la implementación asigna cada proceso a la siguiente CPU en la secuencia (rotación). Para burst se usa una cola FIFO de ráfagas y se asigna a CPUs libres según disponibilidad.
+Este algoritmo no permite ser interrumpido una vez que una ráfaga comienza; los procesos se ordenan por llegada y, para procesos regulares, cada proceso se asigna a la siguiente CPU en secuencia (rotación). Para procesos tipo burst se emplea una cola FIFO de ráfagas y se asigna a CPUs libres según disponibilidad.
 
 ```plantuml
 @startuml FIFO
@@ -65,15 +65,15 @@ Running --> Finished : finish_cpu
 
 ---
 
-### 2) SJF (Shortest Job First) - no preemptivo
+### 2) SJF (Shortest Job First) - no interrumpible
 
-Descripción corta: selecciona la tarea con menor serviceTime entre las que han llegado. No preemptivo.
+Este algoritmo selecciona la tarea con menor serviceTime entre las que han llegado y no interrumpe una ráfaga en curso.
 
 PlantUML:
 
 ```plantuml
 @startuml SJF
-title SJF (non-preemptive)
+title SJF (non-interruptible)
 state Ready
 state Running
 Ready --> Running : select shortest / start_cpu
@@ -83,19 +83,19 @@ Running --> Ready : finish_cpu
 
 ---
 
-### 3) SRTF (Shortest Remaining Time First) - preemptivo
+### 3) SRTF (Shortest Remaining Time First) - interrumpible
 
-Descripción corta: preemptivo por tiempo restante. Si llega una tarea con menor tiempo restante, se preempe la actual.
+Este algoritmo puede interrumpir la ejecución actual si llega otra tarea con menor tiempo restante; siempre ejecuta la ráfaga con menor tiempo restante disponible.
 
 PlantUML:
 
 ```plantuml
 @startuml SRTF
-title SRTF (preemptive)
+title SRTF (interrumpible)
 state Ready
 state Running
 Ready --> Running : start_cpu
-Running --> Ready : preempt
+Running --> Ready : interrupción
 Running --> Finished : finish_cpu
 @enduml
 ```
@@ -104,7 +104,7 @@ Running --> Finished : finish_cpu
 
 ### 4) Round Robin (RR)
 
-Descripción corta: preemptivo por quantum. Cada proceso obtiene un slice; si no finaliza se reencola.
+Este algoritmo reparte la CPU en slices (quantum) entre procesos; cada proceso ejecuta hasta agotar su slice y, si no termina, se reencola para recibir otro slice posteriormente.
 
 PlantUML:
 
@@ -123,7 +123,7 @@ Running --> Finished : finish_cpu
 
 ### 5) Time Limit
 
-Descripción corta: similar a RR pero el límite por turno es `timeLimit`.
+Este algoritmo es similar a Round Robin, pero el límite temporal por turno se fija por la configuración `timeLimit` en lugar de un quantum fijo.
 
 PlantUML:
 
@@ -140,15 +140,15 @@ Running --> Finished : finish_cpu
 
 ---
 
-### 6) Priority (no preemptivo - según implementación)
+### 6) Priority (no interrumpible - según implementación)
 
-Descripción corta: los procesos se ordenan por `priority` (valor menor = mayor prioridad) y luego por arrival time. Asignación cíclica para procesos regulares.
+Este algoritmo ordena los procesos por `priority` (valor menor = mayor prioridad) y, en igualdad de prioridad, por tiempo de llegada; para procesos regulares puede emplear asignación cíclica entre CPUs.
 
 PlantUML:
 
 ```plantuml
 @startuml Priority
-title Priority (non-preemptive)
+title Priority (non-interruptible)
 state Ready
 state Running
 Ready --> Running : select by priority / start_cpu
@@ -158,9 +158,9 @@ Running --> Finished : finish_cpu
 
 ---
 
-### 7) Multiple Priority Queues (MPQ) - no preemptivo
+### 7) Multiple Priority Queues (MPQ) - no interrumpible
 
-Descripción corta: colas por prioridad procesadas de mayor a menor; FIFO dentro de cada cola.
+Este algoritmo mantiene múltiples colas, una por nivel de prioridad; el planificador atiende primero las colas de prioridad más alta, y dentro de cada cola aplica orden FIFO.
 
 PlantUML:
 
@@ -178,7 +178,7 @@ Running --> Finished : finish_cpu
 
 ### 8) Multiple Priority Queues with Feedback (MPQ Feedback)
 
-Descripción corta: múltiples niveles con democión al consumir todo el quantum; cada nivel puede tener su quantum.
+Este algoritmo organiza múltiples niveles con democión por consumo de quantum: si un proceso consume su slice completo es enviado a un nivel de prioridad inferior que puede tener un quantum diferente.
 
 PlantUML:
 
