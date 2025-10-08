@@ -2,6 +2,8 @@
 
 ## Introducción
 
+Este manual tiene como objetivo guiar al usuario en el uso de MASO, desde la instalación hasta la ejecución de simulaciones complejas. Aquí encontrarás instrucciones detalladas sobre cómo crear y configurar procesos, seleccionar algoritmos de planificación, interpretar los resultados visuales y exportar tus simulaciones. Ya seas estudiante aprendiendo los fundamentos de sistemas operativos o profesor preparando material didáctico, este manual te proporcionará toda la información necesaria para aprovechar al máximo las capacidades de MASO.
+
 ### ¿Qué es MASO?
 
 MASO (Simulador Multiplataforma para el Aprendizaje de Sistemas Operativos) es una herramienta educativa diseñada para ayudar a estudiantes y profesionales a comprender los conceptos fundamentales de la planificación de procesos en sistemas operativos.
