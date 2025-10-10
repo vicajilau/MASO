@@ -1,0 +1,1485 @@
+@startuml
+set namespaceSeparator ::
+
+class "maso::core::color_manager.dart::ColorManager" {
+  -Map<String, Color> _colorMap
+  -Set<Color> _usedColors
+  +Color getColorForProcess()
+  -Color _generateUniquePastelColor()
+  -Color _generatePastelColor()
+}
+
+class "maso::core::constants::execution_time_constants.dart::ExecutionTimeConstants" {
+  {static} +String freeProcessId
+  {static} +String switchContextProcessId
+}
+
+class "maso::core::constants::maso_metadata.dart::MasoMetadata" {
+  {static} +String version
+  {static} +String masoFileName
+  {static} +String exportImageFileName
+  {static} +String exportPdfFileName
+  {static} +String format
+  {static} +bool isSupportedVersion()
+}
+
+class "maso::core::constants::settings.dart::Settings" {
+  {static} +int defaultContextSwitchTime
+  {static} +int defaultIoChannels
+  {static} +int defaultCpuCount
+  {static} +int maxContextSwitchTime
+  {static} +int maxIoChannels
+  {static} +int maxCpuCount
+  {static} +int minContextSwitchTime
+  {static} +int minIoChannels
+  {static} +int minCpuCount
+  {static} +int defaultQuantum
+  {static} +int minQuantum
+  {static} +List<int> defaultQueueQuanta
+  {static} +int defaultTimeLimit
+  {static} +int minTimeLimit
+}
+
+class "maso::core::constants::theme.dart::AppTheme" {
+  {static} +Color primaryColor
+  {static} +Color secondaryColor
+  {static} +Color backgroundColor
+  {static} +Color surfaceColor
+  {static} +Color errorColor
+  {static} +ThemeData lightTheme
+  {static} +ThemeData darkTheme
+}
+
+"maso::core::constants::theme.dart::AppTheme" o-- "dart::ui::Color"
+"maso::core::constants::theme.dart::AppTheme" o-- "flutter::src::material::theme_data.dart::ThemeData"
+
+class "maso::core::deep_collection_equality.dart::DeepCollectionEquality" {
+  {static} +bool listEquals()
+  {static} +bool mapEquals()
+  {static} +bool equals()
+}
+
+abstract class "maso::core::deep_copy_mixin.dart::DeepCopy" {
+  +T copy()
+}
+
+class "maso::core::file_handler.dart::FileHandler" {
+  {static} -MethodChannel _channel
+  {static} +void initialize()
+}
+
+"maso::core::file_handler.dart::FileHandler" o-- "flutter::src::services::platform_channel.dart::MethodChannel"
+
+abstract class "maso::core::l10n::app_localizations.dart::AppLocalizations" {
+  +String localeName
+  {static} +LocalizationsDelegate<AppLocalizations> delegate
+  {static} +List<LocalizationsDelegate<dynamic>> localizationsDelegates
+  {static} +List<Locale> supportedLocales
+  +String titleAppBar
+  +String create
+  +String load
+  +String dropFileHere
+  +String errorInvalidFile
+  +String editProcessTitle
+  +String createRegularProcessTitle
+  +String createBurstProcessTitle
+  +String processNameLabel
+  +String arrivalTimeDialogLabel
+  +String serviceTimeDialogLabel
+  +String cancelButton
+  +String saveButton
+  +String confirmDeleteTitle
+  +String deleteButton
+  +String enabledLabel
+  +String disabledLabel
+  +String confirmExitTitle
+  +String confirmExitMessage
+  +String exitButton
+  +String saveDialogTitle
+  +String fillAllFieldsError
+  +String createMasoFileTitle
+  +String fileNameLabel
+  +String fileDescriptionLabel
+  +String createButton
+  +String emptyNameError
+  +String duplicateNameError
+  +String invalidArrivalTimeError
+  +String invalidServiceTimeError
+  +String invalidTimeDifferenceError
+  +String timeDifferenceTooSmallError
+  +String requestFileNameTitle
+  +String fileNameHint
+  +String acceptButton
+  +String errorTitle
+  +String emptyFileNameMessage
+  +String fileNameRequiredError
+  +String fileDescriptionRequiredError
+  +String executionSetupTitle
+  +String selectAlgorithmLabel
+  +String saveTooltip
+  +String saveDisabledTooltip
+  +String executeTooltip
+  +String addTooltip
+  +String backSemanticLabel
+  +String createFileTooltip
+  +String loadFileTooltip
+  +String executionScreenTitle
+  +String executionTimelineTitle
+  +String imageCopiedToClipboard
+  +String exportTimelineImage
+  +String exportTimelinePdf
+  +String clipboardTooltip
+  +String exportTooltip
+  +String executionTimeUnavailable
+  +String imageExported
+  +String pdfExported
+  +String metadataBadContent
+  +String processesBadContent
+  +String unsupportedVersion
+  +String invalidExtension
+  +String settingsDialogTitle
+  +String settingsDialogWarningTitle
+  +String settingsDialogWarningContent
+  +String cancel
+  +String confirm
+  +String close
+  +String settingsDialogDescription
+  +String processModeRegular
+  +String processModeBurst
+  +String processIdLabel
+  +String burstDurationLabel
+  +String addBurstButton
+  +String addThreadButton
+  +String deleteThreadTitle
+  +String confirmButton
+  +String arrivalTimeLabelDecorator
+  +String deleteBurstTitle
+  +String selectBurstType
+  +String burstCpuType
+  +String burstIoType
+  +String burstTypeLabel
+  +String contextSwitchTime
+  +String ioChannels
+  +String cpuCount
+  +String quantumLabel
+  +String invalidQuantumError
+  +String queueQuantaLabel
+  +String invalidQueueQuantaError
+  +String timeLimitLabel
+  +String invalidTimeLimitError
+  +String duplicatedNameProcessBadContent
+  +String unknownError
+  {static} +AppLocalizations? of()
+  +String fileLoaded()
+  +String fileSaved()
+  +String fileError()
+  +String errorLoadingFile()
+  +String errorExportingFile()
+  +String errorSavingFile()
+  +String arrivalTimeLabel()
+  +String serviceTimeLabel()
+  +String confirmDeleteMessage()
+  +String algorithmLabel()
+  +String failedToCaptureImage()
+  +String timelineProcessDescription()
+  +String executionTimeDescription()
+  +String deleteThreadConfirmation()
+  +String deleteBurstConfirmation()
+  +String invalidBurstSequenceError()
+  +String burstNameLabel()
+  +String burstTypeListLabel()
+  +String threadIdLabel()
+  +String emptyNameProcessBadContent()
+  +String invalidArrivalTimeBadContent()
+  +String invalidServiceTimeBadContent()
+  +String emptyThreadError()
+  +String emptyBurstError()
+  +String startAndEndCpuSequenceError()
+  +String startAndEndCpuSequenceBadContent()
+  +String invalidBurstSequenceBadContent()
+  +String invalidBurstDuration()
+}
+
+"maso::core::l10n::app_localizations.dart::AppLocalizations" o-- "flutter::src::widgets::localizations.dart::LocalizationsDelegate<AppLocalizations>"
+
+class "maso::core::l10n::app_localizations.dart::_AppLocalizationsDelegate" {
+  +dynamic load()
+  +bool isSupported()
+  +bool shouldReload()
+}
+
+"flutter::src::widgets::localizations.dart::LocalizationsDelegate" <|-- "maso::core::l10n::app_localizations.dart::_AppLocalizationsDelegate"
+
+class "maso::core::l10n::app_localizations_en.dart::AppLocalizationsEn" {
+  +String titleAppBar
+  +String create
+  +String load
+  +String dropFileHere
+  +String errorInvalidFile
+  +String editProcessTitle
+  +String createRegularProcessTitle
+  +String createBurstProcessTitle
+  +String processNameLabel
+  +String arrivalTimeDialogLabel
+  +String serviceTimeDialogLabel
+  +String cancelButton
+  +String saveButton
+  +String confirmDeleteTitle
+  +String deleteButton
+  +String enabledLabel
+  +String disabledLabel
+  +String confirmExitTitle
+  +String confirmExitMessage
+  +String exitButton
+  +String saveDialogTitle
+  +String fillAllFieldsError
+  +String createMasoFileTitle
+  +String fileNameLabel
+  +String fileDescriptionLabel
+  +String createButton
+  +String emptyNameError
+  +String duplicateNameError
+  +String invalidArrivalTimeError
+  +String invalidServiceTimeError
+  +String invalidTimeDifferenceError
+  +String timeDifferenceTooSmallError
+  +String requestFileNameTitle
+  +String fileNameHint
+  +String acceptButton
+  +String errorTitle
+  +String emptyFileNameMessage
+  +String fileNameRequiredError
+  +String fileDescriptionRequiredError
+  +String executionSetupTitle
+  +String selectAlgorithmLabel
+  +String saveTooltip
+  +String saveDisabledTooltip
+  +String executeTooltip
+  +String addTooltip
+  +String backSemanticLabel
+  +String createFileTooltip
+  +String loadFileTooltip
+  +String executionScreenTitle
+  +String executionTimelineTitle
+  +String imageCopiedToClipboard
+  +String exportTimelineImage
+  +String exportTimelinePdf
+  +String clipboardTooltip
+  +String exportTooltip
+  +String executionTimeUnavailable
+  +String imageExported
+  +String pdfExported
+  +String metadataBadContent
+  +String processesBadContent
+  +String unsupportedVersion
+  +String invalidExtension
+  +String settingsDialogTitle
+  +String settingsDialogWarningTitle
+  +String settingsDialogWarningContent
+  +String cancel
+  +String confirm
+  +String close
+  +String settingsDialogDescription
+  +String processModeRegular
+  +String processModeBurst
+  +String processIdLabel
+  +String burstDurationLabel
+  +String addBurstButton
+  +String addThreadButton
+  +String deleteThreadTitle
+  +String confirmButton
+  +String arrivalTimeLabelDecorator
+  +String deleteBurstTitle
+  +String selectBurstType
+  +String burstCpuType
+  +String burstIoType
+  +String burstTypeLabel
+  +String contextSwitchTime
+  +String ioChannels
+  +String cpuCount
+  +String quantumLabel
+  +String invalidQuantumError
+  +String queueQuantaLabel
+  +String invalidQueueQuantaError
+  +String timeLimitLabel
+  +String invalidTimeLimitError
+  +String duplicatedNameProcessBadContent
+  +String unknownError
+  +String fileLoaded()
+  +String fileSaved()
+  +String fileError()
+  +String errorLoadingFile()
+  +String errorExportingFile()
+  +String errorSavingFile()
+  +String arrivalTimeLabel()
+  +String serviceTimeLabel()
+  +String confirmDeleteMessage()
+  +String algorithmLabel()
+  +String failedToCaptureImage()
+  +String timelineProcessDescription()
+  +String executionTimeDescription()
+  +String deleteThreadConfirmation()
+  +String deleteBurstConfirmation()
+  +String invalidBurstSequenceError()
+  +String burstNameLabel()
+  +String burstTypeListLabel()
+  +String threadIdLabel()
+  +String emptyNameProcessBadContent()
+  +String invalidArrivalTimeBadContent()
+  +String invalidServiceTimeBadContent()
+  +String emptyThreadError()
+  +String emptyBurstError()
+  +String startAndEndCpuSequenceError()
+  +String startAndEndCpuSequenceBadContent()
+  +String invalidBurstSequenceBadContent()
+  +String invalidBurstDuration()
+}
+
+"maso::core::l10n::app_localizations.dart::AppLocalizations" <|-- "maso::core::l10n::app_localizations_en.dart::AppLocalizationsEn"
+
+class "maso::core::l10n::app_localizations_es.dart::AppLocalizationsEs" {
+  +String titleAppBar
+  +String create
+  +String load
+  +String dropFileHere
+  +String errorInvalidFile
+  +String editProcessTitle
+  +String createRegularProcessTitle
+  +String createBurstProcessTitle
+  +String processNameLabel
+  +String arrivalTimeDialogLabel
+  +String serviceTimeDialogLabel
+  +String cancelButton
+  +String saveButton
+  +String confirmDeleteTitle
+  +String deleteButton
+  +String enabledLabel
+  +String disabledLabel
+  +String confirmExitTitle
+  +String confirmExitMessage
+  +String exitButton
+  +String saveDialogTitle
+  +String fillAllFieldsError
+  +String createMasoFileTitle
+  +String fileNameLabel
+  +String fileDescriptionLabel
+  +String createButton
+  +String emptyNameError
+  +String duplicateNameError
+  +String invalidArrivalTimeError
+  +String invalidServiceTimeError
+  +String invalidTimeDifferenceError
+  +String timeDifferenceTooSmallError
+  +String requestFileNameTitle
+  +String fileNameHint
+  +String acceptButton
+  +String errorTitle
+  +String emptyFileNameMessage
+  +String fileNameRequiredError
+  +String fileDescriptionRequiredError
+  +String executionSetupTitle
+  +String selectAlgorithmLabel
+  +String saveTooltip
+  +String saveDisabledTooltip
+  +String executeTooltip
+  +String addTooltip
+  +String backSemanticLabel
+  +String createFileTooltip
+  +String loadFileTooltip
+  +String executionScreenTitle
+  +String executionTimelineTitle
+  +String imageCopiedToClipboard
+  +String exportTimelineImage
+  +String exportTimelinePdf
+  +String clipboardTooltip
+  +String exportTooltip
+  +String executionTimeUnavailable
+  +String imageExported
+  +String pdfExported
+  +String metadataBadContent
+  +String processesBadContent
+  +String unsupportedVersion
+  +String invalidExtension
+  +String settingsDialogTitle
+  +String settingsDialogWarningTitle
+  +String settingsDialogWarningContent
+  +String cancel
+  +String confirm
+  +String close
+  +String settingsDialogDescription
+  +String processModeRegular
+  +String processModeBurst
+  +String processIdLabel
+  +String burstDurationLabel
+  +String addBurstButton
+  +String addThreadButton
+  +String deleteThreadTitle
+  +String confirmButton
+  +String arrivalTimeLabelDecorator
+  +String deleteBurstTitle
+  +String selectBurstType
+  +String burstCpuType
+  +String burstIoType
+  +String burstTypeLabel
+  +String contextSwitchTime
+  +String ioChannels
+  +String cpuCount
+  +String quantumLabel
+  +String invalidQuantumError
+  +String queueQuantaLabel
+  +String invalidQueueQuantaError
+  +String timeLimitLabel
+  +String invalidTimeLimitError
+  +String duplicatedNameProcessBadContent
+  +String unknownError
+  +String fileLoaded()
+  +String fileSaved()
+  +String fileError()
+  +String errorLoadingFile()
+  +String errorExportingFile()
+  +String errorSavingFile()
+  +String arrivalTimeLabel()
+  +String serviceTimeLabel()
+  +String confirmDeleteMessage()
+  +String algorithmLabel()
+  +String failedToCaptureImage()
+  +String timelineProcessDescription()
+  +String executionTimeDescription()
+  +String deleteThreadConfirmation()
+  +String deleteBurstConfirmation()
+  +String invalidBurstSequenceError()
+  +String burstNameLabel()
+  +String burstTypeListLabel()
+  +String threadIdLabel()
+  +String emptyNameProcessBadContent()
+  +String invalidArrivalTimeBadContent()
+  +String invalidServiceTimeBadContent()
+  +String emptyThreadError()
+  +String emptyBurstError()
+  +String startAndEndCpuSequenceError()
+  +String startAndEndCpuSequenceBadContent()
+  +String invalidBurstSequenceBadContent()
+  +String invalidBurstDuration()
+}
+
+"maso::core::l10n::app_localizations.dart::AppLocalizations" <|-- "maso::core::l10n::app_localizations_es.dart::AppLocalizationsEs"
+
+class "maso::core::service_locator.dart::ServiceLocator" {
+  +GetIt getIt
+  {static} -ServiceLocator _instance
+  {static} +ServiceLocator instance
+  +void setup()
+  +void registerMasoFile()
+  +void registerSettings()
+  +void registerExecutionSetup()
+}
+
+"maso::core::service_locator.dart::ServiceLocator" o-- "get_it::get_it.dart::GetIt"
+"maso::core::service_locator.dart::ServiceLocator" o-- "maso::core::service_locator.dart::ServiceLocator"
+
+class "maso::data::repositories::file_repository.dart::FileRepository" {
+  -IFileService _fileService
+  +dynamic loadMasoFile()
+  +dynamic createMasoFile()
+  +dynamic saveMasoFile()
+  +dynamic saveExportedFile()
+  +dynamic pickFileManually()
+  +bool hasMasoFileChanged()
+}
+
+"maso::data::repositories::file_repository.dart::FileRepository" o-- "maso::data::services::file_service::i_file_service.dart::IFileService"
+
+class "maso::data::services::execution_time::base_execution_time_service.dart::BaseExecutionTimeService" {
+  +List<IProcess> processes
+  +ExecutionSetup executionSetup
+  +Machine calculateMachine()
+  +Machine calculateMachineWithRegularProcesses()
+  +Machine calculateMachineWithBurstProcesses()
+}
+
+"maso::data::services::execution_time::base_execution_time_service.dart::BaseExecutionTimeService" o-- "maso::domain::models::execution_setup.dart::ExecutionSetup"
+
+class "maso::data::services::execution_time::fifo_execution_time_service.dart::FifoExecutionTimeService" {
+  +Machine calculateMachineWithRegularProcesses()
+  +Machine calculateMachineWithBurstProcesses()
+}
+
+"maso::data::services::execution_time::base_execution_time_service.dart::BaseExecutionTimeService" <|-- "maso::data::services::execution_time::fifo_execution_time_service.dart::FifoExecutionTimeService"
+
+class "maso::data::services::execution_time::fifo_execution_time_service.dart::_ThreadExecution" {
+  +String processId
+  +String threadId
+  +int arrivalTime
+  +List<Burst> bursts
+  +int currentBurstIndex
+  +Burst? currentBurst
+}
+
+"maso::data::services::execution_time::fifo_execution_time_service.dart::_ThreadExecution" o-- "maso::domain::models::maso::burst.dart::Burst"
+
+class "maso::data::services::execution_time::multiple_priority_queues_execution_time_service.dart::MultiplePriorityQueuesExecutionTimeService" {
+  +Machine calculateMachineWithRegularProcesses()
+  +Machine calculateMachineWithBurstProcesses()
+  -bool _hasThreadsInQueues()
+  -_ThreadExecution? _getNextThreadFromQueues()
+}
+
+"maso::data::services::execution_time::base_execution_time_service.dart::BaseExecutionTimeService" <|-- "maso::data::services::execution_time::multiple_priority_queues_execution_time_service.dart::MultiplePriorityQueuesExecutionTimeService"
+
+class "maso::data::services::execution_time::multiple_priority_queues_execution_time_service.dart::_ThreadExecution" {
+  +String processId
+  +String threadId
+  +int priority
+  +double arrivalTime
+  +List<Burst> bursts
+  +int currentBurstIndex
+  +Burst? currentBurst
+}
+
+"maso::data::services::execution_time::multiple_priority_queues_execution_time_service.dart::_ThreadExecution" o-- "maso::domain::models::maso::burst.dart::Burst"
+
+class "maso::data::services::execution_time::multiple_priority_queues_with_feedback_execution_time_service.dart::MultiplePriorityQueuesWithFeedbackExecutionTimeService" {
+  +Machine calculateMachineWithRegularProcesses()
+  +Machine calculateMachineWithBurstProcesses()
+  -bool _hasThreadsInQueues()
+  -_ThreadExecution? _getNextThreadFromQueues()
+}
+
+"maso::data::services::execution_time::base_execution_time_service.dart::BaseExecutionTimeService" <|-- "maso::data::services::execution_time::multiple_priority_queues_with_feedback_execution_time_service.dart::MultiplePriorityQueuesWithFeedbackExecutionTimeService"
+
+class "maso::data::services::execution_time::multiple_priority_queues_with_feedback_execution_time_service.dart::_ThreadExecution" {
+  +String processId
+  +String threadId
+  +int priority
+  +double arrivalTime
+  +List<Burst> bursts
+  +int currentBurstIndex
+  +double remainingTime
+  +Burst? currentBurst
+}
+
+"maso::data::services::execution_time::multiple_priority_queues_with_feedback_execution_time_service.dart::_ThreadExecution" o-- "maso::domain::models::maso::burst.dart::Burst"
+
+class "maso::data::services::execution_time::priority_execution_time_service.dart::PriorityExecutionTimeService" {
+  +Machine calculateMachineWithRegularProcesses()
+  +Machine calculateMachineWithBurstProcesses()
+}
+
+"maso::data::services::execution_time::base_execution_time_service.dart::BaseExecutionTimeService" <|-- "maso::data::services::execution_time::priority_execution_time_service.dart::PriorityExecutionTimeService"
+
+class "maso::data::services::execution_time::priority_execution_time_service.dart::_ThreadExecution" {
+  +String processId
+  +String threadId
+  +double arrivalTime
+  +List<Burst> bursts
+  +int currentBurstIndex
+  +Burst? currentBurst
+}
+
+"maso::data::services::execution_time::priority_execution_time_service.dart::_ThreadExecution" o-- "maso::domain::models::maso::burst.dart::Burst"
+
+class "maso::data::services::execution_time::round_robin_execution_time_service.dart::RoundRobinExecutionTimeService" {
+  +Machine calculateMachineWithRegularProcesses()
+  +Machine calculateMachineWithBurstProcesses()
+}
+
+"maso::data::services::execution_time::base_execution_time_service.dart::BaseExecutionTimeService" <|-- "maso::data::services::execution_time::round_robin_execution_time_service.dart::RoundRobinExecutionTimeService"
+
+class "maso::data::services::execution_time::round_robin_execution_time_service.dart::_ThreadExecution" {
+  +String processId
+  +String threadId
+  +double arrivalTime
+  +List<Burst> bursts
+  +int currentBurstIndex
+  +double remainingTime
+  +Burst? currentBurst
+}
+
+"maso::data::services::execution_time::round_robin_execution_time_service.dart::_ThreadExecution" o-- "maso::domain::models::maso::burst.dart::Burst"
+
+class "maso::data::services::execution_time::sjf_execution_time_service.dart::SjfExecutionTimeService" {
+  +Machine calculateMachineWithRegularProcesses()
+  +Machine calculateMachineWithBurstProcesses()
+}
+
+"maso::data::services::execution_time::base_execution_time_service.dart::BaseExecutionTimeService" <|-- "maso::data::services::execution_time::sjf_execution_time_service.dart::SjfExecutionTimeService"
+
+class "maso::data::services::execution_time::sjf_execution_time_service.dart::_ThreadExecution" {
+  +String processId
+  +String threadId
+  +double arrivalTime
+  +List<Burst> bursts
+  +int currentBurstIndex
+  +Burst? currentBurst
+}
+
+"maso::data::services::execution_time::sjf_execution_time_service.dart::_ThreadExecution" o-- "maso::domain::models::maso::burst.dart::Burst"
+
+class "maso::data::services::execution_time::srtf_execution_time_service.dart::SrtfExecutionTimeService" {
+  +Machine calculateMachineWithRegularProcesses()
+  +Machine calculateMachineWithBurstProcesses()
+}
+
+"maso::data::services::execution_time::base_execution_time_service.dart::BaseExecutionTimeService" <|-- "maso::data::services::execution_time::srtf_execution_time_service.dart::SrtfExecutionTimeService"
+
+class "maso::data::services::execution_time::srtf_execution_time_service.dart::_ThreadExecution" {
+  +String processId
+  +String threadId
+  +double arrivalTime
+  +List<Burst> bursts
+  +int currentBurstIndex
+  +double remainingTime
+  +Burst? currentBurst
+}
+
+"maso::data::services::execution_time::srtf_execution_time_service.dart::_ThreadExecution" o-- "maso::domain::models::maso::burst.dart::Burst"
+
+class "maso::data::services::execution_time::time_limit_execution_time_service.dart::TimeLimitExecutionTimeService" {
+  +Machine calculateMachineWithRegularProcesses()
+  +Machine calculateMachineWithBurstProcesses()
+}
+
+"maso::data::services::execution_time::base_execution_time_service.dart::BaseExecutionTimeService" <|-- "maso::data::services::execution_time::time_limit_execution_time_service.dart::TimeLimitExecutionTimeService"
+
+class "maso::data::services::execution_time::time_limit_execution_time_service.dart::_ThreadExecution" {
+  +String processId
+  +String threadId
+  +double arrivalTime
+  +List<Burst> bursts
+  +int currentBurstIndex
+  +double remainingTime
+  +Burst? currentBurst
+}
+
+"maso::data::services::execution_time::time_limit_execution_time_service.dart::_ThreadExecution" o-- "maso::domain::models::maso::burst.dart::Burst"
+
+class "maso::data::services::execution_time_calculator_service.dart::ExecutionTimeCalculatorService" {
+  +ExecutionSetup executionSetup
+  +Machine calculateExecutionTimes()
+}
+
+"maso::data::services::execution_time_calculator_service.dart::ExecutionTimeCalculatorService" o-- "maso::domain::models::execution_setup.dart::ExecutionSetup"
+
+abstract class "maso::data::services::file_service::i_file_service.dart::IFileService" {
+  +MasoFile? originalFile
+  +dynamic readMasoFile()
+  +dynamic saveMasoFile()
+  +dynamic saveExportedFile()
+  +dynamic pickFile()
+}
+
+"maso::data::services::file_service::i_file_service.dart::IFileService" o-- "maso::domain::models::maso::maso_file.dart::MasoFile"
+
+class "maso::data::services::file_service::mobile_desktop_file_service.dart::FileService" {
+  +MasoFile? originalFile
+  +dynamic readMasoFile()
+  +dynamic saveMasoFile()
+  +dynamic saveExportedFile()
+  -dynamic _writeExportedFile()
+  +dynamic pickFile()
+}
+
+"maso::data::services::file_service::mobile_desktop_file_service.dart::FileService" o-- "maso::domain::models::maso::maso_file.dart::MasoFile"
+"maso::data::services::file_service::i_file_service.dart::IFileService" <|-- "maso::data::services::file_service::mobile_desktop_file_service.dart::FileService"
+
+class "maso::data::services::file_service::web_file_service.dart::FileService" {
+  +MasoFile? originalFile
+  +dynamic readMasoFile()
+  +MasoFile decodeAndCreateMasoFile()
+  +dynamic saveMasoFile()
+  +dynamic saveExportedFile()
+  +dynamic pickFile()
+  +dynamic readBlobFile()
+}
+
+"maso::data::services::file_service::web_file_service.dart::FileService" o-- "maso::domain::models::maso::maso_file.dart::MasoFile"
+"maso::data::services::file_service::i_file_service.dart::IFileService" <|-- "maso::data::services::file_service::web_file_service.dart::FileService"
+
+class "maso::domain::models::core_processor.dart::CoreProcessor" {
+  +List<HardwareComponent> core
+  +bool isRegularProcessInside()
+  +bool isBurstProcessInside()
+}
+
+class "maso::domain::models::custom_exceptions::bad_maso_file_error_type.dart::BadMasoFileErrorType" {
+  +int index
+  {static} +List<BadMasoFileErrorType> values
+  {static} +BadMasoFileErrorType metadataBadContent
+  {static} +BadMasoFileErrorType processesBadContent
+  {static} +BadMasoFileErrorType unsupportedVersion
+  {static} +BadMasoFileErrorType invalidExtension
+}
+
+"maso::domain::models::custom_exceptions::bad_maso_file_error_type.dart::BadMasoFileErrorType" o-- "maso::domain::models::custom_exceptions::bad_maso_file_error_type.dart::BadMasoFileErrorType"
+"dart::core::Enum" <|-- "maso::domain::models::custom_exceptions::bad_maso_file_error_type.dart::BadMasoFileErrorType"
+
+class "maso::domain::models::custom_exceptions::bad_maso_file_exception.dart::BadMasoFileException" {
+  +BadMasoFileErrorType? type
+  +RegularProcessError? regularProcessError
+  +BurstProcessError? burstProcessError
+  +String description()
+  +String toString()
+}
+
+"maso::domain::models::custom_exceptions::bad_maso_file_exception.dart::BadMasoFileException" o-- "maso::domain::models::custom_exceptions::bad_maso_file_error_type.dart::BadMasoFileErrorType"
+"maso::domain::models::custom_exceptions::bad_maso_file_exception.dart::BadMasoFileException" o-- "maso::domain::models::custom_exceptions::regular_process_error.dart::RegularProcessError"
+"maso::domain::models::custom_exceptions::bad_maso_file_exception.dart::BadMasoFileException" o-- "maso::domain::models::custom_exceptions::burst_process_error.dart::BurstProcessError"
+"dart::core::Exception" <|-- "maso::domain::models::custom_exceptions::bad_maso_file_exception.dart::BadMasoFileException"
+
+class "maso::domain::models::custom_exceptions::burst_process_error.dart::BurstProcessError" {
+  +BurstProcessErrorType errorType
+  +Object? param1
+  +Object? param2
+  +Object? param3
+  +bool success
+  +String getDescriptionForInputError()
+  +String getDescriptionForFileError()
+}
+
+"maso::domain::models::custom_exceptions::burst_process_error.dart::BurstProcessError" o-- "maso::domain::models::custom_exceptions::burst_process_error_type.dart::BurstProcessErrorType"
+"maso::domain::models::custom_exceptions::process_error.dart::ProcessError" <|-- "maso::domain::models::custom_exceptions::burst_process_error.dart::BurstProcessError"
+
+class "maso::domain::models::custom_exceptions::burst_process_error_type.dart::BurstProcessErrorType" {
+  +int index
+  {static} +List<BurstProcessErrorType> values
+  {static} +BurstProcessErrorType emptyName
+  {static} +BurstProcessErrorType duplicatedName
+  {static} +BurstProcessErrorType invalidArrivalTime
+  {static} +BurstProcessErrorType emptyThread
+  {static} +BurstProcessErrorType emptyBurst
+  {static} +BurstProcessErrorType startAndEndCpuSequence
+  {static} +BurstProcessErrorType invalidBurstSequence
+  {static} +BurstProcessErrorType invalidBurstDuration
+}
+
+"maso::domain::models::custom_exceptions::burst_process_error_type.dart::BurstProcessErrorType" o-- "maso::domain::models::custom_exceptions::burst_process_error_type.dart::BurstProcessErrorType"
+"dart::core::Enum" <|-- "maso::domain::models::custom_exceptions::burst_process_error_type.dart::BurstProcessErrorType"
+
+abstract class "maso::domain::models::custom_exceptions::process_error.dart::ProcessError" {
+  +bool success
+  +String getDescriptionForInputError()
+  +String getDescriptionForFileError()
+}
+
+class "maso::domain::models::custom_exceptions::regular_process_error.dart::RegularProcessError" {
+  +RegularProcessErrorType errorType
+  +Object? param1
+  +Object? param2
+  +Object? param3
+  +bool success
+  +String getDescriptionForInputError()
+  +String getDescriptionForFileError()
+}
+
+"maso::domain::models::custom_exceptions::regular_process_error.dart::RegularProcessError" o-- "maso::domain::models::custom_exceptions::regular_process_error_type.dart::RegularProcessErrorType"
+"maso::domain::models::custom_exceptions::process_error.dart::ProcessError" <|-- "maso::domain::models::custom_exceptions::regular_process_error.dart::RegularProcessError"
+
+class "maso::domain::models::custom_exceptions::regular_process_error_type.dart::RegularProcessErrorType" {
+  +int index
+  {static} +List<RegularProcessErrorType> values
+  {static} +RegularProcessErrorType emptyName
+  {static} +RegularProcessErrorType duplicatedName
+  {static} +RegularProcessErrorType invalidArrivalTime
+  {static} +RegularProcessErrorType invalidServiceTime
+}
+
+"maso::domain::models::custom_exceptions::regular_process_error_type.dart::RegularProcessErrorType" o-- "maso::domain::models::custom_exceptions::regular_process_error_type.dart::RegularProcessErrorType"
+"dart::core::Enum" <|-- "maso::domain::models::custom_exceptions::regular_process_error_type.dart::RegularProcessErrorType"
+
+class "maso::domain::models::execution_setup.dart::ExecutionSetup" {
+  +SchedulingAlgorithm algorithm
+  +SettingsMaso settings
+}
+
+"maso::domain::models::execution_setup.dart::ExecutionSetup" o-- "maso::domain::models::scheduling_algorithm.dart::SchedulingAlgorithm"
+"maso::domain::models::execution_setup.dart::ExecutionSetup" o-- "maso::domain::models::settings_maso.dart::SettingsMaso"
+
+class "maso::domain::models::export_formats.dart::ExportFormats" {
+  +int index
+  {static} +List<ExportFormats> values
+  {static} +ExportFormats pdf
+  {static} +ExportFormats image
+}
+
+"maso::domain::models::export_formats.dart::ExportFormats" o-- "maso::domain::models::export_formats.dart::ExportFormats"
+"dart::core::Enum" <|-- "maso::domain::models::export_formats.dart::ExportFormats"
+
+class "maso::domain::models::hardware_component.dart::HardwareComponent" {
+  +HardwareState state
+  +IProcess? process
+  +String toString()
+}
+
+"maso::domain::models::hardware_component.dart::HardwareComponent" o-- "maso::domain::models::hardware_state.dart::HardwareState"
+"maso::domain::models::hardware_component.dart::HardwareComponent" o-- "maso::domain::models::maso::i_process.dart::IProcess"
+
+class "maso::domain::models::hardware_state.dart::HardwareState" {
+  +int index
+  {static} +List<HardwareState> values
+  {static} +HardwareState busy
+  {static} +HardwareState free
+  {static} +HardwareState switchingContext
+}
+
+"maso::domain::models::hardware_state.dart::HardwareState" o-- "maso::domain::models::hardware_state.dart::HardwareState"
+"dart::core::Enum" <|-- "maso::domain::models::hardware_state.dart::HardwareState"
+
+class "maso::domain::models::machine.dart::Machine" {
+  +List<CoreProcessor> cpus
+  +List<CoreProcessor> ioChannels
+  +bool isRegularProcessInside()
+  +bool isBurstProcessInside()
+  +String toString()
+}
+
+class "maso::domain::models::maso::burst.dart::Burst" {
+  +BurstType type
+  +int duration
+  +int hashCode
+  +Map<String, dynamic> toJson()
+  +Burst copy()
+  +bool ==()
+  +String toString()
+}
+
+"maso::domain::models::maso::burst.dart::Burst" o-- "maso::domain::models::maso::burst_type.dart::BurstType"
+"maso::core::deep_copy_mixin.dart::DeepCopy" <|-- "maso::domain::models::maso::burst.dart::Burst"
+
+class "maso::domain::models::maso::burst_process.dart::BurstProcess" {
+  +List<Thread> threads
+  +int hashCode
+  +Map<String, dynamic> toJson()
+  +String toString()
+  +bool ==()
+  +BurstProcess copy()
+}
+
+"maso::domain::models::maso::i_process.dart::IProcess" <|-- "maso::domain::models::maso::burst_process.dart::BurstProcess"
+
+class "maso::domain::models::maso::burst_type.dart::BurstType" {
+  +int index
+  {static} +List<BurstType> values
+  {static} +BurstType cpu
+  {static} +BurstType io
+}
+
+"maso::domain::models::maso::burst_type.dart::BurstType" o-- "maso::domain::models::maso::burst_type.dart::BurstType"
+"dart::core::Enum" <|-- "maso::domain::models::maso::burst_type.dart::BurstType"
+
+abstract class "maso::domain::models::maso::i_process.dart::IProcess" {
+  +String id
+  +int arrivalTime
+  +bool enabled
+  +int hashCode
+  +Map<String, dynamic> toJson()
+  +bool ==()
+  +IProcess copy()
+}
+
+"maso::core::deep_copy_mixin.dart::DeepCopy" <|-- "maso::domain::models::maso::i_process.dart::IProcess"
+
+class "maso::domain::models::maso::maso_file.dart::MasoFile" {
+  +String? filePath
+  +Metadata metadata
+  +Processes processes
+  +int hashCode
+  +Map<String, dynamic> toJson()
+  {static} +void checkIfJsonIsCorrect()
+  +bool ==()
+  +MasoFile copyWith()
+  +String toString()
+}
+
+"maso::domain::models::maso::maso_file.dart::MasoFile" o-- "maso::domain::models::maso::metadata.dart::Metadata"
+"maso::domain::models::maso::maso_file.dart::MasoFile" o-- "maso::domain::models::maso::processes.dart::Processes"
+
+class "maso::domain::models::maso::metadata.dart::Metadata" {
+  +String name
+  +String version
+  +String description
+  +int hashCode
+  +Map<String, dynamic> toJson()
+  +bool ==()
+  +String toString()
+}
+
+class "maso::domain::models::maso::processes.dart::Processes" {
+  +ProcessesMode mode
+  +List<IProcess> elements
+  +int hashCode
+  +Map<String, dynamic> toJson()
+  +bool ==()
+  +Processes copyWith()
+  +String toString()
+}
+
+"maso::domain::models::maso::processes.dart::Processes" o-- "maso::domain::models::maso::process_mode.dart::ProcessesMode"
+
+class "maso::domain::models::maso::process_mode.dart::ProcessesMode" {
+  +int index
+  {static} +List<ProcessesMode> values
+  {static} +ProcessesMode regular
+  {static} +ProcessesMode burst
+}
+
+"maso::domain::models::maso::process_mode.dart::ProcessesMode" o-- "maso::domain::models::maso::process_mode.dart::ProcessesMode"
+"dart::core::Enum" <|-- "maso::domain::models::maso::process_mode.dart::ProcessesMode"
+
+class "maso::domain::models::maso::regular_process.dart::RegularProcess" {
+  +int serviceTime
+  +int priority
+  +int hashCode
+  +Map<String, dynamic> toJson()
+  +String toString()
+  +bool ==()
+  +RegularProcess copy()
+}
+
+"maso::domain::models::maso::i_process.dart::IProcess" <|-- "maso::domain::models::maso::regular_process.dart::RegularProcess"
+
+class "maso::domain::models::maso::thread.dart::Thread" {
+  +String id
+  +List<Burst> bursts
+  +bool enabled
+  +int totalDuration
+  +int hashCode
+  +Map<String, dynamic> toJson()
+  +Thread copy()
+  +bool ==()
+  +String toString()
+}
+
+"maso::core::deep_copy_mixin.dart::DeepCopy" <|-- "maso::domain::models::maso::thread.dart::Thread"
+
+class "maso::domain::models::scheduling_algorithm.dart::SchedulingAlgorithm" {
+  +int index
+  {static} +List<SchedulingAlgorithm> values
+  {static} +SchedulingAlgorithm firstComeFirstServed
+  {static} +SchedulingAlgorithm shortestJobFirst
+  {static} +SchedulingAlgorithm shortestRemainingTimeFirst
+  {static} +SchedulingAlgorithm roundRobin
+  {static} +SchedulingAlgorithm priorityBased
+  {static} +SchedulingAlgorithm multiplePriorityQueues
+  {static} +SchedulingAlgorithm multiplePriorityQueuesWithFeedback
+  {static} +SchedulingAlgorithm timeLimit
+}
+
+"maso::domain::models::scheduling_algorithm.dart::SchedulingAlgorithm" o-- "maso::domain::models::scheduling_algorithm.dart::SchedulingAlgorithm"
+"dart::core::Enum" <|-- "maso::domain::models::scheduling_algorithm.dart::SchedulingAlgorithm"
+
+class "maso::domain::models::settings_maso.dart::SettingsKeys" {
+  {static} +String contextSwitchTime
+  {static} +String ioChannels
+  {static} +String cpuCount
+  {static} +String quantum
+  {static} +String queueQuanta
+  {static} +String timeLimit
+}
+
+class "maso::domain::models::settings_maso.dart::SettingsMaso" {
+  +ProcessesMode processesMode
+  +int contextSwitchTime
+  +int ioChannels
+  +int cpuCount
+  +int quantum
+  +List<int> queueQuanta
+  +int timeLimit
+  {static} +dynamic loadFromPreferences()
+  +dynamic saveToPreferences()
+  +SettingsMaso copy()
+}
+
+"maso::domain::models::settings_maso.dart::SettingsMaso" o-- "maso::domain::models::maso::process_mode.dart::ProcessesMode"
+"maso::core::deep_copy_mixin.dart::DeepCopy" <|-- "maso::domain::models::settings_maso.dart::SettingsMaso"
+
+class "maso::domain::use_cases::check_file_changes_use_case.dart::CheckFileChangesUseCase" {
+  -FileRepository _fileRepository
+  +bool execute()
+}
+
+"maso::domain::use_cases::check_file_changes_use_case.dart::CheckFileChangesUseCase" o-- "maso::data::repositories::file_repository.dart::FileRepository"
+
+class "maso::domain::use_cases::validate_maso_regular_processes_use_case.dart::ValidateMasoProcessUseCase" {
+  {static} +BurstProcessError validateBurstProcess()
+  {static} +RegularProcessError validateRegularProcess()
+}
+
+class "maso::main.dart::MasoApp" {
+  +State<MasoApp> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "maso::main.dart::MasoApp"
+
+class "maso::main.dart::_MasoAppState" {
+  +void initState()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "maso::main.dart::_MasoAppState"
+
+class "maso::presentation::blocs::file_bloc::file_bloc.dart::FileBloc" {
+  -FileRepository _fileRepository
+}
+
+"maso::presentation::blocs::file_bloc::file_bloc.dart::FileBloc" o-- "maso::data::repositories::file_repository.dart::FileRepository"
+"bloc::src::bloc.dart::Bloc" <|-- "maso::presentation::blocs::file_bloc::file_bloc.dart::FileBloc"
+
+abstract class "maso::presentation::blocs::file_bloc::file_event.dart::FileEvent" {
+}
+
+class "maso::presentation::blocs::file_bloc::file_event.dart::FileDropped" {
+  +String filePath
+}
+
+"maso::presentation::blocs::file_bloc::file_event.dart::FileEvent" <|-- "maso::presentation::blocs::file_bloc::file_event.dart::FileDropped"
+
+class "maso::presentation::blocs::file_bloc::file_event.dart::MasoFileSaveRequested" {
+  +MasoFile masoFile
+  +String dialogTitle
+  +String fileName
+}
+
+"maso::presentation::blocs::file_bloc::file_event.dart::MasoFileSaveRequested" o-- "maso::domain::models::maso::maso_file.dart::MasoFile"
+"maso::presentation::blocs::file_bloc::file_event.dart::FileEvent" <|-- "maso::presentation::blocs::file_bloc::file_event.dart::MasoFileSaveRequested"
+
+class "maso::presentation::blocs::file_bloc::file_event.dart::ExportedFileSaveRequested" {
+  +Uint8List bytes
+  +String dialogTitle
+  +String fileName
+  +ExportFormats fileFormat
+}
+
+"maso::presentation::blocs::file_bloc::file_event.dart::ExportedFileSaveRequested" o-- "dart::typed_data::Uint8List"
+"maso::presentation::blocs::file_bloc::file_event.dart::ExportedFileSaveRequested" o-- "maso::domain::models::export_formats.dart::ExportFormats"
+"maso::presentation::blocs::file_bloc::file_event.dart::FileEvent" <|-- "maso::presentation::blocs::file_bloc::file_event.dart::ExportedFileSaveRequested"
+
+class "maso::presentation::blocs::file_bloc::file_event.dart::MasoFilePickRequested" {
+}
+
+"maso::presentation::blocs::file_bloc::file_event.dart::FileEvent" <|-- "maso::presentation::blocs::file_bloc::file_event.dart::MasoFilePickRequested"
+
+class "maso::presentation::blocs::file_bloc::file_event.dart::CreateMasoMetadata" {
+  +String name
+  +String version
+  +String description
+}
+
+"maso::presentation::blocs::file_bloc::file_event.dart::FileEvent" <|-- "maso::presentation::blocs::file_bloc::file_event.dart::CreateMasoMetadata"
+
+class "maso::presentation::blocs::file_bloc::file_event.dart::MasoFileReset" {
+}
+
+"maso::presentation::blocs::file_bloc::file_event.dart::FileEvent" <|-- "maso::presentation::blocs::file_bloc::file_event.dart::MasoFileReset"
+
+abstract class "maso::presentation::blocs::file_bloc::file_state.dart::FileState" {
+}
+
+class "maso::presentation::blocs::file_bloc::file_state.dart::FileInitial" {
+}
+
+"maso::presentation::blocs::file_bloc::file_state.dart::FileState" <|-- "maso::presentation::blocs::file_bloc::file_state.dart::FileInitial"
+
+class "maso::presentation::blocs::file_bloc::file_state.dart::FileLoading" {
+}
+
+"maso::presentation::blocs::file_bloc::file_state.dart::FileState" <|-- "maso::presentation::blocs::file_bloc::file_state.dart::FileLoading"
+
+class "maso::presentation::blocs::file_bloc::file_state.dart::FileLoaded" {
+  +MasoFile masoFile
+}
+
+"maso::presentation::blocs::file_bloc::file_state.dart::FileLoaded" o-- "maso::domain::models::maso::maso_file.dart::MasoFile"
+"maso::presentation::blocs::file_bloc::file_state.dart::FileState" <|-- "maso::presentation::blocs::file_bloc::file_state.dart::FileLoaded"
+
+class "maso::presentation::blocs::file_bloc::file_state.dart::FileExported" {
+  +ExportFormats fileFormat
+}
+
+"maso::presentation::blocs::file_bloc::file_state.dart::FileExported" o-- "maso::domain::models::export_formats.dart::ExportFormats"
+"maso::presentation::blocs::file_bloc::file_state.dart::FileState" <|-- "maso::presentation::blocs::file_bloc::file_state.dart::FileExported"
+
+class "maso::presentation::blocs::file_bloc::file_state.dart::FileError" {
+  +Exception? error
+  +FileErrorType reason
+  +String getDescription()
+}
+
+"maso::presentation::blocs::file_bloc::file_state.dart::FileError" o-- "maso::presentation::blocs::file_bloc::file_state.dart::FileErrorType"
+"maso::presentation::blocs::file_bloc::file_state.dart::FileState" <|-- "maso::presentation::blocs::file_bloc::file_state.dart::FileError"
+
+class "maso::presentation::blocs::file_bloc::file_state.dart::FileErrorType" {
+  +int index
+  {static} +List<FileErrorType> values
+  {static} +FileErrorType invalidExtension
+  {static} +FileErrorType errorOpeningFile
+  {static} +FileErrorType errorSavingMasoFile
+  {static} +FileErrorType errorSavingExportedFile
+  {static} +FileErrorType errorPickingFileManually
+}
+
+"maso::presentation::blocs::file_bloc::file_state.dart::FileErrorType" o-- "maso::presentation::blocs::file_bloc::file_state.dart::FileErrorType"
+"dart::core::Enum" <|-- "maso::presentation::blocs::file_bloc::file_state.dart::FileErrorType"
+
+class "maso::presentation::screens::file_loaded_screen.dart::FileLoadedScreen" {
+  +FileBloc fileBloc
+  +CheckFileChangesUseCase checkFileChangesUseCase
+  +MasoFile masoFile
+  +State<FileLoadedScreen> createState()
+}
+
+"maso::presentation::screens::file_loaded_screen.dart::FileLoadedScreen" o-- "maso::presentation::blocs::file_bloc::file_bloc.dart::FileBloc"
+"maso::presentation::screens::file_loaded_screen.dart::FileLoadedScreen" o-- "maso::domain::use_cases::check_file_changes_use_case.dart::CheckFileChangesUseCase"
+"maso::presentation::screens::file_loaded_screen.dart::FileLoadedScreen" o-- "maso::domain::models::maso::maso_file.dart::MasoFile"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "maso::presentation::screens::file_loaded_screen.dart::FileLoadedScreen"
+
+class "maso::presentation::screens::file_loaded_screen.dart::_FileLoadedScreenState" {
+  +MasoFile cachedMasoFile
+  -bool _hasFileChanged
+  -void _checkFileChange()
+  -dynamic _confirmExit()
+  +void initState()
+  +Widget build()
+  -dynamic _onSavePressed()
+}
+
+"maso::presentation::screens::file_loaded_screen.dart::_FileLoadedScreenState" o-- "maso::domain::models::maso::maso_file.dart::MasoFile"
+"flutter::src::widgets::framework.dart::State" <|-- "maso::presentation::screens::file_loaded_screen.dart::_FileLoadedScreenState"
+
+class "maso::presentation::screens::home_screen.dart::HomeScreen" {
+  +State<HomeScreen> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "maso::presentation::screens::home_screen.dart::HomeScreen"
+
+class "maso::presentation::screens::home_screen.dart::_HomeScreenState" {
+  -bool _isLoading
+  -dynamic _showCreateMasoFileDialog()
+  +Widget build()
+  +void checkDeepLink()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "maso::presentation::screens::home_screen.dart::_HomeScreenState"
+
+class "maso::presentation::screens::maso_file_execution_screen.dart::MasoFileExecutionScreen" {
+  +State<MasoFileExecutionScreen> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "maso::presentation::screens::maso_file_execution_screen.dart::MasoFileExecutionScreen"
+
+class "maso::presentation::screens::maso_file_execution_screen.dart::_MasoFileExecutionScreenState" {
+  -Machine _machine
+  -GlobalKey<State<StatefulWidget>> _repaintKey
+  +void initState()
+  +void executeProcesses()
+  -dynamic _captureImage()
+  -dynamic _copyImageToClipboard()
+  -dynamic _exportAsImage()
+  -dynamic _exportAsPdf()
+  +dynamic createPdfFromImage()
+  -void _showExportOptions()
+  +Widget build()
+}
+
+"maso::presentation::screens::maso_file_execution_screen.dart::_MasoFileExecutionScreenState" o-- "maso::domain::models::machine.dart::Machine"
+"maso::presentation::screens::maso_file_execution_screen.dart::_MasoFileExecutionScreenState" o-- "flutter::src::widgets::framework.dart::GlobalKey<State<StatefulWidget>>"
+"flutter::src::widgets::framework.dart::State" <|-- "maso::presentation::screens::maso_file_execution_screen.dart::_MasoFileExecutionScreenState"
+
+class "maso::presentation::widgets::burst_gantt_chart.dart::BurstGanttChart" {
+  +Machine machine
+  +double cellSpacing
+  +double regularPadding
+  +ColorManager colorManager
+  +Widget build()
+  -Widget _buildResourceRow()
+  -Widget _buildArrowRow()
+  -String _extractProcessId()
+  -int _getArrivalTimeOfProcess()
+  -Widget _buildCell()
+  -Color _colorForState()
+}
+
+"maso::presentation::widgets::burst_gantt_chart.dart::BurstGanttChart" o-- "maso::domain::models::machine.dart::Machine"
+"maso::presentation::widgets::burst_gantt_chart.dart::BurstGanttChart" o-- "maso::core::color_manager.dart::ColorManager"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "maso::presentation::widgets::burst_gantt_chart.dart::BurstGanttChart"
+
+class "maso::presentation::widgets::burst_gantt_chart.dart::_GanttBlock" {
+  +String label
+  +HardwareState state
+  +int startTime
+  +int duration
+}
+
+"maso::presentation::widgets::burst_gantt_chart.dart::_GanttBlock" o-- "maso::domain::models::hardware_state.dart::HardwareState"
+
+class "maso::presentation::widgets::burst_gantt_chart.dart::_ArrowInfo" {
+  +IconData icon
+  +Color color
+}
+
+"maso::presentation::widgets::burst_gantt_chart.dart::_ArrowInfo" o-- "flutter::src::widgets::icon_data.dart::IconData"
+"maso::presentation::widgets::burst_gantt_chart.dart::_ArrowInfo" o-- "dart::ui::Color"
+
+class "maso::presentation::widgets::dialogs::add_edit_process_dialog::add_edit_burst_process_dialog.dart::AddEditBurstProcessDialog" {
+  +BurstProcess? process
+  +MasoFile masoFile
+  +int? processPosition
+  +State<AddEditBurstProcessDialog> createState()
+}
+
+"maso::presentation::widgets::dialogs::add_edit_process_dialog::add_edit_burst_process_dialog.dart::AddEditBurstProcessDialog" o-- "maso::domain::models::maso::burst_process.dart::BurstProcess"
+"maso::presentation::widgets::dialogs::add_edit_process_dialog::add_edit_burst_process_dialog.dart::AddEditBurstProcessDialog" o-- "maso::domain::models::maso::maso_file.dart::MasoFile"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "maso::presentation::widgets::dialogs::add_edit_process_dialog::add_edit_burst_process_dialog.dart::AddEditBurstProcessDialog"
+
+class "maso::presentation::widgets::dialogs::add_edit_process_dialog::add_edit_burst_process_dialog.dart::_AddEditBurstProcessDialogState" {
+  -TextEditingController _idController
+  -TextEditingController _arrivalTimeController
+  +BurstProcess cachedProcess
+  -String? _idError
+  -String? _arrivalTimeError
+  -String? _burstSequenceError
+  +List<List<TextEditingController>> threadControllersBurstList
+  +void initState()
+  -void _initializeBurstControllers()
+  +void dispose()
+  -bool _validateInput()
+  -void _submit()
+  -void _addThread()
+  -void _addBurst()
+  -void _removeThread()
+  -void _removeBurst()
+  +Widget build()
+}
+
+"maso::presentation::widgets::dialogs::add_edit_process_dialog::add_edit_burst_process_dialog.dart::_AddEditBurstProcessDialogState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"maso::presentation::widgets::dialogs::add_edit_process_dialog::add_edit_burst_process_dialog.dart::_AddEditBurstProcessDialogState" o-- "maso::domain::models::maso::burst_process.dart::BurstProcess"
+"flutter::src::widgets::framework.dart::State" <|-- "maso::presentation::widgets::dialogs::add_edit_process_dialog::add_edit_burst_process_dialog.dart::_AddEditBurstProcessDialogState"
+
+class "maso::presentation::widgets::dialogs::add_edit_process_dialog::add_edit_process_dialog.dart::AddEditProcessDialog" {
+  +MasoFile masoFile
+  +dynamic process
+  +int? processPosition
+  +Widget build()
+}
+
+"maso::presentation::widgets::dialogs::add_edit_process_dialog::add_edit_process_dialog.dart::AddEditProcessDialog" o-- "maso::domain::models::maso::maso_file.dart::MasoFile"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "maso::presentation::widgets::dialogs::add_edit_process_dialog::add_edit_process_dialog.dart::AddEditProcessDialog"
+
+class "maso::presentation::widgets::dialogs::add_edit_process_dialog::add_edit_regular_process_dialog.dart::AddEditRegularProcessDialog" {
+  +RegularProcess? process
+  +MasoFile masoFile
+  +int? processPosition
+  +State<AddEditRegularProcessDialog> createState()
+}
+
+"maso::presentation::widgets::dialogs::add_edit_process_dialog::add_edit_regular_process_dialog.dart::AddEditRegularProcessDialog" o-- "maso::domain::models::maso::regular_process.dart::RegularProcess"
+"maso::presentation::widgets::dialogs::add_edit_process_dialog::add_edit_regular_process_dialog.dart::AddEditRegularProcessDialog" o-- "maso::domain::models::maso::maso_file.dart::MasoFile"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "maso::presentation::widgets::dialogs::add_edit_process_dialog::add_edit_regular_process_dialog.dart::AddEditRegularProcessDialog"
+
+class "maso::presentation::widgets::dialogs::add_edit_process_dialog::add_edit_regular_process_dialog.dart::_AddEditRegularProcessDialogState" {
+  -TextEditingController _nameController
+  -TextEditingController _arrivalTimeController
+  -TextEditingController _serviceTimeController
+  -bool _isEnabled
+  -String? _nameError
+  -String? _arrivalTimeError
+  -String? _serviceTimeError
+  +void initState()
+  +void dispose()
+  -bool _validateInput()
+  -void _submit()
+  +Widget build()
+}
+
+"maso::presentation::widgets::dialogs::add_edit_process_dialog::add_edit_regular_process_dialog.dart::_AddEditRegularProcessDialogState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"flutter::src::widgets::framework.dart::State" <|-- "maso::presentation::widgets::dialogs::add_edit_process_dialog::add_edit_regular_process_dialog.dart::_AddEditRegularProcessDialogState"
+
+class "maso::presentation::widgets::dialogs::create_maso_dialog.dart::CreateMasoFileDialog" {
+  +State<CreateMasoFileDialog> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "maso::presentation::widgets::dialogs::create_maso_dialog.dart::CreateMasoFileDialog"
+
+class "maso::presentation::widgets::dialogs::create_maso_dialog.dart::_CreateMasoFileDialogState" {
+  -TextEditingController _nameController
+  -TextEditingController _descriptionController
+  -String? _nameError
+  -String? _descriptionError
+  +void dispose()
+  -void _onNameChanged()
+  -void _onDescriptionChanged()
+  -void _submit()
+  +Widget build()
+}
+
+"maso::presentation::widgets::dialogs::create_maso_dialog.dart::_CreateMasoFileDialogState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"flutter::src::widgets::framework.dart::State" <|-- "maso::presentation::widgets::dialogs::create_maso_dialog.dart::_CreateMasoFileDialogState"
+
+class "maso::presentation::widgets::dialogs::execution_setup_dialog.dart::ExecutionSetupDialog" {
+  +State<ExecutionSetupDialog> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "maso::presentation::widgets::dialogs::execution_setup_dialog.dart::ExecutionSetupDialog"
+
+class "maso::presentation::widgets::dialogs::execution_setup_dialog.dart::_ExecutionSetupDialogState" {
+  -ExecutionSetup? _previousES
+  -SchedulingAlgorithm _selectedAlgorithm
+  -TextEditingController _quantumController
+  -TextEditingController _queueQuantaController
+  -TextEditingController _timeLimitController
+  +void initState()
+  +void dispose()
+  +Widget build()
+}
+
+"maso::presentation::widgets::dialogs::execution_setup_dialog.dart::_ExecutionSetupDialogState" o-- "maso::domain::models::execution_setup.dart::ExecutionSetup"
+"maso::presentation::widgets::dialogs::execution_setup_dialog.dart::_ExecutionSetupDialogState" o-- "maso::domain::models::scheduling_algorithm.dart::SchedulingAlgorithm"
+"maso::presentation::widgets::dialogs::execution_setup_dialog.dart::_ExecutionSetupDialogState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"flutter::src::widgets::framework.dart::State" <|-- "maso::presentation::widgets::dialogs::execution_setup_dialog.dart::_ExecutionSetupDialogState"
+
+class "maso::presentation::widgets::dialogs::exit_confirmation_dialog.dart::ExitConfirmationDialog" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "maso::presentation::widgets::dialogs::exit_confirmation_dialog.dart::ExitConfirmationDialog"
+
+class "maso::presentation::widgets::dialogs::process_list_widget::burst_process_list.dart::BurstProcessList" {
+  +MasoFile masoFile
+  +void Function() onFileChange
+  +State<BurstProcessList> createState()
+}
+
+"maso::presentation::widgets::dialogs::process_list_widget::burst_process_list.dart::BurstProcessList" o-- "maso::domain::models::maso::maso_file.dart::MasoFile"
+"maso::presentation::widgets::dialogs::process_list_widget::burst_process_list.dart::BurstProcessList" o-- "dart::ui::void Function()"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "maso::presentation::widgets::dialogs::process_list_widget::burst_process_list.dart::BurstProcessList"
+
+class "maso::presentation::widgets::dialogs::process_list_widget::burst_process_list.dart::_BurstProcessListState" {
+  +Widget build()
+  -void _editProcess()
+  -Widget _buildThreadTile()
+  -dynamic _confirmDismiss()
+  -void _onReorder()
+  -Widget _buildDismissible()
+  -Widget _buildDismissBackground()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "maso::presentation::widgets::dialogs::process_list_widget::burst_process_list.dart::_BurstProcessListState"
+
+class "maso::presentation::widgets::dialogs::process_list_widget::process_list_widget.dart::ProcessListWidget" {
+  +MasoFile maso
+  +void Function() onFileChange
+  +Widget build()
+}
+
+"maso::presentation::widgets::dialogs::process_list_widget::process_list_widget.dart::ProcessListWidget" o-- "maso::domain::models::maso::maso_file.dart::MasoFile"
+"maso::presentation::widgets::dialogs::process_list_widget::process_list_widget.dart::ProcessListWidget" o-- "dart::ui::void Function()"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "maso::presentation::widgets::dialogs::process_list_widget::process_list_widget.dart::ProcessListWidget"
+
+class "maso::presentation::widgets::dialogs::process_list_widget::regular_process_list.dart::RegularProcessList" {
+  +MasoFile masoFile
+  +void Function() onFileChange
+  +State<RegularProcessList> createState()
+}
+
+"maso::presentation::widgets::dialogs::process_list_widget::regular_process_list.dart::RegularProcessList" o-- "maso::domain::models::maso::maso_file.dart::MasoFile"
+"maso::presentation::widgets::dialogs::process_list_widget::regular_process_list.dart::RegularProcessList" o-- "dart::ui::void Function()"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "maso::presentation::widgets::dialogs::process_list_widget::regular_process_list.dart::RegularProcessList"
+
+class "maso::presentation::widgets::dialogs::process_list_widget::regular_process_list.dart::_RegularProcessListState" {
+  +Widget build()
+  -Widget _buildListTile()
+  -dynamic _confirmDismiss()
+  -void _onReorder()
+  -Widget _buildDismissible()
+  -Widget _buildDismissBackground()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "maso::presentation::widgets::dialogs::process_list_widget::regular_process_list.dart::_RegularProcessListState"
+
+class "maso::presentation::widgets::dialogs::settings_dialog.dart::SettingsDialog" {
+  +SettingsMaso settings
+  +void Function(SettingsMaso) onSettingsChanged
+  +State<SettingsDialog> createState()
+}
+
+"maso::presentation::widgets::dialogs::settings_dialog.dart::SettingsDialog" o-- "maso::domain::models::settings_maso.dart::SettingsMaso"
+"maso::presentation::widgets::dialogs::settings_dialog.dart::SettingsDialog" o-- "flutter::src::foundation::basic_types.dart::void Function(SettingsMaso)"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "maso::presentation::widgets::dialogs::settings_dialog.dart::SettingsDialog"
+
+class "maso::presentation::widgets::dialogs::settings_dialog.dart::_SettingsDialogState" {
+  +SettingsMaso currentSettings
+  +void initState()
+  -void _updateContextSwitchTime()
+  -void _updateIoChannels()
+  -void _updateCpuCount()
+  -void _onConfirm()
+  +Widget build()
+  -Widget _buildSlider()
+  -String _getProcessModeName()
+  -void _updateMode()
+}
+
+"maso::presentation::widgets::dialogs::settings_dialog.dart::_SettingsDialogState" o-- "maso::domain::models::settings_maso.dart::SettingsMaso"
+"flutter::src::widgets::framework.dart::State" <|-- "maso::presentation::widgets::dialogs::settings_dialog.dart::_SettingsDialogState"
+
+class "maso::presentation::widgets::regular_gantt_chart.dart::RegularGanttChart" {
+  +Machine machine
+  +double cellSpacing
+  +double regularPadding
+  +ColorManager colorManager
+  +Widget build()
+  -Widget _buildCpuRow()
+  -Widget _buildArrowRow()
+  -int _getArrivalTimeOfProcess()
+  -Widget _buildCell()
+  -Color _colorForState()
+}
+
+"maso::presentation::widgets::regular_gantt_chart.dart::RegularGanttChart" o-- "maso::domain::models::machine.dart::Machine"
+"maso::presentation::widgets::regular_gantt_chart.dart::RegularGanttChart" o-- "maso::core::color_manager.dart::ColorManager"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "maso::presentation::widgets::regular_gantt_chart.dart::RegularGanttChart"
+
+class "maso::presentation::widgets::regular_gantt_chart.dart::_GanttBlock" {
+  +String label
+  +HardwareState state
+  +int startTime
+  +int duration
+}
+
+"maso::presentation::widgets::regular_gantt_chart.dart::_GanttBlock" o-- "maso::domain::models::hardware_state.dart::HardwareState"
+
+class "maso::presentation::widgets::regular_gantt_chart.dart::_ArrowInfo" {
+  +IconData icon
+  +Color color
+}
+
+"maso::presentation::widgets::regular_gantt_chart.dart::_ArrowInfo" o-- "flutter::src::widgets::icon_data.dart::IconData"
+"maso::presentation::widgets::regular_gantt_chart.dart::_ArrowInfo" o-- "dart::ui::Color"
+
+class "maso::presentation::widgets::request_file_name_dialog.dart::RequestFileNameDialog" {
+  +String format
+  +State<RequestFileNameDialog> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "maso::presentation::widgets::request_file_name_dialog.dart::RequestFileNameDialog"
+
+class "maso::presentation::widgets::request_file_name_dialog.dart::_RequestFileNameDialogState" {
+  -TextEditingController _controller
+  -String? _errorMessage
+  +void initState()
+  +void dispose()
+  -bool _validateInput()
+  -void _submit()
+  +Widget build()
+}
+
+"maso::presentation::widgets::request_file_name_dialog.dart::_RequestFileNameDialogState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"flutter::src::widgets::framework.dart::State" <|-- "maso::presentation::widgets::request_file_name_dialog.dart::_RequestFileNameDialogState"
+
+class "maso::routes::app_router.dart::AppRoutes" {
+  {static} +String home
+  {static} +String fileLoadedScreen
+  {static} +String masoFileExecutionScreen
+}
+
+
+@enduml
