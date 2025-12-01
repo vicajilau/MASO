@@ -24,7 +24,7 @@ class Burst with DeepCopy<Burst> {
   /// Returns a `Map<String, dynamic>` representing the burst in JSON format.
   Map<String, dynamic> toJson() {
     return {
-      'type': type.toString(),
+      'type': type.toJson(),
       'duration': duration,
     };
   }

@@ -40,6 +40,7 @@ class _MasoAppState extends State<MasoApp> {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       showSemanticsDebugger: false,
+      debugShowCheckedModeBanner: true,
     );
   }
 }
