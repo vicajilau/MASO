@@ -25,6 +25,11 @@ enum BurstType {
     throw ArgumentError("Invalid BurstType value: $value");
   }
 
+  /// Converts a `BurstType` enum to JSON (returns the value name only).
+  String toJson() {
+    return name;
+  }
+
   /// Converts a `BurstType` enum to a string.
   String description(BuildContext context) {
     switch (this) {
