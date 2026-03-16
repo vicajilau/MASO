@@ -44,7 +44,7 @@ dependencies:
   platform_detail: ^5.1.0
   timeline_tile: ^2.0.0
   pasteboard: ^0.4.0
-  pdf: ^3.11.3
+  pdf: ^3.12.0
   flutter_launcher_icons: ^0.14.4
   shared_preferences: ^2.5.4
   web: ^1.1.1
