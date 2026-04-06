@@ -59,7 +59,7 @@ class FileService implements IFileService {
     final bytes = utf8.encode(jsonString);
 
     // Open a save dialog for the user to select a file path
-    final pathSaved = await FilePicker.platform.saveFile(
+    final pathSaved = await FilePicker.saveFile(
         dialogTitle: dialogTitle,
         fileName: fileName,
         initialDirectory: masoFile.filePath,
@@ -87,8 +87,8 @@ class FileService implements IFileService {
     // Convert the MasoFile object to JSON string and encode it to bytes
 
     // Open a save dialog for the user to select a file path
-    final path = await FilePicker.platform
-        .saveFile(dialogTitle: dialogTitle, fileName: fileName, bytes: bytes);
+    final path = await FilePicker.saveFile(
+        dialogTitle: dialogTitle, fileName: fileName, bytes: bytes);
 
     // If a path is selected and the platform is desktop, write the file
     if (path != null && PlatformDetail.isDesktop) {
@@ -116,7 +116,7 @@ class FileService implements IFileService {
   @override
   Future<MasoFile?> pickFile() async {
     // Open the file picker dialog
-    final result = await FilePicker.platform.pickFiles();
+    final result = await FilePicker.pickFiles();
 
     // If a file is selected, read and return the file as a MasoFile object
     if (result != null) {
