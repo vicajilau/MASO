@@ -37,7 +37,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.9
   desktop_drop: ^0.7.1
-  file_picker: ^11.0.2
+  file_picker: ^12.0.0-beta.7
   flutter_bloc: ^9.1.1
   get_it: ^9.2.1
   go_router: ^17.2.3
